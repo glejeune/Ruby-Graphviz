@@ -1,0 +1,43 @@
+0.9.0 :
+* Add fdp example (sample 15)
+* Add edge between cluster and node and cluster and cluster support
+* GraphViz.add_node now support array (sample 16)
+* Bug correction in GraphViz.output (sample 19)
+* Add GraphViz#default to set default options (:use, :path and :output)
+* Add possibility to set node or edge attribut via :
+		node.<attribut>=<value> or node.<attribut>( <value> )
+		adge.<attribut>=<value> or adge.<attribut>( <value> )
+* Add GraphViz::Edge.set and GraphViz::Node.net
+* Add sample 20
+* Add GraphViz.node_count and GraphViz.edge_count by Daniel Cadenas Nión
+
+0.8.2 : 
+* Update Node, Edge and Graph Attributes (see http://www.graphviz.org/doc/info/attrs.html)
+* Bugs corrections
+
+0.8.1 :
+* Documentation
+
+0.8.0 :
+* Add all the features of the current graphviz version
+
+0.7.0 :
+* Add option "path" to output
+
+0.6.0 :
+* Add undirected graph support
+
+0.5.0 :
+* Preserve the original order of creation of nodes and edges
+
+0.4.0 :
+* Add HTML-Labels
+
+0.3.0 :
+* Bugs corrections
+
+0.2.0 :
+* Pure ruby
+
+0.1.0 :
+* Initial version

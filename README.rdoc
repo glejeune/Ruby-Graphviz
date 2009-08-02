@@ -1,0 +1,13 @@
+= Ruby/GraphViz
+
+Interface to the GraphViz graphing tool
+
+== Licence
+
+Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Gregoire Lejeune
+
+Ruby/GraphViz is freely distributable according to the terms of the
+GNU General Public License (see the file 'COPYING').
+
+This program is distributed without any warranty. See the file
+'COPYING' for details.
