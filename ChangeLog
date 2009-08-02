@@ -7,7 +7,7 @@
 * Add possibility to set node or edge attribut via :
 		node.<attribut>=<value> or node.<attribut>( <value> )
 		adge.<attribut>=<value> or adge.<attribut>( <value> )
-* Add GraphViz::Edge.set and GraphViz::Node.net
+* Add GraphViz::Edge.set and GraphViz::Node.set
 * Add sample 20
 * Add GraphViz.node_count and GraphViz.edge_count by Daniel Cadenas Nión
 
