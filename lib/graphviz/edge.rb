@@ -55,6 +55,7 @@ class GraphViz
     # Set value +xAttrValue+ to the edge attribut +xAttrName+
     # 
 	  def []=( xAttrName, xAttrValue )
+      xAttrValue = xAttrValue.to_s if xAttrValue.class == Symbol
       @oAttrEdge[xAttrName.to_s] = xAttrValue
     end
 
@@ -65,6 +66,11 @@ class GraphViz
       @oAttrEdge[xAttrName.to_s].clone
     end
     
+    def <<( oNode ) #:nodoc:
+      n = @oGParrent.get_node(@xNodeTwo)
+      
+      GraphViz::commonGraph( oNode, n ).add_edge( n, oNode )
+    end
     #
     # Set edge attributs
     #

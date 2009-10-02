@@ -1,10 +1,47 @@
 = Ruby/GraphViz
 
+Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Gregoire Lejeune
+
+* Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
+* Sources : http://github.com/glejeune/Ruby-Graphviz
+
+== DESCRIPTION
+
 Interface to the GraphViz graphing tool
 
-== Licence
+== SYNOPSIS
 
-Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Gregoire Lejeune
+A basic example
+
+  require 'graphviz'
+
+  # Create a new graph
+  g = GraphViz.new( :G, :type => :digraph )
+
+  # Create two nodes
+  hello = g.add_node( "Hello" )
+  world = g.add_node( "World" )
+
+  # Create an edge between the two nodes
+  g.add_edge( hello, world )
+
+  # Generate output image
+  g.output( :output => "png", :file => "hello_world.png" )
+  
+The same but with a block
+
+  GraphViz::new( :G, :type => :digraph ) { |g|
+    g.world( :label => "World" ) << g.hello( :label => Hello )
+  }.output( :output => :png, :file => "hello_world.png" )
+
+
+== INSTALLATION
+
+  sudo gem install ruby-graphviz
+
+You also need to install GraphViz[http://www.graphviz.org]
+
+== LICENCE
 
 Ruby/GraphViz is freely distributable according to the terms of the
 GNU General Public License (see the file 'COPYING').

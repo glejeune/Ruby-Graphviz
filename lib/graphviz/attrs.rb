@@ -41,10 +41,10 @@ class GraphViz
       if @attributs.index( xKey.to_s ).nil? == true
         raise ArgumentError, "#{@name} attribut '#{xKey.to_s}' invalid"
       end
-      @data[xKey.to_s] = xValue
+      @data[xKey.to_s] = xValue.to_s
 
       if @graphviz.nil? == false
-        @graphviz.set_position( @name, xKey.to_s, xValue )
+        @graphviz.set_position( @name, xKey.to_s, xValue.to_s )
       end
     end
   end

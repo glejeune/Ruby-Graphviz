@@ -48,6 +48,7 @@ class GraphViz
     # Set value +xAttrValue+ to the node attribut +xAttrName+
     # 
     def []=( xAttrName, xAttrValue )
+      xAttrValue = xAttrValue.to_s if xAttrValue.class == Symbol
       @oAttrNode[xAttrName.to_s] = xAttrValue
     end
 

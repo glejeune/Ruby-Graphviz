@@ -46,7 +46,12 @@ class GraphViz
   @graph
   @node
   @edge
-  attr_accessor :node, :edge
+  
+  # This accessor allow you to set global nodes attributs
+  attr_accessor :node
+
+  # This accessor allow you to set global edges attributs
+  attr_accessor :edge
 
   @elements_order
   
@@ -77,6 +82,13 @@ class GraphViz
     return( @hoNodes[xNodeName] )
   end
 
+  #
+  # Return the node object for the given name (or nil)
+  #
+  def get_node( name )
+    @hoNodes[name] || nil
+  end
+  
   ##
   # Create a new edge
   # 
@@ -186,6 +198,7 @@ class GraphViz
   # Set value +xValue+ to the graph attribut +xAttrName+
   # 
   def []=( xAttrName, xValue )
+    xValue = xValue.to_s if xValue.class == Symbol
     @graph[xAttrName] = xValue
   end
 
@@ -288,6 +301,7 @@ class GraphViz
     else
       if hOpt.nil? == false and hOpt[0].nil? == false
         hOpt[0].each do |xKey, xValue|
+          xValue = xValue.to_s
           case xKey.to_s
             when "output"
               if FORMATS.index( xValue ).nil? == true
@@ -437,7 +451,7 @@ class GraphViz
   # 
   def initialize( xGraphName, *hOpt, &block )
     @filename = nil
-    @name     = xGraphName
+    @name     = xGraphName.to_s
     @format   = @@format
     @prog     = @@prog
     @path     = @@path
@@ -459,28 +473,28 @@ class GraphViz
       hOpt[0].each do |xKey, xValue|
         case xKey.to_s
           when "output"
-            if FORMATS.index( xValue ).nil? == true
+            if FORMATS.index( xValue.to_s ).nil? == true
               raise ArgumentError, "output format '#{xValue}' invalid"
             end
-            @format = xValue
+            @format = xValue.to_s
           when "use"
-            if PROGRAMS.index( xValue ).nil? == true
+            if PROGRAMS.index( xValue.to_s ).nil? == true
               raise ArgumentError, "can't use '#{xValue}'"
             end
-            @prog = xValue
+            @prog = xValue.to_s
           when "file"
-            @filename = xValue
+            @filename = xValue.to_s
           when "parent"
             @oParentGraph = xValue
           when "type"
-            if GRAPHTYPE.index( xValue ).nil? == true
+            if GRAPHTYPE.index( xValue.to_s ).nil? == true
               raise ArgumentError, "graph type '#{xValue}' unknow"
             end
-            @oGraphType = xValue
+            @oGraphType = xValue.to_s
           when "path"
-            @path = xValue
+            @path = xValue.to_s
           else
-            self[xKey.to_s] = xValue
+            self[xKey.to_s] = xValue.to_s
         end
       end
     end
