@@ -21,6 +21,7 @@ require 'graphviz/node'
 require 'graphviz/edge'
 require 'graphviz/attrs'
 require 'graphviz/constants'
+require 'graphviz/parser'
 
 class GraphViz 
   include Constants
@@ -85,8 +86,12 @@ class GraphViz
   #
   # Return the node object for the given name (or nil)
   #
-  def get_node( name )
-    @hoNodes[name] || nil
+  def get_node( xNodeName, &block )
+    node = @hoNodes[xNodeName] || nil
+    
+    yield( node ) if( block and node.nil? == false )
+    
+    return node
   end
   
   ##
@@ -155,6 +160,17 @@ class GraphViz
   end
   
   #
+  # Return the graph object for the given name (or nil)
+  #
+  def get_graph( xGraphName, &block )
+    graph = @hoGraphs[xGraphName] || nil
+    
+    yield( graph ) if( block and graph.nil? == false )
+    
+    return graph
+  end
+  
+  #
   # Get the number of nodes
   #
   def node_count
@@ -218,7 +234,7 @@ class GraphViz
   #   :use : Program to use (Constants::PROGRAMS)
   #   :path : Program PATH
   # 
-  def output( *hOpt )
+  def output( *hOpt )    
     xDOTScript = ""
     xLastType = nil
     xSeparator = ""
@@ -423,6 +439,24 @@ class GraphViz
     GraphViz::default( hOpts )
   end
   
+## ----------------------------------------------------------------------------
+
+  # 
+  # Create a new graph from a GraphViz File
+  # 
+  # Options :
+  #   :output : Output format (Constants::FORMATS) (default : dot)
+  #   :file : Output file name (default : none)
+  #   :use : Program to use (Constants::PROGRAMS) (default : dot)
+  #   :path : Program PATH
+  #   :parent : Parent graph (default : none)
+  #   :type : Graph type (Constants::GRAPHTYPE) (default : digraph)
+  # 
+  def self.parse( xFile, *hOpts, &block )
+    g = GraphViz::Parser.parse( xFile, hOpts[0], &block )
+    return g
+  end
+
 ## ----------------------------------------------------------------------------
 
   private 

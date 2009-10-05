@@ -30,10 +30,27 @@ A basic example
   
 The same but with a block
 
+  require 'graphviz'
+
   GraphViz::new( :G, :type => :digraph ) { |g|
     g.world( :label => "World" ) << g.hello( :label => Hello )
   }.output( :output => :png, :file => "hello_world.png" )
 
+Create a graph from a file 
+
+  require 'graphviz'
+
+  # In this example, hello.dot is :
+  #   digraph G {Hello->World;}
+
+  GraphViz.parse( "hello.dot", :path => "/usr/local/bin" ) { |g|
+    g.get_node("Hello") { |n|
+      n[:label] = "Bonjour"
+    }
+    g.get_node("World") { |n|
+      n[:label] = "Le Monde"
+    }
+  }.output(:output => "png", :file => "sample.png")
 
 == INSTALLATION
 

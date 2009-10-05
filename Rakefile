@@ -60,6 +60,8 @@ spec =
       s.require_path = "lib"
       s.bindir = "bin"
       s.executables = ['ruby2gv']
+      
+      s.add_dependency('treetop')
 
       s.rubyforge_project = 'ruby-asp'
       s.has_rdoc = true

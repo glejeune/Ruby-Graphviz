@@ -100,7 +100,10 @@ class GraphViz
     end
     
     def output #:nodoc:
-      xOut = "" << @xNodeName.clone
+      xNodeName = @xNodeName.clone
+      xNodeName = '"' << xNodeName << '"' if xNodeName.match( /^[a-zA-Z_]+[a-zA-Z0-9_\.]*$/ ).nil?
+      
+      xOut = "" << xNodeName
       xAttr = ""
       xSeparator = ""
       @oAttrNode.data.each do |k, v|
