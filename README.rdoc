@@ -26,7 +26,7 @@ A basic example
   g.add_edge( hello, world )
 
   # Generate output image
-  g.output( :output => "png", :file => "hello_world.png" )
+  g.output( :png => "hello_world.png" )
   
 The same but with a block
 
@@ -34,7 +34,7 @@ The same but with a block
 
   GraphViz::new( :G, :type => :digraph ) { |g|
     g.world( :label => "World" ) << g.hello( :label => Hello )
-  }.output( :output => :png, :file => "hello_world.png" )
+  }.output( :png => "hello_world.png" )
 
 Create a graph from a file 
 
@@ -50,13 +50,13 @@ Create a graph from a file
     g.get_node("World") { |n|
       n[:label] = "Le Monde"
     }
-  }.output(:output => "png", :file => "sample.png")
+  }.output(:png => "sample.png")
 
 == INSTALLATION
 
   sudo gem install ruby-graphviz
 
-You also need to install GraphViz[http://www.graphviz.org]
+You also need to install GraphViz[http://www.graphviz.org] and Treetop[http://treetop.rubyforge.org/]
 
 == LICENCE
 
