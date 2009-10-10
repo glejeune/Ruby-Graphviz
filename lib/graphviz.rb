@@ -29,10 +29,12 @@ class GraphViz
   public
 
   ## Var: Output format (dot, png, jpeg, ...)
-  @@format = "canon"
+  @@format = nil #"canon"
   @format
   ## Var: Output file name
   @filename
+  ## Var: Output format and file
+  @output
   ## Var: program to use (dot|twopi)
   @@prog = "dot"
   @prog
@@ -233,8 +235,9 @@ class GraphViz
   #   :file : Output file name
   #   :use : Program to use (Constants::PROGRAMS)
   #   :path : Program PATH
+  #   :<format> => :<file>
   # 
-  def output( *hOpt )    
+  def output( *hOpt )
     xDOTScript = ""
     xLastType = nil
     xSeparator = ""
@@ -317,14 +320,16 @@ class GraphViz
     else
       if hOpt.nil? == false and hOpt[0].nil? == false
         hOpt[0].each do |xKey, xValue|
-          xValue = xValue.to_s
+          xValue = xValue.to_s unless xValue.nil?
           case xKey.to_s
             when "output"
+              warn ":output option is deprecated, please use :<format> => :<file>"
               if FORMATS.index( xValue ).nil? == true
                 raise ArgumentError, "output format '#{xValue}' invalid"
               end
               @format = xValue
             when "file"
+              warn ":file option is deprecated, please use :<format> => :<file>"
               @filename = xValue
             when "use"
               if PROGRAMS.index( xValue ).nil? == true
@@ -334,7 +339,10 @@ class GraphViz
             when "path"
               @path = xValue
             else
-              raise ArgumentError, "option #{xKey.to_s} unknown"
+              if FORMATS.index( xKey.to_s ).nil? == true
+                raise ArgumentError, "output format '#{xValue}' invalid"
+              end
+              @output[xKey.to_s] = xValue
           end
         end
       end
@@ -354,9 +362,24 @@ class GraphViz
           raise StandardError, "GraphViz not installed or #{@prog} not in PATH. Install GraphViz or use the 'path' option"
         end
         
-        xFile = ""
-        xFile = "-o #{@filename}" if @filename.nil? == false
-        xCmd = "#{cmd} -T#{@format} #{xFile} #{t.path}"
+        xOutputWithFile = ""
+        xOutputWithoutFile = ""
+        unless @format.nil?
+          if @filename.nil?
+            xOutputWithoutFile = "-T#{@format} "
+          else
+            xOutputWithFile = "-T#{@format} -o#{@filename} "
+          end
+        end
+        @output.each do |format, file|
+          if file.nil?
+            xOutputWithoutFile << "-T#{format} "
+          else
+            xOutputWithFile << "-T#{format} -o#{file} "
+          end
+        end
+        
+        xCmd = "#{cmd} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         
         f = IO.popen( xCmd )
         print f.readlines
@@ -428,6 +451,7 @@ class GraphViz
         when "path"
           @@path = v
         when "output"
+          warn ":output option is deprecated!"
           @@format = v
         else
           warn "Invalide option #{k}!"
@@ -489,6 +513,7 @@ class GraphViz
     @format   = @@format
     @prog     = @@prog
     @path     = @@path
+    @output   = {}
     
     @elements_order = Array::new()
 
@@ -507,6 +532,7 @@ class GraphViz
       hOpt[0].each do |xKey, xValue|
         case xKey.to_s
           when "output"
+            warn ":output option is deprecated, please use :<format> => :<file>"
             if FORMATS.index( xValue.to_s ).nil? == true
               raise ArgumentError, "output format '#{xValue}' invalid"
             end
@@ -517,6 +543,7 @@ class GraphViz
             end
             @prog = xValue.to_s
           when "file"
+            warn ":file option is deprecated, please use :<format> => :<file>"
             @filename = xValue.to_s
           when "parent"
             @oParentGraph = xValue

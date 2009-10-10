@@ -5,9 +5,9 @@ require "graphviz"
 
 g = nil
 if ARGV[0]
-  g = GraphViz::new( "structs", "output" => "png", "path" => ARGV[0] )
+  g = GraphViz::new( "structs", "path" => ARGV[0] )
 else
-  g = GraphViz::new( "structs", "output" => "png" )
+  g = GraphViz::new( "structs" )
 end
 
 g.node["shape"] = "record"
@@ -19,4 +19,4 @@ struct3 = g.add_node( "struct3", "shape" => "record", "label" => 'hello\nworld |
 g.add_edge( struct1, struct2 )
 g.add_edge( struct1, struct3 )
 
-g.output( :file => "#{$0}.png" )
+g.output( :png => "#{$0}.png" )

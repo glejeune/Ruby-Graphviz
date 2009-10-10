@@ -3,7 +3,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-GraphViz::options( :output => "png", :use => "dot" )
+GraphViz::options( :use => "dot" )
 
 if ARGV[0]
   GraphViz::options( :path => ARGV[0] )
@@ -20,4 +20,4 @@ g.add_node( "struct3", "shape" => "record", "label" => 'hello\nworld |{ b |{c|<h
 g.add_edge( "struct1:f1", "struct2:f0" )
 g.add_edge( "struct1:f2", "struct3:here" )
 
-g.output( :file => "#{$0}.png" )
+g.output( :png => "#{$0}.png" )

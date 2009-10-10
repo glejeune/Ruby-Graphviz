@@ -1,7 +1,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-GraphViz::new( "G", :output => "png", :rankdir => "LR", :type => "graph" ) { |graph|
+GraphViz::new( "G", :rankdir => "LR", :type => "graph" ) { |graph|
   graph.cluster0 { |cluster|
     cluster[:label] = "Back Office"
     
@@ -43,4 +43,4 @@ GraphViz::new( "G", :output => "png", :rankdir => "LR", :type => "graph" ) { |gr
   graph.cluster0.grobil << graph.cluster1.dupond
   graph.cluster1.dupont << graph.cluster2.door
   graph.cluster1.dupond << graph.cluster2.door
-}.output( :path => '/usr/local/bin/', :file => "#{$0}.png" )
+}.output( :path => '/usr/local/bin/', :png => "#{$0}.png" )

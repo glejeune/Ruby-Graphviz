@@ -5,9 +5,9 @@ require "graphviz"
 
 g = nil
 if ARGV[0]
-  g = GraphViz::new( "G", "output" => "png", "nodesep" => ".05", "rankdir" => "LR", "path" => ARGV[0] )
+  g = GraphViz::new( "G" "nodesep" => ".05", "rankdir" => "LR", "path" => ARGV[0] )
 else
-  g = GraphViz::new( "G", "output" => "png", "nodesep" => ".05", "rankdir" => "LR" )
+  g = GraphViz::new( "G", "nodesep" => ".05", "rankdir" => "LR" )
 end
 
 g.node["shape"] = "record"
@@ -31,4 +31,4 @@ g.add_edge( "node0:f6", "node5:n" )
 g.add_edge( "node2:p", "node6:n" )
 g.add_edge( "node4:p", "node7:n" )
 
-g.output( :file => "#{$0}.png" )
+g.output( :png => "#{$0}.png" )

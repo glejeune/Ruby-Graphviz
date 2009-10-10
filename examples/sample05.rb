@@ -29,4 +29,4 @@ g.add_edge( init, make_string )
 g.add_edge( main, printf )
 g.add_edge( execute, compare )
 
-g.output( "output" => "png", :file => "#{$0}.png" )
+g.output( :png => "#{$0}.png" )

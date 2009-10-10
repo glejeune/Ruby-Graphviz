@@ -3,6 +3,8 @@
 * Add the ability to create edge like that : node1 << node2 << node3 ...
 * Complete README
 * Add a DOT parser. This parser has a lot of limitations. So don't use it in a production context !
+* :output and :file options are deprecated, please use :<format> => :<file>
+* You can now specify multiple outputs via :<format> => :<file> (see sample 22).
 
 0.9.0 :
 * Add fdp example (sample 15)
