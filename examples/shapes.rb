@@ -5,9 +5,9 @@ require "graphviz"
 
 g = nil
 if ARGV[0]
-  g = GraphViz::new( "G", "output" => "png", "path" => ARGV[0] )
+  g = GraphViz::new( "G", "path" => ARGV[0] )
 else
-  g = GraphViz::new( "G", "output" => "png" )
+  g = GraphViz::new( "G" )
 end
 
 g.node["shape"] = "ellipse"
@@ -21,4 +21,4 @@ g.node["shape"] = "ellipse"
   g.add_node( s, "shape" => s )
 }
 
-g.output( :file => "shapes.png")
+g.output( :png => "shapes.png")

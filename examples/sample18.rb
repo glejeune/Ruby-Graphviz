@@ -3,7 +3,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-GraphViz::new( "G", :output => "png", :rankdir => "LR", :size => "8,5" ) { |graph|
+GraphViz::new( "G", :rankdir => "LR", :size => "8,5" ) { |graph|
   graph.node[:shape] = "doublecircle"
   graph._LR_0; graph._LR_3; graph._LR_4; graph._LR_8
   graph.node[:shape] = "circle"
@@ -21,4 +21,4 @@ GraphViz::new( "G", :output => "png", :rankdir => "LR", :size => "8,5" ) { |grap
   (graph._LR_7 << graph._LR_5)[:label] = "S(a)"
   (graph._LR_8 << graph._LR_6)[:label] = "S(b)"
   (graph._LR_8 << graph._LR_5)[:label] = "S(a)"
-}.output( :path => '/usr/local/bin/', :file => "#{$0}.png" )
+}.output( :path => '/usr/local/bin/', :png => "#{$0}.png" )

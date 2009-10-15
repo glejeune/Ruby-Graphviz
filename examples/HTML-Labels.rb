@@ -1,7 +1,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-g = GraphViz::new( "structs", :output => "png" )
+g = GraphViz::new( "structs" )
 
 g.node["shape"] = "plaintext"
 
@@ -17,4 +17,4 @@ g.add_edge( "struct1:f2", "struct3:here" )
 
 g.add_edge( "HTML", "struct1" )
 
-g.output( :path => '/usr/local/bin/', :file => "#{$0}.png" )
+g.output( :path => '/usr/local/bin/', :png => "#{$0}.png" )

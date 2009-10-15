@@ -9,7 +9,7 @@ if ARGV[0]
   GraphViz::options( :path => ARGV[0] )
 end
 
-g = GraphViz::new( "structs", "output" => "png" )
+g = GraphViz::new( "structs" )
 
 g.node["shape"] = "record"
 
@@ -20,4 +20,4 @@ g.add_node( "struct3", "shape" => "record", "label" => 'hello\nworld |{ b |{c|<h
 g.add_edge( "struct1:f1", "struct2:f0" )
 g.add_edge( "struct1:f2", "struct3:here" )
 
-g.output( :png => "#{$0}.png" )
+g.output( :png => "#{$0}.png", :canon => nil )

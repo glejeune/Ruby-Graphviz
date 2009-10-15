@@ -593,7 +593,11 @@ class GraphViz
   # Escape a string to be acceptable as a node name in a graphviz input file
   #
   def self.escape(str) #:nodoc:
-    '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"'
+    if str.match( /^[a-zA-Z_]+[a-zA-Z0-9_:\.]*$/ ).nil?
+      '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"' 
+    else
+      str
+    end
   end
   
   def find_executable( ) #:nodoc:

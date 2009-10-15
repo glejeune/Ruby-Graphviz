@@ -10,5 +10,5 @@ GraphViz.parse( "hello.dot", :path => "/usr/local/bin" ) { |g|
   g.get_node("World") { |n|
     n.label = "Le Monde"
   }
-}.output(:output => "png", :file => "sample.png")
+}.output(:png => "sample.png")
 

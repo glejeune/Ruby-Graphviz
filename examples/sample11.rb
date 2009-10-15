@@ -5,9 +5,9 @@ require "graphviz"
 
 graph = nil
 if ARGV[0]
-  graph = GraphViz::new( "G", "output" => "png", "path" => ARGV[0] )
+  graph = GraphViz::new( "G", "path" => ARGV[0] )
 else
-  graph = GraphViz::new( "G", "output" => "png" )
+  graph = GraphViz::new( "G" )
 end
 
 graph["compound"] = "true"
@@ -39,4 +39,4 @@ graph.add_edge( c, g, "ltail" => "cluster0", "lhead" => "cluster1" )
 graph.add_edge( c, e, "ltail" => "cluster0" )
 graph.add_edge( d, h )
 
-graph.output( :file => "#{$0}.png" )
+graph.output( :png => "#{$0}.png" )

@@ -3,7 +3,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-GraphViz::new( "G", "output" => "png" ) { |graph|
+GraphViz::new( "G" ) { |graph|
   graph.node[:shape] = "ellipse"
   graph.node[:color] = "black"
   
@@ -45,4 +45,4 @@ GraphViz::new( "G", "output" => "png" ) { |graph|
   graph.cluster0.a3 << graph.cluster0.a0
   graph.cluster0.a3 << graph.endn
   graph.cluster1.b3 << graph.endn
-}.output( :path => '/usr/local/bin/', :file => "#{$0}.png" )
+}.output( :path => '/usr/local/bin/', :png => "#{$0}.png" )

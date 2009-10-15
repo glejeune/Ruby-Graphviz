@@ -3,7 +3,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-GraphViz::new( "ER", :type => "graph", :output => "png", :use => "neato" ) { |graph|
+GraphViz::new( "ER", :type => "graph", :use => "neato" ) { |graph|
   graph.node[:shape] = "box"
   graph.course; graph.institute; graph.student
   
@@ -56,4 +56,4 @@ GraphViz::new( "ER", :type => "graph", :output => "png", :use => "neato" ) { |gr
 
   graph[:label] = "\\n\\nEntity Relation Diagram\\ndrawn by NEATO";
   graph[:fontsize] = "20";
-}.output( :path => '/usr/local/bin/', :file => "#{$0}.png" )
+}.output( :path => '/usr/local/bin/', :png => "#{$0}.png" )

@@ -7,4 +7,4 @@ require "graphviz"
 
 GraphViz::new( :G, :type => :digraph ) { |g|
   g.world( :label => "World" ) << g.hello( :label => "Hello" )
-}.output( :output => :png, :file => "hello.png" )
+}.output( :png => "hello.png" )

@@ -212,4 +212,4 @@ GraphViz::new( "Ped_Lion_Share", :type => :digraph ) { |g|
   (g._026 << g.marr0017).set { |e| e[:dir] = :none; e[:weight] = 1 }
   (g._027 << g.marr0017).set { |e| e[:dir] = :none; e[:weight] = 1 }
   (g.marr0017 << g._028).set { |e| e[:dir] = :none; e[:weight] = 2 }
-}.output( :output => :png, :file => "lion_share.png" )
+}.output( :png => "lion_share.png" )

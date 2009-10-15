@@ -6,7 +6,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-GraphViz::new( "G", :type => "graph", :output => "png", :use => "fdp" ) { |graph|
+GraphViz::new( "G", :type => "graph", :use => "fdp" ) { |graph|
   graph.e
   graph.clusterA { |cA|
     cA.a << cA.b
@@ -20,4 +20,4 @@ GraphViz::new( "G", :type => "graph", :output => "png", :use => "fdp" ) { |graph
   graph.clusterB.d << graph.clusterA.clusterC._d
   graph.e << graph.clusterB
   graph.clusterA.clusterC << graph.clusterB
-}.output( :path => '/usr/local/bin/', :file => "#{$0}.png" )
+}.output( :path => '/usr/local/bin/', :png => "#{$0}.png" )

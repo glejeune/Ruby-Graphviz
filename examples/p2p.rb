@@ -5,9 +5,9 @@ require "graphviz"
 
 g = nil
 if ARGV[0]
-  g = GraphViz::new( "G", "output" => "png", "path" => ARGV[0], :use => "circo" )
+  g = GraphViz::new( "G", "path" => ARGV[0], :use => "circo" )
 else
-  g = GraphViz::new( "G", "output" => "png" )
+  g = GraphViz::new( "G" )
 end
 
 c0 = g.add_graph( "cluster0" )
@@ -32,4 +32,4 @@ g.add_edge( bp, jv, :color => "red", :label => "Est le beau fils de" ) # Beau fi
 g.add_edge( bp, gr )
 g.add_edge( gr, md )
 
-g.output
+g.output( :png => "p2p.png" )

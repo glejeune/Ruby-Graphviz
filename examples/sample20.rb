@@ -3,7 +3,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-GraphViz::options( :output => "png", :use => "dot" )
+GraphViz::options( :use => "dot" )
 
 if ARGV[0]
   GraphViz::options( :path => ARGV[0] )
@@ -44,4 +44,4 @@ GraphViz::new( "g", :rankdir => "LR", :type => "digraph" ) { |g|
   g.add_edge( g.node10(:f1), g.node11(:f0) )
   g.add_edge( g.node10(:f2), g.node12(:f0) )
   g.add_edge( g.node11(:f2), g.node1(:f0) )
-}.output( :file => "#{$0}.png" )
+}.output( :png => "#{$0}.png" )

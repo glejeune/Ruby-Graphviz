@@ -5,9 +5,9 @@ require "graphviz"
 
 g = nil
 if ARGV[0]
-  g = GraphViz::new( "G", "output" => "png", "path" => ARGV[0] )
+  g = GraphViz::new( "G", "path" => ARGV[0] )
 else
-  g = GraphViz::new( "G", "output" => "png" )
+  g = GraphViz::new( "G" )
 end
 
 g.node[:shape] = "ellipse"
@@ -52,4 +52,4 @@ g.cluster0.a3 << g.cluster0.a0
 g.cluster0.a3 << g.endn
 g.cluster1.b3 << g.endn
 
-g.output( :file => "#{$0}.png" )
+g.output( :png => "#{$0}.png" )

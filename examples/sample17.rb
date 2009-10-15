@@ -3,7 +3,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-GraphViz::new( "G", :type => "graph", :output => "png", :rankdir => "LR", :bgcolor => "#808080" ) { |graph|
+GraphViz::new( "G", :type => "graph", :rankdir => "LR", :bgcolor => "#808080" ) { |graph|
   graph.edge[:dir] = "none"
   
   graph.node[:width] = "0.3"
@@ -89,4 +89,4 @@ GraphViz::new( "G", :type => "graph", :output => "png", :rankdir => "LR", :bgcol
 	_["V"] << _["60"]
 	_["W"] << _["70"]
 	_["X"] << _["80"]
-}.output( :path => '/usr/local/bin/', :file => "#{$0}.png" )
+}.output( :path => '/usr/local/bin/', :png => "#{$0}.png" )
