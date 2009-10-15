@@ -1,3 +1,8 @@
+0.9.2 :
+* Escape nodes (by Dave Burt)
+* Handle errors from graphviz command (by Dave Burt)
+* Output as string (if String class is passed as file i.e. output(:pdf => String)) (by Dave Burt)
+
 0.9.1 :
 * Bugs corrections
 * Add the ability to create edge like that : node1 << node2 << node3 ...

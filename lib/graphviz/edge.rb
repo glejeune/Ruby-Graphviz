@@ -100,11 +100,13 @@ class GraphViz
 	      xLink = " -- "
 	    end
 	  
-	    xNodeNameOne = @xNodeOne.clone
-	    xNodeNameOne = '"' << xNodeNameOne << '"' if xNodeNameOne.match( /^[a-zA-Z_]+[a-zA-Z0-9_\.]*$/ ).nil?
+	    #xNodeNameOne = @xNodeOne.clone
+	    #xNodeNameOne = '"' << xNodeNameOne << '"' if xNodeNameOne.match( /^[a-zA-Z_]+[a-zA-Z0-9_\.]*$/ ).nil?
+	    xNodeNameOne = GraphViz.escape(@xNodeOne)
 	    
-	    xNodeNameTwo = @xNodeTwo.clone
-	    xNodeNameTwo = '"' << xNodeNameTwo << '"' if xNodeNameTwo.match( /^[a-zA-Z_]+[a-zA-Z0-9_\.]*$/ ).nil?
+	    #xNodeNameTwo = @xNodeTwo.clone
+	    #xNodeNameTwo = '"' << xNodeNameTwo << '"' if xNodeNameTwo.match( /^[a-zA-Z_]+[a-zA-Z0-9_\.]*$/ ).nil?
+	    xNodeNameTwo = GraphViz.escape(@xNodeTwo)
       
       xOut = xNodeNameOne + xLink + xNodeNameTwo
       xAttr = ""

@@ -5,9 +5,9 @@ require "graphviz"
 
 g = nil
 if ARGV[0]
-  g = GraphViz::new( "G", "output" => "png", "path" => ARGV[0] )
+  g = GraphViz::new( "G", "path" => ARGV[0] )
 else
-  g = GraphViz::new( "G", "output" => "png" )
+  g = GraphViz::new( "G" )
 end
 
 g["rankdir"] = "LR"
@@ -94,4 +94,4 @@ g.edge["arrowhead"] = "normal"
   g.add_edge( p, s, "arrowhead" => s )
 }
 
-g.output( :file => "#{$0}.png" )
+g.output( :png => "#{$0}.png" )

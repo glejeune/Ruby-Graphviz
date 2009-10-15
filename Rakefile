@@ -67,6 +67,12 @@ spec =
       s.has_rdoc = true
       s.extra_rdoc_files = ["README.rdoc", "ChangeLog", "COPYING", "AUTHORS"]
       s.rdoc_options = ["--title", "Ruby/GraphViz", "--main", "README.rdoc", "--line-numbers"]
+      
+      s.post_install_message = <<EOM
+Since version 0.9.2, Ruby/GraphViz use Open3.popen3. 
+On Windows, you need to install win32-open3
+
+EOM
     end
 
 Rake::GemPackageTask.new(spec) do |p|

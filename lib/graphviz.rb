@@ -16,6 +16,7 @@
 
 require 'tempfile'
 require 'mkmf'
+require 'open3'
 
 require 'graphviz/node'
 require 'graphviz/edge'
@@ -235,7 +236,10 @@ class GraphViz
   #   :file : Output file name
   #   :use : Program to use (Constants::PROGRAMS)
   #   :path : Program PATH
-  #   :<format> => :<file>
+  #   :<format> => <file> : <file> can be
+  #     * a file name
+  #     * nil, then the output will be printed to STDOUT
+  #     * String, then the output will be returned as a String
   # 
   def output( *hOpt )
     xDOTScript = ""
@@ -320,7 +324,7 @@ class GraphViz
     else
       if hOpt.nil? == false and hOpt[0].nil? == false
         hOpt[0].each do |xKey, xValue|
-          xValue = xValue.to_s unless xValue.nil?
+          xValue = xValue.to_s unless xValue.nil? or xValue.class == Class
           case xKey.to_s
             when "output"
               warn ":output option is deprecated, please use :<format> => :<file>"
@@ -349,7 +353,8 @@ class GraphViz
   
       xDOTScript = "#{@oGraphType} #{@name} {\n" << xDOTScript
 
-      if @format != "none"
+      xOutputString = false
+      xOutput = if @format != "none"
         ## Act: Save script and send it to dot
         t = Tempfile::open( File.basename($0) + "." )
         t.print( xDOTScript )
@@ -367,6 +372,9 @@ class GraphViz
         unless @format.nil?
           if @filename.nil?
             xOutputWithoutFile = "-T#{@format} "
+          elsif @filename == String
+            xOutputWithoutFile = "-T#{@format} "
+            xOutputString = true
           else
             xOutputWithFile = "-T#{@format} -o#{@filename} "
           end
@@ -374,6 +382,9 @@ class GraphViz
         @output.each do |format, file|
           if file.nil?
             xOutputWithoutFile << "-T#{format} "
+          elsif file == String
+            xOutputWithoutFile << "-T#{format} "
+            xOutputString = true
           else
             xOutputWithFile << "-T#{format} -o#{file} "
           end
@@ -381,11 +392,26 @@ class GraphViz
         
         xCmd = "#{cmd} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         
-        f = IO.popen( xCmd )
-        print f.readlines
-        f.close
+        #f = IO.popen( xCmd )
+        #print f.readlines
+        #f.close
+        Open3.popen3( xCmd ) do |_, stdout, stderr|
+          errors = stderr.read
+          if errors.blank?
+            stdout.read
+          else
+            raise "Error from graphviz (#{xCmd}):\n#{errors}"
+          end
+        end
       else
-        puts xDOTScript
+        #puts xDOTScript
+        xDOTScript
+      end
+            
+      if xOutputString
+        xOutput
+      else
+        print xOutput
       end
     end
   end
@@ -561,6 +587,13 @@ class GraphViz
     end
   
     yield( self ) if( block )
+  end
+  
+  #
+  # Escape a string to be acceptable as a node name in a graphviz input file
+  #
+  def self.escape(str) #:nodoc:
+    '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"'
   end
   
   def find_executable( ) #:nodoc:
