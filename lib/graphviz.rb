@@ -356,7 +356,11 @@ class GraphViz
       xOutputString = false
       xOutput = if @format != "none"
         ## Act: Save script and send it to dot
-        t = Tempfile::open( File.basename($0) + "." )
+        t = if /Windows/.match( ENV['OS'] )
+          Tempfile::open( File.basename($0), "." )
+        else
+          Tempfile::open( File.basename($0) )
+        end
         t.print( xDOTScript )
         t.close
         
@@ -391,7 +395,10 @@ class GraphViz
         end
         
         xCmd = "#{cmd} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
-        
+        if /Windows/.match( ENV['OS'] )
+          xCmd = "\"#{cmd}\" #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+        end
+
         #f = IO.popen( xCmd )
         #print f.readlines
         #f.close
