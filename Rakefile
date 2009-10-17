@@ -23,7 +23,7 @@ RDOC_OPTS = ['--quiet', '--title', "Ruby/GraphViz, the Documentation",
 
 desc "Packages up Ruby/GraphViz."
 task :default => [:package]
-task :package => [:clean]
+task :package => [:clean, :win32_gem]
 
 task :doc => [:rdoc, :after_doc]
 
@@ -49,7 +49,7 @@ spec =
       s.name = PKG_NAME
       s.version = PKG_VERS
       s.platform = Gem::Platform::RUBY
-
+      
       s.authors = ["Gregoire Lejeune"]
       s.summary = %q{Interface to the GraphViz graphing tool}
       s.email = %q{gregoire.lejeune@free.fr}
@@ -68,16 +68,30 @@ spec =
       s.extra_rdoc_files = ["README.rdoc", "ChangeLog", "COPYING", "AUTHORS"]
       s.rdoc_options = ["--title", "Ruby/GraphViz", "--main", "README.rdoc", "--line-numbers"]
       
-      s.post_install_message = <<EOM
-Since version 0.9.2, Ruby/GraphViz use Open3.popen3. 
-On Windows, you need to install win32-open3
+      s.post_install_message = %{
 
-EOM
+Since version 0.9.2, Ruby/GraphViz use Open3.popen3. 
+On Windows, you need to install ruby-graphviz-#{PKG_VERS}-x86-mswin32.gem
+
+}
     end
 
 Rake::GemPackageTask.new(spec) do |p|
     p.need_tar = true
     p.gem_spec = spec
+end
+
+desc "Create Windows Gem"
+task :win32_gem do
+  # WinSpecs
+  win_spec = spec.clone
+  win_spec.add_dependency('win32-open3')
+  win_spec.platform = 'mswin32'
+
+  # Create the gem, then move it to pkg.
+  Gem::Builder.new(win_spec).build
+  gem_file = "#{win_spec.name}-#{win_spec.version}-#{win_spec.platform}.gem"
+  mv(gem_file, "pkg/#{gem_file}")
 end
 
 task :install do
