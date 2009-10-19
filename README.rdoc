@@ -33,7 +33,7 @@ The same but with a block
   require 'graphviz'
 
   GraphViz::new( :G, :type => :digraph ) { |g|
-    g.world( :label => "World" ) << g.hello( :label => Hello )
+    g.world( :label => "World" ) << g.hello( :label => "Hello" )
   }.output( :png => "hello_world.png" )
 
 Create a graph from a file 
@@ -57,6 +57,8 @@ Create a graph from a file
   sudo gem install ruby-graphviz
 
 You also need to install GraphViz[http://www.graphviz.org] and Treetop[http://treetop.rubyforge.org/]
+
+On *Windows* you also need to install win32-open3. This is not an absolute requirement.
 
 == LICENCE
 
