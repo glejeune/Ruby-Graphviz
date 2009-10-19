@@ -22,6 +22,10 @@ ruby sample16.rb
 ruby sample17.rb
 ruby sample18.rb
 ruby sample19.rb
+ruby sample20.rb
+ruby sample21.rb
+ruby sample22.rb
+ruby sample23.rb
 
 ruby testorder.rb $1
 ruby testxml.rb $1

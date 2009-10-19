@@ -1,5 +1,6 @@
 0.9.3 :
 * Minor bug correction for Windows
+* Use Open3.popen3 if installed, else use IO.popen (by Dave Burt)
 
 0.9.2 :
 * Escape nodes (by Dave Burt)

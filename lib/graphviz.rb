@@ -16,7 +16,6 @@
 
 require 'tempfile'
 require 'mkmf'
-require 'open3'
 
 require 'graphviz/node'
 require 'graphviz/edge'
@@ -394,24 +393,24 @@ class GraphViz
           end
         end
         
-        xCmd = "#{cmd} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
-        if /Windows/.match( ENV['OS'] )
+        #xCmd = "#{cmd} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+        #if /Windows/.match( ENV['OS'] )
           xCmd = "\"#{cmd}\" #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
-        end
+        #end
 
-        #f = IO.popen( xCmd )
-        #print f.readlines
-        #f.close
-        Open3.popen3( xCmd ) do |_, stdout, stderr|
-          errors = stderr.read
-          if errors.blank?
-            stdout.read
-          else
-            raise "Error from graphviz (#{xCmd}):\n#{errors}"
-          end
-        end
+        ##f = IO.popen( xCmd )
+        ##print f.readlines
+        ##f.close
+        #Open3.popen3( xCmd ) do |_, stdout, stderr|
+        #  errors = stderr.read
+        #  if errors.blank?
+        #    stdout.read
+        #  else
+        #    raise "Error from graphviz (#{xCmd}):\n#{errors}"
+        #  end
+        #end
+        output_from_command( xCmd )
       else
-        #puts xDOTScript
         xDOTScript
       end
             
@@ -424,6 +423,35 @@ class GraphViz
   end
   
   alias :save :output
+  
+  def output_and_errors_from_command(cmd) #:nodoc:
+   unless defined? Open3
+     begin
+       require 'open3'
+       require 'win32/open3'
+     rescue LoadError
+     end
+   end
+   begin
+     Open3.popen3( cmd ) do |stdin, stdout, stderr|
+       stdin.close
+       [stdout.read, stderr.read]
+     end
+   rescue NotImplementedError, NoMethodError
+     IO.popen( cmd ) do |stdout|
+       [stdout.read, nil]
+     end
+   end
+  end
+
+  def output_from_command(cmd) #:nodoc:
+   output, errors = output_and_errors_from_command(cmd)
+   if errors.nil? || errors.strip.empty?
+     output
+   else
+     raise "Error from #{cmd}:\n#{errors}"
+   end
+  end
   
   # 
   # Get the graph name
