@@ -323,7 +323,7 @@ class GraphViz
     else
       if hOpt.nil? == false and hOpt[0].nil? == false
         hOpt[0].each do |xKey, xValue|
-          xValue = xValue.to_s unless xValue.nil? or xValue.class == Class
+          xValue = xValue.to_s unless xValue.nil? or [Class, TrueClass, FalseClass].include?(xValue.class)
           case xKey.to_s
             when "output"
               warn ":output option is deprecated, please use :<format> => :<file>"
@@ -363,8 +363,6 @@ class GraphViz
         t.print( xDOTScript )
         t.close
         
-        #cmd = find_executable( @prog )
-        #cmd = find_executable0( @prog )
         cmd = find_executable( )
         if cmd == nil
           raise StandardError, "GraphViz not installed or #{@prog} not in PATH. Install GraphViz or use the 'path' option"
@@ -398,17 +396,6 @@ class GraphViz
           xCmd = "\"#{cmd}\" #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         #end
 
-        ##f = IO.popen( xCmd )
-        ##print f.readlines
-        ##f.close
-        #Open3.popen3( xCmd ) do |_, stdout, stderr|
-        #  errors = stderr.read
-        #  if errors.blank?
-        #    stdout.read
-        #  else
-        #    raise "Error from graphviz (#{xCmd}):\n#{errors}"
-        #  end
-        #end
         output_from_command( xCmd )
       else
         xDOTScript
@@ -474,6 +461,9 @@ class GraphViz
       return GraphViz::commonGraph( oNode, self ).add_edge( self, oNode )
     end
   end
+  alias :> :<<
+  alias :- :<<
+  alias :>> :<<
   
   def pg #:nodoc:
     @oParentGraph

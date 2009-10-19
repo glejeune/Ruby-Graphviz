@@ -71,6 +71,10 @@ class GraphViz
       
       GraphViz::commonGraph( oNode, n ).add_edge( n, oNode )
     end
+    alias :> :<<
+    alias :- :<<
+    alias :>> :<<
+    
     #
     # Set edge attributs
     #
