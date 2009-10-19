@@ -23,7 +23,7 @@ RDOC_OPTS = ['--quiet', '--title', "Ruby/GraphViz, the Documentation",
 
 desc "Packages up Ruby/GraphViz."
 task :default => [:package]
-task :package => [:clean, :win32_gem]
+task :package => [:clean]
 
 task :doc => [:rdoc, :after_doc]
 
