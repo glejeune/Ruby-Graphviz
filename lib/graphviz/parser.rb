@@ -44,8 +44,8 @@ class GraphViz
     
     class Graph < Treetop::Runtime::SyntaxNode
       def eval( context, hOpts )
-        puts "GRAPH TYPE = #{type.text_value}"
-        puts "GRAPH NAME = #{name.text_value}"
+        # puts "GRAPH TYPE = #{type.text_value}"
+        # puts "GRAPH NAME = #{name.text_value}"
         
         hOpts = hOpts[0].merge( {:type => type.text_value} )
         
@@ -69,15 +69,15 @@ class GraphViz
     
     class GraphPreference < Treetop::Runtime::SyntaxNode
       def eval( context )
-        puts "GRAPH PREFERENCE : "
-        puts "  #{key.text_value} = #{value.text_value.gsub(/"/, "")}"
+        # puts "GRAPH PREFERENCE : "
+        # puts "  #{key.text_value} = #{value.text_value.gsub(/"/, "")}"
         context.graph[key.text_value] = value.text_value.gsub(/"/, "")
       end
     end
     
     class NamedGraphPreference < Treetop::Runtime::SyntaxNode
       def eval( context )
-        puts "GRAPH PREFERENCES :"
+        # puts "GRAPH PREFERENCES :"
         options.eval().each do |k,v|
           context.graph[k] = v
         end
@@ -86,14 +86,14 @@ class GraphViz
     
     class NodePreference < Treetop::Runtime::SyntaxNode
       def eval( context )
-        puts "NODE PREFERENCES :"
+        # puts "NODE PREFERENCES :"
         context.options[:node] = context.options[:node].merge( options.eval() )
       end
     end
     
     class EdgePreference < Treetop::Runtime::SyntaxNode
       def eval( context )
-        puts "EDGE PREFERENCES :"
+        # puts "EDGE PREFERENCES :"
         context.options[:edge] = context.options[:edge].merge( options.eval() )
       end
     end
@@ -101,8 +101,8 @@ class GraphViz
     class Node < Treetop::Runtime::SyntaxNode
       def eval( context )
         node_name = name.text_value.gsub( /"/, "" )
-        puts "NODE NAME = #{node_name}"
-        puts "OPTIONS = "
+        # puts "NODE NAME = #{node_name}"
+        # puts "OPTIONS = "
         
         # Create node
         node = context.nodes[node_name] || context.graph.add_node( node_name )
@@ -126,7 +126,7 @@ class GraphViz
     
     class Edge < Treetop::Runtime::SyntaxNode
       def create_node( name, context )
-        puts "  NEED TO CREATE NODE : #{name}"
+        # puts "  NEED TO CREATE NODE : #{name}"
         # Create the node
         node = context.graph.add_node( name )
         
@@ -160,10 +160,10 @@ class GraphViz
       def eval( context )
         one_name = node_one.text_value.gsub( /"/, "" )
         two_name = node_two.text_value.gsub( /"/, "" )
-        puts "EDGE"
-        puts "NODE ONE = #{one_name}"
-        puts "NODE TWO = #{two_name}"
-        puts "OPTIONS = "
+        # puts "EDGE"
+        # puts "NODE ONE = #{one_name}"
+        # puts "NODE TWO = #{two_name}"
+        # puts "OPTIONS = "
         
         # Get or create node one
         one = context.nodes[one_name] || create_node( one_name, context )
@@ -181,7 +181,7 @@ class GraphViz
         last_node = two
         other_nodes.elements.each do |e|
           new_node_name = e.next_node.text_value.gsub( /"/, "" )
-          puts "OTHER NODE : #{new_node_name}"
+          # puts "OTHER NODE : #{new_node_name}"
           
           new_node = context.nodes[new_node_name] || create_node( new_node_name, context )
           create_edge( last_node, new_node, edge_options, context )
@@ -193,7 +193,7 @@ class GraphViz
     
     class Subgraph < Treetop::Runtime::SyntaxNode
       def eval( context )
-        puts "CREATE SUBGRAPH : #{name.text_value}"
+        # puts "CREATE SUBGRAPH : #{name.text_value}"
         
         # Save options
         saved_options = context.options.clone
@@ -220,10 +220,10 @@ class GraphViz
   def eval
     options = {}
     elements[2].elements.each do |e|
-      puts "  #{e.elements[0].text_value} = #{e.elements[4].text_value}"
+      # puts "  #{e.elements[0].text_value} = #{e.elements[4].text_value}"
       options[e.elements[0].text_value] = e.elements[4].text_value.gsub( /"/, "" )
     end
-    puts "  #{elements[3].text_value} = #{elements[7].text_value}"
+    # puts "  #{elements[3].text_value} = #{elements[7].text_value}"
     options[elements[3].text_value] = elements[7].text_value.gsub( /"/, "" )
     
     return options
