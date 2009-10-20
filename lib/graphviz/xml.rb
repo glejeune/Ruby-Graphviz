@@ -30,10 +30,18 @@ class GraphViz
     # Generate the graph
     # 
     # Options :
-    #   :output : Output format (Constants::FORMATS)
-    #   :file : Output file name
-    #   :use : Program to use (Constants::PROGRAMS)
-    #   :path : Program PATH
+    # * :output : Output format (Constants::FORMATS)
+    # * :file : Output file name
+    # * :use : Program to use (Constants::PROGRAMS)
+    # * :path : Program PATH
+    # * :<format> => <file> : <file> can be
+    #   * a file name
+    #   * nil, then the output will be printed to STDOUT
+    #   * String, then the output will be returned as a String
+    # * :errors : DOT error level (default 1)
+    #   * 0 = Error + Warning
+    #   * 1 = Error
+    #   * 2 = none
     # 
     def output( *hOpt )
       @oGraph.output( *hOpt )
@@ -45,8 +53,8 @@ class GraphViz
     # Create a graph from a XML file
     # 
     # In:
-    #   xFile : XML File
-    #   *hOpt : Graph options
+    # * xFile : XML File
+    # * *hOpt : Graph options
     # 
     def initialize( xFile, *hOpt )
       @xNodeName = "00000"

@@ -65,8 +65,8 @@ class GraphViz
   # Create a new node
   #
   # In:
-  #   xNodeName : Name of the new node
-  #   *hOpt : Node attributs
+  # * xNodeName : Name of the new node
+  # * *hOpt : Node attributs
   # 
   # Return the GraphViz::Node object created
   #
@@ -103,9 +103,9 @@ class GraphViz
   # Create a new edge
   # 
   # In:
-  #   oNodeOne : First node (or node list)
-  #   oNodeTwo : Second Node (or node list)
-  #   *hOpt : Edge attributs
+  # * oNodeOne : First node (or node list)
+  # * oNodeTwo : Second Node (or node list)
+  # * *hOpt : Edge attributs
   #
   def add_edge( oNodeOne, oNodeTwo, *hOpt )
     
@@ -140,11 +140,11 @@ class GraphViz
   end
 
   # 
-  # Create à new graph
+  # Create a new graph
   # 
   # In:
-  #   xGraphName : Graph name
-  #   *hOpt : Graph attributs
+  # * xGraphName : Graph name
+  # * *hOpt : Graph attributs
   #
   def add_graph( xGraphName, *hOpt )
     @hoGraphs[xGraphName] = GraphViz::new( xGraphName, :parent => self, :type => @oGraphType )
@@ -234,18 +234,18 @@ class GraphViz
   # Generate the graph
   # 
   # Options :
-  #   :output : Output format (Constants::FORMATS)
-  #   :file : Output file name
-  #   :use : Program to use (Constants::PROGRAMS)
-  #   :path : Program PATH
-  #   :<format> => <file> : <file> can be
-  #     * a file name
-  #     * nil, then the output will be printed to STDOUT
-  #     * String, then the output will be returned as a String
-  #   :errors : DOT error level (default 1)
-  #     * 0 = Error + Warning
-  #     * 1 = Error
-  #     * 2 = none
+  # * :output : Output format (Constants::FORMATS)
+  # * :file : Output file name
+  # * :use : Program to use (Constants::PROGRAMS)
+  # * :path : Program PATH
+  # * :<format> => <file> : <file> can be
+  #   * a file name
+  #   * nil, then the output will be printed to STDOUT
+  #   * String, then the output will be returned as a String
+  # * :errors : DOT error level (default 1)
+  #   * 0 = Error + Warning
+  #   * 1 = Error
+  #   * 2 = none
   # 
   def output( *hOpt )
     xDOTScript = ""
@@ -531,12 +531,12 @@ class GraphViz
   # Create a new graph from a GraphViz File
   # 
   # Options :
-  #   :output : Output format (Constants::FORMATS) (default : dot)
-  #   :file : Output file name (default : none)
-  #   :use : Program to use (Constants::PROGRAMS) (default : dot)
-  #   :path : Program PATH
-  #   :parent : Parent graph (default : none)
-  #   :type : Graph type (Constants::GRAPHTYPE) (default : digraph)
+  # * :output : Output format (Constants::FORMATS) (default : dot)
+  # * :file : Output file name (default : none)
+  # * :use : Program to use (Constants::PROGRAMS) (default : dot)
+  # * :path : Program PATH
+  # * :parent : Parent graph (default : none)
+  # * :type : Graph type (Constants::GRAPHTYPE) (default : digraph)
   # 
   def self.parse( xFile, *hOpts, &block )
     g = GraphViz::Parser.parse( xFile, hOpts[0], &block )
@@ -562,16 +562,16 @@ class GraphViz
   # Create a new graph object
   # 
   # Options :
-  #   :output : Output format (Constants::FORMATS) (default : dot)
-  #   :file : Output file name (default : none)
-  #   :use : Program to use (Constants::PROGRAMS) (default : dot)
-  #   :path : Program PATH
-  #   :parent : Parent graph (default : none)
-  #   :type : Graph type (Constants::GRAPHTYPE) (default : digraph)
-  #   :errors : DOT error level (default 1)
-  #     * 0 = Error + Warning
-  #     * 1 = Error
-  #     * 2 = none
+  # * :output : Output format (Constants::FORMATS) (default : dot)
+  # * :file : Output file name (default : none)
+  # * :use : Program to use (Constants::PROGRAMS) (default : dot)
+  # * :path : Program PATH
+  # * :parent : Parent graph (default : none)
+  # * :type : Graph type (Constants::GRAPHTYPE) (default : digraph)
+  # * :errors : DOT error level (default 1)
+  #   * 0 = Error + Warning
+  #   * 1 = Error
+  #   * 2 = none
   # 
   def initialize( xGraphName, *hOpt, &block )
     @filename = nil

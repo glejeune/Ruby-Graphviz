@@ -28,8 +28,8 @@ class GraphViz
     # Create a new node
     # 
     # In:
-    #   xNodeName : Name of the node
-    #   oGParrent : Graph 
+    # * xNodeName : Name of the node
+    # * oGParrent : Graph 
     # 
     def initialize( xNodeName, oGParrent = nil )
       @xNodeName = xNodeName

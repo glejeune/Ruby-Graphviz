@@ -29,9 +29,9 @@ class GraphViz
     # Create a new edge
     # 
     # In:
-    #   vNodeOne : First node
-    #   vNodeTwo : Second node
-    #   oGParrent : Graph 
+    # * vNodeOne : First node
+    # * vNodeTwo : Second node
+    # * oGParrent : Graph 
     #
     def initialize( vNodeOne, vNodeTwo, oGParrent = nil )
 	    if vNodeOne.class == String
@@ -71,9 +71,9 @@ class GraphViz
       
       GraphViz::commonGraph( oNode, n ).add_edge( n, oNode )
     end
-    alias :> :<<
-    alias :- :<<
-    alias :>> :<<
+    alias :> :<< #:nodoc:
+    alias :- :<< #:nodoc:
+    alias :>> :<< #:nodoc:
     
     #
     # Set edge attributs
