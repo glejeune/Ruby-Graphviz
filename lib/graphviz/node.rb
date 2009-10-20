@@ -114,7 +114,7 @@ class GraphViz
 	      if k == "html"
 		      xAttr << xSeparator + "label = <" + v + ">"
 		    else
-          xAttr << xSeparator + k + " = \"" + v + "\""
+          xAttr << xSeparator + k + " = " + GraphViz.escape(v, true)
 		    end
         xSeparator = ", "
       end

@@ -1,3 +1,8 @@
+0.9.4 :
+* Escape nodes and edges attributs
+* GraphViz::escape corrections (by Dave Burt)
+* Add :errors option to set level of message suppression (default : suppress warning messages)
+
 0.9.3 :
 * Minor bug correction for Windows
 * Use Open3.popen3 if installed, else use IO.popen (by Dave Burt)

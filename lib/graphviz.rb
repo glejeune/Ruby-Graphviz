@@ -41,6 +41,9 @@ class GraphViz
   ## Var: program path
   @@path = nil
   @path
+  ## Var: Error level
+  @@errors = 1
+  @errors
   
   ## Var: Graph name
   @name
@@ -239,6 +242,10 @@ class GraphViz
   #     * a file name
   #     * nil, then the output will be printed to STDOUT
   #     * String, then the output will be returned as a String
+  #   :errors : DOT error level (default 1)
+  #     * 0 = Error + Warning
+  #     * 1 = Error
+  #     * 2 = none
   # 
   def output( *hOpt )
     xDOTScript = ""
@@ -341,6 +348,8 @@ class GraphViz
               @prog = xValue
             when "path"
               @path = xValue
+            when "errors"
+              @errors = xValue
             else
               if FORMATS.index( xKey.to_s ).nil? == true
                 raise ArgumentError, "output format '#{xValue}' invalid"
@@ -393,7 +402,7 @@ class GraphViz
         
         #xCmd = "#{cmd} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         #if /Windows/.match( ENV['OS'] )
-          xCmd = "\"#{cmd}\" #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+          xCmd = "\"#{cmd}\" -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         #end
 
         output_from_command( xCmd )
@@ -492,7 +501,7 @@ class GraphViz
 ## ----------------------------------------------------------------------------
 
   #
-  # Change default options (:use, :path and :output)
+  # Change default options (:use, :path, :errors and :output)
   # 
   def self.default( hOpts )
     hOpts.each do |k, v|
@@ -501,6 +510,8 @@ class GraphViz
           @@prog = v
         when "path"
           @@path = v
+        when "errors"
+          @@errors = v
         when "output"
           warn ":output option is deprecated!"
           @@format = v
@@ -557,6 +568,10 @@ class GraphViz
   #   :path : Program PATH
   #   :parent : Parent graph (default : none)
   #   :type : Graph type (Constants::GRAPHTYPE) (default : digraph)
+  #   :errors : DOT error level (default 1)
+  #     * 0 = Error + Warning
+  #     * 1 = Error
+  #     * 2 = none
   # 
   def initialize( xGraphName, *hOpt, &block )
     @filename = nil
@@ -564,6 +579,7 @@ class GraphViz
     @format   = @@format
     @prog     = @@prog
     @path     = @@path
+    @errors   = @@errors
     @output   = {}
     
     @elements_order = Array::new()
@@ -605,6 +621,8 @@ class GraphViz
             @oGraphType = xValue.to_s
           when "path"
             @path = xValue.to_s
+          when "errors"
+            @errors = xValue
           else
             self[xKey.to_s] = xValue.to_s
         end
@@ -617,8 +635,8 @@ class GraphViz
   #
   # Escape a string to be acceptable as a node name in a graphviz input file
   #
-  def self.escape(str) #:nodoc:
-    if str.match( /^[a-zA-Z_]+[a-zA-Z0-9_:\.]*$/ ).nil?
+  def self.escape(str, force = false) #:nodoc:
+    if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:\.]*\Z/ ).nil?
       '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"' 
     else
       str
