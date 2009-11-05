@@ -60,10 +60,18 @@ class GraphViz
     end
 
     # 
-    # Get the value of the node attribut +xAttrName+
+    # Set values for edge attributs or 
+    # get the value of the given edge attribut +xAttrName+
     # 
     def []( xAttrName )
-      @oAttrEdge[xAttrName.to_s].clone
+      # Modification by axgle (http://github.com/axgle)
+      if Hash === xAttrName
+        xAttrName.each do |key, value|
+          self[key] = value
+        end
+      else
+        @oAttrEdge[xAttrName.to_s].clone
+      end
     end
     
     def <<( oNode ) #:nodoc:
