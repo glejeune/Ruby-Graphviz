@@ -15,7 +15,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
 require 'tempfile'
-require 'mkmf'
+# require 'mkmf'
 
 require 'graphviz/node'
 require 'graphviz/edge'
@@ -643,13 +643,39 @@ class GraphViz
     end
   end
   
-  def find_executable( ) #:nodoc:
-    cmd = find_executable0( @prog )
-    if cmd == nil and @path != nil
-      __cmd = File.join( @path, @prog )
-      cmd = __cmd if File.executable?( __cmd )
+  # def find_executable( ) #:nodoc:
+  #   cmd = find_executable0( @prog )
+  #   if cmd == nil and @path != nil
+  #     __cmd = File.join( @path, @prog )
+  #     cmd = __cmd if File.executable?( __cmd )
+  #   end
+  #   return cmd
+  # end
+  
+  # Since this code is an adaptation of Launchy::Application#find_executable
+  # (http://copiousfreetime.rubyforge.org/launchy/Launchy/Application.html)
+  # it follow is licence :
+  #
+  # Permission to use, copy, modify, and/or distribute this software for any 
+  # purpose with or without fee is hereby granted, provided that the above 
+  # copyright notice and this permission notice appear in all copies.
+  #
+  # THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL WARRANTIES 
+  # WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF 
+  # MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY 
+  # SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES 
+  # WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION 
+  # OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
+  # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+  def find_executable(bin = @prog, *paths) #:nodoc:
+    paths = ENV['PATH'].split(File::PATH_SEPARATOR) if paths.empty?
+    paths.each do |path|
+      file = File.join(path,bin)
+      if File.executable?(file) then
+        return file
+      end
     end
-    return cmd
+    return nil
   end
 end
 
