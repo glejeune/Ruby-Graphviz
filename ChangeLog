@@ -1,6 +1,7 @@
 0.9.5 :
 * Remove 'mkmf' dependency
 * GraphViz::Edge#[] modification
+* Small correction to escape the dot ('.') character (by Miguel Cabrera)
 
 0.9.4 :
 * Escape nodes and edges attributs
