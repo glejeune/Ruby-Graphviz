@@ -14,6 +14,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
+
+begin
+  include Java
+  IS_JRUBY = true
+rescue
+  IS_JRUBY= false
+end
+
+
 require 'tempfile'
 # require 'mkmf'
 
@@ -369,6 +378,7 @@ class GraphViz
         else
           Tempfile::open( File.basename($0) )
         end
+      
         t.print( xDOTScript )
         t.close
         
@@ -376,7 +386,9 @@ class GraphViz
         if cmd == nil
           raise StandardError, "GraphViz not installed or #{@prog} not in PATH. Install GraphViz or use the 'path' option"
         end
-        
+
+        cmd = escape_path_containing_blanks(cmd) if IS_JRUBY
+
         xOutputWithFile = ""
         xOutputWithoutFile = ""
         unless @format.nil?
@@ -402,7 +414,12 @@ class GraphViz
         
         #xCmd = "#{cmd} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         #if /Windows/.match( ENV['OS'] )
-          xCmd = "\"#{cmd}\" -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+
+        if IS_JRUBY
+          xCmd = "#{cmd} -v -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+        else
+          xCmd = "\"#{cmd}\" -v -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+        end
         #end
 
         output_from_command( xCmd )
@@ -419,7 +436,7 @@ class GraphViz
   end
   
   alias :save :output
-  
+
   def output_and_errors_from_command(cmd) #:nodoc:
    unless defined? Open3
      begin
@@ -660,7 +677,7 @@ class GraphViz
   # purpose with or without fee is hereby granted, provided that the above 
   # copyright notice and this permission notice appear in all copies.
   #
-  # THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL WARRANTIES 
+  # THE SOFTWARE IS PROVIDED “AS IS�? AND THE AUTHOR DISCLAIMS ALL WARRANTIES 
   # WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF 
   # MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY 
   # SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES 
@@ -668,14 +685,41 @@ class GraphViz
   # OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
   # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
   def find_executable(bin = @prog, *paths) #:nodoc:
+  
     paths = ENV['PATH'].split(File::PATH_SEPARATOR) if paths.empty?
     paths.each do |path|
-      file = File.join(path,bin)
+      file = File.join(path, add_exe_suffix(bin))
       if File.executable?(file) then
         return file
       end
     end
     return nil
   end
+
+
+  def add_exe_suffix(prog)
+    if /Windows/.match( ENV['OS'] )
+      suffix = '.exe'
+    else
+      suffix = ''
+    end
+    "#{prog}#{suffix}"
+  end
+
+
+  def escape_path_containing_blanks(path)
+    path.gsub!(File::ALT_SEPARATOR, File::SEPARATOR)
+    path_elements = path.split(File::SEPARATOR)
+    path_elements.map! do |element|
+      if element.include?(' ')
+        "\"#{element}\""
+      else
+        element
+      end
+    end
+    path_elements.join(File::SEPARATOR)
+  end
+
+  
 end
 
