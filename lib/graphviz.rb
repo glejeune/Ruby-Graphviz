@@ -416,9 +416,9 @@ class GraphViz
         #if /Windows/.match( ENV['OS'] )
 
         if IS_JRUBY
-          xCmd = "#{cmd} -v -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+          xCmd = "#{cmd} -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         else
-          xCmd = "\"#{cmd}\" -v -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+          xCmd = "\"#{cmd}\" -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         end
         #end
 

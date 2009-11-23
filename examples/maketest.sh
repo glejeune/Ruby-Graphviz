@@ -1,36 +1,36 @@
 #!/bin/sh
 
 echo "arrowhead.rb"
-ruby arrowhead.rb $1
+ruby arrowhead.rb 
 echo "HTML-Labels.rb"
 ruby HTML-Labels.rb
 echo "p2p.rb"
-ruby p2p.rb $1
+ruby p2p.rb 
 
 echo "sample01.rb"
-ruby sample01.rb $1
+ruby sample01.rb 
 echo "sample02.rb"
-ruby sample02.rb $1
+ruby sample02.rb 
 echo "sample03.rb"
-ruby sample03.rb $1
+ruby sample03.rb 
 echo "sample04.rb"
-ruby sample04.rb $1
+ruby sample04.rb 
 echo "sample05.rb"
-ruby sample05.rb $1
+ruby sample05.rb 
 echo "sample06.rb"
 ruby sample06.rb                   
 echo "sample07.rb"
-ruby sample07.rb $1
+ruby sample07.rb 
 echo "sample08.rb"
-ruby sample08.rb $1
+ruby sample08.rb 
 echo "sample09.rb"
-ruby sample09.rb $1
+ruby sample09.rb 
 echo "sample10.rb"
-ruby sample10.rb $1
+ruby sample10.rb 
 echo "sample11.rb"
-ruby sample11.rb $1
+ruby sample11.rb 
 echo "sample12.rb"
-ruby sample12.rb $1
+ruby sample12.rb 
 echo "sample13.rb"
 ruby sample13.rb
 echo "sample14.rb"
@@ -59,11 +59,11 @@ echo "sample25.rb"
 ruby sample25.rb
 
 echo "shapes.rb"
-ruby shapes.rb $1
+ruby shapes.rb 
 echo "testorder.rb"
-ruby testorder.rb $1
+ruby testorder.rb 
 echo "testxml.rb"
-ruby testxml.rb $1
+ruby testxml.rb 
 
 cd dot
 pwd
