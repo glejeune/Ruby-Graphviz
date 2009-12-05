@@ -1,5 +1,6 @@
 0.9.6 :
 * jRuby support (by obruening)
+* Issue #1 : STDOUT in binmode
 
 0.9.5 :
 * Remove 'mkmf' dependency
