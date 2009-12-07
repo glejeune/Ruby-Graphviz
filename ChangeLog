@@ -1,3 +1,6 @@
+0.9.7 :
+* Small bug correction in escape_path_containing_blanks (by Andreas Ronge)
+
 0.9.6 :
 * jRuby support (by obruening)
 * Issue #1 : STDOUT in binmode

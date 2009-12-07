@@ -710,7 +710,7 @@ class GraphViz
 
 
   def escape_path_containing_blanks(path)
-    path.gsub!(File::ALT_SEPARATOR, File::SEPARATOR)
+    path.gsub!(File::ALT_SEPARATOR, File::SEPARATOR) if File::ALT_SEPARATOR
     path_elements = path.split(File::SEPARATOR)
     path_elements.map! do |element|
       if element.include?(' ')
