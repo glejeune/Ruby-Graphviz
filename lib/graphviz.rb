@@ -687,17 +687,29 @@ class GraphViz
   # OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
   # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
   def find_executable(bin = @prog, *paths) #:nodoc:
-  
     paths = ENV['PATH'].split(File::PATH_SEPARATOR) if paths.empty?
     paths.each do |path|
-      file = File.join(path, add_exe_suffix(bin))
+      file = File.join(path,bin)
       if File.executable?(file) then
         return file
+      elsif RUBY_PLATFORM =~ /mswin|mingw/
+        found_ext = (ENV['PATHEXT'] || '.exe;.bat;.com').split(";").find {|ext| File.executable?(file + ext) }
+        return file + found_ext if found_ext
       end
     end
     return nil
   end
-
+#   def find_executable(bin = @prog, *paths) #:nodoc:
+#   
+#     paths = ENV['PATH'].split(File::PATH_SEPARATOR) if paths.empty?
+#     paths.each do |path|
+#       file = File.join(path, add_exe_suffix(bin))
+#       if File.executable?(file) then
+#         return file
+#       end
+#     end
+#     return nil
+#   end
 
   def add_exe_suffix(prog)
     if /Windows/.match( ENV['OS'] )
