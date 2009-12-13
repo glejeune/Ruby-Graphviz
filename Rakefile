@@ -11,7 +11,7 @@ include FileUtils
 
 PKG_NAME = "ruby-graphviz"
 PKG_VERS = Constants::RGV_VERSION
-PKG_FILES = %w(ChangeLog COPYING README.rdoc AUTHORS setup.rb) +
+PKG_FILES = %w(ChangeLog.rdoc COPYING README.rdoc AUTHORS setup.rb) +
  	      Dir.glob("{bin,examples,lib}/**/*")
 
 CLEAN.include ['**/.*.sw?', '*.gem', '.config', 'test/test.log']
@@ -32,7 +32,7 @@ Rake::RDocTask.new do |rdoc|
     rdoc.options += RDOC_OPTS
     rdoc.main = "README.rdoc"
     rdoc.title = "Ruby/GraphViz, the Documentation"
-    rdoc.rdoc_files.add ['README.rdoc', 'AUTHORS', 'COPYING', 'ChangeLog',
+    rdoc.rdoc_files.add ['README.rdoc', 'AUTHORS', 'COPYING', 'ChangeLog.rdoc',
       'lib/graphviz.rb', 
       'lib/graphviz/node.rb',
       'lib/graphviz/edge.rb',
@@ -65,7 +65,7 @@ spec =
 
       s.rubyforge_project = 'ruby-asp'
       s.has_rdoc = true
-      s.extra_rdoc_files = ["README.rdoc", "ChangeLog", "COPYING", "AUTHORS"]
+      s.extra_rdoc_files = ["README.rdoc", "ChangeLog.rdoc", "COPYING", "AUTHORS"]
       s.rdoc_options = ["--title", "Ruby/GraphViz", "--main", "README.rdoc", "--line-numbers"]
       
       s.post_install_message = %{

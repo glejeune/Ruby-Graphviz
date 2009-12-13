@@ -1,6 +1,7 @@
 0.9.7 :
-* Small bug correction in escape_path_containing_blanks (by Andreas Ronge)
-* New find_executable (by reactive)
+* Issue #2: Small bug correction in escape_path_containing_blanks (by Andreas Ronge)
+* Issue #4: New find_executable (by reactive)
+* Issue #3: Tempfiles created in current working directory only in Windows
 
 0.9.6 :
 * jRuby support (by obruening)

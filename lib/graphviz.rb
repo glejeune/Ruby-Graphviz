@@ -373,14 +373,17 @@ class GraphViz
       xOutputString = false
       xOutput = if @format != "none"
         ## Act: Save script and send it to dot
-        t = if /Windows/.match( ENV['OS'] )
-          Tempfile::open( File.basename($0), "." )
-        else
-          Tempfile::open( File.basename($0) )
-        end
-      
-        t.print( xDOTScript )
-        t.close
+#         t = if /Windows/.match( ENV['OS'] )
+#           Tempfile::open( File.basename($0), "." )
+#         else
+#           Tempfile::open( File.basename($0) )
+#         end
+#       
+#         t.print( xDOTScript )
+#         t.close
+        Tempfile::open( File.basename($0) ) do |t|
+          t.print( xDOTScript )
+        end  
         
         cmd = find_executable( )
         if cmd == nil
@@ -661,15 +664,6 @@ class GraphViz
       str
     end
   end
-  
-  # def find_executable( ) #:nodoc:
-  #   cmd = find_executable0( @prog )
-  #   if cmd == nil and @path != nil
-  #     __cmd = File.join( @path, @prog )
-  #     cmd = __cmd if File.executable?( __cmd )
-  #   end
-  #   return cmd
-  # end
   
   # Since this code is an adaptation of Launchy::Application#find_executable
   # (http://copiousfreetime.rubyforge.org/launchy/Launchy/Application.html)
