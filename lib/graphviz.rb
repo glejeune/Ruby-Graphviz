@@ -381,9 +381,9 @@ class GraphViz
 #       
 #         t.print( xDOTScript )
 #         t.close
-        Tempfile::open( File.basename($0) ) do |t|
-          t.print( xDOTScript )
-        end  
+        t = Tempfile::open( File.basename($0) )
+        t.print( xDOTScript )
+        t.close
         
         cmd = find_executable( )
         if cmd == nil
