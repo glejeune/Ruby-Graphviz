@@ -370,8 +370,13 @@ class GraphViz
   
       xDOTScript = "#{@oGraphType} #{@name} {\n" << xDOTScript
 
-      xOutputString = false
-      xOutput = if @format != "none"
+      xOutputString = (@filename == String ||
+        @output.any? {|format, file| file == String })
+
+      xOutput =
+      if @format == "none" || @output.has_key?("none")
+        xDOTScript
+      else
         ## Act: Save script and send it to dot
 #         t = if /Windows/.match( ENV['OS'] )
 #           Tempfile::open( File.basename($0), "." )
@@ -395,21 +400,15 @@ class GraphViz
         xOutputWithFile = ""
         xOutputWithoutFile = ""
         unless @format.nil?
-          if @filename.nil?
+          if @filename.nil? || @filename == String
             xOutputWithoutFile = "-T#{@format} "
-          elsif @filename == String
-            xOutputWithoutFile = "-T#{@format} "
-            xOutputString = true
           else
             xOutputWithFile = "-T#{@format} -o#{@filename} "
           end
         end
         @output.each do |format, file|
-          if file.nil?
+          if file.nil? || file == String
             xOutputWithoutFile << "-T#{format} "
-          elsif file == String
-            xOutputWithoutFile << "-T#{format} "
-            xOutputString = true
           else
             xOutputWithFile << "-T#{format} -o#{file} "
           end
@@ -426,8 +425,6 @@ class GraphViz
         #end
 
         output_from_command( xCmd )
-      else
-        xDOTScript
       end
             
       if xOutputString
