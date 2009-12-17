@@ -374,7 +374,7 @@ class GraphViz
         @output.any? {|format, file| file == String })
 
       xOutput =
-      if @format == "none" || @output.has_key?("none")
+      if @format.to_s == "none" || @output.any? {|fmt, fn| fmt.to_s == "none" }
         xDOTScript
       else
         ## Act: Save script and send it to dot
