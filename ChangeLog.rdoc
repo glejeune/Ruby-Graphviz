@@ -2,6 +2,7 @@
 * Issue #2: Small bug correction in escape_path_containing_blanks (by Andreas Ronge)
 * Issue #4: New find_executable (by reactive)
 * Issue #3: Tempfiles created in current working directory only in Windows
+* Issue #6: Respect "none" format in output options hash and respect String output-filename when the "none" format is selected. See examples/sample27.rb (by Dave Burt)
 
 0.9.6 :
 * jRuby support (by obruening)
