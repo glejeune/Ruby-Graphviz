@@ -22,9 +22,7 @@ rescue
   IS_JRUBY= false
 end
 
-
 require 'tempfile'
-# require 'mkmf'
 
 require 'graphviz/node'
 require 'graphviz/edge'
@@ -373,14 +371,6 @@ class GraphViz
       xOutputString = false
       xOutput = if @format != "none"
         ## Act: Save script and send it to dot
-#         t = if /Windows/.match( ENV['OS'] )
-#           Tempfile::open( File.basename($0), "." )
-#         else
-#           Tempfile::open( File.basename($0) )
-#         end
-#       
-#         t.print( xDOTScript )
-#         t.close
         t = Tempfile::open( File.basename($0) )
         t.print( xDOTScript )
         t.close
@@ -415,15 +405,11 @@ class GraphViz
           end
         end
         
-        #xCmd = "#{cmd} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
-        #if /Windows/.match( ENV['OS'] )
-
         if IS_JRUBY
           xCmd = "#{cmd} -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         else
           xCmd = "\"#{cmd}\" -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         end
-        #end
 
         output_from_command( xCmd )
       else
