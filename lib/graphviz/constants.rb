@@ -14,8 +14,33 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
+# Constants for ruby-graphviz
+# 
+# Constants::FORMATS: the possible output formats
+#   "bmp", "canon", "dot", "xdot", "cmap", "dia", "eps", 
+#   "fig", "gd", "gd2", "gif", "gtk", "hpgl", "ico", "imap",
+#   "cmapx", "imap_np", "cmapx_np", "ismap", "jpeg", "jpg",
+#   "jpe", "mif", "mp", "pcl", "pdf", "pic", "plain",
+#   "plain-ext", "png", "ps", "ps2", "svg", "svgz", "tga",
+#   "tiff", "tif", "vml", "vmlz", "vrml", "vtx", "wbmp",
+#   "xlib", "none" 
+# 
+# Constants::PROGRAMS: The possible programs
+#   "dot", "neato", "twopi", "fdp", "circo"
+#
+# Constants::GRAPHTYPE The possible types of graph
+#   "digraph", "graph"
+#
+#
+# The single letter codes used in constructors map as follows:
+#   G => The root graph, with GRAPHATTRS 
+#   E => Edge, with EDGESATTRS
+#   N => Node, with NODESATTRS
+#   S => subgraph
+#   C => cluster
+#
 module Constants
-  RGV_VERSION = "0.9.7"
+  RGV_VERSION = "0.9.8"
   
   ## Const: Output formats
   FORMATS = [
