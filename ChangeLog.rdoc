@@ -1,3 +1,6 @@
+0.9.8 :
+* Update graph and node posibility to set properties (see sample28.rb)
+
 0.9.7 :
 * Issue #2: Small bug correction in escape_path_containing_blanks (by Andreas Ronge)
 * Issue #4: New find_executable (by reactive)
