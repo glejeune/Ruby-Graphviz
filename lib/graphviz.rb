@@ -386,7 +386,7 @@ class GraphViz
         t.print( xDOTScript )
         t.close
         
-        cmd = find_executable( )
+        cmd = find_executable( @prog, @path )
         if cmd == nil
           raise StandardError, "GraphViz not installed or #{@prog} not in PATH. Install GraphViz or use the 'path' option"
         end

@@ -1,5 +1,6 @@
 0.9.8 :
 * Update graph and node posibility to set properties (see sample28.rb)
+* Issue #7: Path option is never being used to find the executable
 
 0.9.7 :
 * Issue #2: Small bug correction in escape_path_containing_blanks (by Andreas Ronge)
