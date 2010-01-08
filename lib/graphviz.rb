@@ -646,9 +646,11 @@ class GraphViz
   #
   # Escape a string to be acceptable as a node name in a graphviz input file
   #
-  def self.escape(str, force = false) #:nodoc:
-    if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:]*\Z/ ).nil?
-      '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
+  def self.escape(str, force = false ) #:nodoc:
+    #if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:]*\Z/ ).nil?
+    #  '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
+    if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:\.]*\Z/ ).nil?
+      '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"' 
     else
       str
     end
@@ -671,8 +673,8 @@ class GraphViz
   # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
   def find_executable(bin = @prog, *paths) #:nodoc:
     paths = ENV['PATH'].split(File::PATH_SEPARATOR) if paths.empty?
-    paths.each do |path|
-      file = File.join(path,bin)
+    paths.each do |path|    
+      file = (path.nil?)?bin:File.join(path,bin)
       if File.executable?(file) then
         return file
       elsif RUBY_PLATFORM =~ /mswin|mingw/
