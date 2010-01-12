@@ -29,6 +29,7 @@ require 'graphviz/edge'
 require 'graphviz/attrs'
 require 'graphviz/constants'
 require 'graphviz/parser'
+require 'graphviz/types'
 
 class GraphViz 
   include Constants
