@@ -38,13 +38,27 @@ class GraphViz
     end
 
     def []=( xKey, xValue )
-      if @attributs.index( xKey.to_s ).nil? == true
+      unless @attributs.keys.include?( xKey.to_s )
         raise ArgumentError, "#{@name} attribut '#{xKey.to_s}' invalid"
       end
-      @data[xKey.to_s] = xValue.to_s
+      
+      value = ArgumentError
+      @attributs[xKey.to_s].each do |type|
+        begin
+          value = GraphViz::Types.const_get(type).new( xValue )
+          break
+        rescue ArgumentError
+          nil
+        end
+      end
+      
+      if value == ArgumentError
+        raise ArgumentError, "Value `#{xValue}' not allowed for attribut #{xKey}, type #{@attributs[xKey.to_s].join(" or ")}!"
+      end
+      @data[xKey.to_s] = value
 
       if @graphviz.nil? == false
-        @graphviz.set_position( @name, xKey.to_s, xValue.to_s )
+        @graphviz.set_position( @name, xKey.to_s, value )
       end
     end
   end

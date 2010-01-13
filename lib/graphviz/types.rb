@@ -10,6 +10,7 @@ class GraphViz
       end
       
       alias :output :to_gv
+      alias :output :to_s
     end
     
     Dir.glob( File.dirname( File.expand_path(__FILE__) )+"/types/*" ).each do |f|

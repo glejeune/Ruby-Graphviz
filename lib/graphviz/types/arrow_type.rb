@@ -23,10 +23,10 @@ class GraphViz
         "vee"
       ]
       def check(data)
-        unless TYPELIST.include?(data)
+        unless TYPELIST.include?(data.to_s)
           raise ArgumentError, "Value `#{data}' not allowed for attribut with arrowType type!"
         end
-        return data
+        return data.to_s
       end
     end
   end
