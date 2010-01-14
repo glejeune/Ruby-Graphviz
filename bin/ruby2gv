@@ -15,10 +15,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
+require 'rubygems'
 require 'getoptlong'
 require 'graphviz'
-require "graphviz/constants"
+require 'graphviz/constants'
 require 'rbconfig'
+require 'mkmf'
 
 DEBUG = false
 
@@ -27,7 +29,7 @@ class Rb2Gv
 
   def initialize( xGVPath )
     @oGraph = GraphViz::new( "G", :path => xGVPath )
-    @oGraph['size'] = '10,10'
+    # @oGraph['size'] = '10,10'
     @hxNodes = Hash::new( )
     @hxEdge = Hash::new( )
   end
@@ -42,9 +44,9 @@ class Rb2Gv
 
   def out( xFormat = "dot", xFile = nil )
     if xFile.nil? == true
-      @oGraph.output( "output" => xFormat )
+      @oGraph.output( xFormat => String )
     else
-      @oGraph.output( "output" => xFormat, "file" => xFile )
+      @oGraph.output( xFormat => xFile )
     end
   end
   
@@ -59,19 +61,37 @@ class Rb2Gv
   end
   
   def getLibraryPath( xLib, xExt = "rb" )
+  
     xPath = [ "libexecdir", "libdir", "sitedir", "rubylibdir", "sitelibdir", "archdir", "sitedir", "sitearchdir" ]
     xRbLib = with_config( xLib+'lib', xLib)
+    
     if /\.(rb|so)$/.match( xRbLib )
       xRbFile = xRbLib
     else
       xRbFile = xRbLib + "." + xExt
     end
     
+    # Search in "standard" paths
     xPath.each do |xDir|
       xCurrentPath = Config::expand( Config::CONFIG[xDir] )
       xFileFound = File.join( xCurrentPath, xRbFile )
       if File.exist?( xFileFound )
         return xFileFound
+      end
+    end
+    
+    # Search in "rubygems"
+    spec = Gem.searcher.find(xLib)
+    unless spec.nil?
+      spec.require_paths.unshift spec.bindir if spec.bindir
+      xPath = spec.require_paths.map do |path|
+        File.join spec.full_gem_path, path
+      end
+      xPath.each do |xCurrentPath|
+        xFileFound = File.join( xCurrentPath, xRbFile )
+        if File.exist?( xFileFound )
+          return xFileFound
+        end
       end
     end
 
@@ -150,7 +170,7 @@ end
 
 xOutFormat = "png"
 xOutFile = nil
-xGVPath = nil
+xGVPath = ""
 
 oOpt = GetoptLong.new(
   ['--output-format', '-T', GetoptLong::REQUIRED_ARGUMENT],
@@ -191,4 +211,5 @@ end
 
 o = Rb2Gv::new( xGVPath )
 o.parse( xFile )
-o.out( xOutFormat, xOutFile )
+result = o.out( xOutFormat, xOutFile )
+puts result unless result.nil?

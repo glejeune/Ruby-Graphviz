@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-$:.unshift( "../lib" );
+$:.unshift( "../lib" )
 require "graphviz"
 
 g = nil
