@@ -19,8 +19,11 @@ class GraphViz
       end
       
       def output
-        return @data.inspect.gsub( "\\\\", "\\" )
+        return @data.to_s.inspect.gsub( "\\\\", "\\" )
       end
+      
+      alias :to_gv :output
+      alias :to_s :output
     end
   end
 end

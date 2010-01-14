@@ -8,9 +8,6 @@ class GraphViz
       def output
         return @data
       end
-      
-      alias :output :to_gv
-      alias :output :to_s
     end
     
     Dir.glob( File.dirname( File.expand_path(__FILE__) )+"/types/*" ).each do |f|
@@ -19,6 +16,6 @@ class GraphViz
   end
 end
 
-#x = :ArrowType
+#x = :EscString
 #GraphViz::Types.const_get(x).new( "toto" )
 

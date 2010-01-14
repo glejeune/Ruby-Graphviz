@@ -47,7 +47,7 @@ class GraphViz
   @@prog = "dot"
   @prog
   ## Var: program path
-  @@path = nil
+  @@path = []
   @path
   ## Var: Error level
   @@errors = 1
@@ -298,15 +298,15 @@ class GraphViz
 
       case kElement["type"]
         when "graph_attr"
-          xData << xSeparator + kElement["name"] + " = \"" + kElement["value"] + "\""
+          xData << xSeparator + kElement["name"] + " = " + kElement["value"].to_gv
           xSeparator = "; "
 
         when "node_attr"
-          xData << xSeparator + kElement["name"] + " = \"" + kElement["value"] + "\""
+          xData << xSeparator + kElement["name"] + " = " + kElement["value"].to_gv
           xSeparator = ", "
 
         when "edge_attr"
-          xData << xSeparator + kElement["name"] + " = \"" + kElement["value"] + "\""
+          xData << xSeparator + kElement["name"] + " = " + kElement["value"].to_gv
           xSeparator = ", "
 
         when "node"
@@ -361,7 +361,7 @@ class GraphViz
               end
               @prog = xValue
             when "path"
-              @path = xValue
+              @path = xValue.split( "," )
             when "errors"
               @errors = xValue
             else
@@ -521,7 +521,7 @@ class GraphViz
         when "use"
           @@prog = v
         when "path"
-          @@path = v
+          @@path = v.split( "," )
         when "errors"
           @@errors = v
         when "output"
@@ -632,7 +632,7 @@ class GraphViz
             end
             @oGraphType = xValue.to_s
           when "path"
-            @path = xValue.to_s
+            @path = xValue.split( "," )
           when "errors"
             @errors = xValue
           else
@@ -648,10 +648,10 @@ class GraphViz
   # Escape a string to be acceptable as a node name in a graphviz input file
   #
   def self.escape(str, force = false ) #:nodoc:
-    #if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:]*\Z/ ).nil?
-    #  '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
-    if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:\.]*\Z/ ).nil?
-      '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"' 
+    if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:]*\Z/ ).nil?
+      '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
+    #if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:\.]*\Z/ ).nil?
+    #  '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"' 
     else
       str
     end
@@ -672,8 +672,9 @@ class GraphViz
   # WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION 
   # OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
   # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-  def find_executable(bin = @prog, *paths) #:nodoc:
-    paths = ENV['PATH'].split(File::PATH_SEPARATOR) if paths.empty?
+  def find_executable(bin, paths) #:nodoc:
+    paths = ENV['PATH'].split(File::PATH_SEPARATOR) if paths.nil? or paths.empty?
+    
     paths.each do |path|    
       file = (path.nil?)?bin:File.join(path,bin)
       if File.executable?(file) then

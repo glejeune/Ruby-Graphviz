@@ -42,23 +42,10 @@ class GraphViz
         raise ArgumentError, "#{@name} attribut '#{xKey.to_s}' invalid"
       end
       
-      value = ArgumentError
-      @attributs[xKey.to_s].each do |type|
-        begin
-          value = GraphViz::Types.const_get(type).new( xValue )
-          break
-        rescue ArgumentError
-          nil
-        end
-      end
-      
-      if value == ArgumentError
-        raise ArgumentError, "Value `#{xValue}' not allowed for attribut #{xKey}, type #{@attributs[xKey.to_s].join(" or ")}!"
-      end
-      @data[xKey.to_s] = value
+      @data[xKey.to_s] = GraphViz::Types.const_get(@attributs[xKey.to_s]).new( xValue )
 
       if @graphviz.nil? == false
-        @graphviz.set_position( @name, xKey.to_s, value )
+        @graphviz.set_position( @name, xKey.to_s, @data[xKey.to_s] )
       end
     end
   end

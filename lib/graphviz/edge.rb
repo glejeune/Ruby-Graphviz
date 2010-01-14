@@ -124,7 +124,7 @@ class GraphViz
       xAttr = ""
       xSeparator = ""
       @oAttrEdge.data.each do |k, v|
-        xAttr << xSeparator + k + " = " + GraphViz.escape(v, true)
+        xAttr << xSeparator + k + " = " + v.to_gv
         xSeparator = ", "
       end
       if xAttr.length > 0

@@ -118,9 +118,9 @@ class GraphViz
       xSeparator = ""
       @oAttrNode.data.each do |k, v|
 	      if k == "html"
-		      xAttr << xSeparator + "label = <" + v + ">"
+		      xAttr << xSeparator + "label = " + v.to_gv
 		    else
-          xAttr << xSeparator + k + " = " + GraphViz.escape(v, true)
+          xAttr << xSeparator + k + " = " + v.to_gv
 		    end
         xSeparator = ", "
       end
