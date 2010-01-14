@@ -3,6 +3,7 @@
 * Issue #7: Path option is never being used to find the executable
 * Adding classes to check if the attributes are in the correct type
 * Issue #8: dots in href are escaped with backslash, which corrupts the URL (see sample29.rb)
+* Add posibility to use external libraries (see sample30.rb)
 
 0.9.7 :
 * Issue #2: Small bug correction in escape_path_containing_blanks (by Andreas Ronge)
