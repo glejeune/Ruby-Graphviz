@@ -52,6 +52,9 @@ class GraphViz
   ## Var: Error level
   @@errors = 1
   @errors
+  ## Var: External libraries
+  @@extlibs = []
+  @extlibs
   
   ## Var: Graph name
   @name
@@ -361,9 +364,11 @@ class GraphViz
               end
               @prog = xValue
             when "path"
-              @path = xValue.split( "," )
+              @path = xValue.split( "," ).map{ |x| x.strip }
             when "errors"
               @errors = xValue
+            when "extlib"
+              @extlibs = xValue.split( "," ).map{ |x| x.strip }
             else
               if FORMATS.index( xKey.to_s ).nil? == true
                 raise ArgumentError, "output format '#{xValue}' invalid"
@@ -411,10 +416,15 @@ class GraphViz
           end
         end
         
+        xExternalLibraries = ""
+        @extlibs.each do |lib|
+          xExternalLibraries << "-l#{lib} "
+        end
+        
         if IS_JRUBY
-          xCmd = "#{cmd} -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+          xCmd = "#{cmd} -q#{@errors} #{xExternalLibraries} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         else
-          xCmd = "\"#{cmd}\" -q#{@errors} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+          xCmd = "\"#{cmd}\" -q#{@errors} #{xExternalLibraries} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         end
 
         output_from_command( xCmd )
@@ -521,9 +531,11 @@ class GraphViz
         when "use"
           @@prog = v
         when "path"
-          @@path = v.split( "," )
+          @@path = v.split( "," ).map{ |x| x.strip }
         when "errors"
           @@errors = v
+        when "extlibs"
+          @@extlibs = v.split( "," ).map{ |x| x.strip }
         when "output"
           warn ":output option is deprecated!"
           @@format = v
@@ -592,6 +604,7 @@ class GraphViz
     @prog     = @@prog
     @path     = @@path
     @errors   = @@errors
+    @extlibs  = @@extlibs
     @output   = {}
     
     @elements_order = Array::new()
@@ -632,9 +645,11 @@ class GraphViz
             end
             @oGraphType = xValue.to_s
           when "path"
-            @path = xValue.split( "," )
+            @path = xValue.split( "," ).map{ |x| x.strip }
           when "errors"
             @errors = xValue
+          when "extlibs"
+            @extlibs = xValue.split( "," ).map{ |x| x.strip }
           else
             self[xKey.to_s] = xValue.to_s
         end
