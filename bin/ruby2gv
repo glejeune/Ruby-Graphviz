@@ -25,7 +25,7 @@ require 'mkmf'
 DEBUG = false
 
 class Rb2Gv
-  REQUIRE = /^\s*require\s*("|')([^\1]*)(\1)/
+  REQUIRE = /^\s*require\s*("|')([^\1\s]*)(\1)/
 
   def initialize( xGVPath )
     @oGraph = GraphViz::new( "G", :path => xGVPath )
@@ -112,7 +112,7 @@ class Rb2Gv
     
     xData.each do |xLine|
       if lxLineMatch = REQUIRE.match( xLine )
-        xRequiredLib = lxLineMatch[2]
+        xRequiredLib = lxLineMatch[2].gsub( /\.(rb|so)$/, "" )
         
         if @hxNodes.has_key?( xRequiredLib ) == false
           puts "  + Node #{xRequiredLib}" if DEBUG
@@ -151,7 +151,7 @@ def usage
 end
 
 def version
-  puts "Ruby2GraphViz v#{Constants::RGV_VERSION}, (c)2005, 2009 Gregoire Lejeune <gregoire.lejeune@free.fr>"
+  puts "Ruby2GraphViz v#{Constants::RGV_VERSION}, (c)2005, 2009, 2010 Gregoire Lejeune <gregoire.lejeune@free.fr>"
   puts ""
   puts "This program is free software; you can redistribute it and/or modify"
   puts "it under the terms of the GNU General Public License as published by"
