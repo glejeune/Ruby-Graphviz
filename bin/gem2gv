@@ -61,8 +61,10 @@ class Gem2Gv
   end
   
   def getNode( name, version )
-    nodeName = "#{name}#{version}"
-    nodeLabel = "#{name}\n#{version}"
+    #nodeName = "#{name}#{version}"
+    #nodeLabel = "#{name}\n#{version}"
+    nodeName = "#{name}"
+    nodeLabel = "#{name}"
     return @oGraph.get_node(nodeName) || @oGraph.add_node( nodeName, "label" => nodeLabel )
   end
   
@@ -72,8 +74,6 @@ class Gem2Gv
     nodes.each do |node|
       nodeB = getNode( node[:name], node[:version] )
       @oGraph.add_edge( nodeA, nodeB )
-      
-      puts "EDGE between #{gemName} #{version} -- #{node[:name]} #{node[:version]}"
     end
   end
 end
