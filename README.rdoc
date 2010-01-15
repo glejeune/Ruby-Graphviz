@@ -52,9 +52,15 @@ Create a graph from a file
     }
   }.output(:png => "sample.png")
 
-Ruby/GraphViz also include ruby2gv, a simple tool that's allow you to create a dependency graph from a ruby script :
+Ruby/GraphViz also include :
+
+* ruby2gv, a simple tool that's allow you to create a dependency graph from a ruby script :
 
   ruby2gv -Tpng -ogem.png /usr/bin/gem
+
+* gem2gv, a tools that's allow you to create a dependency graph between gems :
+
+	gem2gv ruby-graphviz
 
 == INSTALLATION
 
