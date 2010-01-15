@@ -59,7 +59,7 @@ spec =
       s.files = PKG_FILES
       s.require_path = "lib"
       s.bindir = "bin"
-      s.executables = ['ruby2gv']
+      s.executables = ['ruby2gv', 'gem2gv']
       
       s.add_dependency('treetop')
 

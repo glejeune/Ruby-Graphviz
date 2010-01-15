@@ -1,0 +1,83 @@
+#!/usr/bin/env ruby
+# Copyright (C) 2010 Gregoire Lejeune <gregoire.lejeune@free.fr>
+# 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+require 'rubygems'
+require 'graphviz'
+
+class Gem2Gv
+  def initialize
+    @oGraph = GraphViz::new( :G )
+    
+    @nodes = []
+    @name = 'gem2gv'
+  end
+  
+  def output
+    @oGraph.output( :png => "#{@name}.png" )
+  end
+  
+  def go( gemName, version = ">0" )
+    nodes = getDependency(gemName, version)
+    
+    createEdges( gemName, version, nodes )
+    
+    nodes.each do |node|
+      unless @nodes.include?(node)
+        @nodes << node
+        go( node[:name], node[:version] )
+      end
+    end
+  end
+
+  def getDependency( gemName, version = ">0" )
+    nodes = []
+    
+    dependency = Gem::Dependency.new( gemName, version )
+    fetcher = Gem::SpecFetcher.fetcher
+    
+    fetcher.find_matching(dependency).each do |spec_tuple, source_uri|
+      spec = fetcher.fetch_spec spec_tuple, URI.parse(source_uri)
+      
+      spec.dependencies.each do |dep|
+        #nodes << { :name => dep.name, :version => dep.version_requirements.to_s} unless nodes.include?({ :name => dep.name, :version => dep.version_requirements.to_s})
+        nodes << { :name => dep.name, :version => ">0" } unless nodes.include?({ :name => dep.name, :version => ">0" })
+      end
+    end
+    
+    return nodes
+  end
+  
+  def getNode( name, version )
+    nodeName = "#{name}#{version}"
+    nodeLabel = "#{name}\n#{version}"
+    return @oGraph.get_node(nodeName) || @oGraph.add_node( nodeName, "label" => nodeLabel )
+  end
+  
+  def createEdges( gemName, version, nodes )
+    nodeA = getNode( gemName, version )
+    
+    nodes.each do |node|
+      nodeB = getNode( node[:name], node[:version] )
+      @oGraph.add_edge( nodeA, nodeB )
+      
+      puts "EDGE between #{gemName} #{version} -- #{node[:name]} #{node[:version]}"
+    end
+  end
+end
+
+g = Gem2Gv.new
+g.go( ARGV[0] )
+g.output

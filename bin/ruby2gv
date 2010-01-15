@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Copyright (C) 2005, 2006, 2007 Gregoire Lejeune <gregoire.lejeune@free.fr>
+# Copyright (C) 2005, 2006, 2007, 2008, 2009, 2010 Gregoire Lejeune <gregoire.lejeune@free.fr>
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,16 +27,17 @@ DEBUG = false
 class Rb2Gv
   REQUIRE = /^\s*require\s*("|')([^\1\s]*)(\1)/
 
-  def initialize( xGVPath )
-    @oGraph = GraphViz::new( "G", :path => xGVPath )
+  def initialize( xGVPath, xUse = "dot", xStops = [] )
+    @oGraph = GraphViz::new( "G", :path => xGVPath, :use => xUse )
     # @oGraph['size'] = '10,10'
     @hxNodes = Hash::new( )
-    @hxEdge = Hash::new( )
+    @hxEdge = Array::new( )
+    @lxStops = xStops
   end
   
   public
   def parse( xFile )
-    @hxNodes[xFile] = gv_newNode( xFile )
+    @hxNodes[xFile] = gv_newNode( xFile, "box", "forestgreen" )
     puts "+ Node #{xFile}" if DEBUG
 
     parseFile( xFile, nil, xFile )
@@ -51,7 +52,7 @@ class Rb2Gv
   end
   
   private
-  def gv_newNode( xNode, xShape = "box", xColor = nil )
+  def gv_newNode( xNode, xShape = "box", xColor = nil )  
     xNodeName = xNode.gsub( /[^a-zA-Z0-9]/, "_" )
     if xColor.nil? == true
       @oGraph.add_node( xNodeName, "label" => xNode, "shape" => xShape )
@@ -60,37 +61,42 @@ class Rb2Gv
     end
   end
   
-  def getLibraryPath( xLib, xExt = "rb" )
+  def getLibraryPath( xLib, xExt = ["rb"] )
   
     xPath = [ "libexecdir", "libdir", "sitedir", "rubylibdir", "sitelibdir", "archdir", "sitedir", "sitearchdir" ]
     xRbLib = with_config( xLib+'lib', xLib)
     
-    if /\.(rb|so)$/.match( xRbLib )
-      xRbFile = xRbLib
+    if /\.(rb|so|bundle|dll)$/.match( xRbLib )
+      match = /^(.*)\.([^\.]*)$/.match(xRbLib)
+      xRbFile, xExt = match[1], [match[2]]
     else
-      xRbFile = xRbLib + "." + xExt
+      xRbFile = xRbLib
     end
     
-    # Search in "standard" paths
-    xPath.each do |xDir|
-      xCurrentPath = Config::expand( Config::CONFIG[xDir] )
-      xFileFound = File.join( xCurrentPath, xRbFile )
-      if File.exist?( xFileFound )
-        return xFileFound
-      end
-    end
+    xExt.each do |e|
+      xRbFileWithExt = xRbFile + "." + e
     
-    # Search in "rubygems"
-    spec = Gem.searcher.find(xLib)
-    unless spec.nil?
-      spec.require_paths.unshift spec.bindir if spec.bindir
-      xPath = spec.require_paths.map do |path|
-        File.join spec.full_gem_path, path
-      end
-      xPath.each do |xCurrentPath|
-        xFileFound = File.join( xCurrentPath, xRbFile )
+      # Search in "standard" paths
+      xPath.each do |xDir|
+        xCurrentPath = Config::expand( Config::CONFIG[xDir] )
+        xFileFound = File.join( xCurrentPath, xRbFileWithExt )
         if File.exist?( xFileFound )
           return xFileFound
+        end
+      end
+    
+      # Search in "rubygems" :: This is not utile but...
+      spec = Gem.searcher.find(xLib)
+      unless spec.nil?
+        spec.require_paths.unshift spec.bindir if spec.bindir
+        xPath = spec.require_paths.map do |path|
+          File.join spec.full_gem_path, path
+        end
+        xPath.each do |xCurrentPath|
+          xFileFound = File.join( xCurrentPath, xRbFileWithExt )
+          if File.exist?( xFileFound )
+            return xFileFound
+          end
         end
       end
     end
@@ -119,21 +125,27 @@ class Rb2Gv
 
           xRequiredFile = getLibraryPath( xRequiredLib )
           if xRequiredFile.nil? == false
-            @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib )
-            parseFile( xRequiredFile, xFile, xRequiredLib )
-          else
-            if getLibraryPath( xRequiredLib, "so" ).nil? == false
-              @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib, "ellipse" )
+            unless @lxStops.include?(xRequiredLib)
+              @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib )             
+              parseFile( xRequiredFile, xFile, xRequiredLib )
             else
-              @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib, "ellipse", "red" )
+              @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib, "invhouse", "deepskyblue" )
+            end
+          else
+            if (v = getLibraryPath( xRequiredLib, ["so", "bundle", "dll"] )) == nil
+              @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib, "box", "red" )
+            else
+              @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib, "box", "grey" )
             end
           end
 
         end
         
         puts "  + Edge #{xLib} -> #{xRequiredLib}" if DEBUG
-        @oGraph.add_edge( @hxNodes[xLib], @hxNodes[xRequiredLib] )
-
+        unless @hxEdge.include?( "#{@hxNodes[xLib].name}-#{@hxNodes[xRequiredLib].name}" )
+          @oGraph.add_edge( @hxNodes[xLib], @hxNodes[xRequiredLib] )
+          @hxEdge << "#{@hxNodes[xLib].name}-#{@hxNodes[xRequiredLib].name}"
+        end
       end
     end
     
@@ -146,6 +158,8 @@ def usage
   puts "-T, --output-format format    Output format (default: PNG)"
   puts "-o, --output-file file        Output file (default: STDOUT)"
   puts "-p, --path                    Graphviz path"
+  puts "-u, --use PROGRAM             Program to use (default: dot)"
+  puts "-s, --stop LIB[,LIB, ...]     Stop on libs"
   puts "-V, --version                 Show version"
   puts "-h, --help                    Show this usage message"
 end
@@ -171,11 +185,15 @@ end
 xOutFormat = "png"
 xOutFile = nil
 xGVPath = ""
+xUse = "dot"
+xStops = []
 
 oOpt = GetoptLong.new(
   ['--output-format', '-T', GetoptLong::REQUIRED_ARGUMENT],
   ['--output-file',   '-o', GetoptLong::REQUIRED_ARGUMENT],
   ['--path',          '-p', GetoptLong::REQUIRED_ARGUMENT],
+  ['--use',           '-u', GetoptLong::REQUIRED_ARGUMENT],
+  ['--stop',          '-s', GetoptLong::REQUIRED_ARGUMENT],
   ['--help',          '-h', GetoptLong::NO_ARGUMENT],
   ['--version',       '-V', GetoptLong::NO_ARGUMENT]
 )
@@ -189,6 +207,10 @@ begin
         xOutFile = xValue
       when '--path'
         xGVPath = xValue
+      when '--use'
+        xUse = xValue
+      when '--stop'
+        xStops = xValue.split( "," ).map{ |x| x.strip }
       when '--help'
         usage( )
         exit
@@ -209,7 +231,7 @@ if xFile.nil? == true
   exit
 end
 
-o = Rb2Gv::new( xGVPath )
+o = Rb2Gv::new( xGVPath, xUse, xStops )
 o.parse( xFile )
 result = o.out( xOutFormat, xOutFile )
 puts result unless result.nil?
