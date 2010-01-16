@@ -54,13 +54,13 @@ Create a graph from a file
 
 Ruby/GraphViz also include :
 
-* ruby2gv, a simple tool that's allow you to create a dependency graph from a ruby script :
+* ruby2gv, a simple tool that's allow you to create a dependency graph from a ruby script. Example : http://drp.ly/dShaZ
 
-	ruby2gv -Tpng -ogem.png /usr/bin/gem
+	ruby2gv -Tpng -oruby2gv.png ruby2gv
 
-* gem2gv, a tools that's allow you to create a dependency graph between gems :
+* gem2gv, a tools that's allow you to create a dependency graph between gems. Example : http://drp.ly/dSj9Y
 
-	gem2gv ruby-graphviz
+	gem2gv -Tpng -oruby-graphviz.png ruby-graphviz
 
 == INSTALLATION
 
