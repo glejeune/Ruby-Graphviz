@@ -14,19 +14,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+
 require 'rubygems'
 require 'graphviz'
+require 'getoptlong'
 
 class Gem2Gv
-  def initialize
-    @oGraph = GraphViz::new( :G )
+  def initialize( xGVPath, xUse )
+    @oGraph = GraphViz::new( :G, :path => xGVPath, :use => xUse )
     
     @nodes = []
     @name = 'gem2gv'
   end
   
-  def output
-    @oGraph.output( :png => "#{@name}.png" )
+  def out( xFormat = "dot", xFile = nil )
+    if xFile.nil? == true
+      @oGraph.output( xFormat => String )
+    else
+      @oGraph.output( xFormat => xFile )
+    end
   end
   
   def go( gemName, version = ">0" )
@@ -78,6 +84,83 @@ class Gem2Gv
   end
 end
 
-g = Gem2Gv.new
-g.go( ARGV[0] )
-g.output
+def usage 
+  puts "usage: gem2gv [-Tformat] [-ofile] [-h] [-V] gemname"
+  puts "-T, --output-format format    Output format (default: PNG)"
+  puts "-o, --output-file file        Output file (default: STDOUT)"
+  puts "-p, --path                    Graphviz path"
+  puts "-u, --use PROGRAM             Program to use (default: dot)"
+  puts "-s, --stop LIB[,LIB, ...]     Stop on libs"
+  puts "-V, --version                 Show version"
+  puts "-h, --help                    Show this usage message"
+end
+
+def version
+  puts "Gem2GraphViz v#{Constants::RGV_VERSION}, (c)2010 Gregoire Lejeune <gregoire.lejeune@free.fr>"
+  puts ""
+  puts "This program is free software; you can redistribute it and/or modify"
+  puts "it under the terms of the GNU General Public License as published by"
+  puts "the Free Software Foundation; either version 2 of the License, or"
+  puts "(at your option) any later version."
+  puts ""
+  puts "This program is distributed in the hope that it will be useful,"
+  puts "but WITHOUT ANY WARRANTY; without even the implied warranty of"
+  puts "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the"
+  puts "GNU General Public License for more details."
+  puts ""
+  puts "You should have received a copy of the GNU General Public License"
+  puts "along with this program; if not, write to the Free Software"
+  puts "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA"
+end
+
+xOutFormat = "png"
+xOutFile = nil
+xGVPath = ""
+xUse = "dot"
+xStops = []
+
+oOpt = GetoptLong.new(
+  ['--output-format', '-T', GetoptLong::REQUIRED_ARGUMENT],
+  ['--output-file',   '-o', GetoptLong::REQUIRED_ARGUMENT],
+  ['--path',          '-p', GetoptLong::REQUIRED_ARGUMENT],
+  ['--use',           '-u', GetoptLong::REQUIRED_ARGUMENT],
+  ['--help',          '-h', GetoptLong::NO_ARGUMENT],
+  ['--version',       '-V', GetoptLong::NO_ARGUMENT]
+)
+
+begin
+  oOpt.each_option do |xOpt, xValue|
+    case xOpt
+      when '--output-format'
+        xOutFormat = xValue
+      when '--output-file'
+        xOutFile = xValue
+      when '--path'
+        xGVPath = xValue
+      when '--use'
+        xUse = xValue
+      when '--help'
+        usage( )
+        exit
+      when '--version'
+        version( )
+        exit
+    end
+  end
+rescue GetoptLong::InvalidOption => e
+  usage( )
+  exit
+end
+
+xGem = ARGV[0]
+
+if xGem.nil? == true
+  usage( )
+  exit
+end
+
+
+g = Gem2Gv.new( xGVPath, xUse )
+g.go( xGem )
+result = g.out( xOutFormat, xOutFile )
+puts result unless result.nil?

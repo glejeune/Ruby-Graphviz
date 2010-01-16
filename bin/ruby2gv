@@ -154,7 +154,7 @@ class Rb2Gv
 end
 
 def usage 
-  puts "usage: ruby2gv.rb [-Tformat] [-ofile] [-h] [-V] script"
+  puts "usage: ruby2gv [-Tformat] [-ofile] [-h] [-V] script"
   puts "-T, --output-format format    Output format (default: PNG)"
   puts "-o, --output-file file        Output file (default: STDOUT)"
   puts "-p, --path                    Graphviz path"
