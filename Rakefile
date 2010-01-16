@@ -12,7 +12,7 @@ include FileUtils
 PKG_NAME = "ruby-graphviz"
 PKG_VERS = Constants::RGV_VERSION
 PKG_FILES = %w(ChangeLog.rdoc COPYING README.rdoc AUTHORS setup.rb) +
- 	      Dir.glob("{bin,examples,lib}/**/*")
+ 	      Dir.glob("{bin,examples,lib,test}/**/*")
 
 CLEAN.include ['**/.*.sw?', '*.gem', '.config', 'test/test.log']
 RDOC_OPTS = ['--quiet', '--title', "Ruby/GraphViz, the Documentation",
