@@ -65,6 +65,10 @@
 @ruby sample29.rb
 @echo "sample30.rb"
 @ruby sample30.rb
+@echo "sample31.rb"
+@ruby sample31.rb
+@echo "sample32.rb"
+@ruby sample32.rb
 
 
 @echo "shapes.rb"

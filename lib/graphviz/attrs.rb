@@ -31,10 +31,16 @@ class GraphViz
     end
 
     def []( xKey )
-      if @data.key?( xKey.to_s ) == false
-        nil
+      if xKey.class == Hash
+        xKey.each do |k, v|
+          self[k] = v
+        end
+      else
+        if @data.key?( xKey.to_s ) == false
+          nil
+        end
+        @data[xKey.to_s]
       end
-      @data[xKey.to_s]
     end
 
     def []=( xKey, xValue )
