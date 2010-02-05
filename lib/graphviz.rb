@@ -88,6 +88,11 @@ class GraphViz
     @hoNodes[xNodeName] = GraphViz::Node::new( xNodeName, self )
    
     if hOpt.nil? == false and hOpt[0].nil? == false
+      
+      unless hOpt[0].keys.include?(:label) or hOpt[0].keys.include?("label")
+        hOpt[0][:label] = xNodeName
+      end
+      
       hOpt[0].each do |xKey, xValue|
         @hoNodes[xNodeName][xKey.to_s] = xValue
       end
