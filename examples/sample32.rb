@@ -3,7 +3,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-puts GraphViz.new(:G){ |g|
+GraphViz.new(:G){ |g|
   g.edge[:arrowsize => 0.5]
   g.graph[:bb => "0,0,638,256"]
   g.person[:shape => :record];
@@ -11,4 +11,4 @@ puts GraphViz.new(:G){ |g|
   g.owner[:shape => :ellipse];
   g.passenger[:shape => :ellipse];
   g.vehicle[:shape => :record];
-}.save( :canon => String )
+}.save( :png => "#{$0}.png" )

@@ -1,5 +1,4 @@
 0.9.9 :
-* Issue #9 : The escaping code thinks that a colon ":" is a valid dot identifier when it isn't.
 * Add graph as an accessor to allow you to set global graph attributs (like edge and node)
 
 0.9.8 :
