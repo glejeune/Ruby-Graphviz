@@ -3,7 +3,7 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-puts GraphViz.new(:G){ |g|
+GraphViz.new(:G){ |g|
   g[:ratio => "auto", :label => "I love the world!"]
   
 	g.hello( :label => "Hello", :color => "blue" ) # You can do this
