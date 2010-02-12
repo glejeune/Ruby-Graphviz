@@ -1,5 +1,7 @@
 0.9.9 :
 * Add graph as an accessor to allow you to set global graph attributs (like edge and node)
+* Add each_node, each_edge, each_graph (thanks to @metellius) and graph_count
+* Issue #9 (partial) - Solution : by default, a node will have his label set with the node ID)
 
 0.9.8 :
 * Update graph and node posibility to set properties (see sample28.rb)

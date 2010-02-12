@@ -118,6 +118,22 @@ class GraphViz
     return node
   end
   
+  #
+  # Allow you to traverse nodes
+  #
+  def each_node( &block )
+    @hoNodes.each do |name, node|
+      yield( name, node )
+    end
+  end
+  
+  #
+  # Get the number of nodes
+  #
+  def node_count
+    @hoNodes.size
+  end
+  
   ##
   # Create a new edge
   # 
@@ -158,6 +174,22 @@ class GraphViz
     end
   end
 
+  #
+  # Allow you to traverse edges
+  #
+  def each_edge( &block )
+    @loEdges.each do |edge|
+      yield(edge)
+    end
+  end
+  
+  #
+  # Get the number of edges
+  #
+  def edge_count
+    @loEdges.size
+  end
+  
   # 
   # Create a new graph
   # 
@@ -195,17 +227,19 @@ class GraphViz
   end
   
   #
-  # Get the number of nodes
+  # Allow you to traverse graphs
   #
-  def node_count
-    @hoNodes.size
+  def each_graph( &block )
+    @hoGraphs.each do |name, graph|
+      yield( name, graph )
+    end
   end
   
   #
-  # Get the number of edges
+  # Get the number of graphs
   #
-  def edge_count
-    @loEdges.size
+  def graph_count
+    @hoGraphs.size
   end
   
   def method_missing( idName, *args, &block ) #:nodoc:
