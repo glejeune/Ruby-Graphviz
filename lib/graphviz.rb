@@ -80,24 +80,21 @@ class GraphViz
   #
   # In:
   # * xNodeName : Name of the new node
-  # * *hOpt : Node attributs
+  # * hOpts : Node attributs
   # 
   # Return the GraphViz::Node object created
   #
-  def add_node( xNodeName, *hOpt )
+  def add_node( xNodeName, hOpts = {} )
     @hoNodes[xNodeName] = GraphViz::Node::new( xNodeName, self )
    
-    if hOpt.nil? == false and hOpt[0].nil? == false
-      
-      unless hOpt[0].keys.include?(:label) or hOpt[0].keys.include?("label")
-        hOpt[0][:label] = xNodeName
-      end
-      
-      hOpt[0].each do |xKey, xValue|
-        @hoNodes[xNodeName][xKey.to_s] = xValue
-      end
+    unless hOpts.keys.include?(:label) or hOpts.keys.include?("label")
+      hOpts[:label] = xNodeName
     end
-
+      
+    hOpts.each do |xKey, xValue|
+      @hoNodes[xNodeName][xKey.to_s] = xValue
+    end
+    
     @elements_order.push( { 
       "type" => "node", 
       "name" => xNodeName,
@@ -140,29 +137,27 @@ class GraphViz
   # In:
   # * oNodeOne : First node (or node list)
   # * oNodeTwo : Second Node (or node list)
-  # * *hOpt : Edge attributs
+  # * hOpts : Edge attributs
   #
-  def add_edge( oNodeOne, oNodeTwo, *hOpt )
+  def add_edge( oNodeOne, oNodeTwo, hOpts = {} )
     
     if( oNodeOne.class == Array ) 
       oNodeOne.each do |no|
-        add_edge( no, oNodeTwo, *hOpt )
+        add_edge( no, oNodeTwo, hOpts )
       end
     else
       if( oNodeTwo.class == Array )
         oNodeTwo.each do |nt|
-          add_edge( oNodeOne, nt, *hOpt )
+          add_edge( oNodeOne, nt, hOpts )
         end
       else
 
         oEdge = GraphViz::Edge::new( oNodeOne, oNodeTwo, self )
         
-        if hOpt.nil? == false and hOpt[0].nil? == false
-          hOpt[0].each do |xKey, xValue|
-            oEdge[xKey.to_s] = xValue
-          end
+        hOpts.each do |xKey, xValue|
+          oEdge[xKey.to_s] = xValue
         end
-
+        
         @elements_order.push( { 
           "type" => "edge", 
           "value" => oEdge
@@ -195,17 +190,15 @@ class GraphViz
   # 
   # In:
   # * xGraphName : Graph name
-  # * *hOpt : Graph attributs
+  # * hOpts : Graph attributs
   #
-  def add_graph( xGraphName, *hOpt )
+  def add_graph( xGraphName, hOpts = {} )
     @hoGraphs[xGraphName] = GraphViz::new( xGraphName, :parent => self, :type => @oGraphType )
    
-    if hOpt.nil? == false and hOpt[0].nil? == false
-      hOpt[0].each do |xKey, xValue|
-        @hoGraphs[xGraphName][xKey.to_s] = xValue
-      end
+    hOpts.each do |xKey, xValue|
+      @hoGraphs[xGraphName][xKey.to_s] = xValue
     end
-
+    
     @elements_order.push( { 
       "type" => "graph", 
       "name" => xGraphName,
@@ -249,7 +242,7 @@ class GraphViz
     
     if block
       # Creating a cluster named '#{xName}'
-      rCod = add_graph( xName, args[0] )
+      rCod = add_graph( xName, args[0]||{} )
       yield( rCod )
     else
       # Create a node named '#{xName}' or search for a node, edge or cluster
@@ -262,7 +255,7 @@ class GraphViz
       end
       return( @hoGraphs[xName] ) if @hoGraphs.keys.include?( xName )
       
-      rCod = add_node( xName, args[0] )
+      rCod = add_node( xName, args[0]||{} )
     end
 
     return rCod
@@ -306,7 +299,7 @@ class GraphViz
   #   * 1 = Error
   #   * 2 = none
   # 
-  def output( *hOpt )
+  def output( hOpts = {} )
     xDOTScript = ""
     xLastType = nil
     xSeparator = ""
@@ -387,36 +380,34 @@ class GraphViz
 
       return( xDOTScript )
     else
-      if hOpt.nil? == false and hOpt[0].nil? == false
-        hOpt[0].each do |xKey, xValue|
-          xValue = xValue.to_s unless xValue.nil? or [Class, TrueClass, FalseClass].include?(xValue.class)
-          case xKey.to_s
-            when "output"
-              warn ":output option is deprecated, please use :<format> => :<file>"
-              if FORMATS.index( xValue ).nil? == true
-                raise ArgumentError, "output format '#{xValue}' invalid"
-              end
-              @format = xValue
-            when "file"
-              warn ":file option is deprecated, please use :<format> => :<file>"
-              @filename = xValue
-            when "use"
-              if PROGRAMS.index( xValue ).nil? == true
-                raise ArgumentError, "can't use '#{xValue}'"
-              end
-              @prog = xValue
-            when "path"
-              @path = xValue.split( "," ).map{ |x| x.strip }
-            when "errors"
-              @errors = xValue
-            when "extlib"
-              @extlibs = xValue.split( "," ).map{ |x| x.strip }
-            else
-              if FORMATS.index( xKey.to_s ).nil? == true
-                raise ArgumentError, "output format '#{xValue}' invalid"
-              end
-              @output[xKey.to_s] = xValue
-          end
+      hOpts.each do |xKey, xValue|
+        xValue = xValue.to_s unless xValue.nil? or [Class, TrueClass, FalseClass].include?(xValue.class)
+        case xKey.to_s
+          when "output"
+            warn ":output option is deprecated, please use :<format> => :<file>"
+            if FORMATS.index( xValue ).nil? == true
+              raise ArgumentError, "output format '#{xValue}' invalid"
+            end
+            @format = xValue
+          when "file"
+            warn ":file option is deprecated, please use :<format> => :<file>"
+            @filename = xValue
+          when "use"
+            if PROGRAMS.index( xValue ).nil? == true
+              raise ArgumentError, "can't use '#{xValue}'"
+            end
+            @prog = xValue
+          when "path"
+            @path = xValue.split( "," ).map{ |x| x.strip }
+          when "errors"
+            @errors = xValue
+          when "extlib"
+            @extlibs = xValue.split( "," ).map{ |x| x.strip }
+          else
+            if FORMATS.index( xKey.to_s ).nil? == true
+              raise ArgumentError, "output format '#{xValue}' invalid"
+            end
+            @output[xKey.to_s] = xValue
         end
       end
   
@@ -604,8 +595,8 @@ class GraphViz
   # * :parent : Parent graph (default : none)
   # * :type : Graph type (Constants::GRAPHTYPE) (default : digraph)
   # 
-  def self.parse( xFile, *hOpts, &block )
-    g = GraphViz::Parser.parse( xFile, hOpts[0], &block )
+  def self.parse( xFile, hOpts = {}, &block )
+    g = GraphViz::Parser.parse( xFile, hOpts, &block )
     return g
   end
 
@@ -639,7 +630,7 @@ class GraphViz
   #   * 1 = Error
   #   * 2 = none
   # 
-  def initialize( xGraphName, *hOpt, &block )
+  def initialize( xGraphName, hOpts = {}, &block )
     @filename = nil
     @name     = xGraphName.to_s
     @format   = @@format
@@ -662,39 +653,37 @@ class GraphViz
     @edge  = GraphViz::Attrs::new( self, "edge",  EDGESATTRS  )
     @graph = GraphViz::Attrs::new( self, "graph", GRAPHSATTRS )
 
-    if hOpt.nil? == false and hOpt[0].nil? == false
-      hOpt[0].each do |xKey, xValue|
-        case xKey.to_s
-          when "output"
-            warn ":output option is deprecated, please use :<format> => :<file>"
-            if FORMATS.index( xValue.to_s ).nil? == true
-              raise ArgumentError, "output format '#{xValue}' invalid"
-            end
-            @format = xValue.to_s
-          when "use"
-            if PROGRAMS.index( xValue.to_s ).nil? == true
-              raise ArgumentError, "can't use '#{xValue}'"
-            end
-            @prog = xValue.to_s
-          when "file"
-            warn ":file option is deprecated, please use :<format> => :<file>"
-            @filename = xValue.to_s
-          when "parent"
-            @oParentGraph = xValue
-          when "type"
-            if GRAPHTYPE.index( xValue.to_s ).nil? == true
-              raise ArgumentError, "graph type '#{xValue}' unknow"
-            end
-            @oGraphType = xValue.to_s
-          when "path"
-            @path = xValue.split( "," ).map{ |x| x.strip }
-          when "errors"
-            @errors = xValue
-          when "extlibs"
-            @extlibs = xValue.split( "," ).map{ |x| x.strip }
-          else
-            self[xKey.to_s] = xValue.to_s
-        end
+    hOpts.each do |xKey, xValue|
+      case xKey.to_s
+        when "output"
+          warn ":output option is deprecated, please use :<format> => :<file>"
+          if FORMATS.index( xValue.to_s ).nil? == true
+            raise ArgumentError, "output format '#{xValue}' invalid"
+          end
+          @format = xValue.to_s
+        when "use"
+          if PROGRAMS.index( xValue.to_s ).nil? == true
+            raise ArgumentError, "can't use '#{xValue}'"
+          end
+          @prog = xValue.to_s
+        when "file"
+          warn ":file option is deprecated, please use :<format> => :<file>"
+          @filename = xValue.to_s
+        when "parent"
+          @oParentGraph = xValue
+        when "type"
+          if GRAPHTYPE.index( xValue.to_s ).nil? == true
+            raise ArgumentError, "graph type '#{xValue}' unknow"
+          end
+          @oGraphType = xValue.to_s
+        when "path"
+          @path = xValue.split( "," ).map{ |x| x.strip }
+        when "errors"
+          @errors = xValue
+        when "extlibs"
+          @extlibs = xValue.split( "," ).map{ |x| x.strip }
+        else
+          self[xKey.to_s] = xValue.to_s
       end
     end
   
@@ -755,7 +744,7 @@ class GraphViz
 #     return nil
 #   end
 
-  def add_exe_suffix(prog)
+  def add_exe_suffix(prog) #:nodoc:
     if /Windows/.match( ENV['OS'] )
       suffix = '.exe'
     else
@@ -764,8 +753,7 @@ class GraphViz
     "#{prog}#{suffix}"
   end
 
-
-  def escape_path_containing_blanks(path)
+  def escape_path_containing_blanks(path) #:nodoc:
     path.gsub!(File::ALT_SEPARATOR, File::SEPARATOR) if File::ALT_SEPARATOR
     path_elements = path.split(File::SEPARATOR)
     path_elements.map! do |element|
@@ -778,6 +766,4 @@ class GraphViz
     path_elements.join(File::SEPARATOR)
   end
 
-  
 end
-
