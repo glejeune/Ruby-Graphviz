@@ -242,7 +242,7 @@ module Constants
     "shapefile"           => { :usedBy => "N",    :type => :EscString },
     "showboxes"           => { :usedBy => "ENG",  :type => :EscString },
     "sides"               => { :usedBy => "N",    :type => :EscString },
-    "size"                => { :usedBy => "G",    :type => :EscString },
+    "size"                => { :usedBy => "NG",   :type => :EscString },
     "skew"                => { :usedBy => "N",    :type => :EscString },
     "smoothing"           => { :usedBy => "G",    :type => :EscString },
     "sortv"               => { :usedBy => "GCN",  :type => :EscString },

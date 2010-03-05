@@ -1,3 +1,9 @@
+0.9.10 :
+* TODO: Issue #10
+* TODO: Anonymous graph (see Subgraphs and Clusters at http://www.graphviz.org/doc/info/lang.html)
+* TODO: rank Parser
+* TODO: Anonymous graph in parser
+
 0.9.9 :
 * Add graph as an accessor to allow you to set global graph attributs (like edge and node)
 * Add each_node, each_edge, each_graph (thanks to @metellius) and graph_count

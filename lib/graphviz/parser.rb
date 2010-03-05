@@ -58,11 +58,15 @@ class GraphViz
     end
     
     class Graph < Treetop::Runtime::SyntaxNode
-      def eval( context, hOpts )
+      def eval( context, hOpts = [] )
         # puts "GRAPH TYPE = #{type.text_value}"
         # puts "GRAPH NAME = #{name.text_value}"
         
-        hOpts = hOpts[0].merge( {:type => type.text_value} )
+        begin
+          hOpts = hOpts[0].merge( {:type => type.text_value} )
+        rescue
+          hOpts = {:type => type.text_value}
+        end
         
         # Create Graph
         context.graph = GraphViz.new( name.text_value.gsub(/"/, ""), hOpts )
@@ -232,18 +236,18 @@ class GraphViz
     end
     
     class Options < Treetop::Runtime::SyntaxNode
-  def eval
-    options = {}
-    elements[2].elements.each do |e|
-      # puts "  #{e.elements[0].text_value} = #{e.elements[4].text_value}"
-      options[e.elements[0].text_value] = e.elements[4].text_value.gsub( /"/, "" )
+      def eval
+        options = {}
+        elements[2].elements.each do |e|
+          # puts "  #{e.elements[0].text_value} = #{e.elements[4].text_value}"
+          options[e.elements[0].text_value] = e.elements[4].text_value.gsub( /"/, "" )
+        end
+        # puts "  #{elements[3].text_value} = #{elements[7].text_value}"
+        options[elements[3].text_value] = elements[7].text_value.gsub( /"/, "" )
+        
+        return options
+      end
     end
-    # puts "  #{elements[3].text_value} = #{elements[7].text_value}"
-    options[elements[3].text_value] = elements[7].text_value.gsub( /"/, "" )
-    
-    return options
-  end
-end
 
     def self.parse( file, *hOpts, &block )
       dot = open(file).read

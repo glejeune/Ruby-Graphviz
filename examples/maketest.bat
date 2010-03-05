@@ -69,6 +69,8 @@
 @ruby sample31.rb
 @echo "sample32.rb"
 @ruby sample32.rb
+@echo "sample33.rb"
+@ruby sample33.rb
 
 
 @echo "shapes.rb"
@@ -82,6 +84,9 @@
 @pwd
 @echo "dot/hello_test.rb"
 @ruby hello_test.rb
+@echo "dot/test_parse.rb"
+@ruby test_parse.rb
+
 @cd ..
 
 @cd graphviz.org
