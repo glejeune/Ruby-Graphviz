@@ -20,7 +20,8 @@ Interface to the GraphViz graphing tool
 * GraphViz#add_graph can now take a block parameter. See example/sample34.rb
 * Add GraphViz.digraph and GraphViz.graph (same as GraphViz.new( ..., :type => "digraph" ) and GraphViz.new( ..., :type => "graph" )). See examples/sample35.rb
 * Add GraphViz#subgraph. See examples/sample35.rb
-* TODO: Anonymous graph in parser
+* GraphViz::Parser support anonymous graph
+* TODO: GraphViz::Parser support block
 
 === 0.9.9 :
 * Add graph as an accessor to allow you to set global graph attributs (like edge and node)

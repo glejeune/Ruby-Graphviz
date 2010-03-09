@@ -44,7 +44,15 @@ grammar Dot
 	end
 	
 	rule subgraph
+		named_subgraph / anonymous_subgraph
+	end
+	
+	rule named_subgraph
 	  space "subgraph" blank name:string space cluster:cluster space <GraphViz::Parser::Subgraph>
+	end
+	
+	rule anonymous_subgraph
+	  space "subgraph" space cluster:cluster space <GraphViz::Parser::AnonymousSubgraph>
 	end
 	
 	rule options

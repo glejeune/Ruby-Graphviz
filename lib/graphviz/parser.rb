@@ -235,6 +235,31 @@ class GraphViz
       end
     end
     
+    class AnonymousSubgraph < Treetop::Runtime::SyntaxNode
+      def eval( context )
+        # puts "CREATE ANONYMOUS SUBGRAPH"
+        
+        # Save options
+        saved_options = context.options.clone
+        # Save graph 
+        saved_graph = context.graph
+        
+        # Create Graph
+        context.graph = context.graph.add_graph( )
+        #context.options = {
+        #  :node => {},
+        #  :edge => {}
+        #}
+        
+        # Eval cluster
+        cluster.eval( context )
+        
+        # Reinitialize graph and options
+        context.graph = saved_graph
+        context.options = saved_options
+      end
+    end
+    
     class Options < Treetop::Runtime::SyntaxNode
       def eval
         options = {}

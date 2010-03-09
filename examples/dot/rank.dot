@@ -1,6 +1,6 @@
 digraph G {
-	{ rank = same; "node1"; "node2"; }
-	{ rank = same; "nodeA"; "nodeB"; }
+	subgraph { rank = same; "node1"; "node2"; }
+	subgraph { rank = same; "nodeA"; "nodeB"; }
 	node1 -> nodeA;
 	node2 -> nodeB;
 }
