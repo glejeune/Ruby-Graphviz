@@ -16,9 +16,10 @@ Interface to the GraphViz graphing tool
 * Move ChangeLog in README
 * Add GraphViz::FamilyTree (alpha). See examples/sample33.rb
 * Major bugs corrections in GraphViz::Parser
-* TODO: Issue #10
-* TODO: Anonymous graph (see Subgraphs and Clusters at http://www.graphviz.org/doc/info/lang.html)
-* TODO: rank Parser
+* Issue #10 : Anonymous graph (see Subgraphs and Clusters at http://www.graphviz.org/doc/info/lang.html). See examples/sample34.rb
+* GraphViz#add_graph can now take a block parameter. See example/sample34.rb
+* Add GraphViz.digraph and GraphViz.graph (same as GraphViz.new( ..., :type => "digraph" ) and GraphViz.new( ..., :type => "graph" )). See examples/sample35.rb
+* Add GraphViz#subgraph. See examples/sample35.rb
 * TODO: Anonymous graph in parser
 
 === 0.9.9 :

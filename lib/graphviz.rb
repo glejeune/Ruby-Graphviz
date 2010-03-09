@@ -30,6 +30,7 @@ require 'graphviz/attrs'
 require 'graphviz/constants'
 require 'graphviz/parser'
 require 'graphviz/types'
+require 'graphviz/core_ext'
 
 class GraphViz 
   include Constants
@@ -192,22 +193,34 @@ class GraphViz
   # * xGraphName : Graph name
   # * hOpts : Graph attributs
   #
-  def add_graph( xGraphName, hOpts = {} )
-    @hoGraphs[xGraphName] = GraphViz::new( xGraphName, :parent => self, :type => @oGraphType )
+  def add_graph( xGraphName = nil, hOpts = {}, &block )
+    if xGraphName.kind_of?(Hash)
+      hOpts = xGraphName
+      xGraphName = nil
+    end
+    
+    if xGraphName.nil?
+      xGraphID = String.random(11)
+      xGraphName = ""
+    else
+      xGraphID = xGraphName
+    end
+    
+    @hoGraphs[xGraphID] = GraphViz::new( xGraphName, {:parent => self, :type => @oGraphType}, &block )
    
     hOpts.each do |xKey, xValue|
-      @hoGraphs[xGraphName][xKey.to_s] = xValue
+      @hoGraphs[xGraphID][xKey.to_s] = xValue
     end
     
     @elements_order.push( { 
       "type" => "graph", 
       "name" => xGraphName,
-      "value" => @hoGraphs[xGraphName] 
+      "value" => @hoGraphs[xGraphID] 
     } )
     
-    return( @hoGraphs[xGraphName] )
+    return( @hoGraphs[xGraphID] )
   end
-  
+  alias :subgraph :add_graph
   #
   # Return the graph object for the given name (or nil)
   #
@@ -688,6 +701,13 @@ class GraphViz
     end
   
     yield( self ) if( block )
+  end
+  
+  def self.graph( xGraphName, hOpts = {}, &block )
+    new( xGraphName, hOpts.symbolize_keys.merge( {:type => "graph"} ), &block )
+  end
+  def self.digraph( xGraphName, hOpts = {}, &block )
+    new( xGraphName, hOpts.symbolize_keys.merge( {:type => "digraph"} ), &block )
   end
   
   #
