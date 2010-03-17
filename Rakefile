@@ -7,6 +7,8 @@ require 'rake/gempackagetask'
 require 'rake/rdoctask'
 require 'rake/testtask'
 require 'fileutils'
+require 'json/pure'
+require 'open-uri'
 include FileUtils
 
 PKG_NAME = "ruby-graphviz"
@@ -108,4 +110,45 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/test_*.rb']
 #  t.warning = true
 #  t.verbose = true
+end
+
+class Rubygems
+  def initialize
+    url = "http://rubygems.org/api/v1/gems/#{PKG_NAME}.json"
+    @version_at_rubygems = JSON.parse( open(url).read )["version"]
+  end
+  
+  def status
+    version == PKG_VERS
+  end
+  def self.status
+    self.new.status
+  end
+  
+  def version
+    @version_at_rubygems
+  end
+  def self.version
+    self.new.version
+  end
+end
+
+namespace :gemcutter do
+  desc "push to gemcutter"
+  task :push => [:package] do
+    unless Rubygems.status
+      sh %{gem push pkg/#{PKG_NAME}-#{PKG_VERS}.gem}, :verbose => true
+    else
+      puts "This gem already existe in version #{PKG_VERS}!"
+    end
+  end
+  
+  desc "check gemcutter status"
+  task :status do
+    if Rubygems.status
+      puts "This gem already existe in version #{PKG_VERS}!"
+    else
+      puts "This gem (#{PKG_VERS}) has not been published! Last version at gemcutter is #{Rubygems.version}"
+    end
+  end
 end
