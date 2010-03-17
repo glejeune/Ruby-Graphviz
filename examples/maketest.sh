@@ -73,6 +73,12 @@ echo "sample32.rb"
 ruby sample32.rb
 echo "sample33.rb"
 ruby sample33.rb
+echo "sample34.rb"
+ruby sample34.rb
+echo "sample35.rb"
+ruby sample35.rb
+echo "sample36.rb"
+ruby sample36.rb
 
 echo "shapes.rb"
 ruby shapes.rb 
