@@ -12,6 +12,9 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 0.9.11 :
+* TODO: GraphViz::Parser support block
+
 === 0.9.10 :
 * Move ChangeLog in README
 * Add GraphViz::FamilyTree (alpha). See examples/sample33.rb
@@ -22,7 +25,6 @@ Interface to the GraphViz graphing tool
 * Add GraphViz#subgraph. See examples/sample35.rb
 * GraphViz::Parser support anonymous graph
 * Add lage node example. See examples/sample36.rb
-* TODO: GraphViz::Parser support block
 
 === 0.9.9 :
 * Add graph as an accessor to allow you to set global graph attributs (like edge and node)
