@@ -21,6 +21,7 @@ Interface to the GraphViz graphing tool
 * Add GraphViz.digraph and GraphViz.graph (same as GraphViz.new( ..., :type => "digraph" ) and GraphViz.new( ..., :type => "graph" )). See examples/sample35.rb
 * Add GraphViz#subgraph. See examples/sample35.rb
 * GraphViz::Parser support anonymous graph
+* Add lage node example. See examples/sample36.rb
 * TODO: GraphViz::Parser support block
 
 === 0.9.9 :
