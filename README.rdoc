@@ -14,6 +14,8 @@ Interface to the GraphViz graphing tool
 
 === 0.9.11 :
 * TODO: GraphViz::Parser support block
+* TODO: Issue #11
+* TODO: Issue #12
 
 === 0.9.10 :
 * Move ChangeLog in README
