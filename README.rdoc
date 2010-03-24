@@ -13,8 +13,9 @@ Interface to the GraphViz graphing tool
 == CHANGELOG
 
 === 0.9.11 :
+* Issue #11 : Cygwin PATH
+* Major bugs correction in output
 * TODO: GraphViz::Parser support block
-* TODO: Issue #11
 * TODO: Issue #12
 
 === 0.9.10 :

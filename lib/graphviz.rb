@@ -15,12 +15,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
 
-begin
-  include Java
-  IS_JRUBY = true
-rescue
-  IS_JRUBY= false
-end
+IS_JRUBY = (defined?( JRUBY_VERSION ) != nil)
+IS_CYGWIN = ((RUBY_PLATFORM =~ /cygwin/) != nil)
 
 require 'tempfile'
 
@@ -393,6 +389,8 @@ class GraphViz
 
       return( xDOTScript )
     else
+      hOutput = {}
+      
       hOpts.each do |xKey, xValue|
         xValue = xValue.to_s unless xValue.nil? or [Class, TrueClass, FalseClass].include?(xValue.class)
         case xKey.to_s
@@ -420,19 +418,30 @@ class GraphViz
             if FORMATS.index( xKey.to_s ).nil? == true
               raise ArgumentError, "output format '#{xValue}' invalid"
             end
-            @output[xKey.to_s] = xValue
+            hOutput[xKey.to_s] = xValue
         end
       end
+      
+      @output = hOutput if hOutput.size > 0
   
       xDOTScript = "#{@oGraphType} #{@name} {\n" << xDOTScript
 
       xOutputString = (@filename == String ||
         @output.any? {|format, file| file == String })
         
-      xOutput =
-      if @format.to_s == "none" || @output.any? {|fmt, fn| fmt.to_s == "none" }
-        xDOTScript
-      else
+      xOutput = ""
+      if @format.to_s == "none" or @output.any? {|fmt, fn| fmt.to_s == "none"}
+        if xOutputString
+          xOutput << xDOTScript
+        else
+          xFileName = @output["none"] || @filename
+          open( xFileName, "w" ) do |h|
+            h.puts xDOTScript
+          end
+        end
+      end
+      
+      if (@format.to_s != "none" and not @format.nil?) or (@output.any? {|format, file| format != "none" } and @output.size > 0)
         ## Act: Save script and send it to dot
         t = Tempfile::open( File.basename($0) )
         t.print( xDOTScript )
@@ -447,15 +456,15 @@ class GraphViz
 
         xOutputWithFile = ""
         xOutputWithoutFile = ""
-        unless @format.nil?
-          if @filename.nil? || @filename == String
+        unless @format.nil? or @format == "none"
+          if @filename.nil? or @filename == String
             xOutputWithoutFile = "-T#{@format} "
           else
             xOutputWithFile = "-T#{@format} -o#{@filename} "
           end
         end
-        @output.each do |format, file|
-          if file.nil? || file == String
+        @output.each_except( :key => ["none"] ) do |format, file|
+          if file.nil? or file == String
             xOutputWithoutFile << "-T#{format} "
           else
             xOutputWithFile << "-T#{format} -o#{file} "
@@ -469,11 +478,19 @@ class GraphViz
         
         if IS_JRUBY
           xCmd = "#{cmd} -q#{@errors} #{xExternalLibraries} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+        elsif IS_CYGWIN
+          tmpPath = t.path
+          begin
+            tmpPath = "'" + `cygpath -w #{t.path}`.chomp + "'"
+          rescue
+            warn "cygpath is not installed!"
+          end
+          xCmd = "\"#{cmd}\" -q#{@errors} #{xExternalLibraries} #{xOutputWithFile} #{xOutputWithoutFile} #{tmpPath}"
         else
           xCmd = "\"#{cmd}\" -q#{@errors} #{xExternalLibraries} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         end
 
-        output_from_command( xCmd )
+        xOutput << output_from_command( xCmd )
       end
             
       if xOutputString

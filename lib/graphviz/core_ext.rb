@@ -17,4 +17,27 @@ class Hash
       options
     end
   end
+  
+  # x = {
+  #   :none => String,
+  #   :png => "file.png",
+  #   :svg => "file.svg"
+  # }
+  # 
+  # x.each_except( :key => [:none], :value => [/\.png$/] ) do |k, v|
+  #   puts "#{k} -> #{v}"
+  # end
+  #
+  # => svg -> file.svg
+  def each_except( e, &b )
+    key_table = (e[:key]||[]).clone.delete_if {|i| i.kind_of? Regexp }
+    key_regexp = (e[:key]||[]).clone.delete_if {|i| key_table.include? i }.map {|i| i.to_s }.join("|")
+
+    value_table = (e[:value]||[]).clone.delete_if {|i| i.kind_of? Regexp }
+    value_regexp = (e[:value]||[]).clone.delete_if {|i| value_table.include? i }.map {|i| i.to_s }.join("|")
+
+    self.each do |k, v|
+      yield( k, v ) unless (key_table.size > 0 and key_table.include?(k)) or (key_regexp.size > 0 and k.to_s.match(key_regexp)) or (value_table.size > 0 and value_table.include?(v)) or (value_regexp.size > 0 and v.to_s.match(value_regexp))
+    end
+  end
 end
