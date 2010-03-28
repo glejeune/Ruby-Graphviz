@@ -1,3 +1,4 @@
 .DS_Store
 doc
 pkg
+test/output/
