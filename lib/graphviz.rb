@@ -760,7 +760,7 @@ class GraphViz
     
     paths.each do |path|    
       file = (path.nil?)?bin:File.join(path,bin)
-      if File.executable?(file) then
+      if File.executable?(file) and not File.directory?(file) then
         return file
       elsif RUBY_PLATFORM =~ /mswin|mingw/
         found_ext = (ENV['PATHEXT'] || '.exe;.bat;.com').split(";").find {|ext| File.executable?(file + ext) }
