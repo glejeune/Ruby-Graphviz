@@ -52,7 +52,7 @@ class GraphViz
       #
       #  mu.is_maried_with greg
       def is_maried_with( x )
-        node = @cluster.add_node( "#{@node.name}And#{x.node.name}" )
+        node = @cluster.add_node( "#{@node.id}And#{x.node.id}" )
         node["shape"] = "point"
         @cluster.add_edge( @node, node, "dir" => "none" )
         @cluster.add_edge( node, x.node, "dir" => "none" )
@@ -63,7 +63,7 @@ class GraphViz
       #
       #  sophie.is_divorced_with john
       def is_divorced_with( x )
-        node = @cluster.add_node( "#{@node.name}And#{x.node.name}" )
+        node = @cluster.add_node( "#{@node.id}And#{x.node.id}" )
         node["shape"] = "point"
         node["color"] = "red"
         @cluster.add_edge( @node, node, "dir" => "none", "color" => "red" )
@@ -75,7 +75,7 @@ class GraphViz
       #
       #  simon.is_widower_of elisa
       def is_widower_of( x ) #veuf
-        node = @cluster.add_node( "#{@node.name}And#{x.node.name}" )
+        node = @cluster.add_node( "#{@node.id}And#{x.node.id}" )
         node["shape"] = "point"
         node["color"] = "green"
         @cluster.add_edge( @node, node, "dir" => "none", "color" => "green" )

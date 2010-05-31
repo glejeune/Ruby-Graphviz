@@ -28,7 +28,7 @@ class GraphViz
     # Create a new node
     # 
     # In:
-    # * xNodeName : Name of the node
+    # * xNodeName : ID of the node
     # * oGParrent : Graph 
     # 
     def initialize( xNodeName, oGParrent = nil )
@@ -38,9 +38,17 @@ class GraphViz
     end
 
     # 
-    # Get the node name
+    # Get the node ID
     # 
     def name
+	    warn "GraphViz::Node#name is deprecated, please use GraphViz::Node#id!"
+	    return self.id
+	  end
+
+    # 
+    # Get the node ID
+    # 
+    def id
 	    @xNodeName.clone
 	  end
 	

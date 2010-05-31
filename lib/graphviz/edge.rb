@@ -29,21 +29,21 @@ class GraphViz
     # Create a new edge
     # 
     # In:
-    # * vNodeOne : First node
-    # * vNodeTwo : Second node
+    # * vNodeOne : First node (can be a GraphViz::Node or a node ID)
+    # * vNodeTwo : Second node (can be a GraphViz::Node or a node ID)
     # * oGParrent : Graph 
     #
     def initialize( vNodeOne, vNodeTwo, oGParrent = nil )
 	    if vNodeOne.class == String
         @xNodeOne = vNodeOne
 	    else
-        @xNodeOne = vNodeOne.name
+        @xNodeOne = vNodeOne.id
 	    end
 	  
 	    if vNodeTwo.class == String
         @xNodeTwo = vNodeTwo
 	    else
-        @xNodeTwo = vNodeTwo.name
+        @xNodeTwo = vNodeTwo.id
 	    end
 	    
 	    @oGParrent = oGParrent

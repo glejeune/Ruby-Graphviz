@@ -15,7 +15,7 @@ class GraphViz
         if z.size == 1
           @graph.add_edge( @node, z[0].node, "dir" => "none" )
         else
-          cluster = @graph.add_graph( "#{@node.name}Kids" )
+          cluster = @graph.add_graph( "#{@node.id}Kids" )
           cluster["rank"] = "same"
 
           last = nil
@@ -26,7 +26,7 @@ class GraphViz
           z.each do |person|
             count = count + 1
             if count == add
-              middle = cluster.add_node( "#{@node.name}Kids", "shape" => "point" )
+              middle = cluster.add_node( "#{@node.id}Kids", "shape" => "point" )
               @graph.add_edge( @node, middle, "dir" => "none" )
               unless last.nil?
                 cluster.add_edge( last, middle, "dir" => "none" )
@@ -34,7 +34,7 @@ class GraphViz
               last = middle
             end
             
-            kid = cluster.add_node( "#{person.node.name}Kid", "shape" => "point" )
+            kid = cluster.add_node( "#{person.node.id}Kid", "shape" => "point" )
             @graph.add_edge( kid, person.node, "dir" => "none" )
             
             if add == 0 and count == link

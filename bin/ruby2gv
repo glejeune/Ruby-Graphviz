@@ -142,9 +142,9 @@ class Rb2Gv
         end
         
         puts "  + Edge #{xLib} -> #{xRequiredLib}" if DEBUG
-        unless @hxEdge.include?( "#{@hxNodes[xLib].name}-#{@hxNodes[xRequiredLib].name}" )
+        unless @hxEdge.include?( "#{@hxNodes[xLib].id}-#{@hxNodes[xRequiredLib].id}" )
           @oGraph.add_edge( @hxNodes[xLib], @hxNodes[xRequiredLib] )
-          @hxEdge << "#{@hxNodes[xLib].name}-#{@hxNodes[xRequiredLib].name}"
+          @hxEdge << "#{@hxNodes[xLib].id}-#{@hxNodes[xRequiredLib].id}"
         end
       end
     end

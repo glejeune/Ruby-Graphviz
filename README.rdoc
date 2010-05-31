@@ -12,6 +12,9 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 0.9.12 :
+* GraphViz::Node#name is deprecated, you must use GraphViz::Node#id (issue #14)
+
 === 0.9.11 :
 * Issue #11 : Cygwin PATH
 * Major bugs correction in output
