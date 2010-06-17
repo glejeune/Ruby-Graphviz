@@ -79,6 +79,13 @@ On Windows, you can install 'win32-open3'
 
 You need to install GraphViz (http://graphviz.org/) to use this Gem.
 
+/!\\ Version 0.9.12 introduce a new solution to connect edges to node ports
+For more information, see http://github.com/glejeune/Ruby-Graphviz/issues/#issue/13
+So if you use node ports, maybe you need to change your code.
+
+/!\\ GraphViz::Node#name is deprecated and will be removed in version 1.0.0
+
+/!\\ :output and :file options are deprecated and will be removed in version 1.0.0
 }
     end
 
