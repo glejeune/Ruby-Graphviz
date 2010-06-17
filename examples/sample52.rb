@@ -59,4 +59,4 @@ GraphViz::new( "TrafficLights", :type => :digraph ) { |g|
   g[:overlap] = :false
   g[:label] = 'PetriNet Model TrafficLights\nExtracted from ConceptBase and layed out by Graphviz'
   g[:fontsize] = 12;
-}.output( :errors => 1, :png => "TrafficLights.png" )
+}.output( :errors => 1, :png => "#{$0}.png" )

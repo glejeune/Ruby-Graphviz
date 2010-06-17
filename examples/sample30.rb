@@ -9,4 +9,4 @@ GraphViz.new(:g){ |g|
   b = g.add_node("B", :shape => "sdl_save", :peripheries => 0)
   c = g.add_node("n", :shape => "box", :label => "\\G::\\N\\r")
   a << b << c
-}.save( :ps => "#{$0}.ps", :extlib => "sdlshapes/sdl.ps" )
+}.save( :ps => "#{$0}.ps", :extlib => File.join( File.dirname(__FILE__), "sdlshapes", "sdl.ps" ) )

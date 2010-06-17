@@ -50,6 +50,10 @@ class GraphVizTest < Test::Unit::TestCase
     assert_output_pattern(/\Adigraph G \{.*\}\n\Z/m, '38')
   end
 
+  def test_sample40
+    assert_output_pattern(/\Adigraph G \{.*\}\n\Z/m, '40')
+  end
+
 
   #
   # for every sample file in the examples directory that matches the

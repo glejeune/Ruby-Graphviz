@@ -1,4 +1,4 @@
-# Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009 Gregoire Lejeune <gregoire.lejeune@free.fr>
+# Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Gregoire Lejeune <gregoire.lejeune@free.fr>
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,6 +27,8 @@ require 'graphviz/constants'
 require 'graphviz/parser'
 require 'graphviz/types'
 require 'graphviz/core_ext'
+
+$KCODE = "UTF8"
 
 class GraphViz 
   include Constants
@@ -148,7 +150,6 @@ class GraphViz
           add_edge( oNodeOne, nt, hOpts )
         end
       else
-
         oEdge = GraphViz::Edge::new( oNodeOne, oNodeTwo, self )
         
         hOpts.each do |xKey, xValue|
@@ -254,16 +255,16 @@ class GraphViz
       rCod = add_graph( xName, args[0]||{} )
       yield( rCod )
     else
-      # Create a node named '#{xName}' or search for a node, edge or cluster
+      # Create a node named '#{xName}' or search for a node, edge or cluster      
       if @hoNodes.keys.include?( xName )
         if( args[0] )
-          return "#{xName}:#{args[0].to_s}"
+          return { xName => args[0] }
         else
           return( @hoNodes[xName] ) 
         end
       end
       return( @hoGraphs[xName] ) if @hoGraphs.keys.include?( xName )
-      
+            
       rCod = add_node( xName, args[0]||{} )
     end
 
@@ -313,6 +314,7 @@ class GraphViz
     xLastType = nil
     xSeparator = ""
     xData = ""
+    lNotHugly = []
 
     @elements_order.each { |kElement|
       if xLastType.nil? == true or xLastType != kElement["type"]
@@ -414,6 +416,14 @@ class GraphViz
             @errors = xValue
           when "extlib"
             @extlibs = xValue.split( "," ).map{ |x| x.strip }
+          when "nothugly"
+            begin
+              require 'graphviz/nothugly'
+              @nothugly = true
+            rescue
+              warn "You must install ruby-xslt to use nothugly option!"
+              @nothugly = false
+            end
           else
             if FORMATS.index( xKey.to_s ).nil? == true
               raise ArgumentError, "output format '#{xValue}' invalid"
@@ -457,6 +467,7 @@ class GraphViz
         xOutputWithFile = ""
         xOutputWithoutFile = ""
         unless @format.nil? or @format == "none"
+          lNotHugly << @filename if @format.to_s == "svg" and @nothugly
           if @filename.nil? or @filename == String
             xOutputWithoutFile = "-T#{@format} "
           else
@@ -464,6 +475,7 @@ class GraphViz
           end
         end
         @output.each_except( :key => ["none"] ) do |format, file|
+          lNotHugly << file if format.to_s == "svg" and @nothugly
           if file.nil? or file == String
             xOutputWithoutFile << "-T#{format} "
           else
@@ -492,7 +504,16 @@ class GraphViz
 
         xOutput << output_from_command( xCmd )
       end
-            
+      
+      # Not Hugly
+      lNotHugly.each do |f|
+        if f.nil? or f == String
+          xOutput = GraphViz.nothugly( xOutput, false )
+        else
+          GraphViz.nothugly( f, true )
+        end
+      end
+      
       if xOutputString
         xOutput
       else
@@ -540,6 +561,7 @@ class GraphViz
   def name 
     @name.clone
   end
+  alias :id :name
   
   # 
   # Create an edge between the current cluster and the node or cluster +oNode+
@@ -669,6 +691,7 @@ class GraphViz
     @errors   = @@errors
     @extlibs  = @@extlibs
     @output   = {}
+    @nothugly = false
     
     @elements_order = Array::new()
 
@@ -731,7 +754,7 @@ class GraphViz
   # Escape a string to be acceptable as a node name in a graphviz input file
   #
   def self.escape(str, force = false ) #:nodoc:
-    if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:]*\Z/ ).nil?
+    if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?
       '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
     #if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:\.]*\Z/ ).nil?
     #  '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"' 

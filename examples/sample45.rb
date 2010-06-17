@@ -21,4 +21,4 @@ g.node["shape"] = "ellipse"
   g.add_node( s, "shape" => s )
 }
 
-g.output( :png => "shapes.png")
+g.output( :png => "#{$0}.png")

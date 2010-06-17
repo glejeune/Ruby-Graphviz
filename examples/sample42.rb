@@ -32,4 +32,4 @@ g.add_edge( bp, jv, :color => "red", :label => "Est le beau fils de" ) # Beau fi
 g.add_edge( bp, gr )
 g.add_edge( gr, md )
 
-g.output( :png => "p2p.png" )
+g.output( :png => "#{$0}.png" )

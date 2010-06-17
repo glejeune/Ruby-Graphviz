@@ -17,7 +17,7 @@ g.add_node( "struct1", "shape" => "record", "label" => "<f0> left|<f1> middle|<f
 g.add_node( "struct2", "shape" => "record", "label" => "<f0> one|<f1> two" )
 g.add_node( "struct3", "shape" => "record", "label" => 'hello\nworld |{ b |{c|<here> d|e}| f}| g | h' )
 
-g.add_edge( "struct1:f1", "struct2:f0" )
-g.add_edge( "struct1:f2", "struct3:here" )
+g.add_edge( { "struct1" => :f1}, {"struct2" => :f0} )
+g.add_edge( {"struct1" => :f2}, {"struct3" => :here} )
 
 g.output( :png => "#{$0}.png", :canon => nil )

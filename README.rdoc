@@ -1,10 +1,11 @@
 = Ruby/GraphViz
 
-Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Gregoire Lejeune
+Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Gregoire Lejeune
 
 * Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
 * Sources : http://github.com/glejeune/Ruby-Graphviz
 * Continuous Integration : http://runcoderun.com/glejeune/Ruby-Graphviz
+* <b>NEW</b> - Mailing List : http://groups.google.com/group/ruby-graphviz
 
 == DESCRIPTION
 
@@ -14,6 +15,11 @@ Interface to the GraphViz graphing tool
 
 === 0.9.12 :
 * GraphViz::Node#name is deprecated, you must use GraphViz::Node#id (issue #14)
+* Add :nothugly option to GraphViz#output (see sample41.rb and http://www.hokstad.com/making-graphviz-output-pretty-with-xsl.html)
+* Issue #13 : you must now specify a port in GraphViz::Edge.new with a syntax like this : 
+    GraphViz::Edge.new( {nodeOne => :port}, {nodeTwo => :other} )
+* Issue #12 : UTF8 support (see sample38.rb)
+* Move and rename examples + remove maketest.[sh|bat]
 
 === 0.9.11 :
 * Issue #11 : Cygwin PATH
@@ -198,3 +204,8 @@ GNU General Public License (see the file 'COPYING').
 
 This program is distributed without any warranty. See the file
 'COPYING' for details.
+
+=== nothugly.xsl
+
+By Vidar Hokstad and Ryan Shea; Contributions by Jonas Tingborn,
+Earl Cummings, Michael Kennedy (Graphviz 2.20.2 compatibility, bug fixes, testing, lots of gradients)

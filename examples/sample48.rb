@@ -59,4 +59,4 @@ GraphViz.new( :G, :type => :digraph ) { |g|
   g.start[:shape] = :Mdiamond
   g._end[:label] = "end"
   g._end[:shape] = :Mdiamond
-}.output( :png => "cluster.png" )
+}.output( :png => "#{$0}.png" )

@@ -1,4 +1,4 @@
-# Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Gregoire Lejeune <gregoire.lejeune@free.fr>
+# Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Gregoire Lejeune <gregoire.lejeune@free.fr>
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,7 +21,9 @@ class GraphViz
   class Edge
     include Constants
     @xNodeOne
+    @xNodeOnePort
     @xNodeTwo
+    @xNodeTwoPort
     @oAttrEdge
     @oGParrent
 
@@ -34,17 +36,18 @@ class GraphViz
     # * oGParrent : Graph 
     #
     def initialize( vNodeOne, vNodeTwo, oGParrent = nil )
-	    if vNodeOne.class == String
-        @xNodeOne = vNodeOne
-	    else
-        @xNodeOne = vNodeOne.id
-	    end
-	  
-	    if vNodeTwo.class == String
-        @xNodeTwo = vNodeTwo
-	    else
-        @xNodeTwo = vNodeTwo.id
-	    end
+      @xNodeOne, @xNodeOnePort = getNodeNameAndPort( vNodeOne )
+	    # if vNodeOne.class == String
+      #   @xNodeOne = vNodeOne
+	    # else
+      #   @xNodeOne = vNodeOne.id
+	    # end
+	    @xNodeTwo, @xNodeTwoPort = getNodeNameAndPort( vNodeTwo )
+	    # if vNodeTwo.class == String
+      #   @xNodeTwo = vNodeTwo
+	    # else
+      #   @xNodeTwo = vNodeTwo.id
+	    # end
 	    
 	    @oGParrent = oGParrent
 
@@ -112,13 +115,17 @@ class GraphViz
 	      xLink = " -- "
 	    end
 	  
-	    #xNodeNameOne = @xNodeOne.clone
-	    #xNodeNameOne = '"' << xNodeNameOne << '"' if xNodeNameOne.match( /^[a-zA-Z_]+[a-zA-Z0-9_\.]*$/ ).nil?
-	    xNodeNameOne = GraphViz.escape(@xNodeOne)
+	    xNodeNameOne = if @xNodeOnePort.nil?
+	      GraphViz.escape(@xNodeOne)
+      else
+        GraphViz.escape(@xNodeOne, true) + ":#{@xNodeOnePort}"
+      end
 	    
-	    #xNodeNameTwo = @xNodeTwo.clone
-	    #xNodeNameTwo = '"' << xNodeNameTwo << '"' if xNodeNameTwo.match( /^[a-zA-Z_]+[a-zA-Z0-9_\.]*$/ ).nil?
-	    xNodeNameTwo = GraphViz.escape(@xNodeTwo)
+	    xNodeNameTwo = if @xNodeTwoPort.nil?
+	      GraphViz.escape(@xNodeTwo) 
+	    else 
+	      GraphViz.escape(@xNodeTwo, true) + ":#{@xNodeTwoPort}"
+      end
       
       xOut = xNodeNameOne + xLink + xNodeNameTwo
       xAttr = ""
@@ -134,5 +141,22 @@ class GraphViz
 
       return( xOut )
 	  end
+  
+    private
+    def getNodeNameAndPort( node )
+      name, port = nil, nil
+      if node.class == Hash
+        node.each do |k, v|
+          name, port = getNodeNameAndPort(k)
+          port = v
+        end
+	    elsif node.class == String
+        name = node
+	    else
+        name = node.id
+      end
+      
+      return name, port
+    end
   end
 end

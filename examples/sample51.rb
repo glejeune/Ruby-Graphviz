@@ -34,4 +34,4 @@ GraphViz::new( :G, :type => :graph ) { |g|
   g.runswap << g.runmem
   g._new << g.runmem
   g.sleep << g.runmem
-}.output( :png => "process.png", :use => :fdp )
+}.output( :png => "#{$0}.png", :use => :fdp )
