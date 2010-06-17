@@ -99,8 +99,8 @@ Interface to the GraphViz graphing tool
 * Bug correction in GraphViz.output (sample 19)
 * Add GraphViz#default to set default options (:use, :path and :output)
 * Add possibility to set node or edge attribut via :
-		node.<attribut>=<value> or node.<attribut>( <value> )
-		adge.<attribut>=<value> or adge.<attribut>( <value> )
+    node.<attribut>=<value> or node.<attribut>( <value> )
+    edge.<attribut>=<value> or edge.<attribut>( <value> )
 * Add GraphViz::Edge.set and GraphViz::Node.set
 * Add sample 20
 * Add GraphViz.node_count and GraphViz.edge_count by Daniel Cadenas Nión
