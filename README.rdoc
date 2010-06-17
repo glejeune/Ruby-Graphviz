@@ -183,11 +183,39 @@ Ruby/GraphViz also include :
 
 * ruby2gv, a simple tool that's allow you to create a dependency graph from a ruby script. Example : http://drp.ly/dShaZ
 
-	ruby2gv -Tpng -oruby2gv.png ruby2gv
+  ruby2gv -Tpng -oruby2gv.png ruby2gv
 
 * gem2gv, a tools that's allow you to create a dependency graph between gems. Example : http://drp.ly/dSj9Y
 
-	gem2gv -Tpng -oruby-graphviz.png ruby-graphviz
+  gem2gv -Tpng -oruby-graphviz.png ruby-graphviz
+
+At last, you can create familly tree with GraphViz::FamilyTree (<b>beta</b>) :
+
+  require 'graphviz/family_tree'
+  
+  tree = GraphViz::FamilyTree.new do
+    generation do
+      benoist.is_a_man( "Benoist" )
+      nathalie.is_a_woman( "Nathalie" )
+      
+      benoist.is_maried_with nathalie
+    end
+  
+    generation do
+      charlotte.is_a_woman( "Charlotte" )
+      amelie.is_a_woman( "Amelie" )
+      clement.is_a_man( "Clement" )
+      gregoire.is_a_man( "Gregoire" )
+      
+      muriel.is_a_woman( "Muriel" )
+  
+      gregoire.is_maried_with muriel
+    end
+  
+    couple( benoist, nathalie ).kids( charlotte, amelie, clement, gregoire )
+  end
+  
+  tree.graph.save( :png => "#{$0}.png" )
 
 == INSTALLATION
 
