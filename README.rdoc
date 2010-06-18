@@ -4,7 +4,6 @@ Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Gregoire Lejeune
 
 * Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
 * Sources : http://github.com/glejeune/Ruby-Graphviz
-* Continuous Integration : http://runcoderun.com/glejeune/Ruby-Graphviz
 * <b>NEW</b> - Mailing List : http://groups.google.com/group/ruby-graphviz
 
 == DESCRIPTION

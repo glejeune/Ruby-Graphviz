@@ -79,6 +79,11 @@ On Windows, you can install 'win32-open3'
 
 You need to install GraphViz (http://graphviz.org/) to use this Gem.
 
+For more information about Ruby-Graphviz :
+* Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
+* Sources : http://github.com/glejeune/Ruby-Graphviz
+* NEW - Mailing List : http://groups.google.com/group/ruby-graphviz
+
 /!\\ Version 0.9.12 introduce a new solution to connect edges to node ports
 For more information, see http://github.com/glejeune/Ruby-Graphviz/issues/#issue/13
 So if you use node ports, maybe you need to change your code.
