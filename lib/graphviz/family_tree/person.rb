@@ -4,12 +4,30 @@ require 'graphviz'
 class GraphViz
   class FamilyTree
     class Person
-      def initialize( graph, cluster, tree, name ) #:nodoc:
+      def initialize( graph, tree, generation, id ) #:nodoc:
         @graph = graph
-        @cluster = cluster
-        @node = @cluster.add_node( name )
+        @node = @graph.add_node( id )
         @node["shape"] = "box"
         @tree = tree
+        @generation = generation
+        @x, @y = 0, 0
+        @sibling = nil
+      end
+      
+      def id
+        @node.id
+      end
+      
+      def name
+        @node.label || @node.id
+      end
+      
+      def sibling
+        @sibling
+      end
+      
+      def sibling=(x)
+        @sibling=x
       end
       
       def couples #:nodoc:
@@ -27,6 +45,7 @@ class GraphViz
         @node["label"] = name
         @node["color"] = "blue"
       end
+      
       # Define the current person as a boy
       #
       #  greg.is_a_boy( "Greg" )
@@ -52,10 +71,10 @@ class GraphViz
       #
       #  mu.is_maried_with greg
       def is_maried_with( x )
-        node = @cluster.add_node( "#{@node.id}And#{x.node.id}" )
+        node = @graph.add_node( "#{@node.id}And#{x.node.id}" )
         node["shape"] = "point"
-        @cluster.add_edge( @node, node, "dir" => "none" )
-        @cluster.add_edge( node, x.node, "dir" => "none" )
+        @graph.add_edge( @node, node, "dir" => "none" )
+        @graph.add_edge( node, x.node, "dir" => "none" )
         @tree.add_couple( self, x, node )
       end
       
@@ -63,11 +82,11 @@ class GraphViz
       #
       #  sophie.is_divorced_with john
       def is_divorced_with( x )
-        node = @cluster.add_node( "#{@node.id}And#{x.node.id}" )
+        node = @graph.add_node( "#{@node.id}And#{x.node.id}" )
         node["shape"] = "point"
         node["color"] = "red"
-        @cluster.add_edge( @node, node, "dir" => "none", "color" => "red" )
-        @cluster.add_edge( node, x.node, "dir" => "none", "color" => "red" )
+        @graph.add_edge( @node, node, "dir" => "none", "color" => "red" )
+        @graph.add_edge( node, x.node, "dir" => "none", "color" => "red" )
         @tree.add_couple( self, x, node )
       end
       
@@ -75,19 +94,26 @@ class GraphViz
       #
       #  simon.is_widower_of elisa
       def is_widower_of( x ) #veuf
-        node = @cluster.add_node( "#{@node.id}And#{x.node.id}" )
+        node = @graph.add_node( "#{@node.id}And#{x.node.id}" )
         node["shape"] = "point"
         node["color"] = "green"
-        @cluster.add_edge( @node, node, "dir" => "none", "color" => "green" )
-        @cluster.add_edge( node, x.node, "dir" => "none", "color" => "green" )
+        @graph.add_edge( @node, node, "dir" => "none", "color" => "green" )
+        @graph.add_edge( node, x.node, "dir" => "none", "color" => "green" )
         @tree.add_couple( self, x, node )
       end
 
+      # Define the current person as dead
+      #
+      #  jack.is_dead
+      def is_dead
+        @node["style"] = "filled"
+      end
+      
       # Define the kids of a single person
       #
       #   alice.kids( john, jack, julie )
       def kids( *z )
-        GraphViz::FamilyTree::Couple.new( @graph, @node ).kids( *z )
+        GraphViz::FamilyTree::Couple.new( @graph, @node, [self] ).kids( *z )
       end
     end
   end

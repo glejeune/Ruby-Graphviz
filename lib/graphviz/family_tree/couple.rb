@@ -1,9 +1,11 @@
 class GraphViz
   class FamilyTree
     class Couple
-      def initialize( g, n ) #:nodoc:
-        @graph = g
-        @node = n
+      def initialize( graph, node, persons ) #:nodoc:
+        @graph = graph
+        @node = node
+        @kids = []
+        @persons = persons
       end
       
       def node #:nodoc:
@@ -12,6 +14,10 @@ class GraphViz
       
       # Add kids to a couple
       def kids( *z )
+        @kids = GraphViz::FamilyTree::Sibling.new( z, @persons )
+        
+        return
+        
         if z.size == 1
           @graph.add_edge( @node, z[0].node, "dir" => "none" )
         else
@@ -47,6 +53,10 @@ class GraphViz
             last = kid
           end
         end        
+      end
+      
+      def getKids
+        @kids
       end
     end
   end

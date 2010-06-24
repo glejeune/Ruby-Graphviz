@@ -453,7 +453,7 @@ class GraphViz
       
       if (@format.to_s != "none" and not @format.nil?) or (@output.any? {|format, file| format != "none" } and @output.size > 0)
         ## Act: Save script and send it to dot
-        t = Tempfile::open( File.basename($0) )
+        t = Tempfile::open( File.basename(__FILE__) )
         t.print( xDOTScript )
         t.close
         

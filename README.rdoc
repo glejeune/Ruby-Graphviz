@@ -19,13 +19,14 @@ Interface to the GraphViz graphing tool
     GraphViz::Edge.new( {nodeOne => :port}, {nodeTwo => :other} )
 * Issue #12 : UTF8 support (see sample38.rb)
 * Move and rename examples + remove maketest.[sh|bat]
+* <b>WARNING</b> : FamilyTree is broken in this version !
+* TODO: GraphViz::Parser support block
 
 === 0.9.11 :
 * Issue #11 : Cygwin PATH
 * Major bugs correction in output
 * Bug correction in find_executable
 * Add tests (by Chip Malice : http://github.com/hipe)
-* TODO: GraphViz::Parser support block
 * TODO: Issue #12
 
 === 0.9.10 :

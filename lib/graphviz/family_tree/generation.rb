@@ -3,13 +3,17 @@ class GraphViz
     class Generation
       def initialize( graph, persons, tree, gen_number ) #:nodoc:
         @graph = graph
-        @persons = persons
-        @cluster = @graph.add_graph( "Generation#{gen_number}" )
-        @cluster["rank"] = "same"
+        @all_persons = persons
+        @persons = {}
         @tree = tree
+        @gen_number = gen_number
       end
       
-      def persons #:nodoc:
+      def all_persons #:nodoc:
+        @all_persons
+      end
+      
+      def persons
         @persons
       end
       
@@ -18,7 +22,17 @@ class GraphViz
       end
       
       def method_missing(sym, *args, &block) #:nodoc:
-        persons[sym.to_s] ||= GraphViz::FamilyTree::Person.new( @graph, @cluster, @tree, sym.to_s )
+        all_persons[sym.to_s] ||= (persons[sym.to_s] ||= GraphViz::FamilyTree::Person.new( @graph, @tree, self, sym.to_s ))
+      end
+      
+      # Generation number
+      def number
+        @gen_number
+      end
+      
+      # Generation size
+      def size
+        @persons.size
       end
     end
   end
