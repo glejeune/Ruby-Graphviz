@@ -12,6 +12,11 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 0.9.13 :
+* TODO: GraphViz::Parser support block
+* TODO: Issue #15
+* TODO: New FamilyTree
+
 === 0.9.12 :
 * GraphViz::Node#name is deprecated, you must use GraphViz::Node#id (issue #14)
 * Add :nothugly option to GraphViz#output (see sample41.rb and http://www.hokstad.com/making-graphviz-output-pretty-with-xsl.html)
