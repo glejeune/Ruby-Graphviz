@@ -124,6 +124,10 @@ class GraphViz
       xOut = "" << xNodeName
       xAttr = ""
       xSeparator = ""
+      
+      if @oAttrNode.data.has_key?("label") and @oAttrNode.data.has_key?("html")
+        @oAttrNode.data.delete("label")
+      end
       @oAttrNode.data.each do |k, v|
 	      if k == "html"
 		      xAttr << xSeparator + "label = " + v.to_gv
