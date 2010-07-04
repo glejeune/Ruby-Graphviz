@@ -1,5 +1,3 @@
-require 'nokogiri'
-
 class GraphViz
   class Types
     class LblString < Common
@@ -8,9 +6,9 @@ class GraphViz
       end
       
       def output
-        html = /^<(<.*>)>$/m.match(@data)
-        if html != nil and Nokogiri::XML(html[1]).errors.size == 0  
-          @data
+        html = /^<([<|(^<)*<].*)>$/m.match(@data)
+        if html != nil
+          "<#{html[1]}>"
         else
           @data.to_s.inspect.gsub( "\\\\", "\\" )
         end

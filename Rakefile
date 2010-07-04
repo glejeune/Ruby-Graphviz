@@ -68,7 +68,6 @@ spec =
       s.executables = ['ruby2gv', 'gem2gv']
       
       s.add_dependency('treetop')
-      s.add_dependency('nokogiri')
 
       s.rubyforge_project = 'ruby-asp'
       s.has_rdoc = true
