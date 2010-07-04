@@ -13,6 +13,8 @@ Interface to the GraphViz graphing tool
 == CHANGELOG
 
 === 0.9.13 :
+* Add dot2ruby.g
+* Bug correction with HTML label
 * TODO: GraphViz::Parser support block
 * TODO: Issue #15
 * TODO: New FamilyTree
