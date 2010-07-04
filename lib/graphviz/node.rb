@@ -130,6 +130,7 @@ class GraphViz
       end
       @oAttrNode.data.each do |k, v|
 	      if k == "html"
+	        warn "html attribut is deprecated, please use label : :label => '<<html />>'"
 		      xAttr << xSeparator + "label = " + v.to_gv
 		    else
           xAttr << xSeparator + k + " = " + v.to_gv

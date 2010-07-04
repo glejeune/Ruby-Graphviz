@@ -15,6 +15,7 @@ Interface to the GraphViz graphing tool
 === 0.9.13 :
 * Add dot2ruby.g
 * Bug correction with HTML label
+* The html attribut is deprecated. You can use the label attribut, as dot do it : <tt>:label => '<<html/>>'</tt>
 * TODO: GraphViz::Parser support block
 * TODO: Issue #15
 * TODO: New FamilyTree

@@ -42,7 +42,8 @@ Rake::RDocTask.new do |rdoc|
       'lib/graphviz/family_tree.rb',
       'lib/graphviz/family_tree/couple.rb',
       'lib/graphviz/family_tree/generation.rb',
-      'lib/graphviz/family_tree/person.rb']
+      'lib/graphviz/family_tree/person.rb',
+      'lib/graphviz/family_tree/sibling.rb']
 end
 
 task :after_doc do
@@ -67,6 +68,7 @@ spec =
       s.executables = ['ruby2gv', 'gem2gv']
       
       s.add_dependency('treetop')
+      s.add_dependency('nokogiri')
 
       s.rubyforge_project = 'ruby-asp'
       s.has_rdoc = true
@@ -91,6 +93,9 @@ So if you use node ports, maybe you need to change your code.
 /!\\ GraphViz::Node#name is deprecated and will be removed in version 1.0.0
 
 /!\\ :output and :file options are deprecated and will be removed in version 1.0.0
+
+/!\\ Since version 0.9.13, the html attribut is deprecated. You can use the label
+attribut, as dot do it : :label => '<<html/>>'
 }
     end
 

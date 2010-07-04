@@ -164,11 +164,11 @@ module Constants
     "headtooltip"         => { :usedBy => "E",    :type => :EscString },
     "height"              => { :usedBy => "N",    :type => :EscString },
     "href"                => { :usedBy => "NE",   :type => :EscString },
-    "html"                => { :usedBy => "N",    :type => :HtmlString }, # API extension
+    "html"                => { :usedBy => "N",    :type => :HtmlString }, # API extension -- Deprecated
     "id"                  => { :usedBy => "ENG",  :type => :EscString },
     "image"               => { :usedBy => "N",    :type => :EscString },
     "imagescale"          => { :usedBy => "N",    :type => :EscString },
-    "label"               => { :usedBy => "ENGC", :type => :EscString },
+    "label"               => { :usedBy => "ENGC", :type => :LblString },
     "labelURL"            => { :usedBy => "E",    :type => :EscString },
     "labelangle"          => { :usedBy => "E",    :type => :EscString },
     "labeldistance"       => { :usedBy => "E",    :type => :EscString },
