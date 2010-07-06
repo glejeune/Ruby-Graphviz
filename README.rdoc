@@ -17,6 +17,10 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 0.9.14 :
+* Add dot2ruby script
+* <b>WARNING</b> : FamilyTree is (still) broken in this version !
+
 === 0.9.13 :
 * Add dot2ruby.g
 * Bug correction with HTML label
