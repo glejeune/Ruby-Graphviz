@@ -10,15 +10,19 @@ Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Gregoire Lejeune
 
 Interface to the GraphViz graphing tool
 
+== TODO
+
+* GraphViz::Parser support block
+* New FamilyTree
+
 == CHANGELOG
 
 === 0.9.13 :
 * Add dot2ruby.g
 * Bug correction with HTML label
 * The html attribut is deprecated. You can use the label attribut, as dot do it : <tt>:label => '<<html/>>'</tt>
-* TODO: GraphViz::Parser support block
-* TODO: Issue #15
-* TODO: New FamilyTree
+* Issue #15 : Thin server
+* <b>WARNING</b> : FamilyTree is (still) broken in this version !
 
 === 0.9.12 :
 * GraphViz::Node#name is deprecated, you must use GraphViz::Node#id (issue #14)
@@ -28,14 +32,12 @@ Interface to the GraphViz graphing tool
 * Issue #12 : UTF8 support (see sample38.rb)
 * Move and rename examples + remove maketest.[sh|bat]
 * <b>WARNING</b> : FamilyTree is broken in this version !
-* TODO: GraphViz::Parser support block
 
 === 0.9.11 :
 * Issue #11 : Cygwin PATH
 * Major bugs correction in output
 * Bug correction in find_executable
 * Add tests (by Chip Malice : http://github.com/hipe)
-* TODO: Issue #12
 
 === 0.9.10 :
 * Move ChangeLog in README

@@ -93,8 +93,8 @@ So if you use node ports, maybe you need to change your code.
 
 /!\\ :output and :file options are deprecated and will be removed in version 1.0.0
 
-/!\\ Since version 0.9.13, the html attribut is deprecated. You can use the label
-attribut, as dot do it : :label => '<<html/>>'
+/!\\ The html attribut is deprecated and will be removed in version 1.0.0
+You can use the label attribut, as dot do it : :label => '<<html/>>'
 }
     end
 
