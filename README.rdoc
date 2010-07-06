@@ -197,11 +197,11 @@ Ruby/GraphViz also include :
 
 * ruby2gv, a simple tool that's allow you to create a dependency graph from a ruby script. Example : http://drp.ly/dShaZ
 
-  ruby2gv -Tpng -oruby2gv.png ruby2gv
+    ruby2gv -Tpng -oruby2gv.png ruby2gv
 
 * gem2gv, a tools that's allow you to create a dependency graph between gems. Example : http://drp.ly/dSj9Y
 
-  gem2gv -Tpng -oruby-graphviz.png ruby-graphviz
+    gem2gv -Tpng -oruby-graphviz.png ruby-graphviz
 
 * dot2ruby, a tools that's allow you to create a ruby script from a graphviz script
 
