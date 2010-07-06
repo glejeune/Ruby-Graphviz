@@ -243,6 +243,8 @@ GNU General Public License (see the file 'COPYING').
 This program is distributed without any warranty. See the file
 'COPYING' for details.
 
+GNU General Public Licence: http://en.wikipedia.org/wiki/Gpl
+
 === nothugly.xsl
 
 By Vidar Hokstad and Ryan Shea; Contributions by Jonas Tingborn,
