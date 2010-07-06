@@ -233,7 +233,9 @@ You also need to install GraphViz[http://www.graphviz.org] and Treetop[http://tr
 
 On *Windows* you also need to install win32-open3. This is not an absolute requirement.
 
-== LICENCE
+== LICENCES
+
+=== Ruby/GraphViz 
 
 Ruby/GraphViz is freely distributable according to the terms of the
 GNU General Public License (see the file 'COPYING').
