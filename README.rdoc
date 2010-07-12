@@ -17,6 +17,11 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 0.9.15 :
+* Add <tt>GraphViz.parser2</tt>. <b>WARNING</b> this method will replace <tt>GraphViz.parser</tt>. So please don't use it, or only for testing.
+* Bug correction in <tt>dot2ruby</tt>
+* Add <tt>--output-format</tt> option to <tt>dot2ruby</tt>
+
 === 0.9.14 :
 * Add dot2ruby script
 * Remove NULL character in the DOT script

@@ -17,39 +17,14 @@
 
 require 'rubygems'
 require 'graphviz/constants'
-require 'graphviz/ext'
-require 'graphviz/utils'
+require 'graphviz/dot2ruby'
 require 'getoptlong'
 
-class Dot2Ruby
-  include GVUtils
-  
-  def initialize( xGVPath, xUse, xOutFile )
-    paths = (xGVPath.nil?) ? [] : [xGVPath]
-    @xUsePath = find_executable( xUse, paths )
-    @xGvprPath = find_executable( 'gvpr', paths )
-    @xOutFile = xOutFile
-    @gvprScript = GraphViz::Ext.find( "dot2ruby.g" )
-  end
-  
-  def run( xFile )
-    xCmd = "#{@xUsePath} #{xFile} | #{@xGvprPath} -f #{@gvprScript}"
-    xOutput = output_from_command( xCmd )
-    if @xOutFile.nil?
-      puts xOutput
-    else
-      File.open( @xOutFile, "w" ) do |io|
-        io.print xOutput
-      end
-    end 
-  end
-end
-
 def usage 
-  puts "usage: dot2ruby [-ofile] [-h] [-V] script"
-  puts "-o, --output-file file        Output file (default: STDOUT)"
+  puts "usage: dot2ruby [-ofile] [-Tformat] [-h] [-V] script"
+  puts "-o, --output-file file        Output file"
+  puts "-T, --output-format format    Output format (default: nil)"
   puts "-p, --path                    Graphviz path"
-  puts "-u, --use PROGRAM             Program to use (default: dot)"
   puts "-V, --version                 Show version"
   puts "-h, --help                    Show this usage message"
 end
@@ -74,12 +49,12 @@ end
 
 xOutFile = nil
 xGVPath = nil
-xUse = "dot"
+xOutFormat = nil
 
 oOpt = GetoptLong.new(
   ['--output-file',   '-o', GetoptLong::REQUIRED_ARGUMENT],
+  ['--output-format', '-T', GetoptLong::REQUIRED_ARGUMENT],
   ['--path',          '-p', GetoptLong::REQUIRED_ARGUMENT],
-  ['--use',           '-u', GetoptLong::REQUIRED_ARGUMENT],
   ['--help',          '-h', GetoptLong::NO_ARGUMENT],
   ['--version',       '-V', GetoptLong::NO_ARGUMENT]
 )
@@ -89,10 +64,10 @@ begin
     case xOpt
       when '--output-file'
         xOutFile = xValue
+      when '--output-format'
+        xOutFormat = xValue
       when '--path'
         xGVPath = xValue
-      when '--use'
-        xUse = xValue
       when '--help'
         usage( )
         exit
@@ -113,4 +88,4 @@ if xFile.nil? == true
   exit
 end
 
-Dot2Ruby::new( xGVPath, xUse, xOutFile ).run( xFile )
+Dot2Ruby::new( xGVPath, xOutFile, xOutFormat ).run( xFile )

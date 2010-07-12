@@ -2,7 +2,7 @@
 #
 # digraph G {Hello->World}
 
-$:.unshift( "../../lib" );
+$:.unshift( "../lib" );
 require "graphviz"
 
 GraphViz::new( :G, :type => :digraph ) { |g|
