@@ -144,7 +144,9 @@ namespace :gemcutter do
   task :push => [:package] do
     unless Rubygems.status
       sh %{gem push pkg/#{PKG_NAME}-#{PKG_VERS}.gem}, :verbose => true
+      sh %{git commit -am "Tag #{PKG_VERS}"}, :verbose => true
       sh %{git tag #{PKG_VERS}}, :verbose => true
+      sh %{git push origin master --tags}
     else
       puts "This gem already existe in version #{PKG_VERS}!"
     end
