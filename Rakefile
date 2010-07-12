@@ -140,10 +140,11 @@ class Rubygems
 end
 
 namespace :gemcutter do
-  desc "push to gemcutter"
+  desc "push to gemcutter and tag for github"
   task :push => [:package] do
     unless Rubygems.status
       sh %{gem push pkg/#{PKG_NAME}-#{PKG_VERS}.gem}, :verbose => true
+      sh %{git tag #{PKG_VERS}}, :verbose => true
     else
       puts "This gem already existe in version #{PKG_VERS}!"
     end
