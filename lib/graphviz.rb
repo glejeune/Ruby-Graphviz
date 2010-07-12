@@ -436,7 +436,7 @@ class GraphViz
       
       @output = hOutput if hOutput.size > 0
   
-      xDOTScript = "#{@oGraphType} #{@name} {\n" << xDOTScript
+      xDOTScript = ("#{@oGraphType} #{@name} {\n" << xDOTScript).gsub( /\0/, "" )
 
       xOutputString = (@filename == String ||
         @output.any? {|format, file| file == String })

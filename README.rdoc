@@ -19,6 +19,7 @@ Interface to the GraphViz graphing tool
 
 === 0.9.14 :
 * Add dot2ruby script
+* Remove NULL character in the DOT script
 * <b>WARNING</b> : FamilyTree is (still) broken in this version !
 
 === 0.9.13 :
