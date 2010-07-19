@@ -21,7 +21,7 @@ class GraphVizTest < Test::Unit::TestCase
   # the below tests write to stdout. the other tests write to filesystem
 
   Skips = {
-    '35' => 'hanging for me',
+    #'35' => 'hanging for me',
     '36' => 'hangs for me'
   }
 
