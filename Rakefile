@@ -59,13 +59,13 @@ spec =
       s.authors = ["Gregoire Lejeune"]
       s.summary = %q{Interface to the GraphViz graphing tool}
       s.email = %q{gregoire.lejeune@free.fr}
-      s.homepage = %q{http://raa.ruby-lang.org/project/ruby-graphviz/}
+      s.homepage = %q{http://github.com/glejeune/Ruby-Graphviz}
       s.description = %q{Ruby/Graphviz provides an interface to layout and generate images of directed graphs in a variety of formats (PostScript, PNG, etc.) using GraphViz.}
 
       s.files = PKG_FILES
       s.require_path = "lib"
       s.bindir = "bin"
-      s.executables = ['ruby2gv', 'gem2gv', 'dot2ruby']
+      s.executables = ['ruby2gv', 'gem2gv', 'dot2ruby', 'git2gv']
       
       s.add_dependency('treetop')
 
