@@ -1,0 +1,96 @@
+#!/usr/bin/env ruby
+# Copyright (C) 2010 Gregoire Lejeune <gregoire.lejeune@free.fr>
+# 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+
+require 'rubygems'
+require 'graphviz'
+
+class Git2Gv
+  def run
+    git = GraphViz.new( :G )
+    
+    git.node[:shape => "record"]
+    
+    branches.each do |branch|
+      git.add_node( branch, :style => "filled", :fillcolor => :lightgrey )
+    end
+    
+    commits.each do |commit|
+      git.add_node( 
+        commit[:short], 
+        :style => "filled",
+        :fillcolor => :lightblue,
+        :label => "{ #{commit[:long]} |{ #{commit[:comment].gsub(/\{/, "\\{").gsub(/\}/, "\\}").gsub(/\|/, "\\|").gsub(/</, "\\<").gsub(/>/, "\\>")}}| { #{commit[:commiter]} | #{commit[:date]} } }" 
+      )
+    end
+    
+    refs.each do |from, to|
+      git.add_edge( from, to )
+    end
+    
+    relations.each do |from, to|
+      git.add_edge( to, from, :dir => "back" )
+    end
+    
+    git.output( :svg => "git.svg", :nothugly => true )
+  end
+  
+  # private
+  def cmd(c, &blk)
+    `#{c}`.split($/).map(&blk || proc {|a| a })
+  end
+  
+  def commits
+    @commits ||= begin
+      data = []
+      cmd('git log --pretty=format:"%h - %H - %s - %cn - %cd" --date=short').each do |commit|
+        x = commit.split( " - " )
+        data << {
+          :short => x[0],
+          :long => x[1],
+          :comment => x[2],
+          :commiter => x[3],
+          :date => x[4]
+        }
+      end
+      data
+    end
+  end
+  
+  def relations
+    @rels ||= cmd("git log --pretty=format:\"%h %p\"") { |l|
+      c, *parents = l.split
+      parents.map {|p| [p, c] }
+    }.flatten(1)
+  end
+  
+  def branches
+    @branches ||= cmd("git branch") {|b| b[2..-1] }
+  end
+  
+  def refs
+    branches.inject({}) {|h,b|
+      h.tap { h[b] = `git log -1 #{b} --pretty=format:"%h"` }
+    }
+  end
+  
+  def current_branch
+    cmd("git branch").select {|l| l =~ /^\*/ }.first.strip[2..-1]
+  end
+end
+
+Git2Gv.new().run
+

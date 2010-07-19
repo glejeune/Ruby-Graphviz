@@ -393,7 +393,7 @@ class GraphViz
     xDOTScript << "}"
 
     if @oParentGraph.nil? == false
-      xDOTScript = "subgraph #{@name} {\n" << xDOTScript
+      xDOTScript = "subgraph #{GraphViz.escape(@name)} {\n" << xDOTScript
 
       return( xDOTScript )
     else
@@ -440,7 +440,7 @@ class GraphViz
       
       @output = hOutput if hOutput.size > 0
   
-      xDOTScript = ("#{@oGraphType} #{@name} {\n" << xDOTScript).gsub( /\0/, "" )
+      xDOTScript = ("#{@oGraphType} #{GraphViz.escape(@name)} {\n" << xDOTScript).gsub( /\0/, "" )
 
       xOutputString = (@filename == String ||
         @output.any? {|format, file| file == String })
@@ -755,8 +755,7 @@ class GraphViz
   def self.escape(str, force = false ) #:nodoc:
     if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?
       '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
-    #if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_:\.]*\Z/ ).nil?
-    #  '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"' 
+      ## MAYBE WE NEED TO USE THIS ONE ## str.inspect.gsub(".","\\.").gsub( "\\\\", "\\" )
     else
       str
     end
