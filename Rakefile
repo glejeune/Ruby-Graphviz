@@ -144,7 +144,11 @@ namespace :gemcutter do
   task :push => [:package] do
     unless Rubygems.status
       sh %{gem push pkg/#{PKG_NAME}-#{PKG_VERS}.gem}, :verbose => true
-      sh %{git commit -am "Tag #{PKG_VERS}"}, :verbose => true
+      begin
+        sh %{git commit -am "Tag #{PKG_VERS}"}, :verbose => true
+      rescue => e
+        puts "Nothing to commit !"
+      end
       sh %{git tag #{PKG_VERS}}, :verbose => true
       sh %{git push origin master --tags}
     else
