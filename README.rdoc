@@ -12,10 +12,12 @@ Interface to the GraphViz graphing tool
 
 == TODO
 
-* GraphViz::Parser support block
+* Rename <tt>GraphViz.parser2</tt> to <tt>GraphViz.parser</tt> 
 * New FamilyTree
 
 == CHANGELOG
+
+=== 0.9.16 :
 
 === 0.9.15 :
 * Add <tt>GraphViz.parser2</tt>. <b>WARNING</b> this method will replace <tt>GraphViz.parser</tt>. So please don't use it, or only for testing.
