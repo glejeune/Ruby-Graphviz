@@ -18,6 +18,7 @@ Interface to the GraphViz graphing tool
 == CHANGELOG
 
 === 0.9.16 :
+* Add <tt>xml2gv</tt>
 
 === 0.9.15 :
 * Add <tt>GraphViz.parser2</tt>. <b>WARNING</b> this method will replace <tt>GraphViz.parser</tt>. So please don't use it, or only for testing.
@@ -262,6 +263,8 @@ Ruby/GraphViz also include :
     puts graph_g.output( :canon => String )
 
 * <tt>git2gv</tt>, a tools that's allow you to show your git commits : http://dl.dropbox.com/u/72629/ruby-graphviz-git.svg
+
+* <tt>xml2gv</tt>, a tools that's allow you to show a xml file as graph.
 
 == INSTALLATION
 
