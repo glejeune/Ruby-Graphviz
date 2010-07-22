@@ -12,13 +12,15 @@ Interface to the GraphViz graphing tool
 
 == TODO
 
-* Rename <tt>GraphViz.parser2</tt> to <tt>GraphViz.parser</tt> 
 * New FamilyTree
 
 == CHANGELOG
 
 === 0.9.16 :
 * Add <tt>xml2gv</tt>
+* Rename <tt>GraphViz.parser2</tt> to <tt>GraphViz.parser</tt> 
+* Remove treetop dependency
+* Ruby 1.9 (and MacRuby) compatibility -- Issue #12: see sample38.rb
 
 === 0.9.15 :
 * Add <tt>GraphViz.parser2</tt>. <b>WARNING</b> this method will replace <tt>GraphViz.parser</tt>. So please don't use it, or only for testing.

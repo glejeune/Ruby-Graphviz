@@ -3,7 +3,7 @@
 $:.unshift( "../../lib" );
 require "graphviz"
 
-GraphViz.parse2( "hello.dot", :path => "/usr/local/bin" ) { |g|
+GraphViz.parse( "hello.dot", :path => "/usr/local/bin" ) { |g|
   g.get_node("Hello") { |n|
     n.label = "Bonjour"
   }

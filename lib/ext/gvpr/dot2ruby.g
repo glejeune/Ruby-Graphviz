@@ -114,7 +114,7 @@ N {
   while( attr != "" ) {
     attrv = aget( $, attr );
     if( attrv != "" ) {
-      printf( ", :%s => '%s'", attr, attrv );
+      printf( ", :%s => '%s'", attr, gsub( attrv, "'", "\\'" ) );
     } else {
       printf( ", :%s => ''", attr );
     }
@@ -143,7 +143,7 @@ E {
   while( attr != "" ) {
     attrv = aget( $, attr );
     if( attrv != "" ) {
-      printf( ", :%s => '%s'", attr, attrv );
+      printf( ", :%s => '%s'", attr, gsub( attrv, "'", "\\'" ) );
     } else {
       printf( ", :%s => ''", attr );
     }

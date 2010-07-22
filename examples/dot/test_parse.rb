@@ -6,7 +6,7 @@ require "graphviz"
 Dir.glob( "*.dot" ) { |f|
   print "#{f} : "
   begin
-    puts GraphViz.parse2(f)
+    puts GraphViz.parse(f)
   rescue SyntaxError => e
     puts "Error #{e.message}"
   end

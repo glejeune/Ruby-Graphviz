@@ -67,8 +67,6 @@ spec =
       s.bindir = "bin"
       s.executables = ['ruby2gv', 'gem2gv', 'dot2ruby', 'git2gv', 'xml2gv']
       
-      s.add_dependency('treetop')
-
       s.rubyforge_project = 'ruby-asp'
       s.has_rdoc = true
       s.extra_rdoc_files = ["README.rdoc", "COPYING", "AUTHORS"]

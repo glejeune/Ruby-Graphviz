@@ -26,14 +26,13 @@ require 'graphviz/edge'
 require 'graphviz/attrs'
 require 'graphviz/constants'
 
-# --> WILL BE REMOVED
-require 'graphviz/parser'
-
 require 'graphviz/dot2ruby'
 require 'graphviz/types'
 require 'graphviz/core_ext'
 
-$KCODE = "UTF8"
+if /^1.8/.match RUBY_VERSION
+  $KCODE = "UTF8"
+end
 
 class GraphViz 
   include Constants
@@ -440,7 +439,7 @@ class GraphViz
       
       @output = hOutput if hOutput.size > 0
   
-      xDOTScript = ("#{@oGraphType} #{GraphViz.escape(@name)} {\n" << xDOTScript).gsub( /\0/, "" )
+      xDOTScript = ("#{@oGraphType} #{GraphViz.escape(@name)} {\n" << xDOTScript).gsub( "\0", "" )
 
       xOutputString = (@filename == String ||
         @output.any? {|format, file| file == String })
@@ -619,33 +618,8 @@ class GraphViz
   # * :file : Output file name (default : none)
   # * :use : Program to use (Constants::PROGRAMS) (default : dot)
   # * :path : Program PATH
-  # * :parent : Parent graph (default : none)
-  # * :type : Graph type (Constants::GRAPHTYPE) (default : digraph)
-  # 
-  def self.parse( xFile, hOpts = {}, &block )
-    # This method will be replaced by parser2.
-    # When it's time, remove 
-    #   graphviz/parser.rb
-    #   graphviz/dot.treetop
-    # and remove line
-    #   s.add_dependency('treetop')
-    # in Rakefile
-    g = GraphViz::Parser.parse( xFile, hOpts, &block )
-    return g
-  end
-
-  # 
-  # Create a new graph from a GraphViz File
-  # 
-  # Options :
-  # * :output : Output format (Constants::FORMATS) (default : dot)
-  # * :file : Output file name (default : none)
-  # * :use : Program to use (Constants::PROGRAMS) (default : dot)
-  # * :path : Program PATH
   #
-  # <b>WARNING</b> : This method will replace GraphViz.parser. So please use it only for testing...
-  #   
-  def self.parse2( xFile, hOpts = {}, &block ) 
+  def self.parse( xFile, hOpts = {}, &block ) 
     graph = Dot2Ruby::new( hOpts[:path], nil, nil ).eval( xFile )
     yield( graph ) if( block and graph.nil? == false )
     return graph
