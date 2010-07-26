@@ -30,6 +30,16 @@ class GraphViz
 	    @graphviz  = gviz
     end
 
+    def each
+      @data.each do |k, v|
+        yield(k, v)
+      end
+    end
+    
+    def to_h
+      @data.clone
+    end
+
     def []( xKey )
       if xKey.class == Hash
         xKey.each do |k, v|

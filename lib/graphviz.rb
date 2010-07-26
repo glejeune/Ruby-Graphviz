@@ -70,12 +70,15 @@ class GraphViz
 
   # This accessor allow you to set global graph attributs
   attr_accessor :graph
+  alias_method :graph_attrs, :graph
   
   # This accessor allow you to set global nodes attributs
   attr_accessor :node
+  alias_method :node_attrs, :node
 
   # This accessor allow you to set global edges attributs
   attr_accessor :edge
+  alias_method :edge_attrs, :edge
 
   @elements_order
   

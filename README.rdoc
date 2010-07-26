@@ -21,6 +21,8 @@ Interface to the GraphViz graphing tool
 * Rename <tt>GraphViz.parser2</tt> to <tt>GraphViz.parser</tt> 
 * Remove treetop dependency
 * Ruby 1.9 (and MacRuby) compatibility -- Issue #12: see sample38.rb
+* Add GraphViz::Attrs#each and GraphViz::Attrs#to_h
+* Add GraphViz::Edge#node_one and GraphViz::Edge#node_two
 
 === 0.9.15 :
 * Add <tt>GraphViz.parser2</tt>. <b>WARNING</b> this method will replace <tt>GraphViz.parser</tt>. So please don't use it, or only for testing.

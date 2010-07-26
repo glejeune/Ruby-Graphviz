@@ -54,6 +54,24 @@ class GraphViz
       @oAttrEdge = GraphViz::Attrs::new( nil, "edge", EDGESATTRS )
     end
 
+    # Return the node one as string (so with port if any)
+    def node_one
+      if @xNodeOnePort.nil?
+	      GraphViz.escape(@xNodeOne)
+      else
+        GraphViz.escape(@xNodeOne, true) + ":#{@xNodeOnePort}"
+      end
+    end
+
+    # Return the node two as string (so with port if any)
+    def node_two
+      if @xNodeTwoPort.nil?
+	      GraphViz.escape(@xNodeTwo) 
+	    else 
+	      GraphViz.escape(@xNodeTwo, true) + ":#{@xNodeTwoPort}"
+      end
+    end
+    
     # 
     # Set value +xAttrValue+ to the edge attribut +xAttrName+
     # 
@@ -115,19 +133,7 @@ class GraphViz
 	      xLink = " -- "
 	    end
 	  
-	    xNodeNameOne = if @xNodeOnePort.nil?
-	      GraphViz.escape(@xNodeOne)
-      else
-        GraphViz.escape(@xNodeOne, true) + ":#{@xNodeOnePort}"
-      end
-	    
-	    xNodeNameTwo = if @xNodeTwoPort.nil?
-	      GraphViz.escape(@xNodeTwo) 
-	    else 
-	      GraphViz.escape(@xNodeTwo, true) + ":#{@xNodeTwoPort}"
-      end
-      
-      xOut = xNodeNameOne + xLink + xNodeNameTwo
+      xOut = self.node_one + xLink + self.node_two
       xAttr = ""
       xSeparator = ""
       @oAttrEdge.data.each do |k, v|
