@@ -25,6 +25,7 @@ require 'graphviz/node'
 require 'graphviz/edge'
 require 'graphviz/attrs'
 require 'graphviz/constants'
+require 'graphviz/elements'
 
 require 'graphviz/dot2ruby'
 require 'graphviz/types'
@@ -93,7 +94,8 @@ class GraphViz
   #
   def add_node( xNodeName, hOpts = {} )
     @hoNodes[xNodeName] = GraphViz::Node::new( xNodeName, self )
-   
+    @hoNodes[xNodeName].index = @elements_order.size_of( "node" )
+    
     unless hOpts.keys.include?(:label) or hOpts.keys.include?("label")
       hOpts[:label] = xNodeName
     end
@@ -123,11 +125,23 @@ class GraphViz
   end
   
   #
+  # Return the node object for the given index
+  #
+  def get_node_at_index( index )
+    element = @elements_order[index, "node"]
+    (element.nil?) ? nil : element["value"]
+  end
+  
+  #
   # Allow you to traverse nodes
   #
   def each_node( &block )
-    @hoNodes.each do |name, node|
-      yield( name, node )
+    if block_given?
+      @hoNodes.each do |name, node|
+        yield( name, node )
+      end
+    else
+      return( @hoNodes )
     end
   end
   
@@ -159,6 +173,7 @@ class GraphViz
         end
       else
         oEdge = GraphViz::Edge::new( oNodeOne, oNodeTwo, self )
+        oEdge.index = @elements_order.size_of( "edge" )
         
         hOpts.each do |xKey, xValue|
           oEdge[xKey.to_s] = xValue
@@ -179,8 +194,12 @@ class GraphViz
   # Allow you to traverse edges
   #
   def each_edge( &block )
-    @loEdges.each do |edge|
-      yield(edge)
+    if block_given?
+      @loEdges.each do |edge|
+        yield(edge)
+      end
+    else
+      return @loEdges
     end
   end
   
@@ -189,6 +208,14 @@ class GraphViz
   #
   def edge_count
     @loEdges.size
+  end
+  
+  #
+  # Return the edge object for the given index
+  #
+  def get_edge_at_index( index )
+    element = @elements_order[index, "edge"]
+    (element.nil?) ? nil : element["value"]
   end
   
   # 
@@ -241,9 +268,19 @@ class GraphViz
   # Allow you to traverse graphs
   #
   def each_graph( &block )
-    @hoGraphs.each do |name, graph|
-      yield( name, graph )
+    if block_given?
+      @hoGraphs.each do |name, graph|
+        yield( name, graph )
+      end
+    else
+      return @hoGraphs
     end
+  end
+  
+  #
+  # Return the graph type (graph digraph)
+  def type
+    @oGraphType
   end
   
   #
@@ -669,7 +706,7 @@ class GraphViz
     @output   = {}
     @nothugly = false
     
-    @elements_order = Array::new()
+    @elements_order = GraphViz::Elements::new()
 
     @oParentGraph = nil
     @oGraphType   = "digraph"

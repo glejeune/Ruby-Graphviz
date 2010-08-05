@@ -8,6 +8,10 @@ class GraphViz
       def output
         return @data
       end
+      
+      def source
+        return @data
+      end
     end
     
     Dir.glob( File.dirname( File.expand_path(__FILE__) )+"/types/*" ).each do |f|

@@ -35,6 +35,7 @@ class GraphViz
       @xNodeName = xNodeName
       @oGParrent = oGParrent
       @oAttrNode = GraphViz::Attrs::new( nil, "node", NODESATTRS )
+      @index = nil
     end
 
     # 
@@ -51,6 +52,16 @@ class GraphViz
     def id
 	    @xNodeName.clone
 	  end
+	  
+	  #
+	  # Return the index of the node
+	  #
+	  def index
+	    @index
+    end
+    def index=(i) #:nodoc:
+      @index = i if @index == nil
+    end
 	
 	  # 
     # Set value +xAttrValue+ to the node attribut +xAttrName+

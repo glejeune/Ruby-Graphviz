@@ -16,6 +16,18 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 0.9.17 :
+* GraphViz::Edge#node_one and GraphViz::Edge#node_one now have un optional parameter to indicate if you want to (or not) get the port in the name (default: true)
+* GraphViz#each_node now returns the Hash of nodes if there is no block given.
+* GraphViz#each_edge now returns the list of edges if there is no block given.
+* GraphViz#each_graph now returns the Hash of graphs if there is no block given.
+* Add GraphViz::Node#index : return the node index
+* Add GraphViz::Edge#index : return the edge index
+* Add GraphViz#type : return the graph type (graph or digraph)
+* Add GraphViz#get_edge_at_index and GraphViz#get_node_at_index
+* Add GvDouble 
+* Add GraphViz::Theory (see examples/theory/tests.rb)
+
 === 0.9.16 :
 * Add <tt>xml2gv</tt>
 * Rename <tt>GraphViz.parser2</tt> to <tt>GraphViz.parser</tt> 

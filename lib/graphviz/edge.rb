@@ -52,11 +52,13 @@ class GraphViz
 	    @oGParrent = oGParrent
 
       @oAttrEdge = GraphViz::Attrs::new( nil, "edge", EDGESATTRS )
+      
+      @index = nil
     end
 
     # Return the node one as string (so with port if any)
-    def node_one
-      if @xNodeOnePort.nil?
+    def node_one( with_port = true )
+      if @xNodeOnePort.nil? or with_port == false
 	      GraphViz.escape(@xNodeOne)
       else
         GraphViz.escape(@xNodeOne, true) + ":#{@xNodeOnePort}"
@@ -64,12 +66,22 @@ class GraphViz
     end
 
     # Return the node two as string (so with port if any)
-    def node_two
-      if @xNodeTwoPort.nil?
+    def node_two( with_port = true )
+      if @xNodeTwoPort.nil? or with_port == false
 	      GraphViz.escape(@xNodeTwo) 
 	    else 
 	      GraphViz.escape(@xNodeTwo, true) + ":#{@xNodeTwoPort}"
       end
+    end
+    
+    #
+	  # Return the index of the edge
+	  #
+	  def index
+	    @index
+    end
+    def index=(i) #:nodoc:
+      @index = i if @index == nil
     end
     
     # 
@@ -91,7 +103,11 @@ class GraphViz
           self[key] = value
         end
       else
-        @oAttrEdge[xAttrName.to_s].clone
+        if @oAttrEdge[xAttrName.to_s]
+          @oAttrEdge[xAttrName.to_s].clone 
+        else
+          nil
+        end
       end
     end
     
