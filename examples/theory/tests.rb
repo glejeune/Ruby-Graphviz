@@ -27,23 +27,48 @@ g.output( :png => "matrix.png" )
 
 t = GraphViz::Theory.new( g )
 
-puts "Matrice d'adjacence : "
+puts "Adjancy matrix : "
 puts t.adjancy_matrix
+# => [ 1 1 0 1 0 1]
+#    [ 0 0 1 1 1 0]
+#    [ 0 0 0 1 0 1]
+#    [ 0 0 0 0 1 0]
+#    [ 0 0 0 0 0 0]
+#    [ 0 0 0 0 0 0]
 
-puts "Graph symétrique = #{t.symmetric?}"
+puts "Symmetric ? #{t.symmetric?}"
 
-puts "Matrice d'incidence : "
+puts "Incidence matrix :"
 puts t.incidence_matrix
+# => [  2  1  1  1  0  0  0  0  0  0]
+#    [  0 -1  0  0  1  1  1  0  0  0]
+#    [  0  0  0  0 -1  0  0  1  1  0]
+#    [  0  0 -1  0  0 -1  0 -1  0  1]
+#    [  0  0  0  0  0  0 -1  0  0 -1]
+#    [  0  0  0 -1  0  0  0  0 -1  0]
 
 g.each_node do |name, node|
-  puts "Degré de `#{name}' = #{t.degree(node)}"
+  puts "Degree of node `#{name}' = #{t.degree(node)}"
 end
 
-puts "Matrice des degrés : "
+puts "Degree matrix : "
 puts t.degree_matrix
+# => [ 4 0 0 0 0 0]
+#    [ 0 4 0 0 0 0]
+#    [ 0 0 3 0 0 0]
+#    [ 0 0 0 4 0 0]
+#    [ 0 0 0 0 2 0]
+#    [ 0 0 0 0 0 2]
 
-puts "Matrice Laplacienne "
+
+puts "Laplacian matrix :"
 puts t.laplacian_matrix
+# => [  3 -1  0 -1  0 -1]
+#    [  0  4 -1 -1 -1  0]
+#    [  0  0  3 -1  0 -1]
+#    [  0  0  0  4 -1  0]
+#    [  0  0  0  0  2  0]
+#    [  0  0  0  0  0  2]
 
 puts "Dijkstra between a and f"
 r = t.moore_dijkstra(g.a, g.f)
@@ -53,6 +78,5 @@ else
   print "Path : "; p r[:path]
   print "Distance : #{r[:distance]}"
 end
-
-#m = GraphViz::Math::Matrix.new( 4, 5 )
-#puts m
+# => Path : ["a", "b", "c", "f"]
+#    Distance : 4.0

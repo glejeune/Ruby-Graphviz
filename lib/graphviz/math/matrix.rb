@@ -134,27 +134,3 @@ class GraphViz
     end
   end
 end
-
-puts "DEBUG GraphViz::Math::Matrix"
-m = GraphViz::Math::Matrix.new( 2, 3 )
-m[1,1] = 1; m[1,2] = 2; m[1,3] = 3
-m[2,1] = 4; m[2,2] = 5; m[2,3] = 6
-puts "m :"
-puts m
-puts
-
-n = GraphViz::Math::Matrix.new( 3, 2 )
-n[1,1] = 1; n[1,2] = 2
-n[2,1] = 3; n[2,2] = 4
-n[3,1] = 5; n[3,2] = 6
-puts "n :"
-puts n
-puts
-
-puts "m * n :"
-puts m*n
-puts
-puts "n * m :"
-puts n*m
-
-puts "end DEBUG GraphViz::Math::Matrix"
