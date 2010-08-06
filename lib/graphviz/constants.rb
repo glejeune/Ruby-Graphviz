@@ -96,7 +96,8 @@ module Constants
     "neato",
     "twopi",
     "fdp",
-    "circo"
+    "circo",
+    "sfdp"
   ]
 
   ## Const: graphs type
