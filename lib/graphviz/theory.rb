@@ -6,6 +6,9 @@ class GraphViz
       @graph = graph
     end
     
+    #
+    # Return the adjancy matrix of the graph
+    #
     def adjancy_matrix
       matrix = GraphViz::Math::Matrix.new( @graph.node_count, @graph.node_count )
       
@@ -19,6 +22,9 @@ class GraphViz
       return matrix
     end
     
+    #
+    # Return the incidence matrix of the graph
+    #
     def incidence_matrix
       tail = (@graph.type == "digraph") ? -1 : 1
       matrix = GraphViz::Math::Matrix.new( @graph.node_count, @graph.edge_count )
@@ -37,6 +43,9 @@ class GraphViz
       return matrix
     end
     
+    #
+    # Return the degree of the given node
+    #
     def degree( node )
       degree = 0
       name = node 
@@ -50,28 +59,28 @@ class GraphViz
       
       return degree
     end
-    
-    def degree_matrix
-      matrix = GraphViz::Math::Matrix.new( @graph.node_count, @graph.node_count )
-      @graph.each_node do |name, node|
-        i = node.index
-        matrix[i+1, i+1] = degree(node)
-      end
-      return matrix
-    end
-    
+        
+    #
+    # Return the laplacian matrix of the graph
+    #
     def laplacian_matrix
       return degree_matrix - adjancy_matrix
     end
-        
+    
+    #
+    # Return <tt>true</tt> if the graph if symmetric, <tt>false</tt> otherwise   
+    #
     def symmetric?
       adjancy_matrix == adjancy_matrix.transpose
     end
 
     #
-    # more_dijkstra(source, destination)
+    # moore_dijkstra(source, destination)
     # 
     def moore_dijkstra( dep, arv )
+      dep = @graph.get_node(dep) unless dep.kind_of?(GraphViz::Node)
+      arv = @graph.get_node(arv) unless arv.kind_of?(GraphViz::Node)
+      
       m = distance_matrix
       n = @graph.node_count
       # Table des sommets à choisir
@@ -134,6 +143,34 @@ class GraphViz
       end
     end
     
+    #
+    # Return a liste of range
+    #
+    # If the returned array include nil values, there is one or more circuits in the graph
+    #
+    def range
+      matrix = adjancy_matrix
+      unseen = (1..matrix.columns).to_a
+      result = Array.new(matrix.columns)
+      r = 0
+
+      range_recursion( matrix, unseen, result, r )
+    end
+    
+    #
+    # Return the critical path for a PERT network
+    #
+    # If the given graph is not a PERT network, return nul
+    #
+    def critical_path
+      return nil if range.include?(nil) or @graph.type != "digraph"
+      r = [ [0, [1]] ]
+      
+      critical_path_recursion( distance_matrix, adjancy_matrix, r, [], 0 ).inject( {:distance => 0, :path => []} ) { |r, item|
+        (r[:distance] < item[0]) ? { :distance => item[0], :path => item[1] } : r
+      }
+    end
+    
     private 
     def distance_matrix
       type = @graph.type
@@ -151,5 +188,65 @@ class GraphViz
       
       return matrix
     end    
+  
+    def degree_matrix
+      matrix = GraphViz::Math::Matrix.new( @graph.node_count, @graph.node_count )
+      @graph.each_node do |name, node|
+        i = node.index
+        matrix[i+1, i+1] = degree(node)
+      end
+      return matrix
+    end
+  
+    def range_recursion(matrix, unseen, result, r)
+      remove = []
+      matrix.columns.times do |c|
+        if matrix.sum_of_column(c+1) == 0
+          result[unseen[c]-1] = r
+          remove.unshift( c + 1 )
+        end
+      end
+
+      remove.each do |rem|
+        matrix = matrix.remove_line(rem).remove_column(rem)
+        unseen.delete_at(rem-1)
+      end
+
+      if matrix.columns == 1 and matrix.lines == 1
+        if matrix.sum_of_column(1) == 0
+          result[unseen[0]-1] = r+1
+        end
+      elsif remove.size > 0
+        range_recursion( matrix, unseen, result, r+1 )
+      end
+
+      return result
+    end
+  
+    def index_of_item( array, item )
+      array.inject( [0,[]] ){|a,i|
+        a[1] << a[0] if i == item
+        a[0] += 1
+        a
+      }[1]
+    end
+
+    def critical_path_recursion( d, a, r, result, level )
+      r.each do |p|
+        node = p[1][-1]
+        index_of_item( a.line(node), 1 ).each do |c|
+          succ = c+1
+
+          cpath = [ (p[0] + d[node,succ]), (p[1].clone << succ) ]
+
+          if index_of_item( a.line(succ), 1 ).size > 0
+            capth = critical_path_recursion( d, a, [cpath], result, level+1 )
+          else
+            result << cpath
+          end          
+        end
+      end
+      return result
+    end
   end
 end
