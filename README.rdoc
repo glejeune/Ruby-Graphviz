@@ -27,6 +27,7 @@ Interface to the GraphViz graphing tool
 * Add GraphViz#get_edge_at_index and GraphViz#get_node_at_index
 * Add GvDouble 
 * Add GraphViz::Theory (see examples/theory/tests.rb)
+* Add GraphML[http://graphml.graphdrawing.org/] support (see sample57.rb)
 
 === 0.9.16 :
 * Add <tt>xml2gv</tt>
