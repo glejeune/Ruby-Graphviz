@@ -138,6 +138,7 @@ class GraphViz
     # Add edge options
     # use edge.<option>=<value> or edge.<option>( <value> )
     def method_missing( idName, *args, &block ) #:nodoc:
+      return if idName == :to_ary # ruby 1.9.2 fix
       xName = idName.id2name
       
       self[xName.gsub( /=$/, "" )]=args[0]
