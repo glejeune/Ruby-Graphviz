@@ -28,6 +28,7 @@ Interface to the GraphViz graphing tool
 * Add GvDouble 
 * Add GraphViz::Theory (see examples/theory/tests.rb)
 * Add GraphML[http://graphml.graphdrawing.org/] support (see sample57.rb)
+* fixed "edge attribut 'to_ary' invalid" on mri 1.9.2 (by Stefan Huber)
 
 === 0.9.16 :
 * Add <tt>xml2gv</tt>
@@ -221,6 +222,13 @@ Create a graph from a file
     }
   }.output(:png => "sample.png")
 
+GraphML[http://graphml.graphdrawing.org/] support
+
+  require 'graphviz/graphml'
+  
+  g = GraphViz::GraphML.new( "graphml/cluster.graphml" )
+  g.graph.output( :path => "/usr/local/bin", :png => "#{$0}.png" )
+
 At last, you can create familly tree with GraphViz::FamilyTree (<b>beta</b>) :
 
   require 'graphviz/family_tree'
@@ -282,6 +290,49 @@ Ruby/GraphViz also include :
 * <tt>git2gv</tt>, a tools that's allow you to show your git commits : http://dl.dropbox.com/u/72629/ruby-graphviz-git.svg
 
 * <tt>xml2gv</tt>, a tools that's allow you to show a xml file as graph.
+
+== GRAPH THEORY
+
+  require 'graphviz'
+  require 'graphviz/theory'
+  
+  g = GraphViz.new( :G ) { ... }
+  
+  t = GraphViz::Theory.new( g )
+  
+  puts "Adjancy matrix : "
+  puts t.adjancy_matrix
+  
+  puts "Symmetric ? #{t.symmetric?}"
+  
+  puts "Incidence matrix :"
+  puts t.incidence_matrix
+  
+  g.each_node do |name, node|
+    puts "Degree of node `#{name}' = #{t.degree(node)}"
+  end
+  
+  puts "Laplacian matrix :"
+  puts t.laplacian_matrix
+  
+  puts "Dijkstra between a and f"
+  r = t.moore_dijkstra(g.a, g.f)
+  if r.nil?
+    puts "No way !"
+  else
+    print "\tPath : "; p r[:path]
+    puts "\tDistance : #{r[:distance]}"
+  end
+  
+  print "Ranges : "
+  rr = t.range
+  p rr
+  puts "Your graph contains circuits" if rr.include?(nil)
+  
+  puts "Critical path : "
+  rrr = t.critical_path
+  print "\tPath "; p rrr[:path]
+  puts "\tDistance : #{rrr[:distance]}"
 
 == INSTALLATION
 

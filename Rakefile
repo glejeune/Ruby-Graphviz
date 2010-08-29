@@ -93,6 +93,9 @@ So if you use node ports, maybe you need to change your code.
 
 /!\\ The html attribut is deprecated and will be removed in version 1.0.0
 You can use the label attribut, as dot do it : :label => '<<html/>>'
+
+/!\\ Version 0.9.17 introduce GraphML (http://graphml.graphdrawing.org/) support and
+graph theory !
 }
     end
 
