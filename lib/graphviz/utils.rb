@@ -1,3 +1,5 @@
+require 'rbconfig'
+
 module GVUtils
   # Since this code is an adaptation of Launchy::Application#find_executable
   # (http://copiousfreetime.rubyforge.org/launchy/Launchy/Application.html)
@@ -21,7 +23,7 @@ module GVUtils
       file = (path.nil?)?bin:File.join(path,bin)
       if File.executable?(file) and not File.directory?(file) then
         return file
-      elsif RUBY_PLATFORM =~ /mswin|mingw/
+      elsif Config::CONFIG[‘host_os’] =~ /mswin|mingw/ # WAS: elsif RUBY_PLATFORM =~ /mswin|mingw/
         found_ext = (ENV['PATHEXT'] || '.exe;.bat;.com').split(";").find {|ext| File.executable?(file + ext) }
         return file + found_ext if found_ext
       end
