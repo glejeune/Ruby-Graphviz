@@ -14,7 +14,7 @@ class GraphViz
       end
     end
     
-    Dir.glob( File.dirname( File.expand_path(__FILE__) )+"/types/*" ).each do |f|
+    Dir.glob( File.dirname( File.expand_path(__FILE__) )+"/types/*.rb" ).each do |f|
       autoload File.basename(f).gsub(File.extname(f), "").split( "_" ).map{|n| n.capitalize }.join.to_sym, f
     end
   end
