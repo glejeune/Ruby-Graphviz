@@ -18,6 +18,7 @@ Interface to the GraphViz graphing tool
 
 === 0.9.18 :
 * JRuby bug correction (by Nigel Thorne)
+* Fix autoload problem for Rubinius (by Rolf Timmermans)
 
 === 0.9.17 :
 * GraphViz::Edge#node_one and GraphViz::Edge#node_one now have un optional parameter to indicate if you want to (or not) get the port in the name (default: true)
