@@ -22,7 +22,8 @@ class GraphVizTest < Test::Unit::TestCase
 
   Skips = {
     #'35' => 'hanging for me',
-    '36' => 'hangs for me'
+    '36' => 'hangs for me',
+    '57' => 'will not be able to find the graphml script'
   }
 
 
