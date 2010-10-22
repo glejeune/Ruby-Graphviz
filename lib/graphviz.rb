@@ -479,7 +479,8 @@ class GraphViz
       
       @output = hOutput if hOutput.size > 0
   
-      xDOTScript = ("#{@oGraphType} #{GraphViz.escape(@name)} {\n" << xDOTScript).gsub( "\0", "" )
+      xStict = ((@strict && @oGraphType == "digraph") ? "strict " : "")
+      xDOTScript = ("#{xStict}#{@oGraphType} #{GraphViz.escape(@name)} {\n" << xDOTScript).gsub( "\0", "" )
 
       xOutputString = (@filename == String ||
         @output.any? {|format, file| file == String })
@@ -705,6 +706,7 @@ class GraphViz
     @extlibs  = @@extlibs
     @output   = {}
     @nothugly = false
+    @strict   = false
     
     @elements_order = GraphViz::Elements::new()
 
@@ -744,6 +746,8 @@ class GraphViz
           @oGraphType = xValue.to_s
         when "path"
           @path = xValue.split( "," ).map{ |x| x.strip }
+        when "strict"
+          @strict = (xValue ? true : false)
         when "errors"
           @errors = xValue
         when "extlibs"
@@ -761,6 +765,9 @@ class GraphViz
   end
   def self.digraph( xGraphName, hOpts = {}, &block )
     new( xGraphName, hOpts.symbolize_keys.merge( {:type => "digraph"} ), &block )
+  end
+  def self.strict_digraph( xGraphName, hOpts = {}, &block )
+    new( xGraphName, hOpts.symbolize_keys.merge( {:type => "digraph", :strict => true} ), &block )
   end
   
   #

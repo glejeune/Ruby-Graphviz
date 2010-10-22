@@ -103,7 +103,8 @@ module Constants
   ## Const: graphs type
   GRAPHTYPE = [
     "digraph",
-	  "graph"
+	  "graph",
+	  "strict digraph"
   ]
 
   def self.getAttrsFor( x )

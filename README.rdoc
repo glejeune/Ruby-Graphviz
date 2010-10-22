@@ -16,6 +16,17 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 0.9.19 :
+* Add strict digraph support (by Jonas Elfström) (see sample58.rb)
+    g = GraphViz.new(:G, :type => "strict digraph")
+    # or 
+    g = GraphViz.new(:G, :type => "digraph", :strict => true)
+    # or 
+    g = GraphViz.digraph(:G, :strict => true)
+    # or 
+    g = GraphViz.strict_digraph(:G)
+
+
 === 0.9.18 :
 * JRuby bug correction (by Nigel Thorne)
 * Fix autoload problem for Rubinius (by Rolf Timmermans)
