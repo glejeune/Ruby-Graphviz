@@ -35,7 +35,7 @@ class GraphViz
     # * vNodeTwo : Second node (can be a GraphViz::Node or a node ID)
     # * oGParrent : Graph 
     #
-    def initialize( vNodeOne, vNodeTwo, oGParrent = nil )
+    def initialize( vNodeOne, vNodeTwo, oGParrent )
       @xNodeOne, @xNodeOnePort = getNodeNameAndPort( vNodeOne )
 	    # if vNodeOne.class == String
       #   @xNodeOne = vNodeOne
@@ -64,7 +64,8 @@ class GraphViz
         GraphViz.escape(@xNodeOne, true) + ":#{@xNodeOnePort}"
       end
     end
-
+    alias :tail_node :node_one
+    
     # Return the node two as string (so with port if any)
     def node_two( with_port = true )
       if @xNodeTwoPort.nil? or with_port == false
@@ -73,7 +74,7 @@ class GraphViz
 	      GraphViz.escape(@xNodeTwo, true) + ":#{@xNodeTwoPort}"
       end
     end
-    
+    alias :head_node :node_two
     #
 	  # Return the index of the edge
 	  #
@@ -119,6 +120,17 @@ class GraphViz
     alias :> :<< #:nodoc:
     alias :- :<< #:nodoc:
     alias :>> :<< #:nodoc:
+    
+    #
+    # Return the root graph
+    #
+    def root_graph
+      return( (self.pg.nil?) ? nil : self.pg.root_graph )
+    end
+    
+    def pg #:nodoc:
+      @oGParrent
+    end
     
     #
     # Set edge attributs

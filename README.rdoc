@@ -25,7 +25,8 @@ Interface to the GraphViz graphing tool
     g = GraphViz.digraph(:G, :strict => true)
     # or 
     g = GraphViz.strict_digraph(:G)
-
+* Add GraphViz#root_graph, Node#root_graph, Edge#root_graph
+* The GraphML parser now accept a graphml file or string
 
 === 0.9.18 :
 * JRuby bug correction (by Nigel Thorne)

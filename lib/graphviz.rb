@@ -600,6 +600,13 @@ class GraphViz
     @oParentGraph
   end
   
+  #
+  # Return the root graph
+  #
+  def root_graph
+    return( (self.pg.nil?) ? self : self.pg.root_graph )
+  end
+  
   def self.commonGraph( o1, o2 ) #:nodoc:
     g1 = o1.pg
     g2 = o2.pg
@@ -686,10 +693,10 @@ class GraphViz
   # 
   # Options :
   # * :output : Output format (Constants::FORMATS) (default : dot)
-  # * :file : Output file name (default : none)
+  # * :file : Output file name (default : nil)
   # * :use : Program to use (Constants::PROGRAMS) (default : dot)
   # * :path : Program PATH
-  # * :parent : Parent graph (default : none)
+  # * :parent : Parent graph (default : nil)
   # * :type : Graph type (Constants::GRAPHTYPE) (default : digraph)
   # * :errors : DOT error level (default 1)
   #   * 0 = Error + Warning
@@ -760,12 +767,29 @@ class GraphViz
     yield( self ) if( block )
   end
   
+  #
+  # Create a new undirected graph
+  #
+  # See also GraphViz::new
+  #
   def self.graph( xGraphName, hOpts = {}, &block )
     new( xGraphName, hOpts.symbolize_keys.merge( {:type => "graph"} ), &block )
   end
+
+  #
+  # Create a new directed graph
+  #
+  # See also GraphViz::new
+  #
   def self.digraph( xGraphName, hOpts = {}, &block )
     new( xGraphName, hOpts.symbolize_keys.merge( {:type => "digraph"} ), &block )
   end
+  
+  #
+  # Create a new strict directed graph
+  #
+  # See also GraphViz::new
+  #
   def self.strict_digraph( xGraphName, hOpts = {}, &block )
     new( xGraphName, hOpts.symbolize_keys.merge( {:type => "digraph", :strict => true} ), &block )
   end

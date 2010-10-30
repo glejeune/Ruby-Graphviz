@@ -31,7 +31,7 @@ class GraphViz
     # * xNodeName : ID of the node
     # * oGParrent : Graph 
     # 
-    def initialize( xNodeName, oGParrent = nil )
+    def initialize( xNodeName, oGParrent )
       @xNodeName = xNodeName
       @oGParrent = oGParrent
       @oAttrNode = GraphViz::Attrs::new( nil, "node", NODESATTRS )
@@ -54,7 +54,7 @@ class GraphViz
 	  end
 	  
 	  #
-	  # Return the index of the node
+	  # Return the node index
 	  #
 	  def index
 	    @index
@@ -62,7 +62,14 @@ class GraphViz
     def index=(i) #:nodoc:
       @index = i if @index == nil
     end
-	
+
+    #
+    # Return the root graph
+    #
+    def root_graph
+      return( (self.pg.nil?) ? nil : self.pg.root_graph )
+    end
+    
 	  # 
     # Set value +xAttrValue+ to the node attribut +xAttrName+
     # 

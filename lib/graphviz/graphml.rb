@@ -35,8 +35,9 @@ class GraphViz
       'undirected' => :graph
     }
     
-    def initialize( xFile )
-      @xmlDoc = REXML::Document::new( File::new( xFile ) )
+    def initialize( file_or_str )
+      data = ((File.file?( file_or_str )) ? File::new(file_or_str) : file_or_str) 
+      @xmlDoc = REXML::Document::new( data )
       @attributs = {
         :nodes => {},
         :edges => {},
