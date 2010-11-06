@@ -15,19 +15,19 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdr
 				<data key="label">process #1</data>
 				<node id="a0">
 					<data key="style">filled</data>
-					<data key="style">white</data>
+					<data key="color">white</data>
 				</node>
 				<node id="a1">
 					<data key="style">filled</data>
-					<data key="style">white</data>
+					<data key="color">white</data>
 				</node>
 				<node id="a2">
 					<data key="style">filled</data>
-					<data key="style">white</data>
+					<data key="color">white</data>
 				</node>
 				<node id="a3">
 					<data key="style">filled</data>
-					<data key="style">white</data>
+					<data key="color">white</data>
 				</node>
 				<edge id="e0" source="a0" target="a1"/>
 				<edge id="e1" source="a1" target="a2"/>

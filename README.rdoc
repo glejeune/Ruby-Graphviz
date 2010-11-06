@@ -16,6 +16,8 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 0.9.20 :
+
 === 0.9.19 :
 * Add strict digraph support (by Jonas Elfström) (see sample58.rb)
     g = GraphViz.new(:G, :type => "strict digraph")
