@@ -17,7 +17,7 @@ Interface to the GraphViz graphing tool
 == CHANGELOG
 
 === 0.9.20 :
-* Add GraphViz#each_atributs, Node#each_atributs and Edge#each_atributs
+* Add GraphViz#each_attributs, Node#each_attributs and Edge#each_attributs
 
 === 0.9.19 :
 * Add strict digraph support (by Jonas Elfström) (see sample58.rb)
