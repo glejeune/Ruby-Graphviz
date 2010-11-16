@@ -91,6 +91,22 @@ class GraphViz
       end
     end
 
+    #
+    # Calls block once for each attribut of the node, passing the name and value to the 
+    # block as a two-element array.
+    #
+    # If global is set to false, the block does not receive the attributs set globally
+    #
+    def each_attributs(global = true, &b)
+      attrs = @oAttrNode.to_h
+      if global
+        attrs = pg.node.to_h.merge attrs
+      end
+      attrs.each do |k,v|
+        yield(k,v)
+      end
+    end
+    
     # 
     # Create an edge between the current node and the node +oNode+
     # 

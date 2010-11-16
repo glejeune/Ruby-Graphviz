@@ -337,6 +337,16 @@ class GraphViz
     end
   end
   
+  #
+  # Calls block once for each attribut of the graph, passing the name and value to the 
+  # block as a two-element array.
+  #
+  def each_attributs(&b)
+    @graph.each do |k,v|
+      yield(k,v)
+    end
+  end
+  
   # 
   # Generate the graph
   # 

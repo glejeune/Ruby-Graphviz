@@ -112,6 +112,22 @@ class GraphViz
       end
     end
     
+    #
+    # Calls block once for each attribut of the edge, passing the name and value to the 
+    # block as a two-element array.
+    #
+    # If global is set to false, the block does not receive the attributs set globally
+    #
+    def each_attributs(global = true, &b)
+      attrs = @oAttrEdge.to_h
+      if global
+        attrs = pg.edge.to_h.merge attrs
+      end
+      attrs.each do |k,v|
+        yield(k,v)
+      end
+    end
+    
     def <<( oNode ) #:nodoc:
       n = @oGParrent.get_node(@xNodeTwo)
       

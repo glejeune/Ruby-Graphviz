@@ -52,7 +52,7 @@ class GraphViz
         @data[xKey.to_s]
       end
     end
-
+    
     def []=( xKey, xValue )
       unless @attributs.keys.include?( xKey.to_s )
         raise ArgumentError, "#{@name} attribut '#{xKey.to_s}' invalid"
