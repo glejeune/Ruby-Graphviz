@@ -118,7 +118,7 @@ class GraphViz
     #
     # If global is set to false, the block does not receive the attributs set globally
     #
-    def each_attributs(global = true, &b)
+    def each_attribut(global = true, &b)
       attrs = @oAttrEdge.to_h
       if global
         attrs = pg.edge.to_h.merge attrs
