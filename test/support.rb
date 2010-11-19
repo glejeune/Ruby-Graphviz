@@ -23,7 +23,7 @@ module TestSupport
 
   # @todo move to app?
   def windows?
-    /Windows/ =~ ENV['OS']
+    /mswin|mingw/ =~ RUBY_PLATFORM
   end
 
   def dev_null
