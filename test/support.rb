@@ -6,7 +6,7 @@ rescue LoadError
 end
 require 'stringio'
 
-root = File.expand_path('../..',__FILE__)
+root = File.expand_path('../../lib',__FILE__)
 $:.unshift(root) unless $:.include?(root)
 
 require 'graphviz'

@@ -1,5 +1,5 @@
 require 'test/unit'
-$:.unshift("../lib")
+$:.unshift(File.expand_path('../../lib',__FILE__))
 require 'graphviz'
 
 class GraphVizTest < Test::Unit::TestCase
