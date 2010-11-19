@@ -103,7 +103,7 @@ private
     setup_sample path
     out, err = fake_popen2(path)
     assert_equal "", err, "no errors"
-    assert_match tgt_regexp, out, "output for sample#{number} should match regexp"
+    assert_match tgt_regexp, out.gsub(/\r\n/, "\n"), "output for sample#{number} should match regexp"
   end
 
   def assert_sample_file_has_no_output path
