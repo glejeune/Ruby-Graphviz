@@ -131,8 +131,8 @@ private
   def hack_output_path path
     # hack $0 to change where the output image is written to
     fake_example_path = File.join(OutputDir, File.basename(path))
-    $0 = fake_example_path.dup
-    fail("hack failed") if ($0 != fake_example_path)
+    $program_name = fake_example_path.dup
+    alias $0 $program_name
     self.class.last_image_path = "#{$0}.png"
   end
 end
