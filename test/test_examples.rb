@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__),'support.rb')
+require File.expand_path('support.rb', File.dirname(__FILE__))
 
 class GraphVizTest < Test::Unit::TestCase
 
