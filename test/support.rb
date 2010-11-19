@@ -55,6 +55,7 @@ module IoHack
     #
 
     except = %w(inspect kind_of?)
+    except += except.map{|x| x.to_sym } # for Ruby 1.9
     these = ancestors[0].instance_methods
     # these = [1,2,3].map{|x| ancestors[x].instance_methods(false)}.flatten
     eraseme = (these - except)
