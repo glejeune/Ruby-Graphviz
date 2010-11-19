@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'test/unit'
 require 'ruby-debug'
+require 'stringio'
 
 root = File.expand_path('../..',__FILE__)
 $:.unshift(root) unless $:.include?(root)
