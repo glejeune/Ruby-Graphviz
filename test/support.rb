@@ -1,6 +1,9 @@
 require 'rubygems'
 require 'test/unit'
+begin
 require 'ruby-debug'
+rescue LoadError
+end
 require 'stringio'
 
 root = File.expand_path('../..',__FILE__)
