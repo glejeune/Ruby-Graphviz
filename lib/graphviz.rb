@@ -230,7 +230,7 @@ class GraphViz
       hOpts = xGraphName
       xGraphName = nil
     end
-    
+
     if xGraphName.nil?
       xGraphID = String.random(11)
       xGraphName = ""
@@ -442,7 +442,7 @@ class GraphViz
     xDOTScript << "}"
 
     if @oParentGraph.nil? == false
-      xDOTScript = "subgraph #{GraphViz.escape(@name)} {\n" << xDOTScript
+      xDOTScript = "subgraph #{GraphViz.escape(@name, :unquote_empty => true)} {\n" << xDOTScript
 
       return( xDOTScript )
     else
@@ -490,7 +490,7 @@ class GraphViz
       @output = hOutput if hOutput.size > 0
   
       xStict = ((@strict && @oGraphType == "digraph") ? "strict " : "")
-      xDOTScript = ("#{xStict}#{@oGraphType} #{GraphViz.escape(@name)} {\n" << xDOTScript).gsub( "\0", "" )
+      xDOTScript = ("#{xStict}#{@oGraphType} #{GraphViz.escape(@name, :unquote_empty => true)} {\n" << xDOTScript).gsub( "\0", "" )
 
       xOutputString = (@filename == String ||
         @output.any? {|format, file| file == String })
@@ -807,13 +807,27 @@ class GraphViz
   #
   # Escape a string to be acceptable as a node name in a graphviz input file
   #
-  def self.escape(str, force = false ) #:nodoc:
-    if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?
+  def self.escape(str, opts = {} ) #:nodoc:
+    options = {
+      :force => false,
+      :unquote_empty => false,
+    }.merge(opts)
+    
+    if (options[:force] or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?) and options[:unquote_empty] == false
       '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
       ## MAYBE WE NEED TO USE THIS ONE ## str.inspect.gsub(".","\\.").gsub( "\\\\", "\\" )
     else
       str
     end
   end
+  
+  #def self.escape(str, force = false ) #:nodoc:
+  #  if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?
+  #    '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
+  #    ## MAYBE WE NEED TO USE THIS ONE ## str.inspect.gsub(".","\\.").gsub( "\\\\", "\\" )
+  #  else
+  #    str
+  #  end
+  #end
   
 end

@@ -18,6 +18,9 @@ Interface to the GraphViz graphing tool
 
 === 0.9.20 :
 * Add GraphViz#each_attribut, Node#each_attribut and Edge#each_attribut
+* Bugs corrections in tests (by oupo)
+* Major bug correction in GraphViz#output for subgraphs
+* Update GraphViz.escape
 
 === 0.9.19 :
 * Add strict digraph support (by Jonas Elfström) (see sample58.rb)

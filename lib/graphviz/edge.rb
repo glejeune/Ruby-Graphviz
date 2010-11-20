@@ -61,7 +61,7 @@ class GraphViz
       if @xNodeOnePort.nil? or with_port == false
 	      GraphViz.escape(@xNodeOne)
       else
-        GraphViz.escape(@xNodeOne, true) + ":#{@xNodeOnePort}"
+        GraphViz.escape(@xNodeOne, :force => true) + ":#{@xNodeOnePort}"
       end
     end
     alias :tail_node :node_one
@@ -71,7 +71,7 @@ class GraphViz
       if @xNodeTwoPort.nil? or with_port == false
 	      GraphViz.escape(@xNodeTwo) 
 	    else 
-	      GraphViz.escape(@xNodeTwo, true) + ":#{@xNodeTwoPort}"
+	      GraphViz.escape(@xNodeTwo, :force => true) + ":#{@xNodeTwoPort}"
       end
     end
     alias :head_node :node_two

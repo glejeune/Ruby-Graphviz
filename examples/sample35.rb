@@ -40,4 +40,4 @@ GraphViz.digraph( :G ) { |g|
   (c2.mysite << c2.dotgraph)[:color => "blue"]
   (c1.image << c2.dotgraph)[:color => "red"]
   (c2.mysite << g.cluster_0.zeimage)[:color => "red"]
-}.output( :png => "#{$0}.png" )
+}.output( :png => "#{$0}.png", :none => "#{$0}.gv" )
