@@ -1,4 +1,6 @@
 .DS_Store
+.idea
+*.iml
 doc
 pkg
 test/output/
