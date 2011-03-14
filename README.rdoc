@@ -32,12 +32,12 @@ Interface to the GraphViz graphing tool
   * <tt>:inverty => [true|false]</tt> : Invert y coordinate in output
   * <tt>:no_layout => v</tt> : No layout mode 'v' (=1) -- neato only
   * <tt>:reduce => [true|false]</tt> : Reduce graph -- neato only
-  * <tt>Lg => [true|false]</tt> : Don't use grid -- fdp only
-  * <tt>LO => [true|false]</tt> : Use old attractive force -- fdp only
-  * <tt>Ln => i</tt> : Set number of iterations to i -- fdp only
-  * <tt>LU => i</tt> : Set unscaled factor to i -- fdp only
-  * <tt>LC => v</tt> : Set overlap expansion factor to v -- fdp only
-  * <tt>LT => [*]v</tt> : Set temperature (temperature factor) to v -- fdp only
+  * <tt>:Lg => [true|false]</tt> : Don't use grid -- fdp only
+  * <tt>:LO => [true|false]</tt> : Use old attractive force -- fdp only
+  * <tt>:Ln => i</tt> : Set number of iterations to i -- fdp only
+  * <tt>:LU => i</tt> : Set unscaled factor to i -- fdp only
+  * <tt>:LC => v</tt> : Set overlap expansion factor to v -- fdp only
+  * <tt>:LT => [*]v</tt> : Set temperature (temperature factor) to v -- fdp only
 
 === 0.9.20 :
 * Add GraphViz#each_attribut, Node#each_attribut and Edge#each_attribut
