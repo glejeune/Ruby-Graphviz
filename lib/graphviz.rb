@@ -452,13 +452,13 @@ class GraphViz
         xValue = xValue.to_s unless xValue.nil? or [Class, TrueClass, FalseClass].include?(xValue.class)
         case xKey.to_s
           when "output"
-            warn ":output option is deprecated, please use :<format> => :<file>"
+            warn ":output option is deprecated, please use :<format> => :<file> -- BE CAREFUL, it will be removed in the 1.0 version!"
             if FORMATS.index( xValue ).nil? == true
               raise ArgumentError, "output format '#{xValue}' invalid"
             end
             @format = xValue
           when "file"
-            warn ":file option is deprecated, please use :<format> => :<file>"
+            warn ":file option is deprecated, please use :<format> => :<file> -- BE CAREFUL, it will be removed in the 1.0 version!"
             @filename = xValue
           when "use"
             if PROGRAMS.index( xValue ).nil? == true
@@ -471,6 +471,36 @@ class GraphViz
             @errors = xValue
           when "extlib"
             @extlibs = xValue.split( "," ).map{ |x| x.strip }
+          when "scale"
+            # Scale input by 'v' (=72)
+            @scale = xValue
+          when "inverty"
+            # Invert y coordinate in output
+            @inverty = xValue
+          when "no_layout"
+            # No layout mode 'v' (=1)
+            @no_layout = xValue
+          when "reduce"
+            # Reduce graph
+            @reduce_graph = xValue
+          when "Lg"
+            # Don't use grid
+            @Lg = xValue
+          when "LO"
+            # Use old attractive force
+            @LO = xValue
+          when "Ln"
+            # Set number of iterations to i
+            @Ln = xValue
+          when "LU"
+            # Set unscaled factor to i
+            @LU = xValue
+          when "LC"
+            # Set overlap expansion factor to v
+            @LC = xValue
+          when "LT"
+            # Set temperature (temperature factor) to v
+            @LT = xValue
           when "nothugly"
             begin
               require 'graphviz/nothugly'
@@ -544,8 +574,23 @@ class GraphViz
           xExternalLibraries << "-l#{lib} "
         end
         
+        xOtherOptions = ""        
+        xOtherOptions += " -s#{@scale}" unless @scale.nil?
+        xOtherOptions += " -y" if @inverty == true
+        unless @no_layout.nil?
+          xOtherOptions += " -n"
+          xOtherOptions += "2" if @no_layout.to_i == 2
+        end
+        xOtherOptions += " -x" if @reduce_graph == true
+        xOtherOptions += " -Lg" if @Lg == true
+        xOtherOptions += " -LO" if @LO == true
+        xOtherOptions += " -Ln#{@Ln}" unless @LN.nil?
+        xOtherOptions += " -LU#{@LU}" unless @LU.nil?
+        xOtherOptions += " -LC#{@LC}" unless @LC.nil?
+        xOtherOptions += " -LT#{@LT}" unless @LT.nil?
+        
         if IS_JRUBY
-          xCmd = "#{cmd} -q#{@errors} #{xExternalLibraries} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+          xCmd = "#{cmd} -q#{@errors} #{xExternalLibraries} #{xOtherOptions} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         elsif IS_CYGWIN
           tmpPath = t.path
           begin
@@ -553,9 +598,9 @@ class GraphViz
           rescue
             warn "cygpath is not installed!"
           end
-          xCmd = "\"#{cmd}\" -q#{@errors} #{xExternalLibraries} #{xOutputWithFile} #{xOutputWithoutFile} #{tmpPath}"
+          xCmd = "\"#{cmd}\" -q#{@errors} #{xExternalLibraries} #{xOtherOptions} #{xOutputWithFile} #{xOutputWithoutFile} #{tmpPath}"
         else
-          xCmd = "\"#{cmd}\" -q#{@errors} #{xExternalLibraries} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+          xCmd = "\"#{cmd}\" -q#{@errors} #{xExternalLibraries} #{xOtherOptions} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
         end
 
         xOutput << output_from_command( xCmd )
@@ -724,6 +769,17 @@ class GraphViz
     @output   = {}
     @nothugly = false
     @strict   = false
+    
+    @scale        = nil
+    @inverty      = nil
+    @no_layout    = nil
+    @reduce_graph = nil
+    @Lg           = nil
+    @LO           = nil
+    @Ln           = nil
+    @LU           = nil
+    @LC           = nil
+    @LT           = nil
     
     @elements_order = GraphViz::Elements::new()
 
