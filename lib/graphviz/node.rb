@@ -41,15 +41,6 @@ class GraphViz
     # 
     # Get the node ID
     # 
-    def name
-      # TODO : Remove in v1.0
-	    warn "GraphViz::Node#name is deprecated, please use GraphViz::Node#id! -- BE CAREFUL, it will be removed in the 1.0 version!"
-	    return self.id
-	  end
-
-    # 
-    # Get the node ID
-    # 
     def id
 	    @xNodeName.clone
 	  end
@@ -164,12 +155,7 @@ class GraphViz
         @oAttrNode.data.delete("label")
       end
       @oAttrNode.data.each do |k, v|
-	      if k == "html"
-	        warn "html attribut is deprecated, please use label : :label => '<<html />>' -- BE CAREFUL, it will be removed in the 1.0 version!"
-		      xAttr << xSeparator + "label = " + v.to_gv
-		    else
-          xAttr << xSeparator + k + " = " + v.to_gv
-		    end
+        xAttr << xSeparator + k + " = " + v.to_gv
         xSeparator = ", "
       end
       if xAttr.length > 0

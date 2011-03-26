@@ -451,15 +451,6 @@ class GraphViz
       hOpts.each do |xKey, xValue|
         xValue = xValue.to_s unless xValue.nil? or [Class, TrueClass, FalseClass].include?(xValue.class)
         case xKey.to_s
-          when "output"
-            warn ":output option is deprecated, please use :<format> => :<file> -- BE CAREFUL, it will be removed in the 1.0 version!"
-            if FORMATS.index( xValue ).nil? == true
-              raise ArgumentError, "output format '#{xValue}' invalid"
-            end
-            @format = xValue
-          when "file"
-            warn ":file option is deprecated, please use :<format> => :<file> -- BE CAREFUL, it will be removed in the 1.0 version!"
-            @filename = xValue
           when "use"
             if PROGRAMS.index( xValue ).nil? == true
               raise ArgumentError, "can't use '#{xValue}'"
@@ -698,9 +689,6 @@ class GraphViz
           @@errors = v
         when "extlibs"
           @@extlibs = v.split( "," ).map{ |x| x.strip }
-        when "output"
-          warn ":output option is deprecated!"
-          @@format = v
         else
           warn "Invalide option #{k}!"
       end
@@ -796,20 +784,11 @@ class GraphViz
 
     hOpts.each do |xKey, xValue|
       case xKey.to_s
-        when "output"
-          warn ":output option is deprecated, please use :<format> => :<file>"
-          if FORMATS.index( xValue.to_s ).nil? == true
-            raise ArgumentError, "output format '#{xValue}' invalid"
-          end
-          @format = xValue.to_s
         when "use"
           if PROGRAMS.index( xValue.to_s ).nil? == true
             raise ArgumentError, "can't use '#{xValue}'"
           end
           @prog = xValue.to_s
-        when "file"
-          warn ":file option is deprecated, please use :<format> => :<file>"
-          @filename = xValue.to_s
         when "parent"
           @oParentGraph = xValue
         when "type"

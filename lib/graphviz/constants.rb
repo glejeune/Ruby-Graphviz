@@ -166,7 +166,6 @@ module Constants
     "headtooltip"         => { :usedBy => "E",    :type => :EscString },
     "height"              => { :usedBy => "N",    :type => :GvDouble },
     "href"                => { :usedBy => "NE",   :type => :EscString },
-    "html"                => { :usedBy => "N",    :type => :HtmlString }, # API extension -- Deprecated
     "id"                  => { :usedBy => "ENG",  :type => :EscString },
     "image"               => { :usedBy => "N",    :type => :EscString },
     "imagescale"          => { :usedBy => "N",    :type => :EscString },

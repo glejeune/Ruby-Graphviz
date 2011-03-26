@@ -25,6 +25,13 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 1.0.0 : 
+* \o/
+* GraphViz::Node#name has been removed - use GraphViz::Node#id
+* A html attribut has been removed - use a label attribut (<tt>:label => '<<html/>>'</tt>)
+* :output option has been removed - use :<format> => :<file>
+* :file option has been removed - use :<format> => :<file>
+
 === 0.9.21 :
 * Add attributs "label_scheme" and "rotation"
 * Add missing options :
