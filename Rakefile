@@ -87,11 +87,11 @@ For more information about Ruby-Graphviz :
 For more information, see http://github.com/glejeune/Ruby-Graphviz/issues/#issue/13
 So if you use node ports, maybe you need to change your code.
 
-/!\\ GraphViz::Node#name is deprecated and will be removed in version 1.0.0
+/!\\ GraphViz::Node#name has been removed!
 
-/!\\ :output and :file options are deprecated and will be removed in version 1.0.0
+/!\\ :output and :file options have been removed!
 
-/!\\ The html attribut is deprecated and will be removed in version 1.0.0
+/!\\ The html attribut has been removed!
 You can use the label attribut, as dot do it : :label => '<<html/>>'
 
 /!\\ Version 0.9.17 introduce GraphML (http://graphml.graphdrawing.org/) support and

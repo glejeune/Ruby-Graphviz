@@ -19,7 +19,7 @@ Interface to the GraphViz graphing tool
 <b>We are close to the 1.0 version... So if you use one of the following method or attribut, please update your code because they will be remove.</b>
 
 * GraphViz::Node#name must be replaced by GraphViz::Node#id
-* A html attribut must be replaced by a label attribut (<tt>:label => '<<html/>>'</tt>)
+* The html attribut must be replaced by a label attribut (<tt>:label => '<<html/>>'</tt>)
 * :output option must be replaced by :<format> => :<file>
 * :file option must be replaced by :<format> => :<file>
 
@@ -28,7 +28,7 @@ Interface to the GraphViz graphing tool
 === 1.0.0 : 
 * \o/
 * GraphViz::Node#name has been removed - use GraphViz::Node#id
-* A html attribut has been removed - use a label attribut (<tt>:label => '<<html/>>'</tt>)
+* The html attribut has been removed - use a label attribut (<tt>:label => '<<html/>>'</tt>)
 * :output option has been removed - use :<format> => :<file>
 * :file option has been removed - use :<format> => :<file>
 * Add GraphViz#to_s
