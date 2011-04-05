@@ -20,31 +20,17 @@ require 'rexml/document'
 class GraphViz
   class XML
     
-    @oReXML
-    @oGraph 
-    @xNodeName
-	  @bShowText
-	  @bShowAttrs
+    # The GraphViz object
+    attr_accessor :graph
     
     # 
     # Generate the graph
     # 
-    # Options :
-    # * :output : Output format (Constants::FORMATS)
-    # * :file : Output file name
-    # * :use : Program to use (Constants::PROGRAMS)
-    # * :path : Program PATH
-    # * :<format> => <file> : <file> can be
-    #   * a file name
-    #   * nil, then the output will be printed to STDOUT
-    #   * String, then the output will be returned as a String
-    # * :errors : DOT error level (default 1)
-    #   * 0 = Error + Warning
-    #   * 1 = Error
-    #   * 2 = none
+    # THIS METHOD IS DEPRECATED, PLEASE USE GraphViz::XML.graph.output
     # 
     def output( *hOpt )
-      @oGraph.output( *hOpt )
+      warn "GraphViz::XML.output is deprecated, use GraphViz::XML.graph.output"
+      @graph.output( *hOpt )
     end
     
     private
@@ -54,7 +40,9 @@ class GraphViz
     # 
     # In:
     # * xFile : XML File
-    # * *hOpt : Graph options
+    # * *hOpt : Graph options:
+    #   * :text : show text nodes (default true)
+    #   * :attrs : show XML attributs (default true)
     # 
     def initialize( xFile, *hOpt )
       @xNodeName = "00000"
@@ -75,7 +63,7 @@ class GraphViz
       end
 
       @oReXML = REXML::Document::new( File::new( xFile ) )
-      @oGraph = GraphViz::new( "XML", *hOpt ) 
+      @graph = GraphViz::new( "XML", *hOpt ) 
       _init( @oReXML.root() )
     end
     
@@ -93,7 +81,7 @@ class GraphViz
 		
 		    label << "}"
 	    end
-      @oGraph.add_node( xLocalNodeName, "label" => label, "color" => "blue", "shape" => "record" )
+      @graph.add_node( xLocalNodeName, "label" => label, "color" => "blue", "shape" => "record" )
 
       ## Act: Search and add Text nodes
       if oXMLNode.has_text? == true and @bShowText == true
@@ -111,8 +99,8 @@ class GraphViz
         end
 
         if xText.length > 0
-          @oGraph.add_node( xTextNodeName, "label" => xText, "color" => "black", "shape" => "ellipse" )
-          @oGraph.add_edge( xLocalNodeName, xTextNodeName )
+          @graph.add_node( xTextNodeName, "label" => xText, "color" => "black", "shape" => "ellipse" )
+          @graph.add_edge( xLocalNodeName, xTextNodeName )
         end
       end
 
@@ -121,7 +109,7 @@ class GraphViz
 
       oXMLNode.each_element( ) do |oXMLChild|
         xChildNodeName = _init( oXMLChild )
-        @oGraph.add_edge( xLocalNodeName, xChildNodeName )
+        @graph.add_edge( xLocalNodeName, xChildNodeName )
       end
 
       return( xLocalNodeName )

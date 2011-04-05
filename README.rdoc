@@ -1,6 +1,6 @@
 = Ruby/GraphViz
 
-Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Gregoire Lejeune
+Copyright (C) 2004-2011 Gregoire Lejeune
 
 * Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
 * Sources : http://github.com/glejeune/Ruby-Graphviz
@@ -33,6 +33,7 @@ Interface to the GraphViz graphing tool
 * :file option has been removed - use :<format> => :<file>
 * Add GraphViz#to_s
 * Add GraphViz#add (see sample59.rb)
+* GraphViz::XML.output is deprecated, use GraphViz::XML.graph.output
 
 === 0.9.21 :
 * Add attributs "label_scheme" and "rotation"

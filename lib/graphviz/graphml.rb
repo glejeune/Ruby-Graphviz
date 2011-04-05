@@ -21,6 +21,8 @@ require 'rexml/document'
 class GraphViz
   class GraphML
     attr_reader :attributs
+    
+    # The GraphViz object
     attr_accessor :graph
   
     DEST = {
@@ -35,6 +37,9 @@ class GraphViz
       'undirected' => :graph
     }
     
+    #
+    # Create a new GraphViz object from a GraphML file of string
+    #
     def initialize( file_or_str )
       data = ((File.file?( file_or_str )) ? File::new(file_or_str) : file_or_str) 
       @xmlDoc = REXML::Document::new( data )
@@ -52,7 +57,7 @@ class GraphViz
       parse( @xmlDoc.root )
     end
     
-    def parse( node )
+    def parse( node ) #:nodoc:
       #begin
         send( node.name.to_sym, node )
       #rescue NoMethodError => e
@@ -60,7 +65,7 @@ class GraphViz
       #end
     end
     
-    def graphml( node )
+    def graphml( node ) #:nodoc:
       node.each_element( ) do |child|
         #begin
           send( "graphml_#{child.name}".to_sym, child )
@@ -70,7 +75,7 @@ class GraphViz
       end
     end
     
-    def graphml_key( node )
+    def graphml_key( node ) #:nodoc:
       id = node.attributes['id']
       @current_attr = {
         :name => node.attributes['attr.name'],
@@ -91,11 +96,11 @@ class GraphViz
       @current_attr = nil
     end
     
-    def graphml_key_default( node )
+    def graphml_key_default( node ) #:nodoc:
       @current_attr[:default] = node.texts().to_s
     end
     
-    def graphml_graph( node )
+    def graphml_graph( node ) #:nodoc:
       @current_node = nil
       
       if @current_graph.nil?
@@ -128,11 +133,11 @@ class GraphViz
       @current_graph = previous_graph
     end
     
-    def graphml_graph_data( node )
+    def graphml_graph_data( node ) #:nodoc:
       @current_graph[@attributs[:graphs][node.attributes['key']][:name]] = node.texts().to_s
     end
     
-    def graphml_graph_node( node )
+    def graphml_graph_node( node ) #:nodoc:
       @current_node = {}
   
       node.each_element( ) do |child|
@@ -158,11 +163,11 @@ class GraphViz
       @current_node = nil
     end
     
-    def graphml_graph_node_data( node )
+    def graphml_graph_node_data( node ) #:nodoc:
       @current_node[@attributs[:nodes][node.attributes['key']][:name]] = node.texts().to_s
     end
     
-    def graphml_graph_node_port( node )
+    def graphml_graph_node_port( node ) #:nodoc:
       @current_node[:shape] = :record
       port = node.attributes['name']
       if @current_node[:label]
@@ -173,7 +178,7 @@ class GraphViz
       end
     end
     
-    def graphml_graph_edge( node )
+    def graphml_graph_edge( node ) #:nodoc:
       source = node.attributes['source']
       source = {source => node.attributes['sourceport']} if node.attributes['sourceport']
       target = node.attributes['target']
@@ -192,11 +197,11 @@ class GraphViz
       @current_edge = nil
     end
   
-    def graphml_graph_edge_data( node )
+    def graphml_graph_edge_data( node ) #:nodoc:
       @current_edge[@attributs[:edges][node.attributes['key']][:name]] = node.texts().to_s
     end
     
-    def graphml_graph_hyperedge( node )
+    def graphml_graph_hyperedge( node ) #:nodoc:
       list = []
       
       node.each_element( ) do |child|

@@ -39,6 +39,7 @@ Rake::RDocTask.new do |rdoc|
       'lib/graphviz/edge.rb',
       'lib/graphviz/constants.rb',
       'lib/graphviz/xml.rb',
+      'lib/graphviz/graphml.rb',
       'lib/graphviz/family_tree.rb',
       'lib/graphviz/family_tree/couple.rb',
       'lib/graphviz/family_tree/generation.rb',
@@ -47,7 +48,7 @@ Rake::RDocTask.new do |rdoc|
 end
 
 task :after_doc do
-    sh %{scp -r doc/rdoc/* #{ENV['USER']}@rubyforge.org:/var/www/gforge-projects/ruby-asp/ruby-graphviz}
+    # sh %{scp -r doc/rdoc/* #{ENV['USER']}@rubyforge.org:/var/www/gforge-projects/ruby-asp/ruby-graphviz}
 end
 
 spec =

@@ -93,4 +93,4 @@ if xFile.nil? == true
 end
 
 gvxml = GraphViz::XML::new( xFile, :text => true, :attrs => true )
-gvxml.output( xOutFormat => xOutFile, :path => xGVPath )
+gvxml.graph.output( xOutFormat => xOutFile, :path => xGVPath )
