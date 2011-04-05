@@ -93,24 +93,26 @@ class GraphViz
   # Return the GraphViz::Node object created
   #
   def add_node( xNodeName, hOpts = {} )
-    @hoNodes[xNodeName] = GraphViz::Node::new( xNodeName, self )
-    @hoNodes[xNodeName].index = @elements_order.size_of( "node" )
+    return @hoNodes[xNodeName] || Proc.new {
+      @hoNodes[xNodeName] = GraphViz::Node::new( xNodeName, self )
+      @hoNodes[xNodeName].index = @elements_order.size_of( "node" )
     
-    unless hOpts.keys.include?(:label) or hOpts.keys.include?("label")
-      hOpts[:label] = xNodeName
-    end
+      unless hOpts.keys.include?(:label) or hOpts.keys.include?("label")
+        hOpts[:label] = xNodeName
+      end
       
-    hOpts.each do |xKey, xValue|
-      @hoNodes[xNodeName][xKey.to_s] = xValue
-    end
+      hOpts.each do |xKey, xValue|
+        @hoNodes[xNodeName][xKey.to_s] = xValue
+      end
     
-    @elements_order.push( { 
-      "type" => "node", 
-      "name" => xNodeName,
-      "value" => @hoNodes[xNodeName] 
-    } )
+      @elements_order.push( { 
+        "type" => "node", 
+        "name" => xNodeName,
+        "value" => @hoNodes[xNodeName] 
+      } )
     
-    return( @hoNodes[xNodeName] )
+      return( @hoNodes[xNodeName] )
+    }.call
   end
 
   #
@@ -278,7 +280,19 @@ class GraphViz
   end
   
   #
+  # Add nodes and edges defined by a Hash
+  #
+  def add(h)
+    if h.kind_of? Hash
+      h.each do |node, data|
+        add_hash_edge(node, data)
+      end
+    end 
+  end
+    
+  #
   # Return the graph type (graph digraph)
+  #
   def type
     @oGraphType
   end
@@ -616,6 +630,10 @@ class GraphViz
   
   alias :save :output
   
+  def to_s
+    self.output(:none => String)
+  end
+  
   # 
   # Get the graph name
   #
@@ -810,6 +828,19 @@ class GraphViz
     end
   
     yield( self ) if( block )
+  end
+  
+  # Edge between a node and a Hash
+  # Used by GraphViz#add
+  def add_hash_edge(node, hash)
+    if hash.kind_of? Hash
+      hash.each do |nt, data|
+        add_edge(node, nt)
+        add_hash_edge(nt, data)
+      end
+    else
+      add_edge(node, hash)
+    end
   end
   
   #

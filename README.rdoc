@@ -31,6 +31,8 @@ Interface to the GraphViz graphing tool
 * A html attribut has been removed - use a label attribut (<tt>:label => '<<html/>>'</tt>)
 * :output option has been removed - use :<format> => :<file>
 * :file option has been removed - use :<format> => :<file>
+* Add GraphViz#to_s
+* Add GraphViz#add (see sample59.rb)
 
 === 0.9.21 :
 * Add attributs "label_scheme" and "rotation"
