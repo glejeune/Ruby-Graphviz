@@ -34,6 +34,7 @@ Interface to the GraphViz graphing tool
 * Add GraphViz#to_s
 * Add GraphViz#add (see sample59.rb)
 * GraphViz::XML.output is deprecated, use GraphViz::XML.graph.output
+* Issue #22 : Error when generating a graph with an ID containing a space.
 
 === 0.9.21 :
 * Add attributs "label_scheme" and "rotation"

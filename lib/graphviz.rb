@@ -879,21 +879,12 @@ class GraphViz
       :unquote_empty => false,
     }.merge(opts)
     
-    if (options[:force] or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?) and options[:unquote_empty] == false
-      '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
-      ## MAYBE WE NEED TO USE THIS ONE ## str.inspect.gsub(".","\\.").gsub( "\\\\", "\\" )
+    if (options[:force] or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?) 
+      unless options[:unquote_empty] == true and str.size == 0
+        '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
+      end
     else
       str
     end
-  end
-  
-  #def self.escape(str, force = false ) #:nodoc:
-  #  if force or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?
-  #    '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
-  #    ## MAYBE WE NEED TO USE THIS ONE ## str.inspect.gsub(".","\\.").gsub( "\\\\", "\\" )
-  #  else
-  #    str
-  #  end
-  #end
-  
+  end  
 end
