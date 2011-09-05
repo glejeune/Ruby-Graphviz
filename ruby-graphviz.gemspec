@@ -52,5 +52,5 @@ graph theory !
   # s.add_runtime_dependency("middleman", "~>2.0.0.3")
   
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'json_pure'
+  s.add_development_dependency 'gems'
 end

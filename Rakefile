@@ -7,11 +7,8 @@ require 'rubygems/package_task'
 require 'rdoc/task'
 require 'rake/testtask'
 require 'fileutils'
-require 'json/pure'
 require 'open-uri'
 include FileUtils
-
-Bundler::GemHelper.install_tasks
 
 CLEAN.include ['**/.*.sw?', '*.gem', '.config', 'test/test.log']
 RDOC_OPTS = ['--quiet', '--title', "Ruby/GraphViz, the Documentation",
@@ -48,34 +45,15 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/test_*.rb']
 end
 
-namespace :gemcutter do
-  PKG_NAME = "ruby-graphviz"
-  PKG_VERS = Constants::RGV_VERSION
-  PKG_FILES = %w(COPYING README.rdoc AUTHORS setup.rb Rakefile) +
-   	      Dir.glob("{bin,examples,lib,test}/**/*")
+Bundler::GemHelper.install_tasks
 
-  desc "push to gemcutter and tag for github"
-  task :push => [:package] do
-    unless Rubygems.status
-      sh %{gem push pkg/#{PKG_NAME}-#{PKG_VERS}.gem}, :verbose => true
-      begin
-        sh %{git commit -am "Tag #{PKG_VERS}"}, :verbose => true
-      rescue => e
-        puts "Nothing to commit !"
-      end
-      sh %{git tag #{PKG_VERS}}, :verbose => true
-      sh %{git push origin master --tags}
-    else
-      puts "This gem already existe in version #{PKG_VERS}!"
-    end
-  end
-  
+namespace :gemcutter do
   desc "check gemcutter status"
   task :status do
     if Rubygems.status
       puts "This gem already existe in version #{PKG_VERS}!"
     else
-      puts "This gem (#{PKG_VERS}) has not been published! Last version at gemcutter is #{Rubygems.version}"
+      puts "This gem (#{Constants::RGV_VERSION}) has not been published! Last version at gemcutter is #{Rubygems.version}"
     end
   end
 end
