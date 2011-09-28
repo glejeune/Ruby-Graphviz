@@ -47,4 +47,13 @@ class Dot2Ruby #:nodoc:
     instance_eval(xOutput)
     return @_graph_eval
   end
+
+  def eval_string( data ) #:nodoc:
+    t = Tempfile::open( File.basename(__FILE__) )
+    t.print( data )
+    t.close
+    result = self.eval(t.path)
+    t.close
+    return result
+  end
 end

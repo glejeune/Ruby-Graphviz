@@ -734,6 +734,12 @@ class GraphViz
     return graph
   end
 
+  def self.parse_string( str, hOpts = {}, &block )
+    graph = Dot2Ruby::new( hOpts[:path], nil, nil ).eval_string( str )
+    yield( graph ) if( block and graph.nil? == false )
+    return graph
+  end
+
 ## ----------------------------------------------------------------------------
 
   private 
