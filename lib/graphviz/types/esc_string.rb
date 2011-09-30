@@ -10,7 +10,6 @@
 # >> puts x.inspect.gsub( "\\\\", "\\" )
 # "hello\n\t\l\"world\""
 
-
 class GraphViz
   class Types
     class EscString < Common
@@ -24,6 +23,10 @@ class GraphViz
       
       alias :to_gv :output
       alias :to_s :output
+
+      def to_ruby
+         @data.to_ruby
+      end
     end
   end
 end

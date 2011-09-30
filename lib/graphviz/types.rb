@@ -19,7 +19,3 @@ class GraphViz
     end
   end
 end
-
-#x = :EscString
-#GraphViz::Types.const_get(x).new( "toto" )
-

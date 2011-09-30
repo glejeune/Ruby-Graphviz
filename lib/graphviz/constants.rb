@@ -120,22 +120,23 @@ module Constants
     "Damping"             => { :usedBy => "G",    :type => :GvDouble },
     "K"                   => { :usedBy => "GC",   :type => :GvDouble },
     "URL"                 => { :usedBy => "ENGC", :type => :EscString },
-    "arrowhead"           => { :usedBy => "E",    :type => :EscString },
+    "area"                => { :usedBy => "NC",   :type => :GvDouble },
+    "arrowhead"           => { :usedBy => "E",    :type => :EscString }, # arrowType
     "arrowsize"           => { :usedBy => "E",    :type => :GvDouble },
-    "arrowtail"           => { :usedBy => "E",    :type => :EscString },
-    "aspect"              => { :usedBy => "G",    :type => :EscString },
-    "bb"                  => { :usedBy => "G",    :type => :EscString },
-    "bgcolor"             => { :usedBy => "GC",   :type => :EscString },
-    "center"              => { :usedBy => "G",    :type => :EscString },
+    "arrowtail"           => { :usedBy => "E",    :type => :EscString }, # arrowType
+    "aspect"              => { :usedBy => "G",    :type => :EscString }, # aspectType
+    "bb"                  => { :usedBy => "G",    :type => :EscString }, # rect
+    "bgcolor"             => { :usedBy => "GC",   :type => :EscString }, # color
+    "center"              => { :usedBy => "G",    :type => :EscString }, # bool
     "charset"             => { :usedBy => "G",    :type => :EscString },
-    "clusterrank"         => { :usedBy => "G",    :type => :EscString },
-    "color"               => { :usedBy => "ENC",  :type => :EscString },
-    "colorscheme"         => { :usedBy => "ENCG", :type => :EscString },
+    "clusterrank"         => { :usedBy => "G",    :type => :EscString }, # clusterMode
+    "color"               => { :usedBy => "ENC",  :type => :EscString }, # color, colorList
+    "colorscheme"         => { :usedBy => "ENCG", :type => :EscString }, 
     "comment"             => { :usedBy => "ENG",  :type => :EscString },
-    "compound"            => { :usedBy => "G",    :type => :EscString },
-    "concentrate"         => { :usedBy => "G",    :type => :EscString },
-    "constraint"          => { :usedBy => "E",    :type => :EscString },
-    "decorate"            => { :usedBy => "E",    :type => :EscString },
+    "compound"            => { :usedBy => "G",    :type => :EscString }, # bool
+    "concentrate"         => { :usedBy => "G",    :type => :EscString }, # bool
+    "constraint"          => { :usedBy => "E",    :type => :EscString }, # bool
+    "decorate"            => { :usedBy => "E",    :type => :EscString }, # bool
     "defaultdist"         => { :usedBy => "G",    :type => :GvDouble },
     "dim"                 => { :usedBy => "G",    :type => :EscString },
     "dimen"               => { :usedBy => "G",    :type => :EscString },
@@ -223,7 +224,7 @@ module Constants
     "penwidth"            => { :usedBy => "CNE",  :type => :GvDouble },
     "peripheries"         => { :usedBy => "NC",   :type => :EscString },
     "pin"                 => { :usedBy => "N",    :type => :EscString },
-    "pos"                 => { :usedBy => "EN",   :type => :EscString },
+    "pos"                 => { :usedBy => "EN",   :type => :SplineType },
     "quadtree"            => { :usedBy => "G",    :type => :EscString },
     "quantum"             => { :usedBy => "G",    :type => :GvDouble },
     "rank"                => { :usedBy => "S",    :type => :EscString },

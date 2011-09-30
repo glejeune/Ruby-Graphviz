@@ -9,6 +9,16 @@ class String
   end
 end
 
+class Object
+   def to_ruby
+      begin
+         eval self
+      rescue => e
+         self
+      end
+   end
+end
+
 # From : http://www.geekmade.co.uk/2008/09/ruby-tip-normalizing-hash-keys-as-symbols/
 class Hash
   def symbolize_keys

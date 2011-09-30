@@ -719,7 +719,6 @@ class GraphViz
   
 ## ----------------------------------------------------------------------------
 
-  # 
   # Create a new graph from a GraphViz File
   # 
   # Options :
@@ -734,10 +733,29 @@ class GraphViz
     return graph
   end
 
+  # Create a new graph from a GraphViz File
+  # 
+  # Options :
+  # * :output : Output format (Constants::FORMATS) (default : dot)
+  # * :file : Output file name (default : none)
+  # * :use : Program to use (Constants::PROGRAMS) (default : dot)
+  # * :path : Program PATH
+  #
   def self.parse_string( str, hOpts = {}, &block )
     graph = Dot2Ruby::new( hOpts[:path], nil, nil ).eval_string( str )
     yield( graph ) if( block and graph.nil? == false )
     return graph
+  end
+
+  # Return a new completed graph 
+  def complete
+    GraphViz.parse_string( root_graph.output( :dot => String ) )
+  end
+
+  # Complete the current graph
+  def complete!
+    # TODO: Keep options
+    complete
   end
 
 ## ----------------------------------------------------------------------------

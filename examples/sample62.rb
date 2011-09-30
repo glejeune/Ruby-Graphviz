@@ -3,13 +3,18 @@
 $:.unshift( "../lib" );
 require "graphviz"
 
-asm = GraphViz::new( "" ) 
+hello_world = GraphViz::new( "" ) 
 
-my = asm.add_node("Hello")
-asmn = asm.add_node("World")
-asm.add_edge(my, asmn) 
+hello = hello_world.add_node("Hello")
+world = hello_world.add_node("World")
+hello_world.add_edge(hello, world) 
 
-final_graph = GraphViz.parse_string( asm.output( :dot => String ) )
-final_graph.each_node do |_, node|
-   puts "Node #{node.id} : position = #{node[:pos]}"
+# final_graph = GraphViz.parse_string( hello_world.output( :dot => String ) )
+# final_graph.each_node do |_, node|
+#    puts "Node #{node.id} : position = #{node[:pos]}"
+# end
+
+hello_world = hello_world.complete
+hello_world.each_node do |_, node|
+   puts "Node #{node.id} : position = " ; p node[:pos].point
 end

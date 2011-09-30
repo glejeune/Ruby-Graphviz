@@ -11,6 +11,7 @@ class GraphViz
       
       alias :to_gv :output
       alias :to_s :output
+      alias :to_ruby :output
     end
   end
 end
