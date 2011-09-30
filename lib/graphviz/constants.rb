@@ -127,150 +127,152 @@ module Constants
     "aspect"              => { :usedBy => "G",    :type => :EscString }, # aspectType
     "bb"                  => { :usedBy => "G",    :type => :EscString }, # rect
     "bgcolor"             => { :usedBy => "GC",   :type => :EscString }, # color
-    "center"              => { :usedBy => "G",    :type => :EscString }, # bool
-    "charset"             => { :usedBy => "G",    :type => :EscString },
+    "center"              => { :usedBy => "G",    :type => :GvBool },    # bool
+    "charset"             => { :usedBy => "G",    :type => :EscString }, # string
     "clusterrank"         => { :usedBy => "G",    :type => :EscString }, # clusterMode
     "color"               => { :usedBy => "ENC",  :type => :EscString }, # color, colorList
-    "colorscheme"         => { :usedBy => "ENCG", :type => :EscString }, 
-    "comment"             => { :usedBy => "ENG",  :type => :EscString },
-    "compound"            => { :usedBy => "G",    :type => :EscString }, # bool
-    "concentrate"         => { :usedBy => "G",    :type => :EscString }, # bool
-    "constraint"          => { :usedBy => "E",    :type => :EscString }, # bool
-    "decorate"            => { :usedBy => "E",    :type => :EscString }, # bool
+    "colorscheme"         => { :usedBy => "ENCG", :type => :EscString }, # string
+    "comment"             => { :usedBy => "ENG",  :type => :EscString }, # string
+    "compound"            => { :usedBy => "G",    :type => :GvBool },    # bool
+    "concentrate"         => { :usedBy => "G",    :type => :GvBool },    # bool
+    "constraint"          => { :usedBy => "E",    :type => :GvBool },    # bool
+    "decorate"            => { :usedBy => "E",    :type => :GvBool },    # bool
     "defaultdist"         => { :usedBy => "G",    :type => :GvDouble },
-    "dim"                 => { :usedBy => "G",    :type => :EscString },
-    "dimen"               => { :usedBy => "G",    :type => :EscString },
-    "dir"                 => { :usedBy => "E",    :type => :EscString },
-    "diredgeconstraints"  => { :usedBy => "G",    :type => :EscString },
-    "distortion"          => { :usedBy => "N",    :type => :GvDouble },
-    "dpi"                 => { :usedBy => "G",    :type => :GvDouble },
+    "dim"                 => { :usedBy => "G",    :type => :EscString }, # int
+    "dimen"               => { :usedBy => "G",    :type => :EscString }, # int
+    "dir"                 => { :usedBy => "E",    :type => :EscString }, # dirType
+    "diredgeconstraints"  => { :usedBy => "G",    :type => :EscString }, # string, bool
+    "distortion"          => { :usedBy => "N",    :type => :GvDouble },  
+    "dpi"                 => { :usedBy => "G",    :type => :GvDouble },  
     "edgeURL"             => { :usedBy => "E",    :type => :EscString },
     "edgehref"            => { :usedBy => "E",    :type => :EscString },
     "edgetarget"          => { :usedBy => "E",    :type => :EscString },
     "edgetooltip"         => { :usedBy => "E",    :type => :EscString },
     "epsilon"             => { :usedBy => "G",    :type => :GvDouble },
     "esep"                => { :usedBy => "G",    :type => :EscString }, # GvDouble , pointf
-    "fillcolor"           => { :usedBy => "NC",   :type => :EscString },
-    "fixedsize"           => { :usedBy => "N",    :type => :EscString },
-    "fontcolor"           => { :usedBy => "ENGC", :type => :EscString },
-    "fontname"            => { :usedBy => "ENGC", :type => :EscString },
-    "fontnames"           => { :usedBy => "G",    :type => :EscString },
-    "fontpath"            => { :usedBy => "G",    :type => :EscString },
+    "fillcolor"           => { :usedBy => "NC",   :type => :EscString }, # color
+    "fixedsize"           => { :usedBy => "N",    :type => :GvBool }, # bool
+    "fontcolor"           => { :usedBy => "ENGC", :type => :EscString }, # color
+    "fontname"            => { :usedBy => "ENGC", :type => :EscString }, # string
+    "fontnames"           => { :usedBy => "G",    :type => :EscString }, # string
+    "fontpath"            => { :usedBy => "G",    :type => :EscString }, # string
     "fontsize"            => { :usedBy => "ENGC", :type => :GvDouble },
-    "group"               => { :usedBy => "N",    :type => :EscString },
+    "group"               => { :usedBy => "N",    :type => :EscString }, # string
     "headURL"             => { :usedBy => "E",    :type => :EscString },
-    "headclip"            => { :usedBy => "E",    :type => :EscString },
+    "headclip"            => { :usedBy => "E",    :type => :GvBool }, # bool
     "headhref"            => { :usedBy => "E",    :type => :EscString },
-    "headlabel"           => { :usedBy => "E",    :type => :EscString },
-    "headport"            => { :usedBy => "E",    :type => :EscString },
+    "headlabel"           => { :usedBy => "E",    :type => :EscString }, # LblString 
+    "headport"            => { :usedBy => "E",    :type => :EscString }, # portPos
     "headtarget"          => { :usedBy => "E",    :type => :EscString },
     "headtooltip"         => { :usedBy => "E",    :type => :EscString },
     "height"              => { :usedBy => "N",    :type => :GvDouble },
     "href"                => { :usedBy => "NE",   :type => :EscString },
     "id"                  => { :usedBy => "ENG",  :type => :EscString },
-    "image"               => { :usedBy => "N",    :type => :EscString },
-    "imagescale"          => { :usedBy => "N",    :type => :EscString },
+    "image"               => { :usedBy => "N",    :type => :EscString }, # string
+    "imagescale"          => { :usedBy => "N",    :type => :EscString }, # bool, string
     "label"               => { :usedBy => "ENGC", :type => :LblString },
     "labelURL"            => { :usedBy => "E",    :type => :EscString },
-    "label_scheme"        => { :usedBy => "G",    :type => :EscString },
+    "label_scheme"        => { :usedBy => "G",    :type => :EscString }, # int
     "labelangle"          => { :usedBy => "E",    :type => :GvDouble },
     "labeldistance"       => { :usedBy => "E",    :type => :GvDouble },
-    "labelfloat"          => { :usedBy => "E",    :type => :EscString },
-    "labelfontcolor"      => { :usedBy => "E",    :type => :EscString },
-    "labelfontname"       => { :usedBy => "E",    :type => :EscString },
+    "labelfloat"          => { :usedBy => "E",    :type => :GvBool }, # bool
+    "labelfontcolor"      => { :usedBy => "E",    :type => :EscString }, # color
+    "labelfontname"       => { :usedBy => "E",    :type => :EscString }, # string
     "labelfontsize"       => { :usedBy => "E",    :type => :GvDouble },
     "labelhref"           => { :usedBy => "E",    :type => :EscString },
-    "labeljust"           => { :usedBy => "GC",   :type => :EscString },
-    "labelloc"            => { :usedBy => "GCN",  :type => :EscString },
+    "labeljust"           => { :usedBy => "GC",   :type => :EscString }, # string
+    "labelloc"            => { :usedBy => "GCN",  :type => :EscString }, # string
     "labeltarget"         => { :usedBy => "E",    :type => :EscString },
     "labeltooltip"        => { :usedBy => "E",    :type => :EscString },
-    "landscape"           => { :usedBy => "G",    :type => :EscString },
-    "layer"               => { :usedBy => "EN",   :type => :EscString },
-    "layers"              => { :usedBy => "G",    :type => :EscString },
-    "layersep"            => { :usedBy => "G",    :type => :EscString },
-    "layout"              => { :usedBy => "G",    :type => :EscString },
-    "len"                 => { :usedBy => "E",    :type => :GvDouble },
-    "levels"              => { :usedBy => "G",    :type => :EscString },
+    "landscape"           => { :usedBy => "G",    :type => :GvBool }, # bool
+    "layer"               => { :usedBy => "EN",   :type => :EscString }, # layerRange
+    "layers"              => { :usedBy => "G",    :type => :EscString }, # layerList
+    "layersep"            => { :usedBy => "G",    :type => :EscString }, # string
+    "layout"              => { :usedBy => "G",    :type => :EscString }, # string
+    "len"                 => { :usedBy => "E",    :type => :GvDouble },  
+    "levels"              => { :usedBy => "G",    :type => :EscString }, # int
     "levelsgap"           => { :usedBy => "G",    :type => :GvDouble },
-    "lhead"               => { :usedBy => "E",    :type => :EscString },
+    "lhead"               => { :usedBy => "E",    :type => :EscString }, # string
     "lheight"             => { :usedBy => "GC",   :type => :GvDouble },
-    "lp"                  => { :usedBy => "EGC",  :type => :EscString },
-    "ltail"               => { :usedBy => "E",    :type => :EscString },
-    "lweight"             => { :usedBy => "GC",   :type => :GvDouble },
+    "lp"                  => { :usedBy => "EGC",  :type => :EscString }, # point
+    "ltail"               => { :usedBy => "E",    :type => :EscString }, # string
+    "lwidth"              => { :usedBy => "GC",   :type => :GvDouble },
     "margin"              => { :usedBy => "NG",   :type => :EscString }, # GvDouble , pointf
-    "maxiter"             => { :usedBy => "G",    :type => :EscString },
+    "maxiter"             => { :usedBy => "G",    :type => :EscString }, # int
     "mclimit"             => { :usedBy => "G",    :type => :GvDouble },
     "mindist"             => { :usedBy => "G",    :type => :GvDouble },
-    "minlen"              => { :usedBy => "E",    :type => :EscString },
-    "mode"                => { :usedBy => "G",    :type => :EscString },
-    "model"               => { :usedBy => "G",    :type => :EscString },
-    "mosek"               => { :usedBy => "G",    :type => :EscString },
+    "minlen"              => { :usedBy => "E",    :type => :EscString }, # int
+    "mode"                => { :usedBy => "G",    :type => :EscString }, # string
+    "model"               => { :usedBy => "G",    :type => :EscString }, # string
+    "mosek"               => { :usedBy => "G",    :type => :GvBool }, # bool
     "nodesep"             => { :usedBy => "G",    :type => :GvDouble },
-    "nojustify"           => { :usedBy => "GCNE", :type => :EscString },
-    "normalize"           => { :usedBy => "G",    :type => :EscString },
+    "nojustify"           => { :usedBy => "GCNE", :type => :GvBool }, # bool
+    "normalize"           => { :usedBy => "G",    :type => :GvBool }, # bool
     "nslimit"             => { :usedBy => "G",    :type => :GvDouble },
     "nslimit1"            => { :usedBy => "G",    :type => :GvDouble },
-    "ordering"            => { :usedBy => "G",    :type => :EscString },
-    "orientation"         => { :usedBy => "NG",   :type => :GvDouble },
-    "outputorder"         => { :usedBy => "G",    :type => :EscString },
-    "overlap"             => { :usedBy => "G",    :type => :EscString },
+    "ordering"            => { :usedBy => "G",    :type => :EscString }, # string
+    "orientation"         => { :usedBy => "NG",   :type => :GvDouble },  # N: double, G: string
+    "outputorder"         => { :usedBy => "G",    :type => :EscString }, # outputMode
+    "overlap"             => { :usedBy => "G",    :type => :EscString }, # string, bool
     "overlap_scaling"     => { :usedBy => "G",    :type => :GvDouble },
-    "pack"                => { :usedBy => "G",    :type => :EscString },
-    "packmode"            => { :usedBy => "G",    :type => :EscString },
+    "pack"                => { :usedBy => "G",    :type => :EscString }, # bool, int
+    "packmode"            => { :usedBy => "G",    :type => :EscString }, # packMode
     "pad"                 => { :usedBy => "G",    :type => :EscString }, # GvDouble , pointf
     "page"                => { :usedBy => "G",    :type => :EscString }, # GvDouble , pointf
-    "pagedir"             => { :usedBy => "G",    :type => :EscString },
-    "pencolor"            => { :usedBy => "C",    :type => :EscString },
+    "pagedir"             => { :usedBy => "G",    :type => :EscString }, # pageDir
+    "pencolor"            => { :usedBy => "C",    :type => :EscString }, # color
     "penwidth"            => { :usedBy => "CNE",  :type => :GvDouble },
-    "peripheries"         => { :usedBy => "NC",   :type => :EscString },
-    "pin"                 => { :usedBy => "N",    :type => :EscString },
-    "pos"                 => { :usedBy => "EN",   :type => :SplineType },
-    "quadtree"            => { :usedBy => "G",    :type => :EscString },
+    "peripheries"         => { :usedBy => "NC",   :type => :EscString }, # int
+    "pin"                 => { :usedBy => "N",    :type => :GvBool }, # bool
+    "pos"                 => { :usedBy => "EN",   :type => :SplineType }, # point, splineTypes
+    "quadtree"            => { :usedBy => "G",    :type => :GvBool }, # bool
     "quantum"             => { :usedBy => "G",    :type => :GvDouble },
-    "rank"                => { :usedBy => "S",    :type => :EscString },
-    "rankdir"             => { :usedBy => "G",    :type => :EscString },
+    "rank"                => { :usedBy => "S",    :type => :EscString }, # rankType
+    "rankdir"             => { :usedBy => "G",    :type => :EscString }, # rankDir
     "ranksep"             => { :usedBy => "G",    :type => :EscString }, # GvDouble, doubleList
     "ratio"               => { :usedBy => "G",    :type => :EscString }, # GvDouble, String
-    "rects"               => { :usedBy => "N",    :type => :EscString },
-    "regular"             => { :usedBy => "N",    :type => :EscString },
-    "remincross"          => { :usedBy => "G",    :type => :EscString },
+    "rects"               => { :usedBy => "N",    :type => :EscString }, # rect
+    "regular"             => { :usedBy => "N",    :type => :GvBool }, # bool
+    "remincross"          => { :usedBy => "G",    :type => :GvBool }, # bool
     "repulsiveforce"      => { :usedBy => "G",    :type => :GvDouble },
     "resolution"          => { :usedBy => "G",    :type => :GvDouble },
-    "root"                => { :usedBy => "GN",   :type => :EscString },
-    "rotate"              => { :usedBy => "G",    :type => :EscString },
+    "root"                => { :usedBy => "GN",   :type => :EscString }, # bool, string
+    "rotate"              => { :usedBy => "G",    :type => :EscString }, # int
     "rotation"            => { :usedBy => "G",    :type => :GvDouble },
-    "samehead"            => { :usedBy => "E",    :type => :EscString },
-    "sametail"            => { :usedBy => "E",    :type => :EscString },
-    "samplepoints"        => { :usedBy => "G",    :type => :EscString },
-    "searchsize"          => { :usedBy => "G",    :type => :EscString },
-    "sep"                 => { :usedBy => "G",    :type => :EscString }, # GvDouble , pointf
-    "shape"               => { :usedBy => "N",    :type => :EscString },
-    "shapefile"           => { :usedBy => "N",    :type => :EscString },
-    "showboxes"           => { :usedBy => "ENG",  :type => :EscString },
-    "sides"               => { :usedBy => "N",    :type => :EscString },
-    "size"                => { :usedBy => "NG",   :type => :EscString }, # GvDouble , pointf
+    "samehead"            => { :usedBy => "E",    :type => :EscString }, # string
+    "sametail"            => { :usedBy => "E",    :type => :EscString }, # string
+    "samplepoints"        => { :usedBy => "G",    :type => :EscString }, # int
+    "scale"               => { :usedBy => "G",    :type => :EscString }, # double, pointf
+    "searchsize"          => { :usedBy => "G",    :type => :EscString }, # int
+    "sep"                 => { :usedBy => "G",    :type => :EscString }, # double , pointf
+    "shape"               => { :usedBy => "N",    :type => :EscString }, # shape
+    "shapefile"           => { :usedBy => "N",    :type => :EscString }, # string
+    "showboxes"           => { :usedBy => "ENG",  :type => :EscString }, # int
+    "sides"               => { :usedBy => "N",    :type => :EscString }, # int
+    "size"                => { :usedBy => "NG",   :type => :EscString }, # double , pointf
     "skew"                => { :usedBy => "N",    :type => :GvDouble },
-    "smoothing"           => { :usedBy => "G",    :type => :EscString },
-    "sortv"               => { :usedBy => "GCN",  :type => :EscString },
-    "splines"             => { :usedBy => "G",    :type => :EscString },
-    "start"               => { :usedBy => "G",    :type => :EscString },
-    "style"               => { :usedBy => "ENC",  :type => :EscString },
-    "stylesheet"          => { :usedBy => "G",    :type => :EscString },
+    "smoothing"           => { :usedBy => "G",    :type => :EscString }, # smoothType
+    "sortv"               => { :usedBy => "GCN",  :type => :EscString }, # int
+    "splines"             => { :usedBy => "G",    :type => :EscString }, # bool, string
+    "start"               => { :usedBy => "G",    :type => :EscString }, # startType
+    "style"               => { :usedBy => "ENC",  :type => :EscString }, # style
+    "stylesheet"          => { :usedBy => "G",    :type => :EscString }, # string
     "tailURL"             => { :usedBy => "E",    :type => :EscString },
-    "tailclip"            => { :usedBy => "E",    :type => :EscString },
+    "tailclip"            => { :usedBy => "E",    :type => :GvBool }, # bool
     "tailhref"            => { :usedBy => "E",    :type => :EscString },
-    "taillabel"           => { :usedBy => "E",    :type => :EscString },
-    "tailport"            => { :usedBy => "E",    :type => :EscString },
+    "taillabel"           => { :usedBy => "E",    :type => :EscString }, # lblString
+    "tailport"            => { :usedBy => "E",    :type => :EscString }, # portPos
     "tailtarget"          => { :usedBy => "E",    :type => :EscString },
     "tailtooltip"         => { :usedBy => "E",    :type => :EscString },
-    "target"              => { :usedBy => "ENGC", :type => :EscString },
+    "target"              => { :usedBy => "ENGC", :type => :EscString }, # escString, string
     "tooltip"             => { :usedBy => "NEC",  :type => :EscString },
-    "truecolor"           => { :usedBy => "G",    :type => :EscString },
-    "vertices"            => { :usedBy => "N",    :type => :EscString },
-    "viewport"            => { :usedBy => "G",    :type => :EscString },
+    "truecolor"           => { :usedBy => "G",    :type => :GvBool }, # bool
+    "vertices"            => { :usedBy => "N",    :type => :EscString }, # pointfList
+    "viewport"            => { :usedBy => "G",    :type => :EscString }, # viewPort
     "voro_margin"         => { :usedBy => "G",    :type => :GvDouble },
     "weight"              => { :usedBy => "E",    :type => :GvDouble },
     "width"               => { :usedBy => "N",    :type => :GvDouble },
+    "xlabel"              => { :usedBy => "EN",   :type => :LblString },
     "z"                   => { :usedBy => "N",    :type => :GvDouble }
   }
 

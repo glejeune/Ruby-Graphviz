@@ -18,3 +18,7 @@ hello_world = hello_world.complete
 hello_world.each_node do |_, node|
    puts "Node #{node.id} : position = " ; p node[:pos].point
 end
+
+puts "---------"
+
+puts hello_world.output( :dot => String )

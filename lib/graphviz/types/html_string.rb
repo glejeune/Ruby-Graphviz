@@ -1,3 +1,4 @@
+# TODO: Remove
 class GraphViz
   class Types
     class HtmlString < Common
