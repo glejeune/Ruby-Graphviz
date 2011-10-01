@@ -1,3 +1,8 @@
+class SplineTypeException < RuntimeError
+end
+
+# spliteType or point 
+#
 # spline ( ';' spline )*
 # where spline =  (endp)? (startp)? point (triple)+
 # and triple   =  point point point
@@ -8,9 +13,6 @@
 # to the control points of a B-spline from p1 to pn. If startp is given, it touches 
 # one node of the edge, and the arrowhead goes from p1 to startp. If startp is not 
 # given, p1 touches a node. Similarly for pn and endp. 
-class SplineTypeException < RuntimeError
-end
-
 class GraphViz
   class Types
     class SplineType < Common
