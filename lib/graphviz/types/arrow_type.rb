@@ -12,7 +12,7 @@
 
 class GraphViz
   class Types
-    class EscString < Common
+    class ArrowType < Common
       def check(data)
         return data
       end

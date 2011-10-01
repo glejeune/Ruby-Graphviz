@@ -1,6 +1,6 @@
 class GraphViz
   class Types
-    class ArrowType < Common
+    class EscString < Common
       def check(data)
         return data
       end

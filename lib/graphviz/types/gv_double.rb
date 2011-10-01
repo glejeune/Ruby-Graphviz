@@ -7,7 +7,7 @@ class GraphViz
       FLOAT_MASK = /[-+]?(?:[0-9]*\.[0-9]+|[0-9]+)/
 
       def check(data)
-        if data.is_a?(Float) or (data.is_a?(String) and FLOAT_MASK.match(data) 
+        if data.kind_of?(Numeric) or (data.is_a?(String) and FLOAT_MASK.match(data))
           return data
         end
 
