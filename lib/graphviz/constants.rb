@@ -121,11 +121,11 @@ module Constants
     "K"                   => { :usedBy => "GC",   :type => :GvDouble },
     "URL"                 => { :usedBy => "ENGC", :type => :EscString },
     "area"                => { :usedBy => "NC",   :type => :GvDouble },
-    "arrowhead"           => { :usedBy => "E",    :type => :EscString }, # arrowType
+    "arrowhead"           => { :usedBy => "E",    :type => :ArrowType }, # arrowType
     "arrowsize"           => { :usedBy => "E",    :type => :GvDouble },
-    "arrowtail"           => { :usedBy => "E",    :type => :EscString }, # arrowType
+    "arrowtail"           => { :usedBy => "E",    :type => :ArrowType }, # arrowType
     "aspect"              => { :usedBy => "G",    :type => :EscString }, # aspectType
-    "bb"                  => { :usedBy => "G",    :type => :EscString }, # rect
+    "bb"                  => { :usedBy => "G",    :type => :Rect }, # rect
     "bgcolor"             => { :usedBy => "GC",   :type => :EscString }, # color
     "center"              => { :usedBy => "G",    :type => :GvBool },    # bool
     "charset"             => { :usedBy => "G",    :type => :EscString }, # string
@@ -231,7 +231,7 @@ module Constants
     "rankdir"             => { :usedBy => "G",    :type => :EscString }, # rankDir
     "ranksep"             => { :usedBy => "G",    :type => :EscString }, # GvDouble, doubleList
     "ratio"               => { :usedBy => "G",    :type => :EscString }, # GvDouble, String
-    "rects"               => { :usedBy => "N",    :type => :EscString }, # rect
+    "rects"               => { :usedBy => "N",    :type => :Rect }, # rect
     "regular"             => { :usedBy => "N",    :type => :GvBool }, # bool
     "remincross"          => { :usedBy => "G",    :type => :GvBool }, # bool
     "repulsiveforce"      => { :usedBy => "G",    :type => :GvDouble },

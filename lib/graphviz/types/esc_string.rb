@@ -1,18 +1,6 @@
-# >> x = "hello\n\t\\l\"world\""
-# => "hello\n\t\\l\"world\""
-# >> puts x.inspect.gsub( "\\\\", "\\" )
-# "hello\n\t\l\"world\""
-#
-# OR
-# 
-# >> x = 'hello\n\t\l"world"'
-# => "hello\\n\\t\\l\"world\""
-# >> puts x.inspect.gsub( "\\\\", "\\" )
-# "hello\n\t\l\"world\""
-
 class GraphViz
   class Types
-    class EscString < Common
+    class ArrowType < Common
       def check(data)
         return data
       end
@@ -25,7 +13,7 @@ class GraphViz
       alias :to_s :output
 
       def to_ruby
-         @data.to_ruby
+         @data
       end
     end
   end

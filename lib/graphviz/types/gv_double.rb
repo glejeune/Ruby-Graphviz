@@ -1,8 +1,17 @@
+class DoubleException < RuntimeError
+end
+
 class GraphViz
   class Types
     class GvDouble < Common
+      FLOAT_MASK = /[-+]?(?:[0-9]*\.[0-9]+|[0-9]+)/
+
       def check(data)
-        return data
+        if data.is_a?(Float) or (data.is_a?(String) and FLOAT_MASK.match(data) 
+          return data
+        end
+
+        raise DoubleException, "Invalid double value"
       end
       
       def output
@@ -15,7 +24,7 @@ class GraphViz
       
       alias :to_gv :output
       alias :to_s :output
-      alias :to_ruby :output
+      alias :to_ruby :to_f
     end
   end
 end
