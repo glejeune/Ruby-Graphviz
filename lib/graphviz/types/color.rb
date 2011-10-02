@@ -10,17 +10,18 @@ class GraphViz
       RGBA = /^#(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})?$/
 
       def check(data)
+        data = data.to_s if data.is_a?(Symbol)
         if data[0].chr == "#"
           m = RGBA.match(data)
           if m.nil?
-            raise ColorException, "Wrong color definition"
+            raise ColorException, "Wrong color definition RGBA #{data}"
           end
           @to_ruby = GraphViz::Utils::Colors.rgb(m[1], m[2], m[3], m[4])
           return data
         elsif data.include?(",") or data.include?(" ")
           m = data.split(/(?:\s*,\s*|\s+)/).map { |x| x.to_f }
           if m.size != 3
-            raise ColorException, "Wrong color definition"
+            raise ColorException, "Wrong color definition HSV #{data}"
           end
           @to_ruby = GraphViz::Utils::Colors.hsv(m[0], m[1], m[2])
           return data
@@ -33,7 +34,7 @@ class GraphViz
             return data
           end
 
-          raise ColorException, "Wrong color definition"
+          raise ColorException, "Wrong color definition Array #{data}"
         else
           @to_ruby = GraphViz::Utils::Colors.name(data)
           return data

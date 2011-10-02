@@ -4,7 +4,7 @@ class GraphViz
    class Utils
       class Colors 
          HEX_FOR_COLOR = /[0-9a-fA-F]{2}/
-         RGBA = /(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})/
+         RGBA = /^(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})?$/
       
          attr_reader :r, :g, :b, :a
          attr_reader :h, :s, :v

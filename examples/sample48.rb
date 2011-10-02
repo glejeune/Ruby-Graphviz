@@ -28,7 +28,7 @@
 # 	end [shape=Msquare];
 # }
 
-$:.unshift( "../../lib" );
+$:.unshift( "../lib" );
 require "graphviz"
 
 GraphViz.new( :G, :type => :digraph ) { |g|

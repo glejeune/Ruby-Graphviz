@@ -62,7 +62,7 @@ class GraphViz
       return( (self.pg.nil?) ? nil : self.pg.root_graph )
     end
     
-	  # 
+	 # 
     # Set value +xAttrValue+ to the node attribut +xAttrName+
     # 
     def []=( xAttrName, xAttrValue )
