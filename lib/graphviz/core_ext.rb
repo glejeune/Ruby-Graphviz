@@ -23,6 +23,15 @@ class Object
    end
 end
 
+class Array
+   def all?(&b)
+      r = self.delete_if { |x|
+         yield x
+      }
+      r.size == 0
+   end
+end
+
 # From : http://www.geekmade.co.uk/2008/09/ruby-tip-normalizing-hash-keys-as-symbols/
 class Hash
    def symbolize_keys
