@@ -126,11 +126,11 @@ module Constants
     "arrowtail"           => { :usedBy => "E",    :type => :ArrowType }, # arrowType
     "aspect"              => { :usedBy => "G",    :type => :EscString }, # aspectType
     "bb"                  => { :usedBy => "G",    :type => :Rect }, # rect
-    "bgcolor"             => { :usedBy => "GC",   :type => :EscString }, # color
+    "bgcolor"             => { :usedBy => "GC",   :type => :Color }, # color
     "center"              => { :usedBy => "G",    :type => :GvBool },    # bool
     "charset"             => { :usedBy => "G",    :type => :EscString }, # string
     "clusterrank"         => { :usedBy => "G",    :type => :EscString }, # clusterMode
-    "color"               => { :usedBy => "ENC",  :type => :EscString }, # color, colorList
+    "color"               => { :usedBy => "ENC",  :type => :ColorList }, # color, colorList
     "colorscheme"         => { :usedBy => "ENCG", :type => :EscString }, # string
     "comment"             => { :usedBy => "ENG",  :type => :EscString }, # string
     "compound"            => { :usedBy => "G",    :type => :GvBool },    # bool
@@ -150,9 +150,9 @@ module Constants
     "edgetooltip"         => { :usedBy => "E",    :type => :EscString },
     "epsilon"             => { :usedBy => "G",    :type => :GvDouble },
     "esep"                => { :usedBy => "G",    :type => :EscString }, # GvDouble , pointf
-    "fillcolor"           => { :usedBy => "NC",   :type => :EscString }, # color
+    "fillcolor"           => { :usedBy => "NC",   :type => :Color }, # color
     "fixedsize"           => { :usedBy => "N",    :type => :GvBool }, # bool
-    "fontcolor"           => { :usedBy => "ENGC", :type => :EscString }, # color
+    "fontcolor"           => { :usedBy => "ENGC", :type => :Color }, # color
     "fontname"            => { :usedBy => "ENGC", :type => :EscString }, # string
     "fontnames"           => { :usedBy => "G",    :type => :EscString }, # string
     "fontpath"            => { :usedBy => "G",    :type => :EscString }, # string
@@ -176,7 +176,7 @@ module Constants
     "labelangle"          => { :usedBy => "E",    :type => :GvDouble },
     "labeldistance"       => { :usedBy => "E",    :type => :GvDouble },
     "labelfloat"          => { :usedBy => "E",    :type => :GvBool }, # bool
-    "labelfontcolor"      => { :usedBy => "E",    :type => :EscString }, # color
+    "labelfontcolor"      => { :usedBy => "E",    :type => :Color }, # color
     "labelfontname"       => { :usedBy => "E",    :type => :EscString }, # string
     "labelfontsize"       => { :usedBy => "E",    :type => :GvDouble },
     "labelhref"           => { :usedBy => "E",    :type => :EscString },
@@ -220,7 +220,7 @@ module Constants
     "pad"                 => { :usedBy => "G",    :type => :EscString }, # GvDouble , pointf
     "page"                => { :usedBy => "G",    :type => :EscString }, # GvDouble , pointf
     "pagedir"             => { :usedBy => "G",    :type => :EscString }, # pageDir
-    "pencolor"            => { :usedBy => "C",    :type => :EscString }, # color
+    "pencolor"            => { :usedBy => "C",    :type => :Color }, # color
     "penwidth"            => { :usedBy => "CNE",  :type => :GvDouble },
     "peripheries"         => { :usedBy => "NC",   :type => :EscString }, # int
     "pin"                 => { :usedBy => "N",    :type => :GvBool }, # bool
