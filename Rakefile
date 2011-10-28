@@ -3,8 +3,8 @@ require "graphviz/constants"
 
 require 'rake'
 require 'rake/clean'
-require 'rake/gempackagetask'
-require 'rake/rdoctask'
+require 'rubygems/package_task'
+require 'rdoc/task'
 require 'rake/testtask'
 require 'fileutils'
 require 'json/pure'
@@ -100,7 +100,8 @@ graph theory !
 }
     end
 
-Rake::GemPackageTask.new(spec) do |p|
+Gem::PackageTask.new(spec) do |p|
+# Rake::GemPackageTask.new(spec) do |p|
     p.need_tar = true
     p.gem_spec = spec
 end
