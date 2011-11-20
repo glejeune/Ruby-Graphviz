@@ -23,7 +23,7 @@ module GVUtils
       file = (path.nil?)?bin:File.join(path,bin)
       if File.executable?(file) and not File.directory?(file) then
         return file
-      elsif Config::CONFIG['host_os'] =~ /mswin|mingw/ # WAS: elsif RUBY_PLATFORM =~ /mswin|mingw/
+      elsif RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ # WAS: elsif RUBY_PLATFORM =~ /mswin|mingw/
         found_ext = (ENV['PATHEXT'] || '.exe;.bat;.com').split(";").find {|ext| File.executable?(file + ext) }
         return file + found_ext if found_ext
       end
