@@ -16,10 +16,10 @@ Interface to the GraphViz graphing tool
 
 == WARNING
 
-<b>We are close to the 1.0 version... So if you use one of the following method or attribut, please update your code because they will be remove.</b>
+<b>We are close to the 1.0 version... So if you use one of the following methods or attributes, please update your code because they will be removed.</b>
 
 * GraphViz::Node#name must be replaced by GraphViz::Node#id
-* The html attribut must be replaced by a label attribut (<tt>:label => '<<html/>>'</tt>)
+* The html attribut must be replaced by a label attribute (<tt>:label => '<<html/>>'</tt>)
 * :output option must be replaced by :<format> => :<file>
 * :file option must be replaced by :<format> => :<file>
 
@@ -28,7 +28,7 @@ Interface to the GraphViz graphing tool
 === 1.0.0 : 
 * \o/
 * GraphViz::Node#name has been removed - use GraphViz::Node#id
-* The html attribut has been removed - use a label attribut (<tt>:label => '<<html/>>'</tt>)
+* The html attribute has been removed - use a label attribut (<tt>:label => '<<html/>>'</tt>)
 * :output option has been removed - use :<format> => :<file>
 * :file option has been removed - use :<format> => :<file>
 * Add GraphViz#to_s
@@ -37,7 +37,7 @@ Interface to the GraphViz graphing tool
 * Issue #22 : Error when generating a graph with an ID containing a space.
 
 === 0.9.21 :
-* Add attributs "label_scheme" and "rotation"
+* Add attributes "label_scheme" and "rotation"
 * Add missing options :
   * <tt>:scale => v</tt> : Scale input by 'v' (=72)
   * <tt>:inverty => [true|false]</tt> : Invert y coordinate in output
@@ -286,7 +286,7 @@ GraphML[http://graphml.graphdrawing.org/] support
   g = GraphViz::GraphML.new( "graphml/cluster.graphml" )
   g.graph.output( :path => "/usr/local/bin", :png => "#{$0}.png" )
 
-At last, you can create familly tree with GraphViz::FamilyTree (<b>beta</b>) :
+At last, you can create family tree with GraphViz::FamilyTree (<b>beta</b>) :
 
   require 'graphviz/family_tree'
   
@@ -316,17 +316,17 @@ At last, you can create familly tree with GraphViz::FamilyTree (<b>beta</b>) :
 
 == TOOLS
 
-Ruby/GraphViz also include :
+Ruby/GraphViz also includes :
 
-* <tt>ruby2gv</tt>, a simple tool that's allow you to create a dependency graph from a ruby script. Example : http://drp.ly/dShaZ
+* <tt>ruby2gv</tt>, a simple tool that allows you to create a dependency graph from a ruby script. Example : http://drp.ly/dShaZ
 
     ruby2gv -Tpng -oruby2gv.png ruby2gv
 
-* <tt>gem2gv</tt>, a tools that's allow you to create a dependency graph between gems. Example : http://drp.ly/dSj9Y
+* <tt>gem2gv</tt>, a tool that allows you to create a dependency graph between gems. Example : http://drp.ly/dSj9Y
 
     gem2gv -Tpng -oruby-graphviz.png ruby-graphviz
 
-* <tt>dot2ruby</tt>, a tools that's allow you to create a ruby script from a graphviz script
+* <tt>dot2ruby</tt>, a tool that allows you to create a ruby script from a graphviz script
 
     $ cat hello.dot
     digraph G {Hello->World;}
@@ -344,9 +344,9 @@ Ruby/GraphViz also include :
     }
     puts graph_g.output( :canon => String )
 
-* <tt>git2gv</tt>, a tools that's allow you to show your git commits : http://dl.dropbox.com/u/72629/ruby-graphviz-git.svg
+* <tt>git2gv</tt>, a tool that allows you to show your git commits : http://dl.dropbox.com/u/72629/ruby-graphviz-git.svg
 
-* <tt>xml2gv</tt>, a tools that's allow you to show a xml file as graph.
+* <tt>xml2gv</tt>, a tool that allows you to show a xml file as graph.
 
 == GRAPH THEORY
 
