@@ -14,15 +14,6 @@ Interface to the GraphViz graphing tool
 
 * New FamilyTree
 
-== WARNING
-
-<b>We are close to the 1.0 version... So if you use one of the following methods or attributes, please update your code because they will be removed.</b>
-
-* GraphViz::Node#name must be replaced by GraphViz::Node#id
-* The html attribut must be replaced by a label attribute (<tt>:label => '<<html/>>'</tt>)
-* :output option must be replaced by :<format> => :<file>
-* :file option must be replaced by :<format> => :<file>
-
 == CHANGELOG
 
 === 1.0.0 : 
