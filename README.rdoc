@@ -16,6 +16,13 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 1.0.1 : 
+* Add GraphViz::DSL
+* Change project to use Bundler gem tools
+* Fix a few typos in the README
+* Change Config to RbConfig
+* Add possibility to get the x,y coordinates of each of the nodes
+
 === 1.0.0 : 
 * \o/
 * GraphViz::Node#name has been removed - use GraphViz::Node#id

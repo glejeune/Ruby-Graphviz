@@ -228,31 +228,37 @@ class GraphViz
   # * hOpts : Graph attributs
   #
   def add_graph( xGraphName = nil, hOpts = {}, &block )
-    if xGraphName.kind_of?(Hash)
-      hOpts = xGraphName
-      xGraphName = nil
-    end
+     if xGraphName.kind_of?(GraphViz) 
+        xGraphID = xGraphName.id
+        @hoGraphs[xGraphID] = xGraphName.clone
+        xGraphName = xGraphID 
+     else
+        if xGraphName.kind_of?(Hash)
+           hOpts = xGraphName
+           xGraphName = nil
+        end
 
-    if xGraphName.nil?
-      xGraphID = String.random(11)
-      xGraphName = ""
-    else
-      xGraphID = xGraphName
-    end
-    
-    @hoGraphs[xGraphID] = GraphViz::new( xGraphName, {:parent => self, :type => @oGraphType}, &block )
-   
-    hOpts.each do |xKey, xValue|
-      @hoGraphs[xGraphID][xKey.to_s] = xValue
-    end
-    
-    @elements_order.push( { 
-      "type" => "graph", 
-      "name" => xGraphName,
-      "value" => @hoGraphs[xGraphID] 
-    } )
-    
-    return( @hoGraphs[xGraphID] )
+        if xGraphName.nil?
+           xGraphID = String.random(11)
+           xGraphName = ""
+        else
+           xGraphID = xGraphName
+        end
+
+        @hoGraphs[xGraphID] = GraphViz::new( xGraphName, {:parent => self, :type => @oGraphType}, &block )
+
+        hOpts.each do |xKey, xValue|
+           @hoGraphs[xGraphID][xKey.to_s] = xValue
+        end
+     end
+
+     @elements_order.push( { 
+        "type" => "graph", 
+        "name" => xGraphName,
+        "value" => @hoGraphs[xGraphID] 
+     } )
+
+     return( @hoGraphs[xGraphID] )
   end
   alias :subgraph :add_graph
   #
