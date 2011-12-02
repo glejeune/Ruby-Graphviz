@@ -15,13 +15,13 @@ digraph :G do
       graph[:label => "process #2", :color => :blue]
    end
 
-   start << cluster_0.a0
-   start << cluster_1.b0
-   cluster_0.a1 << cluster_1.b3
-   cluster_1.b2 << cluster_0.a3
-   cluster_0.a3 << cluster_0.a0
-   cluster_0.a3 << _end
-   cluster_1.b3 << _end
+   start << a0
+   start << b0
+   a1 << b3
+   b2 << a3
+   a3 << a0
+   a3 << _end
+   b3 << _end
 
    start[:shape] = :Mdiamond
    _end[:label] = "end"

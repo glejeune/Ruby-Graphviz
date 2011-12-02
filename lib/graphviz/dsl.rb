@@ -9,8 +9,8 @@ class GraphViz::DSL
    end
 
    def method_missing(sym, *args, &block)
-      return @graph.get_graph(sym.to_s) unless(@graph.get_graph(sym.to_s).nil?)
-      return @graph.get_node(sym.to_s) unless(@graph.get_node(sym.to_s).nil?)
+      return @graph.get_graph(sym.to_s) unless @graph.get_graph(sym.to_s).nil?
+      return @graph.get_node(sym.to_s) unless @graph.get_node(sym.to_s).nil?
       if(@graph.respond_to?(sym, true))
          @graph.send(sym, *args)
       elsif(block)
@@ -20,9 +20,25 @@ class GraphViz::DSL
       end
    end
 
+   def n(name)
+      return @graph.get_node(name) unless @graph.get_node(name.to_s).nil?
+      @graph.add_node(name)
+   end
+
+   def e(*args)
+      e = nil
+      last = args.shift
+      while current = args.shift
+         e = @graph.add_edge(last, current)
+         last = current
+      end
+      return e
+   end
+
    def subgraph(name, &block) 
       @graph.add_graph(GraphViz::DSL.new(name, { :parent => @graph, :type => @graph.type }, &block).graph)
    end
+   alias :cluster :subgraph
 
    def output(hOpts = {}) 
       @graph.output(hOpts)
