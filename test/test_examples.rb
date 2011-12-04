@@ -26,7 +26,6 @@ class GraphVizTest < Test::Unit::TestCase
     '36' => 'hangs for me',
     '53' => 'FamilyTree is broken',
     '57' => 'will not be able to find the graphml script',
-    '62' => 'Work in progress',
     '99' => 'FamilyTree is broken'
   }
 
@@ -61,6 +60,10 @@ class GraphVizTest < Test::Unit::TestCase
 
   def test_sample55
     assert_output_pattern(/\Agraph G \{.*\}\n\Z/m, '55')
+  end
+
+  def test_sample62
+     assert_output_pattern(/\ANode.*\n\Z/m, '62')
   end
 
   #

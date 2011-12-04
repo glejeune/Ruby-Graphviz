@@ -26,7 +26,6 @@ digraph :G do
       n(ruby)[:color => :tomato]
    end
 
-   puts output(:canon => String)
    output :png => "#{$0}.png"
 end
 
