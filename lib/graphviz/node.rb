@@ -78,6 +78,7 @@ class GraphViz
         xAttrName.each do |key, value|
           self[key] = value
         end
+        return self
       else
         (@oAttrNode[xAttrName.to_s].nil?)?nil:@oAttrNode[xAttrName.to_s].clone
       end

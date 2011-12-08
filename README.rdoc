@@ -261,6 +261,15 @@ The same but with a block
     g.world( :label => "World" ) << g.hello( :label => "Hello" )
   }.output( :png => "hello_world.png" )
 
+Or with the DSL
+
+  require 'graphviz/dsl'
+  digraph :G do
+    world[:label => "World"] << hello[:label => "Hello"]
+
+    output :png => "hello_world.png"
+  end
+
 Create a graph from a file 
 
   require 'graphviz'
@@ -284,33 +293,6 @@ GraphML[http://graphml.graphdrawing.org/] support
   g = GraphViz::GraphML.new( "graphml/cluster.graphml" )
   g.graph.output( :path => "/usr/local/bin", :png => "#{$0}.png" )
 
-At last, you can create family tree with GraphViz::FamilyTree (<b>beta</b>) :
-
-  require 'graphviz/family_tree'
-  
-  tree = GraphViz::FamilyTree.new do
-    generation do
-      benoist.is_a_man( "Benoist" )
-      nathalie.is_a_woman( "Nathalie" )
-      
-      benoist.is_maried_with nathalie
-    end
-  
-    generation do
-      charlotte.is_a_woman( "Charlotte" )
-      amelie.is_a_woman( "Amelie" )
-      clement.is_a_man( "Clement" )
-      gregoire.is_a_man( "Gregoire" )
-      
-      muriel.is_a_woman( "Muriel" )
-  
-      gregoire.is_maried_with muriel
-    end
-  
-    couple( benoist, nathalie ).kids( charlotte, amelie, clement, gregoire )
-  end
-  
-  tree.graph.save( :png => "#{$0}.png" )
 
 == TOOLS
 
@@ -393,7 +375,7 @@ Ruby/GraphViz also includes :
 
   sudo gem install ruby-graphviz
 
-You also need to install GraphViz[http://www.graphviz.org] and Treetop[http://treetop.rubyforge.org/]
+You also need to install GraphViz[http://www.graphviz.org] 
 
 On *Windows* you also need to install win32-open3. This is not an absolute requirement.
 
