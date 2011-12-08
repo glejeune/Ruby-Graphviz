@@ -40,7 +40,7 @@
 #   C => cluster
 #
 module Constants
-  RGV_VERSION = "1.0.1"
+  RGV_VERSION = "1.0.2"
   
   ## Const: Output formats
   FORMATS = [
