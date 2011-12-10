@@ -39,12 +39,12 @@ puts "Symmetric ? #{t.symmetric?}"
 
 puts "Incidence matrix :"
 puts t.incidence_matrix
-# => [  1  1  1  1  0  0  0  0  0  0]
-#    [  0 -1  0  0  1  1  1  0  0  0]
-#    [  0  0  0  0 -1  0  0  1  1  0]
-#    [  0  0 -1  0  0 -1  0 -1  0  1]
-#    [  0  0  0  0  0  0 -1  0  0 -1]
-#    [  0  0  0 -1  0  0  0  0 -1  0]
+# => [  1  1  1  0  0  0  0  0  0]
+#    [ -1  0  0  1  1  1  0  0  0]
+#    [  0  0  0 -1  0  0  1  1  0]
+#    [  0 -1  0  0 -1  0 -1  0  1]
+#    [  0  0  0  0  0 -1  0  0 -1]
+#    [  0  0 -1  0  0  0  0 -1  0]
 
 g.each_node do |name, node|
   puts "Degree of node `#{name}' = #{t.degree(node)}"

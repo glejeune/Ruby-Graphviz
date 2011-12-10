@@ -115,15 +115,30 @@ class GraphViz
     }.call
   end
 
-  #
-  # Return the node object for the given name (or nil)
-  #
+  # Return the node object for the given name (or nil) in the current graph
   def get_node( xNodeName, &block )
     node = @hoNodes[xNodeName] || nil
     
     yield( node ) if( block and node.nil? == false )
     
     return node
+  end
+
+  # Returns the first node found in the entire graph, starting from the root graph
+  def find_node(name) 
+     root = root_graph
+     return root.search_node(name)
+  end
+
+  # Return the first node found in the current graph, and it subgraphs
+  def search_node(name)
+     n = get_node(name)
+     return n unless n.nil?
+     each_graph { |_, g|
+        n = g.search_node(name)
+        return n unless n.nil?
+     }
+     return nil
   end
   
   #

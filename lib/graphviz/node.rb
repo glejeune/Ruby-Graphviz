@@ -23,6 +23,11 @@ class GraphViz
     @xNodeName
     @oAttrNode
     @oGParrent
+
+    # All nodes that are directly accessible from given node.
+    attr_reader :neighbors
+    # All nodes that are incident to the given node.
+    attr_reader :incidents
     
     # 
     # Create a new node
@@ -32,6 +37,8 @@ class GraphViz
     # * oGParrent : Graph 
     # 
     def initialize( xNodeName, oGParrent )
+      @neighbors = []
+      @incidents = []
       @xNodeName = xNodeName
       @oGParrent = oGParrent
       @oAttrNode = GraphViz::Attrs::new( nil, "node", NODESATTRS )
@@ -130,7 +137,7 @@ class GraphViz
     def set( &b )
       yield( self )
     end
-    
+
     # Add node options
     # use node.<option>=<value> or node.<option>( <value> )
     def method_missing( idName, *args, &block ) #:nodoc:
