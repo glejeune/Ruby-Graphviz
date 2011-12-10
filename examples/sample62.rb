@@ -21,4 +21,4 @@ end
 
 puts "---------"
 
-puts hello_world.output( :dot => String )
+puts hello_world.output( :canon => String )

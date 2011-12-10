@@ -1,4 +1,4 @@
-# Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Gregoire Lejeune <gregoire.lejeune@free.fr>
+# Copyright (C) 2004 - 2011 Gregoire Lejeune <gregoire.lejeune@free.fr>
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,160 +18,139 @@ require 'graphviz/attrs'
 require 'graphviz/constants'
 
 class GraphViz
-  class Node
-    include Constants
-    @xNodeName
-    @oAttrNode
-    @oGParrent
+   class Node
+      include Constants
 
-    # All nodes that are directly accessible from given node.
-    attr_reader :neighbors
-    # All nodes that are incident to the given node.
-    attr_reader :incidents
-    
-    # 
-    # Create a new node
-    # 
-    # In:
-    # * xNodeName : ID of the node
-    # * oGParrent : Graph 
-    # 
-    def initialize( xNodeName, oGParrent )
-      @neighbors = []
-      @incidents = []
-      @xNodeName = xNodeName
-      @oGParrent = oGParrent
-      @oAttrNode = GraphViz::Attrs::new( nil, "node", NODESATTRS )
-      @index = nil
-    end
+      # List of nodes that are directly accessible from given node.
+      attr_reader :neighbors
+      # List of nodes that are incident to the given node.
+      attr_reader :incidents
 
-    # 
-    # Get the node ID
-    # 
-    def id
-	    @xNodeName.clone
-	  end
-	  
-	  #
-	  # Return the node index
-	  #
-	  def index
-	    @index
-    end
-    def index=(i) #:nodoc:
-      @index = i if @index == nil
-    end
+      # Create a new node
+      # 
+      # * node_id : ID of the node
+      # * parent_graph : Graph 
+      def initialize( node_id, parent_graph )
+         @neighbors = []
+         @incidents = []
+         @node_id = node_id
+         @parent_graph = parent_graph
+         @node_attributs = GraphViz::Attrs::new( nil, "node", NODESATTRS )
+         @index = nil
+      end
 
-    #
-    # Return the root graph
-    #
-    def root_graph
-      return( (self.pg.nil?) ? nil : self.pg.root_graph )
-    end
-    
-	 # 
-    # Set value +xAttrValue+ to the node attribut +xAttrName+
-    # 
-    def []=( xAttrName, xAttrValue )
-      xAttrValue = xAttrValue.to_s if xAttrValue.class == Symbol
-      @oAttrNode[xAttrName.to_s] = xAttrValue
-    end
+      # Get the node ID
+      def id
+         @node_id.clone
+      end
 
-    # 
-    # Get the value of the node attribut +xAttrName+
-    # 
-    def []( xAttrName )
-      if Hash === xAttrName
-        xAttrName.each do |key, value|
-          self[key] = value
-        end
-        return self
-      else
-        (@oAttrNode[xAttrName.to_s].nil?)?nil:@oAttrNode[xAttrName.to_s].clone
+      # Return the node index
+      def index
+         @index
       end
-    end
+      def index=(i) #:nodoc:
+         @index = i if @index == nil
+      end
 
-    #
-    # Calls block once for each attribut of the node, passing the name and value to the 
-    # block as a two-element array.
-    #
-    # If global is set to false, the block does not receive the attributs set globally
-    #
-    def each_attribut(global = true, &b)
-      attrs = @oAttrNode.to_h
-      if global
-        attrs = pg.node.to_h.merge attrs
+      # Return the root graph
+      def root_graph
+         return( (self.pg.nil?) ? nil : self.pg.root_graph )
       end
-      attrs.each do |k,v|
-        yield(k,v)
-      end
-    end
-    
-    # 
-    # Create an edge between the current node and the node +oNode+
-    # 
-    def <<( oNode )
-      if( oNode.class == Array ) 
-        oNode.each do |no|
-          self << no
-        end
-      else
-        return GraphViz::commonGraph( oNode, self ).add_edge( self, oNode )
-      end
-    end
-    alias :> :<<
-    alias :- :<<
-    alias :>> :<<
-    
-    #
-    # Set node attributs
-    #
-    # Example :
-    #   n = graph.add_node( ... )
-    #   ...
-    #   n.set { |_n|
-    #     _n.color = "blue"
-    #     _n.fontcolor = "red"
-    #   }
-    # 
-    def set( &b )
-      yield( self )
-    end
 
-    # Add node options
-    # use node.<option>=<value> or node.<option>( <value> )
-    def method_missing( idName, *args, &block ) #:nodoc:
-      xName = idName.id2name
-      
-      self[xName.gsub( /=$/, "" )]=args[0]
-    end
-    
-    def pg #:nodoc:
-      @oGParrent
-    end
-    
-    def output #:nodoc:
-      #xNodeName = @xNodeName.clone
-      #xNodeName = '"' << xNodeName << '"' if xNodeName.match( /^[a-zA-Z_]+[a-zA-Z0-9_\.]*$/ ).nil?
-      xNodeName = GraphViz.escape(@xNodeName)
-      
-      xOut = "" << xNodeName
-      xAttr = ""
-      xSeparator = ""
-      
-      if @oAttrNode.data.has_key?("label") and @oAttrNode.data.has_key?("html")
-        @oAttrNode.data.delete("label")
+      # Set value +attribut_value+ to the node attribut +attribut_name+
+      def []=( attribut_name, attribut_value )
+         attribut_value = attribut_value.to_s if attribut_value.class == Symbol
+         @node_attributs[attribut_name.to_s] = attribut_value
       end
-      @oAttrNode.data.each do |k, v|
-        xAttr << xSeparator + k + " = " + v.to_gv
-        xSeparator = ", "
-      end
-      if xAttr.length > 0
-        xOut << " [" + xAttr + "]"
-      end
-      xOut << ";"
 
-      return( xOut )
-    end
-  end
+      # Get the value of the node attribut +attribut_name+
+      def []( attribut_name )
+         if Hash === attribut_name
+            attribut_name.each do |key, value|
+               self[key] = value
+            end
+            return self
+         else
+            (@node_attributs[attribut_name.to_s].nil?)?nil:@node_attributs[attribut_name.to_s].clone
+         end
+      end
+
+      # Calls block once for each attribut of the node, passing the name and value to the 
+      # block as a two-element array.
+      #
+      # If global is set to false, the block does not receive the attributs set globally
+      def each_attribut(global = true, &b)
+         attrs = @node_attributs.to_h
+         if global
+            attrs = pg.node.to_h.merge attrs
+         end
+         attrs.each do |k,v|
+            yield(k,v)
+         end
+      end
+
+      # Create an edge between the current node and the node +node+
+      def <<( node )
+         if( node.class == Array ) 
+            node.each do |no|
+               self << no
+            end
+         else
+            return GraphViz::commonGraph( node, self ).add_edge( self, node )
+         end
+      end
+      alias :> :<<
+      alias :- :<<
+      alias :>> :<<
+
+      # Set node attributs
+      #
+      # Example :
+      #   n = graph.add_node( ... )
+      #   ...
+      #   n.set { |_n|
+      #     _n.color = "blue"
+      #     _n.fontcolor = "red"
+      #   }
+      # 
+      def set( &b )
+         yield( self )
+      end
+
+      # Add node options
+      # use node.<option>=<value> or node.<option>( <value> )
+      def method_missing( idName, *args, &block ) #:nodoc:
+         xName = idName.id2name
+
+         self[xName.gsub( /=$/, "" )]=args[0]
+      end
+
+      def pg #:nodoc:
+         @parent_graph
+      end
+
+      def output #:nodoc:
+         #node_id = @node_id.clone
+         #node_id = '"' << node_id << '"' if node_id.match( /^[a-zA-Z_]+[a-zA-Z0-9_\.]*$/ ).nil?
+         node_id = GraphViz.escape(@node_id)
+
+         xOut = "" << node_id
+         xAttr = ""
+         xSeparator = ""
+
+         if @node_attributs.data.has_key?("label") and @node_attributs.data.has_key?("html")
+            @node_attributs.data.delete("label")
+         end
+         @node_attributs.data.each do |k, v|
+            xAttr << xSeparator + k + " = " + v.to_gv
+            xSeparator = ", "
+         end
+         if xAttr.length > 0
+            xOut << " [" + xAttr + "]"
+         end
+         xOut << ";"
+
+         return( xOut )
+      end
+   end
 end

@@ -40,10 +40,13 @@ class GraphViz
          @xNodeTwo, @xNodeTwoPort = getNodeNameAndPort( vNodeTwo )
 
          @oGParrent = oGParrent
-
          @oAttrEdge = GraphViz::Attrs::new( nil, "edge", EDGESATTRS )
-
          @index = nil
+
+         if @oGParrent.directed? 
+            (@oGParrent.find_node(@xNodeOne) || @oGParrent.add_node(@xNodeOne)).neighbors << (@oGParrent.find_node(@xNodeTwo) || @oGParrent.add_node(@xNodeTwo))
+            (@oGParrent.find_node(@xNodeTwo) || @oGParrent.add_node(@xNodeTwo)).incidents << (@oGParrent.find_node(@xNodeOne) || @oGParrent.add_node(@xNodeOne))
+         end
       end
 
       # Return the node one as string (so with port if any)

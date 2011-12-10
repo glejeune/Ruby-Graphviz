@@ -48,6 +48,8 @@ puts t.incidence_matrix
 
 g.each_node do |name, node|
   puts "Degree of node `#{name}' = #{t.degree(node)}"
+  print "neighbors : "; p t.neighbors(name).map{ |e| e.id } # = node.neighbors.map { |e| e.id }
+  print "incidents : "; p t.incidents(name).map{ |e| e.id } # = node.incidents.map { |e| e.id }
 end
 
 puts "Laplacian matrix :"
@@ -79,3 +81,7 @@ puts "Critical path : "
 rrr = t.critical_path
 print "\tPath "; p rrr[:path]
 puts "\tDistance : #{rrr[:distance]}"
+
+t.pagerank.each { |node, rank| 
+   puts "Pagerank for node #{node.id} = #{rank}"
+}

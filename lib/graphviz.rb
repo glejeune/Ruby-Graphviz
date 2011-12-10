@@ -93,16 +93,14 @@ class GraphViz
   # Return the GraphViz::Node object created
   #
   def add_node( xNodeName, hOpts = {} )
-    return @hoNodes[xNodeName] || Proc.new {
+    node = @hoNodes[xNodeName]
+
+    if node.nil?
       @hoNodes[xNodeName] = GraphViz::Node::new( xNodeName, self )
       @hoNodes[xNodeName].index = @elements_order.size_of( "node" )
     
       unless hOpts.keys.include?(:label) or hOpts.keys.include?("label")
         hOpts[:label] = xNodeName
-      end
-      
-      hOpts.each do |xKey, xValue|
-        @hoNodes[xNodeName][xKey.to_s] = xValue
       end
     
       @elements_order.push( { 
@@ -110,9 +108,15 @@ class GraphViz
         "name" => xNodeName,
         "value" => @hoNodes[xNodeName] 
       } )
-    
-      return( @hoNodes[xNodeName] )
-    }.call
+
+      node = @hoNodes[xNodeName]
+    end
+
+    hOpts.each do |xKey, xValue|
+       @hoNodes[xNodeName][xKey.to_s] = xValue
+    end
+
+    return node
   end
 
   # Return the node object for the given name (or nil) in the current graph
@@ -779,6 +783,10 @@ class GraphViz
     complete
   end
 
+  # Return true if the graph is directed.
+  def directed?
+     not (/digraph/ =~ "bla digraph bla").nil?
+  end
 ## ----------------------------------------------------------------------------
 
   private 
