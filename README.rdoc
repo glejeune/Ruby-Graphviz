@@ -16,6 +16,10 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 1.0.2 :
+* Add PageRank algorithm
+* Major bug corrections
+
 === 1.0.1 : 
 * Add GraphViz::DSL
 * Change project to use Bundler gem tools
