@@ -42,10 +42,13 @@ RDoc::Task.new do |rdoc|
 end
 
 Rake::TestTask.new(:test) do |t|
-  t.test_files = FileList['test/test_*.rb']
   require 'graphviz/utils'
   include GVUtils
-  t.test_files.exclude("test/test_examples.rb") if find_executable("dot", nil).nil?
+  if find_executable("dot", nil).nil?
+    t.test_files = FileList['test/test_*.rb'].exclude("test/test_examples.rb") 
+  else
+    t.test_files = FileList['test/test_*.rb']
+  end
 end
 
 Bundler::GemHelper.install_tasks
