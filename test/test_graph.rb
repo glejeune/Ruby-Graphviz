@@ -79,10 +79,30 @@ class GraphVizTest < Test::Unit::TestCase
      g.add_edge( a3, a0 )
      g.add_edge( a3, endn )
 
-     assert(g, "Create graph failed!")
+     assert g
 
-     assert_equal(g.get_node("start"), start, "Can't get node!")
-     assert_nil(g.get_node("a0"), "Found a wrong node!")
-     assert_equal(g.find_node("a0"), a0, "Can't find node!")
+     assert_equal g.get_node("start"), start
+     assert_equal g.find_node("start"), start
+     assert_equal g.search_node("start"), start
+
+     assert_nil   g.get_node("a0")
+     assert_equal g.find_node("a0"), a0
+     assert_equal g.search_node("a0"), a0
+
+     assert_nil   c0.get_node("start")
+     assert_equal c0.find_node("start"), start
+     assert_nil   c0.search_node("start")
+
+     assert_equal c0.get_node("a0"), a0
+     assert_equal c0.find_node("a0"), a0
+     assert_equal c0.search_node("a0"), a0
+
+     assert_nil   c1.get_node("start")
+     assert_equal c1.find_node("start"), start
+     assert_nil   c1.search_node("start")
+
+     assert_nil   c1.get_node("a0")
+     assert_equal c1.find_node("a0"), a0
+     assert_nil   c1.search_node("a0")
   end
 end
