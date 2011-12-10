@@ -15,54 +15,49 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
 class GraphViz
-  class Attrs
-    @data
-    @name
-    @attributs
-	  @graphviz
-    
-    attr_accessor :data
+   class Attrs
+      attr_accessor :data
 
-    def initialize( gviz, name, attributs )
-      @name      = name
-      @attributs = attributs
-      @data      = Hash::new( )
-	    @graphviz  = gviz
-    end
+      def initialize( gviz, name, attributs )
+         @name      = name
+         @attributs = attributs
+         @data      = Hash::new( )
+         @graphviz  = gviz
+      end
 
-    def each
-      @data.each do |k, v|
-        yield(k, v)
+      def each
+         @data.each do |k, v|
+            yield(k, v)
+         end
       end
-    end
-    
-    def to_h
-      @data.clone
-    end
 
-    def []( xKey )
-      if xKey.class == Hash
-        xKey.each do |k, v|
-          self[k] = v
-        end
-      else
-        if @data.key?( xKey.to_s ) == false
-          nil
-        end
-        @data[xKey.to_s]
+      def to_h
+         @data.clone
       end
-    end
-    
-    def []=( xKey, xValue )
-      unless @attributs.keys.include?( xKey.to_s )
-        raise ArgumentError, "#{@name} attribut '#{xKey.to_s}' invalid"
-      end
-      
-      @data[xKey.to_s] = GraphViz::Types.const_get(@attributs[xKey.to_s]).new( xValue )
 
-      if @graphviz.nil? == false
-        @graphviz.set_position( @name, xKey.to_s, @data[xKey.to_s] )
+      def []( key )
+         if key.class == Hash
+            key.each do |k, v|
+               self[k] = v
+            end
+         else
+            if @data.key?( key.to_s ) == false
+               nil
+            end
+            @data[key.to_s]
+         end
       end
-    end
-  end
+
+      def []=( key, value )
+         unless @attributs.keys.include?( key.to_s )
+            raise ArgumentError, "#{@name} attribut '#{key.to_s}' invalid"
+         end
+
+         @data[key.to_s] = GraphViz::Types.const_get(@attributs[key.to_s]).new( value )
+
+         if @graphviz.nil? == false
+            @graphviz.set_position( @name, key.to_s, @data[key.to_s] )
+         end
+      end
+   end
 end

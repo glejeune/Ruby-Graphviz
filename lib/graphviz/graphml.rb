@@ -37,9 +37,7 @@ class GraphViz
       'undirected' => :graph
     }
     
-    #
     # Create a new GraphViz object from a GraphML file of string
-    #
     def initialize( file_or_str )
       data = ((File.file?( file_or_str )) ? File::new(file_or_str) : file_or_str) 
       @xmlDoc = REXML::Document::new( data )

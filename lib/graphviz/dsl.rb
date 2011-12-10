@@ -3,12 +3,13 @@ require 'graphviz'
 class GraphViz::DSL
    attr_accessor :graph
 
-   def initialize(name, hOpts = {}, &block)
-      @graph = GraphViz.new(name, hOpts)
+   # Create a new graph
+   def initialize(name, options = {}, &block)
+      @graph = GraphViz.new(name, options)
       instance_eval(&block) if block
    end
 
-   def method_missing(sym, *args, &block)
+   def method_missing(sym, *args, &block) #:nodoc:
       return @graph.get_graph(sym.to_s) unless @graph.get_graph(sym.to_s).nil?
       return @graph.get_node(sym.to_s) unless @graph.get_node(sym.to_s).nil?
       if(@graph.respond_to?(sym, true))
@@ -20,11 +21,13 @@ class GraphViz::DSL
       end
    end
 
+   # Add a new node
    def n(name)
       return @graph.get_node(name) unless @graph.get_node(name.to_s).nil?
       @graph.add_node(name)
    end
 
+   # Create edges
    def e(*args)
       e = nil
       last = args.shift
@@ -35,25 +38,30 @@ class GraphViz::DSL
       return e
    end
 
+   # Add a subgraph
    def subgraph(name, &block) 
       @graph.add_graph(GraphViz::DSL.new(name, { :parent => @graph, :type => @graph.type }, &block).graph)
    end
    alias :cluster :subgraph
 
-   def output(hOpts = {}) 
-      @graph.output(hOpts)
+   # Generate output
+   def output(options = {}) 
+      @graph.output(options)
    end
 end
 
-def graph(name, hOpts = {}, &block) 
-   GraphViz::DSL.new(name, hOpts.merge( { :type => "graph" } ), &block).graph
+# Create a new undirected graph
+def graph(name, options = {}, &block) 
+   GraphViz::DSL.new(name, options.merge( { :type => "graph" } ), &block).graph
 end
 
-def digraph(name, hOpts = {}, &block) 
-   GraphViz::DSL.new(name, hOpts.merge( { :type => "digraph" } ), &block).graph
+# Create a new directed graph
+def digraph(name, options = {}, &block) 
+   GraphViz::DSL.new(name, options.merge( { :type => "digraph" } ), &block).graph
 end
 
-def strict(name, hOpts = {}, &block) 
-   GraphViz::DSL.new(name, hOpts.merge( { :type => "strict digraph" } ), &block).graph
+# Create a new strict directed graph
+def strict(name, options = {}, &block) 
+   GraphViz::DSL.new(name, options.merge( { :type => "strict digraph" } ), &block).graph
 end
 

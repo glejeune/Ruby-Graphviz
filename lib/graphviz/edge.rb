@@ -20,58 +20,50 @@ require 'graphviz/constants'
 class GraphViz
    class Edge
       include Constants
-      @xNodeOne
-      @xNodeOnePort
-      @xNodeTwo
-      @xNodeTwoPort
-      @oAttrEdge
-      @oGParrent
 
-      # 
       # Create a new edge
       # 
       # In:
       # * vNodeOne : First node (can be a GraphViz::Node or a node ID)
       # * vNodeTwo : Second node (can be a GraphViz::Node or a node ID)
-      # * oGParrent : Graph 
-      #
-      def initialize( vNodeOne, vNodeTwo, oGParrent )
-         @xNodeOne, @xNodeOnePort = getNodeNameAndPort( vNodeOne )
-         @xNodeTwo, @xNodeTwoPort = getNodeNameAndPort( vNodeTwo )
+      # * parent_graph : Graph 
+      def initialize( vNodeOne, vNodeTwo, parent_graph )
+         @node_one_id, @node_one_port = getNodeNameAndPort( vNodeOne )
+         @node_two_id, @node_two_port = getNodeNameAndPort( vNodeTwo )
 
-         @oGParrent = oGParrent
-         @oAttrEdge = GraphViz::Attrs::new( nil, "edge", EDGESATTRS )
+         @parent_graph = parent_graph
+         @edge_attributs = GraphViz::Attrs::new( nil, "edge", EDGESATTRS )
          @index = nil
 
-         if @oGParrent.directed? 
-            (@oGParrent.find_node(@xNodeOne) || @oGParrent.add_node(@xNodeOne)).neighbors << (@oGParrent.find_node(@xNodeTwo) || @oGParrent.add_node(@xNodeTwo))
-            (@oGParrent.find_node(@xNodeTwo) || @oGParrent.add_node(@xNodeTwo)).incidents << (@oGParrent.find_node(@xNodeOne) || @oGParrent.add_node(@xNodeOne))
+         unless @parent_graph.directed? 
+            (@parent_graph.find_node(@node_one_id) || @parent_graph.add_node(@node_one_id)).incidents << (@parent_graph.find_node(@node_two_id) || @parent_graph.add_node(@node_two_id))
+            (@parent_graph.find_node(@node_two_id) || @parent_graph.add_node(@node_two_id)).neighbors << (@parent_graph.find_node(@node_one_id) || @parent_graph.add_node(@node_one_id))
          end
+         (@parent_graph.find_node(@node_one_id) || @parent_graph.add_node(@node_one_id)).neighbors << (@parent_graph.find_node(@node_two_id) || @parent_graph.add_node(@node_two_id))
+         (@parent_graph.find_node(@node_two_id) || @parent_graph.add_node(@node_two_id)).incidents << (@parent_graph.find_node(@node_one_id) || @parent_graph.add_node(@node_one_id))
       end
 
       # Return the node one as string (so with port if any)
       def node_one( with_port = true )
-         if @xNodeOnePort.nil? or with_port == false
-            GraphViz.escape(@xNodeOne)
+         if @node_one_port.nil? or with_port == false
+            GraphViz.escape(@node_one_id)
          else
-            GraphViz.escape(@xNodeOne, :force => true) + ":#{@xNodeOnePort}"
+            GraphViz.escape(@node_one_id, :force => true) + ":#{@node_one_port}"
          end
       end
       alias :tail_node :node_one
 
       # Return the node two as string (so with port if any)
       def node_two( with_port = true )
-         if @xNodeTwoPort.nil? or with_port == false
-            GraphViz.escape(@xNodeTwo) 
+         if @node_two_port.nil? or with_port == false
+            GraphViz.escape(@node_two_id) 
          else 
-            GraphViz.escape(@xNodeTwo, :force => true) + ":#{@xNodeTwoPort}"
+            GraphViz.escape(@node_two_id, :force => true) + ":#{@node_two_port}"
          end
       end
       alias :head_node :node_two
 
-      #
       # Return the index of the edge
-      #
       def index
          @index
       end
@@ -79,27 +71,23 @@ class GraphViz
          @index = i if @index == nil
       end
 
-      # 
-      # Set value +xAttrValue+ to the edge attribut +xAttrName+
-      # 
-      def []=( xAttrName, xAttrValue )
-         xAttrValue = xAttrValue.to_s if xAttrValue.class == Symbol
-         @oAttrEdge[xAttrName.to_s] = xAttrValue
+      # Set value +attribut_value+ to the edge attribut +attribut_name+
+      def []=( attribut_name, attribut_value )
+         attribut_value = attribut_value.to_s if attribut_value.class == Symbol
+         @edge_attributs[attribut_name.to_s] = attribut_value
       end
 
-      # 
       # Set values for edge attributs or 
-      # get the value of the given edge attribut +xAttrName+
-      # 
-      def []( xAttrName )
+      # get the value of the given edge attribut +attribut_name+
+      def []( attribut_name )
          # Modification by axgle (http://github.com/axgle)
-         if Hash === xAttrName
-            xAttrName.each do |key, value|
+         if Hash === attribut_name
+            attribut_name.each do |key, value|
                self[key] = value
             end
          else
-            if @oAttrEdge[xAttrName.to_s]
-               @oAttrEdge[xAttrName.to_s].clone 
+            if @edge_attributs[attribut_name.to_s]
+               @edge_attributs[attribut_name.to_s].clone 
             else
                nil
             end
@@ -113,7 +101,7 @@ class GraphViz
       # If global is set to false, the block does not receive the attributs set globally
       #
       def each_attribut(global = true, &b)
-         attrs = @oAttrEdge.to_h
+         attrs = @edge_attributs.to_h
          if global
             attrs = pg.edge.to_h.merge attrs
          end
@@ -122,10 +110,10 @@ class GraphViz
          end
       end
 
-      def <<( oNode ) #:nodoc:
-         n = @oGParrent.get_node(@xNodeTwo)
+      def <<( node ) #:nodoc:
+         n = @parent_graph.get_node(@node_two_id)
 
-         GraphViz::commonGraph( oNode, n ).add_edge( n, oNode )
+         GraphViz::commonGraph( node, n ).add_edge( n, node )
       end
       alias :> :<< #:nodoc:
       alias :- :<< #:nodoc:
@@ -139,10 +127,9 @@ class GraphViz
       end
 
       def pg #:nodoc:
-         @oGParrent
+         @parent_graph
       end
 
-      #
       # Set edge attributs
       #
       # Example :
@@ -152,7 +139,6 @@ class GraphViz
       #     _e.color = "blue"
       #     _e.fontcolor = "red"
       #   }
-      # 
       def set( &b )
          yield( self )
       end
@@ -175,7 +161,7 @@ class GraphViz
          xOut = self.node_one + xLink + self.node_two
          xAttr = ""
          xSeparator = ""
-         @oAttrEdge.data.each do |k, v|
+         @edge_attributs.data.each do |k, v|
             xAttr << xSeparator + k + " = " + v.to_gv
             xSeparator = ", "
          end

@@ -21,9 +21,9 @@ class GraphViz
    class Node
       include Constants
 
-      # List of nodes that are directly accessible from given node.
+      # List of nodes that are directly accessible from given node (in a directed graph neighbors == incidents)
       attr_reader :neighbors
-      # List of nodes that are incident to the given node.
+      # List of nodes that are incident to the given node (in a directed graph neighbors == incidents)
       attr_reader :incidents
 
       # Create a new node

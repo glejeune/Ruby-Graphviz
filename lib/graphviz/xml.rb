@@ -28,9 +28,9 @@ class GraphViz
     # 
     # THIS METHOD IS DEPRECATED, PLEASE USE GraphViz::XML.graph.output
     # 
-    def output( *hOpt )
+    def output( *options )
       warn "GraphViz::XML.output is deprecated, use GraphViz::XML.graph.output"
-      @graph.output( *hOpt )
+      @graph.output( *options )
     end
     
     private
@@ -39,58 +39,58 @@ class GraphViz
     # Create a graph from a XML file
     # 
     # In:
-    # * xFile : XML File
-    # * *hOpt : Graph options:
+    # * xml_file : XML File
+    # * *options : Graph options:
     #   * :text : show text nodes (default true)
     #   * :attrs : show XML attributs (default true)
     # 
-    def initialize( xFile, *hOpt )
-      @xNodeName = "00000"
-	    @bShowText = true
-	    @bShowAttrs = true
+    def initialize( xml_file, *options )
+      @node_name = "00000"
+	   @show_text = true
+	   @show_attributs = true
 
-      if hOpt.nil? == false and hOpt[0].nil? == false
-        hOpt[0].each do |xKey, xValue|
+      if options.nil? == false and options[0].nil? == false
+        options[0].each do |xKey, xValue|
           case xKey.to_s
             when "text"
-              @bShowText = xValue
-		          hOpt[0].delete( xKey )
+              @show_text = xValue
+		          options[0].delete( xKey )
             when "attrs"
-              @bShowAttrs = xValue
-		          hOpt[0].delete( xKey )
+              @show_attributs = xValue
+		          options[0].delete( xKey )
           end
         end
       end
 
-      @oReXML = REXML::Document::new( File::new( xFile ) )
-      @graph = GraphViz::new( "XML", *hOpt ) 
-      _init( @oReXML.root() )
+      @rexml_document = REXML::Document::new( File::new( xml_file ) )
+      @graph = GraphViz::new( "XML", *options ) 
+      parse_xml_node( @rexml_document.root() )
     end
     
-    def _init( oXMLNode ) #:nodoc:
-      xLocalNodeName = @xNodeName.clone
-      @xNodeName.succ!
+    def parse_xml_node( xml_node ) #:nodoc:
+      local_node_name = @node_name.clone
+      @node_name.succ!
       
-      label = oXMLNode.name
-      if oXMLNode.has_attributes? == true and @bShowAttrs == true
-        label = "{ " + oXMLNode.name 
+      label = xml_node.name
+      if xml_node.has_attributes? == true and @show_attributs == true
+        label = "{ " + xml_node.name 
 		
-		    oXMLNode.attributes.each do |xName, xValue|
+		    xml_node.attributes.each do |xName, xValue|
 		      label << "| { #{xName} | #{xValue} } " 
 		    end
 		
 		    label << "}"
 	    end
-      @graph.add_node( xLocalNodeName, "label" => label, "color" => "blue", "shape" => "record" )
+      @graph.add_node( local_node_name, "label" => label, "color" => "blue", "shape" => "record" )
 
       ## Act: Search and add Text nodes
-      if oXMLNode.has_text? == true and @bShowText == true
-        xTextNodeName = xLocalNodeName.clone
-        xTextNodeName << "111"
+      if xml_node.has_text? == true and @show_text == true
+        text_node_name = local_node_name.clone
+        text_node_name << "111"
         
         xText = ""
         xSep = ""
-        oXMLNode.texts().each do |l|
+        xml_node.texts().each do |l|
           x = l.value.chomp.strip
           if x.length > 0
             xText << xSep << x
@@ -99,20 +99,20 @@ class GraphViz
         end
 
         if xText.length > 0
-          @graph.add_node( xTextNodeName, "label" => xText, "color" => "black", "shape" => "ellipse" )
-          @graph.add_edge( xLocalNodeName, xTextNodeName )
+          @graph.add_node( text_node_name, "label" => xText, "color" => "black", "shape" => "ellipse" )
+          @graph.add_edge( local_node_name, text_node_name )
         end
       end
 
       ## Act: Search and add attributs
       ## TODO
 
-      oXMLNode.each_element( ) do |oXMLChild|
-        xChildNodeName = _init( oXMLChild )
-        @graph.add_edge( xLocalNodeName, xChildNodeName )
+      xml_node.each_element( ) do |xml_child_node|
+        child_node_name = parse_xml_node( xml_child_node )
+        @graph.add_edge( local_node_name, child_node_name )
       end
 
-      return( xLocalNodeName )
+      return( local_node_name )
     end
 
   end

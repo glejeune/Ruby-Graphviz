@@ -6,9 +6,7 @@ class GraphViz
          @graph = graph
       end
 
-      #
       # Return the adjancy matrix of the graph
-      #
       def adjancy_matrix
          matrix = GraphViz::Math::Matrix.new( @graph.node_count, @graph.node_count )
 
@@ -22,9 +20,7 @@ class GraphViz
          return matrix
       end
 
-      #
       # Return the incidence matrix of the graph
-      #
       def incidence_matrix
          tail = (@graph.type == "digraph") ? -1 : 1
          matrix = GraphViz::Math::Matrix.new( @graph.node_count, @graph.edge_count )
@@ -43,9 +39,7 @@ class GraphViz
          return matrix
       end
 
-      #
       # Return the degree of the given node
-      #
       def degree( node )
          degree = 0
          name = node 
@@ -60,23 +54,17 @@ class GraphViz
          return degree
       end
 
-      #
       # Return the laplacian matrix of the graph
-      #
       def laplacian_matrix
          return degree_matrix - adjancy_matrix
       end
 
-      #
       # Return <tt>true</tt> if the graph if symmetric, <tt>false</tt> otherwise   
-      #
       def symmetric?
          adjancy_matrix == adjancy_matrix.transpose
       end
 
-      #
       # moore_dijkstra(source, destination)
-      # 
       def moore_dijkstra( dep, arv )
          dep = @graph.get_node(dep) unless dep.kind_of?(GraphViz::Node)
          arv = @graph.get_node(arv) unless arv.kind_of?(GraphViz::Node)
@@ -143,11 +131,9 @@ class GraphViz
          end
       end
 
-      #
       # Return a liste of range
       #
       # If the returned array include nil values, there is one or more circuits in the graph
-      #
       def range
          matrix = adjancy_matrix
          unseen = (1..matrix.columns).to_a
@@ -157,11 +143,9 @@ class GraphViz
          range_recursion( matrix, unseen, result, r )
       end
 
-      #
       # Return the critical path for a PERT network
       #
       # If the given graph is not a PERT network, return nul
-      #
       def critical_path
          return nil if range.include?(nil) or @graph.type != "digraph"
          r = [ [0, [1]] ]
@@ -203,6 +187,7 @@ class GraphViz
          return pagerank
       end
 
+      # Return the list of nodes that are directly accessible from given node 
       def neighbors(node)
          if node.class == String
             @graph.get_node(node).neighbors
@@ -211,6 +196,7 @@ class GraphViz
          end
       end
 
+      # Return the list of nodes that are incident to the given node (in a directed graph neighbors == incidents)
       def incidents(node)
          if node.class == String
             @graph.get_node(node).incidents
