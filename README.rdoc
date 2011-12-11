@@ -19,6 +19,8 @@ Interface to the GraphViz graphing tool
 === 1.0.2 :
 * Add PageRank algorithm
 * Major bug corrections
+* Fix utils/colors.rb's case syntax
+* Modify deprecated method: Hash#index to Hash#key
 
 === 1.0.1 : 
 * Add GraphViz::DSL
