@@ -42,7 +42,6 @@ class GraphViz
                raise ColorException, "Bad alpha value"
             end
       
-      
             @r = r
             @g = g
             @b = b
