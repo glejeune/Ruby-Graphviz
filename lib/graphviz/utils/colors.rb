@@ -48,7 +48,7 @@ class GraphViz
             @b = b
             @a = a
             
-            @color = COLORS.index(rgba_string.downcase)
+            @color = COLORS.key(rgba_string.downcase)
             
             @h, @s, @v = rgb_to_hsv(@r, @g, @b)
          end
@@ -64,7 +64,7 @@ class GraphViz
       
             @r, @g, @b = hsv_to_rgb(@h, @s, @v)
       
-            @color = COLORS.index(rgba_string.downcase);
+            @color = COLORS.key(rgba_string.downcase);
          end
       
          def name(c = nil)
