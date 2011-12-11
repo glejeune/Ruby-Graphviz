@@ -175,23 +175,23 @@ class GraphViz
                q = _v * ( 1.0 - _s * f )
                t = _v * ( 1.0 - _s * ( 1 - f ) )
                case i 
-               when 0:
+               when 0
                   r = _v
                   g = t
                   b = p
-               when 1:
+               when 1
                   r = q
                   g = _v
                   b = p
-               when 2:
+               when 2
                   r = p
                   g = _v
                   b = t
-               when 3:
+               when 3
                   r = p
                   g = q
                   b = _v
-               when 4:
+               when 4
                   r = t
                   g = p
                   b = _v
