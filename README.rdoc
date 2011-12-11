@@ -16,6 +16,8 @@ Interface to the GraphViz graphing tool
 
 == CHANGELOG
 
+=== 1.0.3 :
+
 === 1.0.2 :
 * Add PageRank algorithm
 * Major bug corrections
