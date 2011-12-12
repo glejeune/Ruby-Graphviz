@@ -17,6 +17,7 @@ Interface to the GraphViz graphing tool
 == CHANGELOG
 
 === 1.0.3 :
+* Remove definition of Array#all?
 
 === 1.0.2 :
 * Add PageRank algorithm
