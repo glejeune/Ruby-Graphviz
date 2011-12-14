@@ -93,6 +93,9 @@ class GraphViz
   # Return the GraphViz::Node object created
   #
   def add_node( xNodeName, hOpts = {} )
+     warn "GraphViz#add_node is deprecated, please use GraphViz#add_nodes"
+     return add_nodes(xNodeName, hOpts)
+=begin
     node = @hoNodes[xNodeName]
 
     if node.nil?
@@ -117,6 +120,38 @@ class GraphViz
     end
 
     return node
+=end
+  end
+
+  def add_nodes(node_name, options = {})
+     if node_name.kind_of? Array
+        node_name.each { |n| add_nodes(n, options.clone) }
+     else
+        node = @hoNodes[node_name]
+
+        if node.nil?
+           @hoNodes[node_name] = GraphViz::Node::new( node_name, self )
+           @hoNodes[node_name].index = @elements_order.size_of( "node" )
+
+           unless options.keys.include?(:label) or options.keys.include?("label")
+              options[:label] = node_name
+           end
+
+           @elements_order.push( { 
+              "type" => "node", 
+              "name" => node_name,
+              "value" => @hoNodes[node_name] 
+           } )
+
+           node = @hoNodes[node_name]
+        end
+
+        options.each do |xKey, xValue|
+           @hoNodes[node_name][xKey.to_s] = xValue
+        end
+
+        return node
+     end
   end
 
   # Return the node object for the given name (or nil) in the current graph
@@ -166,47 +201,49 @@ class GraphViz
     end
   end
   
-  #
   # Get the number of nodes
-  #
   def node_count
     @hoNodes.size
   end
   
-  ##
+  #<b>DEPRECATED</b>
+  def add_edge( oNodeOne, oNodeTwo, hOpts = {} )
+     warn "GraphViz#add_edge is deprecated, please use GraphViz#add_edges"
+     add_edges(oNodeOne, oNodeTwo, hOpts)
+  end
+
   # Create a new edge
   # 
   # In:
-  # * oNodeOne : First node (or node list)
-  # * oNodeTwo : Second Node (or node list)
-  # * hOpts : Edge attributs
-  #
-  def add_edge( oNodeOne, oNodeTwo, hOpts = {} )
+  # * node_one : First node (or node list)
+  # * node_two : Second Node (or node list)
+  # * options : Edge attributs
+  def add_edges( node_one, node_two, options = {} )
     
-    if( oNodeOne.class == Array ) 
-      oNodeOne.each do |no|
-        add_edge( no, oNodeTwo, hOpts )
+    if( node_one.class == Array ) 
+      node_one.each do |no|
+        add_edges( no, node_two, options )
       end
     else
-      if( oNodeTwo.class == Array )
-        oNodeTwo.each do |nt|
-          add_edge( oNodeOne, nt, hOpts )
+      if( node_two.class == Array )
+        node_two.each do |nt|
+          add_edges( node_one, nt, options )
         end
       else
-        oEdge = GraphViz::Edge::new( oNodeOne, oNodeTwo, self )
-        oEdge.index = @elements_order.size_of( "edge" )
+        edge = GraphViz::Edge::new( node_one, node_two, self )
+        edge.index = @elements_order.size_of( "edge" )
         
-        hOpts.each do |xKey, xValue|
-          oEdge[xKey.to_s] = xValue
+        options.each do |xKey, xValue|
+          edge[xKey.to_s] = xValue
         end
         
         @elements_order.push( { 
           "type" => "edge", 
-          "value" => oEdge
+          "value" => edge
         } )
-        @loEdges.push( oEdge )
+        @loEdges.push( edge )
         
-        return( oEdge )
+        return( edge )
       end
     end
   end
@@ -349,7 +386,7 @@ class GraphViz
       end
       return( @hoGraphs[xName] ) if @hoGraphs.keys.include?( xName )
             
-      rCod = add_node( xName, args[0]||{} )
+      rCod = add_nodes( xName, args[0]||{} )
     end
 
     return rCod
@@ -678,7 +715,7 @@ class GraphViz
         self << no
       end
     else
-      return GraphViz::commonGraph( oNode, self ).add_edge( self, oNode )
+      return GraphViz::commonGraph( oNode, self ).add_edges( self, oNode )
     end
   end
   alias :> :<<
@@ -888,11 +925,11 @@ class GraphViz
   def add_hash_edge(node, hash)
     if hash.kind_of? Hash
       hash.each do |nt, data|
-        add_edge(node, nt)
+        add_edges(node, nt)
         add_hash_edge(nt, data)
       end
     else
-      add_edge(node, hash)
+      add_edges(node, hash)
     end
   end
   
@@ -914,15 +951,42 @@ class GraphViz
     new( xGraphName, hOpts.symbolize_keys.merge( {:type => "digraph"} ), &block )
   end
   
-  #
   # Create a new strict directed graph
   #
   # See also GraphViz::new
-  #
   def self.strict_digraph( xGraphName, hOpts = {}, &block )
     new( xGraphName, hOpts.symbolize_keys.merge( {:type => "digraph", :strict => true} ), &block )
   end
   
+  # Create a random graph.
+  def self.generate(num_nodes, num_edges, directed = false, weight_range = (1..1))
+     g = nil
+     if directed
+        g = GraphViz.digraph(:G)
+     else
+        g = GraphViz.graph(:G)
+     end
+
+     nodes = (1..num_nodes).map{ |e| e.to_s }
+     x = g.add_nodes(nodes)
+
+     edges = []
+     nodes.each do |head|
+        nodes.each do |tail|
+           if (directed and head != tail) or (head < tail)
+              edges << {:head => head, :tail => tail, :weight => weight_range.to_a.shuffle[0]}
+           end
+        end
+     end
+     edges.shuffle!
+
+     (num_edges - 1).times do |i|
+        g.add_edges(edges[i][:head], edges[i][:tail], :label => edges[i][:weight].to_s, :weight => edges[i][:weight])
+     end
+
+     return g
+  end
+
   #
   # Escape a string to be acceptable as a node name in a graphviz input file
   #

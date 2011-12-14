@@ -14,20 +14,20 @@ start_level=6
 # or @g = GraphViz.digraph(:G, :strict => true)
 # or @g = GraphViz.strict_digraph(:G)
 
-def add_node(level, depth, parent)
+def add_nodes(level, depth, parent)
   if depth<@max_depth
     current=[level, depth].join(",")
 
     sub=level<=>@min_level
     add=@max_level<=>level
-    add_node(level-sub, depth+1, current)
-    add_node(level+add, depth+1, current)
+    add_nodes(level-sub, depth+1, current)
+    add_nodes(level+add, depth+1, current)
 
-    @g.add_node(current).label=level.to_s
-    @g.add_edge(parent, current) unless parent=="00"
+    @g.add_nodes(current).label=level.to_s
+    @g.add_edges(parent, current) unless parent=="00"
   end
 end
 
-add_node(start_level, 0, "00")
+add_nodes(start_level, 0, "00")
 
 @g.output( :png => "#{$0}.png" )

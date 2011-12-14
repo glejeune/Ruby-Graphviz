@@ -13,18 +13,18 @@ GraphViz::new( "G", :type => "graph", :rankdir => "LR", :bgcolor => "#808080" ) 
   _ = {}
   
   ("1".."8").each do |v|
-    _[v] = graph.add_node( v, :shape => "circle", :style => "invis")
+    _[v] = graph.add_nodes( v, :shape => "circle", :style => "invis")
   end
   ["10","20","30","40","50","60","70","80"].each do |v|
-    _[v] = graph.add_node( v, :shape => "circle", :style => "invis")
+    _[v] = graph.add_nodes( v, :shape => "circle", :style => "invis")
   end
   
   ("a".."x").each do |v|
-    _[v] = graph.add_node( v, :shape => "circle")
+    _[v] = graph.add_nodes( v, :shape => "circle")
   end
 
   ("A".."X").each do |v|
-    _[v] = graph.add_node( v, :shape => "diamond")
+    _[v] = graph.add_nodes( v, :shape => "diamond")
   end
   
   (_["1"] << _["a"])[:color]="#0000ff"

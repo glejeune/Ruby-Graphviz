@@ -20,7 +20,7 @@ type = ["box", "point"]
 GraphViz.graph( :G, :use => :neato ) { |g|
   (1..5).each do |x|
     (1..5).each do |y|
-      g.add_node( "n#{x}x#{y}", :pos => "#{x},#{y}!", :shape => type.rotate )
+      g.add_nodes( "n#{x}x#{y}", :pos => "#{x},#{y}!", :shape => type.rotate )
     end
   end  
 }.output( :png => "#{$0}.png" )

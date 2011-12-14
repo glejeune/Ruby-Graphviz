@@ -107,7 +107,7 @@ N {
     subgraph = nxtsubg( subgraph );
   }
   
-  printf( "  node_%s = graph_%s.add_node( \"%s\"", rubyfy($.name), rubyfy(ofgraph.name), $.name );
+  printf( "  node_%s = graph_%s.add_nodes( \"%s\"", rubyfy($.name), rubyfy(ofgraph.name), $.name );
 
   // Attributs of N
   attr = fstAttr($G, "N");
@@ -136,7 +136,7 @@ E {
     subgraph = nxtsubg( subgraph );
   }
 
-  printf( "  graph_%s.add_edge( \"%s\", \"%s\"", rubyfy(ofgraph.name), $.tail.name, $.head.name );
+  printf( "  graph_%s.add_edges( \"%s\", \"%s\"", rubyfy(ofgraph.name), $.tail.name, $.head.name );
   
   // Attributs of E
   attr = fstAttr($G, "E");

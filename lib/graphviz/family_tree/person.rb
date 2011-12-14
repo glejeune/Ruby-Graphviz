@@ -6,7 +6,7 @@ class GraphViz
     class Person
       def initialize( graph, tree, generation, id ) #:nodoc:
         @graph = graph
-        @node = @graph.add_node( id )
+        @node = @graph.add_nodes( id )
         @node["shape"] = "box"
         @tree = tree
         @generation = generation
@@ -71,10 +71,10 @@ class GraphViz
       #
       #  mu.is_maried_with greg
       def is_maried_with( x )
-        node = @graph.add_node( "#{@node.id}And#{x.node.id}" )
+        node = @graph.add_nodes( "#{@node.id}And#{x.node.id}" )
         node["shape"] = "point"
-        @graph.add_edge( @node, node, "dir" => "none" )
-        @graph.add_edge( node, x.node, "dir" => "none" )
+        @graph.add_edges( @node, node, "dir" => "none" )
+        @graph.add_edges( node, x.node, "dir" => "none" )
         @tree.add_couple( self, x, node )
       end
       
@@ -82,11 +82,11 @@ class GraphViz
       #
       #  sophie.is_divorced_with john
       def is_divorced_with( x )
-        node = @graph.add_node( "#{@node.id}And#{x.node.id}" )
+        node = @graph.add_nodes( "#{@node.id}And#{x.node.id}" )
         node["shape"] = "point"
         node["color"] = "red"
-        @graph.add_edge( @node, node, "dir" => "none", "color" => "red" )
-        @graph.add_edge( node, x.node, "dir" => "none", "color" => "red" )
+        @graph.add_edges( @node, node, "dir" => "none", "color" => "red" )
+        @graph.add_edges( node, x.node, "dir" => "none", "color" => "red" )
         @tree.add_couple( self, x, node )
       end
       
@@ -94,11 +94,11 @@ class GraphViz
       #
       #  simon.is_widower_of elisa
       def is_widower_of( x ) #veuf
-        node = @graph.add_node( "#{@node.id}And#{x.node.id}" )
+        node = @graph.add_nodes( "#{@node.id}And#{x.node.id}" )
         node["shape"] = "point"
         node["color"] = "green"
-        @graph.add_edge( @node, node, "dir" => "none", "color" => "green" )
-        @graph.add_edge( node, x.node, "dir" => "none", "color" => "green" )
+        @graph.add_edges( @node, node, "dir" => "none", "color" => "green" )
+        @graph.add_edges( node, x.node, "dir" => "none", "color" => "green" )
         @tree.add_couple( self, x, node )
       end
 

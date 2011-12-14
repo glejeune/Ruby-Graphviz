@@ -152,7 +152,7 @@ class GraphViz
       end
       
       unless @current_node.nil?
-        node = @current_graph.add_node( node.attributes['id'] )
+        node = @current_graph.add_nodes( node.attributes['id'] )
         @current_node.each do |k, v|
           node[k] = v
         end
@@ -182,7 +182,7 @@ class GraphViz
       target = node.attributes['target']
       target = {target => node.attributes['targetport']} if node.attributes['targetport']
       
-      @current_edge = @current_graph.add_edge( source, target )
+      @current_edge = @current_graph.add_edges( source, target )
   
       node.each_element( ) do |child|
         #begin
@@ -214,7 +214,7 @@ class GraphViz
       
       list.each { |s|
         list.each { |t|
-          @current_graph.add_edge( s, t ) unless s == t
+          @current_graph.add_edges( s, t ) unless s == t
         }
       } 
     end

@@ -81,7 +81,7 @@ class GraphViz
 		
 		    label << "}"
 	    end
-      @graph.add_node( local_node_name, "label" => label, "color" => "blue", "shape" => "record" )
+      @graph.add_nodes( local_node_name, "label" => label, "color" => "blue", "shape" => "record" )
 
       ## Act: Search and add Text nodes
       if xml_node.has_text? == true and @show_text == true
@@ -99,8 +99,8 @@ class GraphViz
         end
 
         if xText.length > 0
-          @graph.add_node( text_node_name, "label" => xText, "color" => "black", "shape" => "ellipse" )
-          @graph.add_edge( local_node_name, text_node_name )
+          @graph.add_nodes( text_node_name, "label" => xText, "color" => "black", "shape" => "ellipse" )
+          @graph.add_edges( local_node_name, text_node_name )
         end
       end
 
@@ -109,7 +109,7 @@ class GraphViz
 
       xml_node.each_element( ) do |xml_child_node|
         child_node_name = parse_xml_node( xml_child_node )
-        @graph.add_edge( local_node_name, child_node_name )
+        @graph.add_edges( local_node_name, child_node_name )
       end
 
       return( local_node_name )

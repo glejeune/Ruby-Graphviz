@@ -5,9 +5,9 @@ require "graphviz"
 
 hello_world = GraphViz::new( "" ) 
 
-hello = hello_world.add_node("Hello")
-world = hello_world.add_node("World")
-hello_world.add_edge(hello, world) 
+hello = hello_world.add_nodes("Hello")
+world = hello_world.add_nodes("World")
+hello_world.add_edges(hello, world) 
 
 # final_graph = GraphViz.parse_string( hello_world.output( :dot => String ) )
 # final_graph.each_node do |_, node|

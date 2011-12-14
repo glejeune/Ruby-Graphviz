@@ -12,11 +12,11 @@ end
 
 g.node["shape"] = "record"
 
-struct1 = g.add_node( "struct1", "shape" => "record", "label" => "<f0> left|<f1> mid\ dle|<f2> right" )
-struct2 = g.add_node( "struct2", "shape" => "record", "label" => "<f0> one|<f1> two" )
-struct3 = g.add_node( "struct3", "shape" => "record", "label" => 'hello\nworld |{ b |{c|<here> d|e}| f}| g | h' )
+struct1 = g.add_nodes( "struct1", "shape" => "record", "label" => "<f0> left|<f1> mid\ dle|<f2> right" )
+struct2 = g.add_nodes( "struct2", "shape" => "record", "label" => "<f0> one|<f1> two" )
+struct3 = g.add_nodes( "struct3", "shape" => "record", "label" => 'hello\nworld |{ b |{c|<here> d|e}| f}| g | h' )
 
-g.add_edge( struct1, struct2 )
-g.add_edge( struct1, struct3 )
+g.add_edges( struct1, struct2 )
+g.add_edges( struct1, struct3 )
 
 g.output( :png => "#{$0}.png" )

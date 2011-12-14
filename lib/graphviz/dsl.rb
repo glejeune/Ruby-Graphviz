@@ -17,14 +17,14 @@ class GraphViz::DSL
       elsif(block)
          @graph.add_graph(GraphViz::DSL.new(sym, { :parent => @graph, :type => @graph.type }, &block).graph)
       else
-         @graph.add_node(sym.to_s, *args)
+         @graph.add_nodes(sym.to_s, *args)
       end
    end
 
    # Add a new node
    def n(name)
       return @graph.get_node(name) unless @graph.get_node(name.to_s).nil?
-      @graph.add_node(name)
+      @graph.add_nodes(name)
    end
 
    # Create edges
@@ -32,7 +32,7 @@ class GraphViz::DSL
       e = nil
       last = args.shift
       while current = args.shift
-         e = @graph.add_edge(last, current)
+         e = @graph.add_edges(last, current)
          last = current
       end
       return e

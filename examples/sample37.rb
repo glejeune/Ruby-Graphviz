@@ -9,7 +9,7 @@ g = GraphViz::new( "Solarsys",
 )
 
 # the star
-sun  = g.add_node(
+sun  = g.add_nodes(
  'Sun',
  :shape => "circle",
  :penwidth => 2,
@@ -24,7 +24,7 @@ planets = Hash.new
 # The Earth and the Moon - in the same subgraph\rank
 g.subgraph { |c|
  c[:rank => 'same']
- planets['Moon']  = c.add_node(
+ planets['Moon']  = c.add_nodes(
    'Moon',
    :shape => "circle",
    :penwidth => 2,
@@ -33,7 +33,7 @@ g.subgraph { |c|
    :fillcolor => "red",
    :label => "Moon\n"
  )
- planets['Earth']  = c.add_node(
+ planets['Earth']  = c.add_nodes(
    'Earth',
    :shape => "circle",
    :penwidth => 2,
@@ -42,7 +42,7 @@ g.subgraph { |c|
    :fillcolor => "blue",
    :label => "Earth\n"
  )
- c.add_edge( planets['Moon'], planets['Earth'],
+ c.add_edges( planets['Moon'], planets['Earth'],
    :penwidth => 2,
    :labeltooltip => "distance",
    :color => "black"
@@ -51,7 +51,7 @@ g.subgraph { |c|
 
 }
 
-g.add_edge( sun, planets['Earth'],
+g.add_edges( sun, planets['Earth'],
   :penwidth => 2,
   :labeltooltip => "distance",
   :color => "black"
@@ -65,7 +65,7 @@ i = 0
  # that doesnt seem to work ...
  g.subgraph { |c|
    c[:rank => "same"]
-   planets[p] = c.add_node(
+   planets[p] = c.add_nodes(
      p,
      :shape => "circle",
      :penwidth => 2,
@@ -74,7 +74,7 @@ i = 0
      :style => :filled,
      :label => "#{p}\n"
    )
-   c.add_edge( sun, planets[p],
+   c.add_edges( sun, planets[p],
      :penwidth => 2,
      :label => "distance",
      :color => "black"

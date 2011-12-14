@@ -36,11 +36,11 @@ class GraphViz
          @index = nil
 
          unless @parent_graph.directed? 
-            (@parent_graph.find_node(@node_one_id) || @parent_graph.add_node(@node_one_id)).incidents << (@parent_graph.find_node(@node_two_id) || @parent_graph.add_node(@node_two_id))
-            (@parent_graph.find_node(@node_two_id) || @parent_graph.add_node(@node_two_id)).neighbors << (@parent_graph.find_node(@node_one_id) || @parent_graph.add_node(@node_one_id))
+            (@parent_graph.find_node(@node_one_id) || @parent_graph.add_nodes(@node_one_id)).incidents << (@parent_graph.find_node(@node_two_id) || @parent_graph.add_nodes(@node_two_id))
+            (@parent_graph.find_node(@node_two_id) || @parent_graph.add_nodes(@node_two_id)).neighbors << (@parent_graph.find_node(@node_one_id) || @parent_graph.add_nodes(@node_one_id))
          end
-         (@parent_graph.find_node(@node_one_id) || @parent_graph.add_node(@node_one_id)).neighbors << (@parent_graph.find_node(@node_two_id) || @parent_graph.add_node(@node_two_id))
-         (@parent_graph.find_node(@node_two_id) || @parent_graph.add_node(@node_two_id)).incidents << (@parent_graph.find_node(@node_one_id) || @parent_graph.add_node(@node_one_id))
+         (@parent_graph.find_node(@node_one_id) || @parent_graph.add_nodes(@node_one_id)).neighbors << (@parent_graph.find_node(@node_two_id) || @parent_graph.add_nodes(@node_two_id))
+         (@parent_graph.find_node(@node_two_id) || @parent_graph.add_nodes(@node_two_id)).incidents << (@parent_graph.find_node(@node_one_id) || @parent_graph.add_nodes(@node_one_id))
       end
 
       # Return the node one as string (so with port if any)
@@ -113,7 +113,7 @@ class GraphViz
       def <<( node ) #:nodoc:
          n = @parent_graph.get_node(@node_two_id)
 
-         GraphViz::commonGraph( node, n ).add_edge( n, node )
+         GraphViz::commonGraph( node, n ).add_edges( n, node )
       end
       alias :> :<< #:nodoc:
       alias :- :<< #:nodoc:
@@ -133,7 +133,7 @@ class GraphViz
       # Set edge attributs
       #
       # Example :
-      #   e = graph.add_edge( ... )
+      #   e = graph.add_edges( ... )
       #   ...
       #   e.set { |_e|
       #     _e.color = "blue"

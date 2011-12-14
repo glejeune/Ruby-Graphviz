@@ -89,9 +89,9 @@ g.edge["arrowhead"] = "normal"
 "rveervee" 
 ].each { |s|
   p = "p_" << s
-  g.add_node( p, "shape" => "point" )
-  g.add_node( s )
-  g.add_edge( p, s, "arrowhead" => s )
+  g.add_nodes( p, "shape" => "point" )
+  g.add_nodes( s )
+  g.add_edges( p, s, "arrowhead" => s )
 }
 
 g.output( :png => "#{$0}.png" )

@@ -18,6 +18,9 @@ Interface to the GraphViz graphing tool
 
 === 1.0.3 :
 * Remove definition of Array#all?
+* Add GraphViz#add_edges (GraphViz#add_edge is deprecated)
+* Add GraphViz#add_nodes (GraphViz#add_node is deprecated)
+* Add GraphViz::generate 
 
 === 1.0.2 :
 * Add PageRank algorithm

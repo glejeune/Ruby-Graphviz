@@ -96,7 +96,7 @@ class GraphViz
                self << no
             end
          else
-            return GraphViz::commonGraph( node, self ).add_edge( self, node )
+            return GraphViz::commonGraph( node, self ).add_edges( self, node )
          end
       end
       alias :> :<<
@@ -106,7 +106,7 @@ class GraphViz
       # Set node attributs
       #
       # Example :
-      #   n = graph.add_node( ... )
+      #   n = graph.add_nodes( ... )
       #   ...
       #   n.set { |_n|
       #     _n.color = "blue"

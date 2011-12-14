@@ -18,7 +18,7 @@ g.node["shape"] = "ellipse"
   "doubleoctagon", "tripleoctagon", "invtriangle", "invtrapezium", "invhouse", 
   "Mdiamond", "Msquare", "Mcircle", "rect", "rectangle", "none", "note", "tab", "folder",
   "box3d", "component" ].each { |s|
-  g.add_node( s, "shape" => s )
+  g.add_nodes( s, "shape" => s )
 }
 
 g.output( :png => "#{$0}.png")
