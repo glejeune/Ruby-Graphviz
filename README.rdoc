@@ -17,6 +17,7 @@ Interface to the GraphViz graphing tool
 == CHANGELOG
 
 === 1.0.3 :
+* Add Breadth First Search algorithm (GraphViz::Theory#bfs)
 * Add Depth First Search algorithm (GraphViz::Theory#dfs)
 * Add GraphViz#add_edges (GraphViz#add_edge is deprecated)
 * Add GraphViz#add_nodes (GraphViz#add_node is deprecated)
