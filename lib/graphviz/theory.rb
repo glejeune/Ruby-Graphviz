@@ -205,7 +205,22 @@ class GraphViz
          end
       end
 
+      # Depth First Search
+      def dfs(node, &b)
+         visited_nodes = []
+         recursive_dfs(node, visited_nodes, &b)
+      end
+
       private 
+      def recursive_dfs(node, visited_nodes, &b)
+         node = @graph.get_node(node) if node.kind_of? String 
+         b.call(node)
+         visited_nodes << node
+         neighbors(node).each do |n|
+            recursive_dfs(n, visited_nodes, &b) unless visited_nodes.include?(n)
+         end
+      end
+
       def distance_matrix
          type = @graph.type
          matrix = GraphViz::Math::Matrix.new( @graph.node_count, @graph.node_count, (1.0/0.0) )
