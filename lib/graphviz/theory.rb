@@ -205,6 +205,26 @@ class GraphViz
          end
       end
 
+      # Breadth First Search
+      def bfs(node, &b)
+         queue = []
+         visited_nodes = []
+         node = @graph.get_node(node) if node.kind_of? String
+         queue << node
+         visited_nodes << node
+
+         while not queue.empty?
+            node = queue.shift
+            b.call(node)
+            neighbors(node).each do |n|
+               unless visited_nodes.include?(n)
+                  visited_nodes << n
+                  queue << n
+               end
+            end
+         end
+      end
+
       # Depth First Search
       def dfs(node, &b)
          visited_nodes = []
