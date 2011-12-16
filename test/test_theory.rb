@@ -85,7 +85,7 @@ class GraphVizTheoryTest < Test::Unit::TestCase
    def test_dijkstra_a_f
       r = @t.moore_dijkstra(@g.a, @g.f)
       assert r
-      assert_equal ["a", "b", "c", "f"], r[:path]
+      assert_equal ["a", "b", "c", "f"], r[:path].map{|n| n.id}
       assert_equal 4.0, r[:distance]
    end
 

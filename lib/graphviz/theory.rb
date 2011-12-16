@@ -116,10 +116,10 @@ class GraphViz
          ch = []
          k = arv
          while k.index != dep.index
-            ch.unshift(k.id)
+            ch.unshift(k)
             k = pred[k.index]
          end
-         ch.unshift(dep.id)
+         ch.unshift(dep)
 
          if d[arv.index].to_f.infinite?
             return nil
