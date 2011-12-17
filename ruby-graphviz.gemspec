@@ -34,19 +34,8 @@ For more information about Ruby-Graphviz :
 * Sources : http://github.com/glejeune/Ruby-Graphviz
 * NEW - Mailing List : http://groups.google.com/group/ruby-graphviz
 
-/!\\ Version 0.9.12 introduce a new solution to connect edges to node ports
-For more information, see http://github.com/glejeune/Ruby-Graphviz/issues/#issue/13
-So if you use node ports, maybe you need to change your code.
-
-/!\\ GraphViz::Node#name has been removed!
-
-/!\\ :output and :file options have been removed!
-
-/!\\ The html attribut has been removed!
-You can use the label attribut, as dot do it : :label => '<<html/>>'
-
-/!\\ Version 0.9.17 introduce GraphML (http://graphml.graphdrawing.org/) support and
-graph theory !
+/!\\ GraphViz#add_edge is deprecated, use GraphViz#add_edges
+/!\\ GraphViz#add_node is deprecated, use GraphViz#add_nodes
   }
   
   # s.add_runtime_dependency("middleman", "~>2.0.0.3")
