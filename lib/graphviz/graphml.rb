@@ -162,7 +162,8 @@ class GraphViz
     end
     
     def graphml_graph_node_data( node ) #:nodoc:
-      @current_node[@attributs[:nodes][node.attributes['key']][:name]] = node.texts().to_s
+      #@current_node[@attributs[:nodes][node.attributes['key']][:name]] = node.texts().to_s
+      @current_node[@attributs[:nodes][node.attributes['key']][:name]] = node.texts().join(sep='\n',)
     end
     
     def graphml_graph_node_port( node ) #:nodoc:
