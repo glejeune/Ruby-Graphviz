@@ -83,7 +83,12 @@ class GraphViz
 
   @elements_order
   
-  ##
+  #<b>DEPRECATED</b> please use GraphViz#add_nodes
+  def add_node( xNodeName, hOpts = {} )
+     warn "GraphViz#add_node is deprecated, please use GraphViz#add_nodes"
+     return add_nodes(xNodeName, hOpts)
+  end
+
   # Create a new node
   #
   # In:
@@ -91,38 +96,6 @@ class GraphViz
   # * hOpts : Node attributs
   # 
   # Return the GraphViz::Node object created
-  #
-  def add_node( xNodeName, hOpts = {} )
-     warn "GraphViz#add_node is deprecated, please use GraphViz#add_nodes"
-     return add_nodes(xNodeName, hOpts)
-=begin
-    node = @hoNodes[xNodeName]
-
-    if node.nil?
-      @hoNodes[xNodeName] = GraphViz::Node::new( xNodeName, self )
-      @hoNodes[xNodeName].index = @elements_order.size_of( "node" )
-    
-      unless hOpts.keys.include?(:label) or hOpts.keys.include?("label")
-        hOpts[:label] = xNodeName
-      end
-    
-      @elements_order.push( { 
-        "type" => "node", 
-        "name" => xNodeName,
-        "value" => @hoNodes[xNodeName] 
-      } )
-
-      node = @hoNodes[xNodeName]
-    end
-
-    hOpts.each do |xKey, xValue|
-       @hoNodes[xNodeName][xKey.to_s] = xValue
-    end
-
-    return node
-=end
-  end
-
   def add_nodes(node_name, options = {})
      if node_name.kind_of? Array
         node_name.each { |n| add_nodes(n, options.clone) }
@@ -206,7 +179,7 @@ class GraphViz
     @hoNodes.size
   end
   
-  #<b>DEPRECATED</b>
+  #<b>DEPRECATED</b> please use GraphViz#add_edges
   def add_edge( oNodeOne, oNodeTwo, hOpts = {} )
      warn "GraphViz#add_edge is deprecated, please use GraphViz#add_edges"
      add_edges(oNodeOne, oNodeTwo, hOpts)
