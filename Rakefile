@@ -27,7 +27,7 @@ RDoc::Task.new do |rdoc|
     rdoc.options += RDOC_OPTS
     rdoc.main = "README.rdoc"
     rdoc.title = "Ruby/GraphViz, the Documentation"
-    rdoc.rdoc_files.add ['README.rdoc', 'AUTHORS', 'COPYING',
+    rdoc.rdoc_files.add ['README.rdoc', 'CHANGELOG.rdoc', 'AUTHORS.rdoc', 'COPYING.rdoc',
       'lib/graphviz.rb', 
       'lib/graphviz/node.rb',
       'lib/graphviz/edge.rb',
