@@ -57,13 +57,13 @@ class GraphViz
          return( (self.pg.nil?) ? nil : self.pg.root_graph )
       end
 
-      # Set value +attribut_value+ to the node attribut +attribut_name+
+      # Set value +attribut_value+ to the node attribute +attribut_name+
       def []=( attribut_name, attribut_value )
          attribut_value = attribut_value.to_s if attribut_value.class == Symbol
          @node_attributs[attribut_name.to_s] = attribut_value
       end
 
-      # Get the value of the node attribut +attribut_name+
+      # Get the value of the node attribute +attribut_name+
       def []( attribut_name )
          if Hash === attribut_name
             attribut_name.each do |key, value|
@@ -75,10 +75,10 @@ class GraphViz
          end
       end
 
-      # Calls block once for each attribut of the node, passing the name and value to the 
+      # Calls block once for each attribute of the node, passing the name and value to the 
       # block as a two-element array.
       #
-      # If global is set to false, the block does not receive the attributs set globally
+      # If global is set to false, the block does not receive the attributes set globally
       def each_attribut(global = true, &b)
          attrs = @node_attributs.to_h
          if global
@@ -103,7 +103,7 @@ class GraphViz
       alias :- :<<
       alias :>> :<<
 
-      # Set node attributs
+      # Set node attributes
       #
       # Example :
       #   n = graph.add_nodes( ... )
