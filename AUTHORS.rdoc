@@ -19,5 +19,6 @@
 
 Thanks to :
 
+* Jake Goulding <http://jakegoulding.com> - Spelling corrections
 * Desmond Dsouza - Windows tests and corrections
 * Vidar Hokstad and Ryan Shea - for nothugly.xsl
