@@ -32,7 +32,7 @@ class GraphViz
          @node_two_id, @node_two_port = getNodeNameAndPort( vNodeTwo )
 
          @parent_graph = parent_graph
-         @edge_attributs = GraphViz::Attrs::new( nil, "edge", EDGESATTRS )
+         @edge_attributes = GraphViz::Attrs::new( nil, "edge", EDGESATTRS )
          @index = nil
 
          unless @parent_graph.directed? 
@@ -71,23 +71,23 @@ class GraphViz
          @index = i if @index == nil
       end
 
-      # Set value +attribut_value+ to the edge attribut +attribut_name+
-      def []=( attribut_name, attribut_value )
-         attribut_value = attribut_value.to_s if attribut_value.class == Symbol
-         @edge_attributs[attribut_name.to_s] = attribut_value
+      # Set value +attribute_value+ to the edge attribute +attribute_name+
+      def []=( attribute_name, attribute_value )
+         attribute_value = attribute_value.to_s if attribute_value.class == Symbol
+         @edge_attributes[attribute_name.to_s] = attribute_value
       end
 
-      # Set values for edge attributs or 
-      # get the value of the given edge attribut +attribut_name+
-      def []( attribut_name )
+      # Set values for edge attributes or 
+      # get the value of the given edge attribute +attribute_name+
+      def []( attribute_name )
          # Modification by axgle (http://github.com/axgle)
-         if Hash === attribut_name
-            attribut_name.each do |key, value|
+         if Hash === attribute_name
+            attribute_name.each do |key, value|
                self[key] = value
             end
          else
-            if @edge_attributs[attribut_name.to_s]
-               @edge_attributs[attribut_name.to_s].clone 
+            if @edge_attributes[attribute_name.to_s]
+               @edge_attributes[attribute_name.to_s].clone 
             else
                nil
             end
@@ -95,19 +95,23 @@ class GraphViz
       end
 
       #
-      # Calls block once for each attribut of the edge, passing the name and value to the 
+      # Calls block once for each attribute of the edge, passing the name and value to the 
       # block as a two-element array.
       #
-      # If global is set to false, the block does not receive the attributs set globally
+      # If global is set to false, the block does not receive the attributes set globally
       #
-      def each_attribut(global = true, &b)
-         attrs = @edge_attributs.to_h
+      def each_attribute(global = true, &b)
+         attrs = @edge_attributes.to_h
          if global
             attrs = pg.edge.to_h.merge attrs
          end
          attrs.each do |k,v|
             yield(k,v)
          end
+      end
+      def each_attribut(global = true, &b)
+         warn "`GraphViz::Edge#each_attribut` is deprecated, please use `GraphViz::Edge#each_attribute`"
+         each_attribute(global, &b)
       end
 
       def <<( node ) #:nodoc:
@@ -130,7 +134,7 @@ class GraphViz
          @parent_graph
       end
 
-      # Set edge attributs
+      # Set edge attributes
       #
       # Example :
       #   e = graph.add_edges( ... )
@@ -161,7 +165,7 @@ class GraphViz
          xOut = self.node_one + xLink + self.node_two
          xAttr = ""
          xSeparator = ""
-         @edge_attributs.data.each do |k, v|
+         @edge_attributes.data.each do |k, v|
             xAttr << xSeparator + k + " = " + v.to_gv
             xSeparator = ", "
          end

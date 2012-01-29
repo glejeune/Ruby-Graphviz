@@ -1,6 +1,10 @@
 = CHANGELOG
 
 == 1.0.4 :
+* GraphViz::Edge#each_attribut is deprecated, please use GraphViz::Edge#each_attribute
+* GraphViz::GraphML#attributs is deprecated, please, use GraphViz::GraphML#attributes
+* GraphViz::Node#each_attribut is deprecated, please use GraphViz::Node#each_attribute
+* Major bug correction in GraphViz::Attrs and GraphViz::parse
 
 == 1.0.3 :
 * The GraphViz::Theory#moore_dijkstra return a path which contains GraphViz::Node instead of GraphViz::Node#id

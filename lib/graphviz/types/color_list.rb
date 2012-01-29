@@ -3,6 +3,8 @@ class GraphViz
     class ColorList < Common
       def check(data)
         data = data.to_s if data.is_a?(Symbol)
+        return nil if data.empty?
+
         @to_ruby = data.split(/\s*:\s*/).map { |c| GraphViz::Types::Color.new(c).to_ruby }
         return data
       end

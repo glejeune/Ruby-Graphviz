@@ -18,10 +18,10 @@ class GraphViz
    class Types
       class GvBool < Common
          BOOL_TRUE = ["true", "yes"]
-         BOOL_FALSE = ["false", "no"]
+         BOOL_FALSE = ["false", "no", ""]
 
          def check(data)
-            if true == data or (data.is_a?(Integer) and data != 0) or (data.is_a?(String) and BOOL_TRUE.include?(data.downcase))
+            if true == data or (data.is_a?(Integer) and data != 0) or (data.is_a?(String) and !BOOL_FALSE.include?(data.downcase))
                @to_ruby = true
                return data
             end

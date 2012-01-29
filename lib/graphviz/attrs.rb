@@ -14,15 +14,18 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
+class AttributeException < RuntimeError
+end
+
 class GraphViz
    class Attrs
       attr_accessor :data
 
-      def initialize( gviz, name, attributs )
-         @name      = name
-         @attributs = attributs
-         @data      = Hash::new( )
-         @graphviz  = gviz
+      def initialize( gviz, name, attributes )
+         @name       = name
+         @attributes = attributes
+         @data       = Hash::new( )
+         @graphviz   = gviz
       end
 
       def each
@@ -49,14 +52,21 @@ class GraphViz
       end
 
       def []=( key, value )
-         unless @attributs.keys.include?( key.to_s )
-            raise ArgumentError, "#{@name} attribut '#{key.to_s}' invalid"
+         unless @attributes.keys.include?( key.to_s )
+            raise ArgumentError, "#{@name} attribute '#{key.to_s}' invalid"
          end
 
-         @data[key.to_s] = GraphViz::Types.const_get(@attributs[key.to_s]).new( value )
+         begin
+            value = GraphViz::Types.const_get(@attributes[key.to_s]).new( value )
+         rescue => e
+            raise AttributeException, "Invalide value `#{value}` for attribute `#{key}` : #{e}"
+         end
+         unless value.nil?
+            @data[key.to_s] = value
 
-         if @graphviz.nil? == false
-            @graphviz.set_position( @name, key.to_s, @data[key.to_s] )
+            if @graphviz.nil? == false
+               @graphviz.set_position( @name, key.to_s, @data[key.to_s] )
+            end
          end
       end
    end

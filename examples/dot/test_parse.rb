@@ -4,7 +4,7 @@ $:.unshift( "../../lib" );
 require "graphviz"
 
 Dir.glob( "*.dot" ) { |f|
-  print "#{f} : "
+  puts "#{f} : "
   begin
     puts GraphViz.parse(f)
   rescue SyntaxError => e

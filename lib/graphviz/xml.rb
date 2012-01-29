@@ -42,12 +42,12 @@ class GraphViz
     # * xml_file : XML File
     # * *options : Graph options:
     #   * :text : show text nodes (default true)
-    #   * :attrs : show XML attributs (default true)
+    #   * :attrs : show XML attributes (default true)
     # 
     def initialize( xml_file, *options )
       @node_name = "00000"
 	   @show_text = true
-	   @show_attributs = true
+	   @show_attributes = true
 
       if options.nil? == false and options[0].nil? == false
         options[0].each do |xKey, xValue|
@@ -56,7 +56,7 @@ class GraphViz
               @show_text = xValue
 		          options[0].delete( xKey )
             when "attrs"
-              @show_attributs = xValue
+              @show_attributes = xValue
 		          options[0].delete( xKey )
           end
         end
@@ -72,7 +72,7 @@ class GraphViz
       @node_name.succ!
       
       label = xml_node.name
-      if xml_node.has_attributes? == true and @show_attributs == true
+      if xml_node.has_attributes? == true and @show_attributes == true
         label = "{ " + xml_node.name 
 		
 		    xml_node.attributes.each do |xName, xValue|
@@ -104,7 +104,7 @@ class GraphViz
         end
       end
 
-      ## Act: Search and add attributs
+      ## Act: Search and add attributes
       ## TODO
 
       xml_node.each_element( ) do |xml_child_node|

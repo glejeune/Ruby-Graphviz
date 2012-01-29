@@ -64,20 +64,20 @@ class GraphViz
   ## Var: Graph name
   @name
 
-  ## Var: defined attributs
+  ## Var: defined attributes
   @graph
   @node
   @edge
 
-  # This accessor allow you to set global graph attributs
+  # This accessor allow you to set global graph attributes
   attr_accessor :graph
   alias_method :graph_attrs, :graph
   
-  # This accessor allow you to set global nodes attributs
+  # This accessor allow you to set global nodes attributes
   attr_accessor :node
   alias_method :node_attrs, :node
 
-  # This accessor allow you to set global edges attributs
+  # This accessor allow you to set global edges attributes
   attr_accessor :edge
   alias_method :edge_attrs, :edge
 
@@ -93,7 +93,7 @@ class GraphViz
   #
   # In:
   # * xNodeName : Name of the new node
-  # * hOpts : Node attributs
+  # * hOpts : Node attributes
   # 
   # Return the GraphViz::Node object created
   def add_nodes(node_name, options = {})
@@ -190,7 +190,7 @@ class GraphViz
   # In:
   # * node_one : First node (or node list)
   # * node_two : Second Node (or node list)
-  # * options : Edge attributs
+  # * options : Edge attributes
   def add_edges( node_one, node_two, options = {} )
     
     if( node_one.class == Array ) 
@@ -254,7 +254,7 @@ class GraphViz
   # 
   # In:
   # * xGraphName : Graph name
-  # * hOpts : Graph attributs
+  # * hOpts : Graph attributes
   #
   def add_graph( xGraphName = nil, hOpts = {}, &block )
      if xGraphName.kind_of?(GraphViz) 
@@ -366,7 +366,7 @@ class GraphViz
   end
   
   # 
-  # Set value +xValue+ to the graph attribut +xAttrName+
+  # Set value +xValue+ to the graph attribute +xAttrName+
   # 
   def []=( xAttrName, xValue )
     xValue = xValue.to_s if xValue.class == Symbol
@@ -374,7 +374,7 @@ class GraphViz
   end
 
   # 
-  # Get the value of the graph attribut +xAttrName+
+  # Get the value of the graph attribute +xAttrName+
   # 
   def []( xAttrName )
     if Hash === xAttrName
@@ -387,13 +387,17 @@ class GraphViz
   end
   
   #
-  # Calls block once for each attribut of the graph, passing the name and value to the 
+  # Calls block once for each attribute of the graph, passing the name and value to the 
   # block as a two-element array.
   #
-  def each_attribut(&b)
+  def each_attribute(&b)
     @graph.each do |k,v|
       yield(k,v)
     end
+  end
+  def each_attribut(&b)
+     warn "`GraphViz#each_attribut` is deprecated, please use `GraphViz#each_attribute`"
+     each_attribute(&b)
   end
   
   # 

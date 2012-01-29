@@ -35,7 +35,7 @@ class GraphViz
          @incidents = []
          @node_id = node_id
          @parent_graph = parent_graph
-         @node_attributs = GraphViz::Attrs::new( nil, "node", NODESATTRS )
+         @node_attributes = GraphViz::Attrs::new( nil, "node", NODESATTRS )
          @index = nil
       end
 
@@ -57,21 +57,21 @@ class GraphViz
          return( (self.pg.nil?) ? nil : self.pg.root_graph )
       end
 
-      # Set value +attribut_value+ to the node attribute +attribut_name+
-      def []=( attribut_name, attribut_value )
-         attribut_value = attribut_value.to_s if attribut_value.class == Symbol
-         @node_attributs[attribut_name.to_s] = attribut_value
+      # Set value +attribute_value+ to the node attribute +attribute_name+
+      def []=( attribute_name, attribute_value )
+         attribute_value = attribute_value.to_s if attribute_value.class == Symbol
+         @node_attributes[attribute_name.to_s] = attribute_value
       end
 
-      # Get the value of the node attribute +attribut_name+
-      def []( attribut_name )
-         if Hash === attribut_name
-            attribut_name.each do |key, value|
+      # Get the value of the node attribute +attribute_name+
+      def []( attribute_name )
+         if Hash === attribute_name
+            attribute_name.each do |key, value|
                self[key] = value
             end
             return self
          else
-            (@node_attributs[attribut_name.to_s].nil?)?nil:@node_attributs[attribut_name.to_s].clone
+            (@node_attributes[attribute_name.to_s].nil?)?nil:@node_attributes[attribute_name.to_s].clone
          end
       end
 
@@ -79,14 +79,18 @@ class GraphViz
       # block as a two-element array.
       #
       # If global is set to false, the block does not receive the attributes set globally
-      def each_attribut(global = true, &b)
-         attrs = @node_attributs.to_h
+      def each_attribute(global = true, &b)
+         attrs = @node_attributes.to_h
          if global
             attrs = pg.node.to_h.merge attrs
          end
          attrs.each do |k,v|
             yield(k,v)
          end
+      end
+      def each_attribut(global = true, &b)
+         warn "`GraphViz::Node#each_attribut` is deprecated, please use `GraphViz::Node#each_attribute`"
+         each_attribute(global, &b)
       end
 
       # Create an edge between the current node and the node +node+
@@ -138,10 +142,10 @@ class GraphViz
          xAttr = ""
          xSeparator = ""
 
-         if @node_attributs.data.has_key?("label") and @node_attributs.data.has_key?("html")
-            @node_attributs.data.delete("label")
+         if @node_attributes.data.has_key?("label") and @node_attributes.data.has_key?("html")
+            @node_attributes.data.delete("label")
          end
-         @node_attributs.data.each do |k, v|
+         @node_attributes.data.each do |k, v|
             xAttr << xSeparator + k + " = " + v.to_gv
             xSeparator = ", "
          end

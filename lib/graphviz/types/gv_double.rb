@@ -11,7 +11,9 @@ class GraphViz
           return data
         end
 
-        raise DoubleException, "Invalid double value"
+        return nil if data.is_a?(String) and data.empty?
+
+        raise DoubleException, "Invalid double value for `#{data}`"
       end
       
       def output

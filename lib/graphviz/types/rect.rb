@@ -15,6 +15,7 @@ class GraphViz
         if data.is_a?(Array)
            return check(data.join(","))
         end
+        return nil if data.is_a?(String) and data.empty?
 
         raise RectException, "Invalid rect value"
       end

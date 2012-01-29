@@ -20,7 +20,11 @@ require 'rexml/document'
 
 class GraphViz
   class GraphML
-    attr_reader :attributs
+    attr_reader :attributes
+    def attributs
+       warn "`GraphViz::GraphML#attributs` is deprecated, please, use `GraphViz::GraphML#attributes`"
+       return @attributes
+    end
     
     # The GraphViz object
     attr_accessor :graph
@@ -41,7 +45,7 @@ class GraphViz
     def initialize( file_or_str )
       data = ((File.file?( file_or_str )) ? File::new(file_or_str) : file_or_str) 
       @xmlDoc = REXML::Document::new( data )
-      @attributs = {
+      @attributes = {
         :nodes => {},
         :edges => {},
         :graphs => {}
@@ -80,7 +84,7 @@ class GraphViz
         :type => node.attributes['attr.type']
       }    
       DEST[node.attributes['for']].each do |d|
-        @attributs[d][id] = @current_attr
+        @attributes[d][id] = @current_attr
       end
       
       node.each_element( ) do |child|
@@ -110,13 +114,13 @@ class GraphViz
         @current_graph = previous_graph.add_graph( node.attributes['id'] )
       end
       
-      @attributs[:graphs].each do |id, data|
+      @attributes[:graphs].each do |id, data|
         @current_graph.graph[data[:name]] = data[:default] if data.has_key?(:default)
       end
-      @attributs[:nodes].each do |id, data|
+      @attributes[:nodes].each do |id, data|
         @current_graph.node[data[:name]] = data[:default] if data.has_key?(:default)
       end
-      @attributs[:edges].each do |id, data|
+      @attributes[:edges].each do |id, data|
         @current_graph.edge[data[:name]] = data[:default] if data.has_key?(:default)
       end
           
@@ -132,7 +136,7 @@ class GraphViz
     end
     
     def graphml_graph_data( node ) #:nodoc:
-      @current_graph[@attributs[:graphs][node.attributes['key']][:name]] = node.texts().to_s
+      @current_graph[@attributes[:graphs][node.attributes['key']][:name]] = node.texts().to_s
     end
     
     def graphml_graph_node( node ) #:nodoc:
@@ -162,8 +166,8 @@ class GraphViz
     end
     
     def graphml_graph_node_data( node ) #:nodoc:
-      #@current_node[@attributs[:nodes][node.attributes['key']][:name]] = node.texts().to_s
-      @current_node[@attributs[:nodes][node.attributes['key']][:name]] = node.texts().join(sep='\n',)
+      #@current_node[@attributes[:nodes][node.attributes['key']][:name]] = node.texts().to_s
+      @current_node[@attributes[:nodes][node.attributes['key']][:name]] = node.texts().join(sep='\n',)
     end
     
     def graphml_graph_node_port( node ) #:nodoc:
@@ -197,7 +201,7 @@ class GraphViz
     end
   
     def graphml_graph_edge_data( node ) #:nodoc:
-      @current_edge[@attributs[:edges][node.attributes['key']][:name]] = node.texts().to_s
+      @current_edge[@attributes[:edges][node.attributes['key']][:name]] = node.texts().to_s
     end
     
     def graphml_graph_hyperedge( node ) #:nodoc:

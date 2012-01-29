@@ -276,12 +276,12 @@ module Constants
     "z"                   => { :usedBy => "N",    :type => :GvDouble }
   }
 
-  ## Const: Graph attributs
+  ## Const: Graph attributes
   GRAPHSATTRS = Constants::getAttrsFor( /G|S|C/ )
 
-  ## Const: Node attributs
+  ## Const: Node attributes
   NODESATTRS = Constants::getAttrsFor( /N/ )
 
-  ## Const: Edge attributs
+  ## Const: Edge attributes
   EDGESATTRS = Constants::getAttrsFor( /E/ )
 end

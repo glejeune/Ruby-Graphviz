@@ -11,6 +11,8 @@ class GraphViz
 
       def check(data)
         data = data.to_s if data.is_a?(Symbol)
+        return nil if data.empty?
+
         if data[0].chr == "#"
           m = RGBA.match(data)
           if m.nil?
