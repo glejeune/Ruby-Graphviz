@@ -35,9 +35,10 @@ class GraphViz
            @is_spline = false
            return data
         end
+        return nil if data.empty?
+
         raise SplineTypeException, "Invalid spline type value"
       end
-      return nil if data.empty?
       
       def output
         return @data.to_s.inspect.gsub( "\\\\", "\\" )

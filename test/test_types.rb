@@ -55,11 +55,13 @@ class TypesTest < Test::Unit::TestCase
     assert_equal false, bool.to_ruby
 
     assert_raise BoolException, "Wrong bool value" do
-       GraphViz::Types::GvBool.new("toto")
+       GraphViz::Types::GvBool.new(:toto)
     end
 
-    assert_raise BoolException, "Wrong bool value" do
-       GraphViz::Types::GvBool.new("")
+    assert_block "Create GvBool with empty string failed." do
+       bool = GraphViz::Types::GvBool.new("")
     end
+    assert bool
+    assert_equal false, bool.to_ruby
   end
 end

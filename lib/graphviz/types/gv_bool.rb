@@ -5,7 +5,7 @@ end
 #
 # For the bool type, 
 # - TRUE values are represented by "true" or "yes" (case-insensitive), true and any non-zero integer
-# - FALSE values by "false" or "no" (case-insensitive), false and zero.
+# - FALSE values by "false", "no" or empty string (case-insensitive), false and zero.
 #
 # Example 
 #
