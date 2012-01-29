@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   
   s.rubyforge_project = 'ruby-asp'
   s.has_rdoc = true
-  s.extra_rdoc_files = ["README.rdoc", "COPYING", "AUTHORS"]
+  s.extra_rdoc_files = ["README.rdoc", "COPYING.rdoc", "AUTHORS.rdoc", "CHANGELOG.rdoc"]
   s.rdoc_options = ["--title", "Ruby/GraphViz", "--main", "README.rdoc"]
   s.post_install_message = %{
 Since version 0.9.2, Ruby/GraphViz can use Open3.popen3 (or not)
@@ -34,11 +34,13 @@ For more information about Ruby-Graphviz :
 * Sources : http://github.com/glejeune/Ruby-Graphviz
 * NEW - Mailing List : http://groups.google.com/group/ruby-graphviz
 
-/!\\ GraphViz#add_edge is deprecated, use GraphViz#add_edges
-/!\\ GraphViz#add_node is deprecated, use GraphViz#add_nodes
+Last (important) changes :
+* GraphViz#add_edge is deprecated, use GraphViz#add_edges
+* GraphViz#add_node is deprecated, use GraphViz#add_nodes
+* GraphViz::Edge#each_attribut is deprecated, use GraphViz::Edge#each_attribute
+* GraphViz::GraphML#attributs is deprecated, use GraphViz::GraphML#attributes
+* GraphViz::Node#each_attribut is deprecated, use GraphViz::Node#each_attribute
   }
-  
-  # s.add_runtime_dependency("middleman", "~>2.0.0.3")
   
   s.add_development_dependency 'rake'
   s.add_development_dependency 'gems'
