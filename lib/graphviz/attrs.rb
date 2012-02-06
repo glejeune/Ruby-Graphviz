@@ -56,6 +56,11 @@ class GraphViz
             raise ArgumentError, "#{@name} attribute '#{key.to_s}' invalid"
          end
 
+         if value.nil?
+            warn "Value for attribute `#{key}` can't be null"
+            return
+         end
+
          begin
             value = GraphViz::Types.const_get(@attributes[key.to_s]).new( value )
          rescue => e
