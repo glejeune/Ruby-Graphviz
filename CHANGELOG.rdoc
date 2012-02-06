@@ -1,5 +1,8 @@
 = CHANGELOG
 
+== 1.0.5 :
+* Change deprecated methods in gem2gv, git2gv and ruby2gv
+
 == 1.0.4 :
 * GraphViz::Edge#each_attribut is deprecated, please use GraphViz::Edge#each_attribute
 * GraphViz::GraphML#attributs is deprecated, please, use GraphViz::GraphML#attributes

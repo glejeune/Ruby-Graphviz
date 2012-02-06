@@ -55,9 +55,9 @@ class Rb2Gv
   def gv_newNode( xNode, xShape = "box", xColor = nil )  
     xNodeName = xNode.gsub( /[^a-zA-Z0-9]/, "_" )
     if xColor.nil? == true
-      @oGraph.add_node( xNodeName, "label" => xNode, "shape" => xShape )
+      @oGraph.add_nodes( xNodeName, "label" => xNode, "shape" => xShape )
     else
-      @oGraph.add_node( xNodeName, "label" => xNode, "shape" => xShape, "style" => "filled", "color" => xColor )
+      @oGraph.add_nodes( xNodeName, "label" => xNode, "shape" => xShape, "style" => "filled", "color" => xColor )
     end
   end
   
@@ -143,7 +143,7 @@ class Rb2Gv
         
         puts "  + Edge #{xLib} -> #{xRequiredLib}" if DEBUG
         unless @hxEdge.include?( "#{@hxNodes[xLib].id}-#{@hxNodes[xRequiredLib].id}" )
-          @oGraph.add_edge( @hxNodes[xLib], @hxNodes[xRequiredLib] )
+          @oGraph.add_edges( @hxNodes[xLib], @hxNodes[xRequiredLib] )
           @hxEdge << "#{@hxNodes[xLib].id}-#{@hxNodes[xRequiredLib].id}"
         end
       end
