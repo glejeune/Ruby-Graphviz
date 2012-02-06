@@ -1,5 +1,7 @@
 = CHANGELOG
 
+== 1.0.6 :
+
 == 1.0.5 :
 * Change deprecated methods in gem2gv, git2gv and ruby2gv
 * Issue #38
