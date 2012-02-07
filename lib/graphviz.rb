@@ -550,7 +550,7 @@ class GraphViz
               require 'graphviz/nothugly'
               @nothugly = true
             rescue LoadError => e
-              warn "You must install ruby-xslt to use nothugly option!"
+              warn "You must install ruby-xslt or libxslt-ruby to use nothugly option!"
               @nothugly = false
             end
           else
