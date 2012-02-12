@@ -30,10 +30,14 @@ class GraphViz
     attr_accessor :graph
   
     DEST = {
-      'node'  => [:nodes],
-      'edge'  => [:edges],
-      'graph' => [:graphs],
-      'all'   => [:nodes, :edges, :graphs]
+      'node'      => [:nodes],
+      'edge'      => [:edges],
+      'graph'     => [:graphs],
+      'graphml'   => [:graphml],
+      'hyperedge' => [:hyperedge],
+      'port'      => [:port],
+      'endpoint'  => [:endpoint],
+      'all'       => [:nodes, :edges, :graphs, :graphml, :hyperedge, :port, :endpoint]
     }
     
     GTYPE = {
@@ -48,7 +52,11 @@ class GraphViz
       @attributes = {
         :nodes => {},
         :edges => {},
-        :graphs => {}
+        :graphs => {},
+        :graphml => {},
+        :endpoint => {},
+        :port => {},
+        :hyperedge => {}
       }
       @graph = nil
       @current_attr = nil
@@ -69,11 +77,11 @@ class GraphViz
     
     def graphml( node ) #:nodoc:
       node.each_element( ) do |child|
-        #begin
+        begin
           send( "graphml_#{child.name}".to_sym, child )
-        #rescue NoMethodError => e
-        #  raise "ERROR node #{child.name} can be child of graphml"
-        #end
+        rescue NoMethodError => e
+          warn "ERROR node #{child} can be child of graphml"
+        end
       end
     end
     
@@ -125,18 +133,18 @@ class GraphViz
       end
           
       node.each_element( ) do |child|
-        #begin
-          send( "graphml_graph_#{child.name}".to_sym, child )
-        #rescue NoMethodError => e
-        #  raise "ERROR node #{child.name} can be child of graphml"
-        #end
+        send( "graphml_graph_#{child.name}".to_sym, child )
       end
       
       @current_graph = previous_graph
     end
     
     def graphml_graph_data( node ) #:nodoc:
-      @current_graph[@attributes[:graphs][node.attributes['key']][:name]] = node.texts().to_s
+      begin
+        @current_graph[@attributes[:graphs][node.attributes['key']][:name]] = node.texts().to_s
+      rescue ArgumentError => e
+        warn e
+      end
     end
     
     def graphml_graph_node( node ) #:nodoc:
@@ -158,7 +166,11 @@ class GraphViz
       unless @current_node.nil?
         node = @current_graph.add_nodes( node.attributes['id'] )
         @current_node.each do |k, v|
-          node[k] = v
+          begin
+            node[k] = v
+          rescue ArgumentError => e
+            warn e
+          end
         end
       end
       
@@ -201,7 +213,11 @@ class GraphViz
     end
   
     def graphml_graph_edge_data( node ) #:nodoc:
-      @current_edge[@attributes[:edges][node.attributes['key']][:name]] = node.texts().to_s
+      begin
+        @current_edge[@attributes[:edges][node.attributes['key']][:name]] = node.texts().to_s
+      rescue ArgumentError => e
+        warn e
+      end
     end
     
     def graphml_graph_hyperedge( node ) #:nodoc:
