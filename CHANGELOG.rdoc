@@ -1,6 +1,8 @@
 = CHANGELOG
 
 == 1.0.6 :
+* Issue #40 : GraphML importation doesn't work...
+* Bug correction (with Ruby 1.8)
 * Add (experimental) support of LibXML/LibXSLT 
 
 == 1.0.5 :
