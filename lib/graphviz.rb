@@ -975,7 +975,7 @@ class GraphViz
     
     if (options[:force] or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?) 
       unless options[:unquote_empty] == true and str.size == 0
-        '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n').gsub(".","\\.") + '"' 
+        '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"' 
       end
     else
       str
