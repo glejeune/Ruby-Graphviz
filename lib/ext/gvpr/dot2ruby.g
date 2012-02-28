@@ -41,6 +41,13 @@ BEGIN {
     out = gsub( out, "[!a-zA-Z0-9_]", "_" );
     return( out );
   }
+
+  string stringify( string s ) {
+    string sout;
+    sout = gsub(s, "$", "\\$");
+    sout = canon(sout);
+    return( sout );
+  }
 }
 
 BEG_G {
@@ -48,9 +55,9 @@ BEG_G {
   // Directed 
   g_direct = isDirect($);
   if( g_direct == 0 ) {
-    printf( "graph_%s = GraphViz.graph( \"%s\"", rubyfy($.name), rubyfy($.name) );
+    printf( "graph_%s = GraphViz.graph( %s", rubyfy($.name), stringify($.name) );
   } else {
-    printf( "graph_%s = GraphViz.digraph( \"%s\"", rubyfy($.name), rubyfy($.name) );
+    printf( "graph_%s = GraphViz.digraph( %s", rubyfy($.name), stringify($.name) );
   }
   // Strict
   g_strict = isStrict($);
