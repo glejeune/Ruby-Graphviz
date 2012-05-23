@@ -24,21 +24,21 @@ class GraphViz
             if g.is_a?(Fixnum)
                g = g.to_s.convert_base(10, 16)
             end
-            unless g.is_a?(String) and HEX_FOR_COLOR.match(r)
+            unless g.is_a?(String) and HEX_FOR_COLOR.match(g)
                raise ColorException, "Bad green value"
             end
             
             if b.is_a?(Fixnum)
                b = b.to_s.convert_base(10, 16)
             end
-            unless b.is_a?(String) and HEX_FOR_COLOR.match(r)
+            unless b.is_a?(String) and HEX_FOR_COLOR.match(b)
                raise ColorException, "Bad blue value"
             end
       
             if a.is_a?(Fixnum)
                a = a.to_s.convert_base(10, 16)
             end
-            unless a.nil? or (a.is_a?(String) and HEX_FOR_COLOR.match(r))
+            unless a.nil? or (a.is_a?(String) and HEX_FOR_COLOR.match(a))
                raise ColorException, "Bad alpha value"
             end
       
