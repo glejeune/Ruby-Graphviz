@@ -16,6 +16,9 @@
 * Ronen Barzel <https://github.com/ronen>
 * Jamison Dance <https://github.com/jergason>
 * hirochachacha <https://github.com/hirochachacha>
+* coding64 (https://github.com/coding46)
+* Neven Has (https://github.com/nevenh)
+* Postmodern (https://github.com/postmodern) 
 
 Thanks to :
 

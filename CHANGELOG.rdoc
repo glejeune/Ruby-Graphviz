@@ -1,7 +1,11 @@
 = CHANGELOG
 
 == 1.0.6 :
-* Issue #46 : "escaped dot in label" aka "GVPR error in Dot2Ruby"
+* Issue #46 : Some tests fail because it cannot find 'dot'
+* Issue #45 : Fix for copy/paste error (by coding46)
+* Issue #44 : characters escaping (by Neven Has)
+* Issue #43 : Added lib/ruby-graphviz to match the gem name (by Postmodern)
+* Issue #42 : "escaped dot in label" aka "GVPR error in Dot2Ruby"
 * Issue #40 : GraphML importation doesn't work...
 * Bug correction (with Ruby 1.8)
 * Add (experimental) support of LibXML/LibXSLT 
