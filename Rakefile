@@ -1,6 +1,7 @@
 $:.unshift( "lib" )
 require "graphviz/constants"
 
+require 'rubygems'
 require 'rake/clean'
 require 'bundler'
 require 'rubygems/package_task'
@@ -53,13 +54,3 @@ end
 
 Bundler::GemHelper.install_tasks
 
-namespace :gemcutter do
-  desc "check gemcutter status"
-  task :status do
-    if Rubygems.status
-      puts "This gem already existe in version #{PKG_VERS}!"
-    else
-      puts "This gem (#{Constants::RGV_VERSION}) has not been published! Last version at gemcutter is #{Rubygems.version}"
-    end
-  end
-end
