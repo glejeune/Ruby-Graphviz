@@ -1,5 +1,8 @@
 = CHANGELOG
 
+== 1.0.7 :
+* Issue #47 : Find executable (by markus1189)
+
 == 1.0.6 :
 * Issue #46 : Some tests fail because it cannot find 'dot'
 * Issue #45 : Fix for copy/paste error (by coding46)
