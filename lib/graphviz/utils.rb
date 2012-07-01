@@ -16,14 +16,16 @@ module GVUtils
   # WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION 
   # OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
   # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-  def find_executable(bin, paths) #:nodoc:
-    paths = ENV['PATH'].split(File::PATH_SEPARATOR) if paths.nil? or paths.empty?
-  
-    paths.each do |path|    
-      file = (path.nil?)?bin:File.join(path,bin)
-      if File.executable?(file) and not File.directory?(file) then
-        return file
-      elsif RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ # WAS: elsif RUBY_PLATFORM =~ /mswin|mingw/
+  def find_executable(bin, custom_paths) #:nodoc:
+    system_path = ENV['PATH']
+    user_given_path = Array(custom_paths).join(File::PATH_SEPARATOR)
+    search_path = system_path + File::PATH_SEPARATOR + user_given_path
+
+    search_path.split(File::PATH_SEPARATOR).each do |path|
+      file_path = File.join(path,bin)
+      return file_path if File.executable?(file_path) and File.file?(file_path)
+
+      if RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ # WAS: elsif RUBY_PLATFORM =~ /mswin|mingw/
         found_ext = (ENV['PATHEXT'] || '.exe;.bat;.com').split(";").find {|ext| File.executable?(file + ext) }
         return file + found_ext if found_ext
       end
