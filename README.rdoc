@@ -1,6 +1,6 @@
 = Ruby/GraphViz
 
-Copyright (C) 2004-2011 Gregoire Lejeune
+Copyright (C) 2004-2012 Gregoire Lejeune
 
 * Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
 * Sources : http://github.com/glejeune/Ruby-Graphviz
