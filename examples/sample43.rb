@@ -23,4 +23,4 @@ g.add_edges( {"struct1" => :f2}, {"struct3" => :here} )
 
 g.add_edges( "HTML", "struct1" )
 
-g.output( :path => '/usr/local/bin/', :png => "#{$0}.png" )
+g.output( :path => ARGV[0], :png => "#{$0}.png" )
