@@ -510,7 +510,7 @@ class GraphViz
             end
             @prog = xValue
           when "path"
-            @path = xValue.split( "," ).map{ |x| x.strip }
+            @path = xValue && xValue.split( "," ).map{ |x| x.strip }
           when "errors"
             @errors = xValue
           when "extlib"
