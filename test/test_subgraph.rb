@@ -11,6 +11,6 @@ class GraphVizSubGraphTest < Test::Unit::TestCase
     cl2 = GraphViz::new('cluster_cl1')
     master2.add_graph cl2
 
-    assert_equal(master1.inspect, master2.inspect, "Wrong subgraph")
+    assert_equal(master1.to_s, master2.to_s, "Wrong subgraph")
   end
 end
