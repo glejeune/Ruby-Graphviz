@@ -260,6 +260,8 @@ class GraphViz
      if xGraphName.kind_of?(GraphViz) 
         xGraphID = xGraphName.id
         @hoGraphs[xGraphID] = xGraphName.clone
+        @hoGraphs[xGraphID].type = @oGraphType
+        @hoGraphs[xGraphID].pg = self
         xGraphName = xGraphID 
      else
         if xGraphName.kind_of?(Hash)
@@ -330,6 +332,9 @@ class GraphViz
   #
   def type
     @oGraphType
+  end
+  def type=(x) #:nodoc:
+    @oGraphType = x
   end
   
   #
@@ -701,6 +706,9 @@ class GraphViz
   
   def pg #:nodoc:
     @oParentGraph
+  end
+  def pg=(x) #:nodoc:
+    @oParentGraph = x
   end
   
   #
