@@ -1,5 +1,7 @@
 = CHANGELOG
 
+== 1.0.8 :
+
 == 1.0.7 :
 * Issue #48 : add_graph fails when passed a GraphViz object
 * Issue #47 : Find executable (by markus1189)
