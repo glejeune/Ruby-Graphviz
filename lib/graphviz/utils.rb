@@ -26,8 +26,8 @@ module GVUtils
       return file_path if File.executable?(file_path) and File.file?(file_path)
 
       if RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ # WAS: elsif RUBY_PLATFORM =~ /mswin|mingw/
-        found_ext = (ENV['PATHEXT'] || '.exe;.bat;.com').split(";").find {|ext| File.executable?(file + ext) }
-        return file + found_ext if found_ext
+        found_ext = (ENV['PATHEXT'] || '.exe;.bat;.com').split(";").find {|ext| File.executable?(file_path + ext) }
+        return file_path + found_ext if found_ext
       end
     end
     return nil
