@@ -44,9 +44,6 @@ class GraphViz
                self[k] = v
             end
          else
-            if @data.key?( key.to_s ) == false
-               nil
-            end
             @data[key.to_s]
          end
       end
@@ -66,12 +63,10 @@ class GraphViz
          rescue => e
             raise AttributeException, "Invalide value `#{value}` for attribute `#{key}` : #{e}"
          end
-         unless value.nil?
-            @data[key.to_s] = value
 
-            if @graphviz.nil? == false
-               @graphviz.set_position( @name, key.to_s, @data[key.to_s] )
-            end
+         if value
+           @data[key.to_s] = value
+           @graphviz.set_position( @name, key.to_s, @data[key.to_s] ) if @graphviz
          end
       end
    end

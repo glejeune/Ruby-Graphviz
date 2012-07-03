@@ -106,7 +106,7 @@ class Rb2Gv
 
   def parseFile( xFile, xFromFile = nil, xLib = nil )
 
-    if xFromFile.nil? == false
+    if xFromFile
       puts "Parse #{xFile} required in #{xFromFile} :" if DEBUG
     else
       puts "Parse #{xFile} :" if DEBUG
@@ -120,11 +120,11 @@ class Rb2Gv
       if lxLineMatch = REQUIRE.match( xLine )
         xRequiredLib = lxLineMatch[2].gsub( /\.(rb|so)$/, "" )
 
-        if @hxNodes.has_key?( xRequiredLib ) == false
+        if not @hxNodes.has_key?( xRequiredLib )
           puts "  + Node #{xRequiredLib}" if DEBUG
 
           xRequiredFile = getLibraryPath( xRequiredLib )
-          if xRequiredFile.nil? == false
+          if xRequiredFile
             unless @lxStops.include?(xRequiredLib)
               @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib )
               parseFile( xRequiredFile, xFile, xRequiredLib )

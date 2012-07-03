@@ -131,7 +131,7 @@ class GraphViz
   def get_node( xNodeName, &block )
     node = @hoNodes[xNodeName] || nil
 
-    yield( node ) if( block and node.nil? == false )
+    yield( node ) if( block and node )
 
     return node
   end
@@ -298,7 +298,7 @@ class GraphViz
   def get_graph( xGraphName, &block )
     graph = @hoGraphs[xGraphName] || nil
 
-    yield( graph ) if( block and graph.nil? == false )
+    yield( graph ) if( block and graph )
 
     return graph
   end
@@ -499,7 +499,7 @@ class GraphViz
     end
     xDOTScript << "}"
 
-    if @oParentGraph.nil? == false
+    if @oParentGraph
       xDOTScript = "subgraph #{GraphViz.escape(@name, :unquote_empty => true)} {\n" << xDOTScript
 
       return( xDOTScript )
@@ -776,7 +776,7 @@ class GraphViz
   #
   def self.parse( xFile, hOpts = {}, &block )
     graph = Dot2Ruby::new( hOpts[:path], nil, nil ).eval( xFile )
-    yield( graph ) if( block and graph.nil? == false )
+    yield( graph ) if( block and graph )
     return graph
   end
 
@@ -790,7 +790,7 @@ class GraphViz
   #
   def self.parse_string( str, hOpts = {}, &block )
     graph = Dot2Ruby::new( hOpts[:path], nil, nil ).eval_string( str )
-    yield( graph ) if( block and graph.nil? == false )
+    yield( graph ) if( block and graph )
     return graph
   end
 

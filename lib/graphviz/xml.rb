@@ -49,7 +49,7 @@ class GraphViz
 	   @show_text = true
 	   @show_attributes = true
 
-      if options.nil? == false and options[0].nil? == false
+      if options and options[0]
         options[0].each do |xKey, xValue|
           case xKey.to_s
             when "text"
@@ -74,11 +74,11 @@ class GraphViz
       label = xml_node.name
       if xml_node.has_attributes? and @show_attributes
         label = "{ " + xml_node.name
-		
+
 		    xml_node.attributes.each do |xName, xValue|
 		      label << "| { #{xName} | #{xValue} } "
 		    end
-		
+
 		    label << "}"
 	    end
       @graph.add_nodes( local_node_name, "label" => label, "color" => "blue", "shape" => "record" )
