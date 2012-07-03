@@ -12,7 +12,7 @@ end
 GraphViz::new( "g", :rankdir => "LR", :type => "digraph" ) { |g|
   g.node[:fontsize] = "16"
   g.node[:shape] = "record"
-  
+
   g.node0( :label => "<f0> 0x10ba8| <f1>" )
   g.node1( :label => "<f0> 0xf7fc4380| <f1> | <f2> |-1" )
   g.node2( :label => "<f0> 0xf7fc44b8| | |2" )
@@ -26,7 +26,7 @@ GraphViz::new( "g", :rankdir => "LR", :type => "digraph" ) { |g|
   g.node10( :label => "<f0> (nil)| <f1> | <f2> |-1" )
   g.node11( :label => "<f0> (nil)| <f1> | <f2> |-1" )
   g.node12( :label => "<f0> 0xf7fc43e0| | |1" )
-  
+
   g.add_edges( g.node0(:f0), g.node1(:f0) )
   g.add_edges( g.node0(:f1), g.node2(:f0) )
   g.add_edges( g.node1(:f0), g.node3(:f0) )

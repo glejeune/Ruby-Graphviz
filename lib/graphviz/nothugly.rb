@@ -1,8 +1,8 @@
 # This file use notugly.xsl: An XSL transform to pretty up the SVG output from Graphviz
-# 
+#
 # See: http://www.hokstad.com/making-graphviz-output-pretty-with-xsl.html
 # And: http://www.hokstad.com/making-graphviz-output-pretty-with-xsl-updated.html
-# 
+#
 # By Vidar Hokstad and Ryan Shea; Contributions by Jonas Tingborn,
 # Earl Cummings, Michael Kennedy (Graphviz 2.20.2 compatibility, bug fixes,
 # testing, lots of gradients)
@@ -33,7 +33,7 @@ class GraphViz
   def self.nothugly( file, save = true )
     xsl = File.join( File.dirname(File.expand_path(__FILE__)), "nothugly", "nothugly.xsl" )
     out = self.send(XSLT_METHOD, file, xsl)
-  
+
     if save
       fname = File.join( File.dirname(File.expand_path(file)), File.basename(file))
       File.open( fname, "w" ) { |io|

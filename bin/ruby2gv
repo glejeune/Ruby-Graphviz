@@ -1,16 +1,16 @@
 #!/usr/bin/env ruby
 # Copyright (C) 2005 - 2012 Gregoire Lejeune <gregoire.lejeune@free.fr>
-# 
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
@@ -34,7 +34,7 @@ class Rb2Gv
     @hxEdge = Array::new( )
     @lxStops = xStops
   end
-  
+
   public
   def parse( xFile )
     @hxNodes[xFile] = gv_newNode( xFile, "box", "forestgreen" )
@@ -44,38 +44,38 @@ class Rb2Gv
   end
 
   def out( xFormat = "dot", xFile = nil )
-    if xFile.nil? 
+    if xFile.nil?
       @oGraph.output( xFormat => String )
     else
       @oGraph.output( xFormat => xFile )
     end
   end
-  
+
   private
-  def gv_newNode( xNode, xShape = "box", xColor = nil )  
+  def gv_newNode( xNode, xShape = "box", xColor = nil )
     xNodeName = xNode.gsub( /[^a-zA-Z0-9]/, "_" )
-    if xColor.nil? 
+    if xColor.nil?
       @oGraph.add_nodes( xNodeName, "label" => xNode, "shape" => xShape )
     else
       @oGraph.add_nodes( xNodeName, "label" => xNode, "shape" => xShape, "style" => "filled", "color" => xColor )
     end
   end
-  
+
   def getLibraryPath( xLib, xExt = ["rb"] )
-  
+
     xPath = [ "libexecdir", "libdir", "sitedir", "rubylibdir", "sitelibdir", "archdir", "sitedir", "sitearchdir" ]
     xRbLib = with_config( xLib+'lib', xLib)
-    
+
     if /\.(rb|so|bundle|dll)$/.match( xRbLib )
       match = /^(.*)\.([^\.]*)$/.match(xRbLib)
       xRbFile, xExt = match[1], [match[2]]
     else
       xRbFile = xRbLib
     end
-    
+
     xExt.each do |e|
       xRbFileWithExt = xRbFile + "." + e
-    
+
       # Search in "standard" paths
       xPath.each do |xDir|
         xCurrentPath = Config::expand( Config::CONFIG[xDir] )
@@ -84,7 +84,7 @@ class Rb2Gv
           return xFileFound
         end
       end
-    
+
       # Search in "rubygems" :: This is not utile but...
       spec = Gem.searcher.find(xLib)
       unless spec.nil?
@@ -103,9 +103,9 @@ class Rb2Gv
 
     return nil
   end
-  
+
   def parseFile( xFile, xFromFile = nil, xLib = nil )
-  
+
     if xFromFile.nil? == false
       puts "Parse #{xFile} required in #{xFromFile} :" if DEBUG
     else
@@ -115,18 +115,18 @@ class Rb2Gv
     fp = open( xFile, 'r' )
     xData = fp.read()
     fp.close
-    
+
     xData.each do |xLine|
       if lxLineMatch = REQUIRE.match( xLine )
         xRequiredLib = lxLineMatch[2].gsub( /\.(rb|so)$/, "" )
-        
+
         if @hxNodes.has_key?( xRequiredLib ) == false
           puts "  + Node #{xRequiredLib}" if DEBUG
 
           xRequiredFile = getLibraryPath( xRequiredLib )
           if xRequiredFile.nil? == false
             unless @lxStops.include?(xRequiredLib)
-              @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib )             
+              @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib )
               parseFile( xRequiredFile, xFile, xRequiredLib )
             else
               @hxNodes[xRequiredLib] = gv_newNode( xRequiredLib, "invhouse", "deepskyblue" )
@@ -140,7 +140,7 @@ class Rb2Gv
           end
 
         end
-        
+
         puts "  + Edge #{xLib} -> #{xRequiredLib}" if DEBUG
         unless @hxEdge.include?( "#{@hxNodes[xLib].id}-#{@hxNodes[xRequiredLib].id}" )
           @oGraph.add_edges( @hxNodes[xLib], @hxNodes[xRequiredLib] )
@@ -148,12 +148,12 @@ class Rb2Gv
         end
       end
     end
-    
+
   end
 
 end
 
-def usage 
+def usage
   puts "usage: ruby2gv [-Tformat] [-ofile] [-h] [-V] script"
   puts "-T, --output-format format    Output format (default: PNG)"
   puts "-o, --output-file file        Output file (default: STDOUT)"
@@ -226,7 +226,7 @@ end
 
 xFile = ARGV[0]
 
-if xFile.nil? 
+if xFile.nil?
   usage( )
   exit
 end

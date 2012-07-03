@@ -5,11 +5,11 @@ class GraphViz
       def check(data)
         return data
       end
-      
+
       def output
         return "<"+@data+">"
       end
-      
+
       alias :to_gv :output
       alias :to_s :output
       alias :to_ruby :output

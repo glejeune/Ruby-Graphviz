@@ -13,31 +13,31 @@ class GraphViz
         @x, @y = 0, 0
         @sibling = nil
       end
-      
+
       def id
         @node.id
       end
-      
+
       def name
         @node.label || @node.id
       end
-      
+
       def sibling
         @sibling
       end
-      
+
       def sibling=(x)
         @sibling=x
       end
-      
+
       def couples #:nodoc:
         @couples
       end
-      
+
       def node #:nodoc:
         @node
       end
-      
+
       # Define the current person as a man
       #
       #  greg.is_a_man( "Greg" )
@@ -45,14 +45,14 @@ class GraphViz
         @node["label"] = name
         @node["color"] = "blue"
       end
-      
+
       # Define the current person as a boy
       #
       #  greg.is_a_boy( "Greg" )
       def is_a_boy( name )
         is_a_man( name )
       end
-      
+
       # Define the current perdon as a woman
       #
       #  mu.is_a_woman( "Muriel" )
@@ -66,7 +66,7 @@ class GraphViz
       def is_a_girl( name )
         is_a_woman( name )
       end
-      
+
       # Define that's two persons are maried
       #
       #  mu.is_maried_with greg
@@ -77,7 +77,7 @@ class GraphViz
         @graph.add_edges( node, x.node, "dir" => "none" )
         @tree.add_couple( self, x, node )
       end
-      
+
       # Define that's two persons are divorced
       #
       #  sophie.is_divorced_with john
@@ -89,7 +89,7 @@ class GraphViz
         @graph.add_edges( node, x.node, "dir" => "none", "color" => "red" )
         @tree.add_couple( self, x, node )
       end
-      
+
       # Define that's a person is widower of another
       #
       #  simon.is_widower_of elisa
@@ -108,7 +108,7 @@ class GraphViz
       def is_dead
         @node["style"] = "filled"
       end
-      
+
       # Define the kids of a single person
       #
       #   alice.kids( john, jack, julie )

@@ -5,7 +5,7 @@
 # ratio = "auto" ;
 # mincross = 2.0 ;
 # label = "Pedigree Lion_Share" ;
-# 
+#
 # "001" [shape=box     , regular=1,style=filled,fillcolor=white   ] ;
 # "002" [shape=box     , regular=1,style=filled,fillcolor=white   ] ;
 # "003" [shape=circle  , regular=1,style=filled,fillcolor=white   ] ;

@@ -1,30 +1,30 @@
 # Copyright (C) 2004 - 2012 Gregoire Lejeune <gregoire.lejeune@free.fr>
-# 
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 
 # Constants for ruby-graphviz
-# 
+#
 # Constants::FORMATS: the possible output formats
-#   "bmp", "canon", "dot", "xdot", "cmap", "dia", "eps", 
+#   "bmp", "canon", "dot", "xdot", "cmap", "dia", "eps",
 #   "fig", "gd", "gd2", "gif", "gtk", "hpgl", "ico", "imap",
 #   "cmapx", "imap_np", "cmapx_np", "ismap", "jpeg", "jpg",
 #   "jpe", "mif", "mp", "pcl", "pdf", "pic", "plain",
 #   "plain-ext", "png", "ps", "ps2", "svg", "svgz", "tga",
 #   "tiff", "tif", "vml", "vmlz", "vrml", "vtx", "wbmp",
-#   "xlib", "none" 
-# 
+#   "xlib", "none"
+#
 # Constants::PROGRAMS: The possible programs
 #   "dot", "neato", "twopi", "fdp", "circo"
 #
@@ -33,7 +33,7 @@
 #
 #
 # The single letter codes used in constructors map as follows:
-#   G => The root graph, with GRAPHATTRS 
+#   G => The root graph, with GRAPHATTRS
 #   E => Edge, with EDGESATTRS
 #   N => Node, with NODESATTRS
 #   S => subgraph
@@ -41,14 +41,14 @@
 #
 module Constants
   RGV_VERSION = "1.0.8"
-  
+
   ## Const: Output formats
   FORMATS = [
     "bmp",
     "canon",
-    "dot", 
+    "dot",
     "xdot",
-    "cmap", 
+    "cmap",
     "dia",
     "eps",
     "fig",
@@ -56,37 +56,37 @@ module Constants
     "gd2",
     "gif",
     "gtk",
-    "hpgl", 
+    "hpgl",
     "ico",
-    "imap", 
+    "imap",
     "cmapx",
-    "imap_np", 
+    "imap_np",
     "cmapx_np",
-    "ismap", 
-    "jpeg", 
-    "jpg", 
-    "jpe", 
-    "mif", 
+    "ismap",
+    "jpeg",
+    "jpg",
+    "jpe",
+    "mif",
     "mp",
-    "pcl", 
+    "pcl",
     "pdf",
-    "pic", 
-    "plain", 
+    "pic",
+    "plain",
     "plain-ext",
-    "png", 
-    "ps", 
+    "png",
+    "ps",
     "ps2",
-    "svg", 
+    "svg",
     "svgz",
     "tga",
     "tiff",
     "tif",
     "vml",
     "vmlz",
-    "vrml", 
-    "vtx", 
-    "wbmp", 
-    "xlib", 
+    "vrml",
+    "vtx",
+    "wbmp",
+    "xlib",
     "none"
   ]
 
@@ -114,7 +114,7 @@ module Constants
     }
     list
   end
-  
+
   # E, N, G, S and C represent edges, nodes, the root graph, subgraphs and cluster subgraphs, respectively
   GENCS_ATTRS = {
     "Damping"             => { :usedBy => "G",    :type => :GvDouble },
@@ -142,8 +142,8 @@ module Constants
     "dimen"               => { :usedBy => "G",    :type => :EscString }, # int
     "dir"                 => { :usedBy => "E",    :type => :EscString }, # dirType
     "diredgeconstraints"  => { :usedBy => "G",    :type => :EscString }, # string, bool
-    "distortion"          => { :usedBy => "N",    :type => :GvDouble },  
-    "dpi"                 => { :usedBy => "G",    :type => :GvDouble },  
+    "distortion"          => { :usedBy => "N",    :type => :GvDouble },
+    "dpi"                 => { :usedBy => "G",    :type => :GvDouble },
     "edgeURL"             => { :usedBy => "E",    :type => :EscString },
     "edgehref"            => { :usedBy => "E",    :type => :EscString },
     "edgetarget"          => { :usedBy => "E",    :type => :EscString },
@@ -161,7 +161,7 @@ module Constants
     "headURL"             => { :usedBy => "E",    :type => :EscString },
     "headclip"            => { :usedBy => "E",    :type => :GvBool }, # bool
     "headhref"            => { :usedBy => "E",    :type => :EscString },
-    "headlabel"           => { :usedBy => "E",    :type => :EscString }, # LblString 
+    "headlabel"           => { :usedBy => "E",    :type => :EscString }, # LblString
     "headport"            => { :usedBy => "E",    :type => :EscString }, # portPos
     "headtarget"          => { :usedBy => "E",    :type => :EscString },
     "headtooltip"         => { :usedBy => "E",    :type => :EscString },
@@ -189,7 +189,7 @@ module Constants
     "layers"              => { :usedBy => "G",    :type => :EscString }, # layerList
     "layersep"            => { :usedBy => "G",    :type => :EscString }, # string
     "layout"              => { :usedBy => "G",    :type => :EscString }, # string
-    "len"                 => { :usedBy => "E",    :type => :GvDouble },  
+    "len"                 => { :usedBy => "E",    :type => :GvDouble },
     "levels"              => { :usedBy => "G",    :type => :EscString }, # int
     "levelsgap"           => { :usedBy => "G",    :type => :GvDouble },
     "lhead"               => { :usedBy => "E",    :type => :EscString }, # string

@@ -1,16 +1,16 @@
 #!/usr/bin/env ruby
 # Copyright (C) 2010 Gregoire Lejeune <gregoire.lejeune@free.fr>
-# 
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
@@ -20,7 +20,7 @@ require 'graphviz/constants'
 require 'graphviz/dot2ruby'
 require 'getoptlong'
 
-def usage 
+def usage
   puts "usage: dot2ruby [-ofile] [-Tformat] [-h] [-V] script"
   puts "-o, --output-file file        Output file"
   puts "-T, --output-format format    Output format (default: nil)"
@@ -83,7 +83,7 @@ end
 
 xFile = ARGV[0]
 
-if xFile.nil? 
+if xFile.nil?
   usage( )
   exit
 end

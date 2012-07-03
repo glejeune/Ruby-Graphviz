@@ -19,7 +19,7 @@
 #   green1->gy1;
 #   yellow1->yr1;
 #   red1->rg1;
-#   
+#
 #   overlap=false
 #   label="PetriNet Model TrafficLights\nExtracted from ConceptBase and layed out by Graphviz"
 #   fontsize=12;
@@ -38,7 +38,7 @@ GraphViz::new( "TrafficLights", :type => :digraph ) { |g|
   g.green1.set { |n| n[:shape] = :circle; n[:fixedsize] = :true; n[:width] = 0.9 }
   g.yellow1.set { |n| n[:shape] = :circle; n[:fixedsize] = :true; n[:width] = 0.9 }
   g.red1.set { |n| n[:shape] = :circle; n[:fixedsize] = :true; n[:width] = 0.9 }
-  
+
   g.gy2 << g.yellow2
   g.rg2 << g.green2
   g.yr2 << g.safe1

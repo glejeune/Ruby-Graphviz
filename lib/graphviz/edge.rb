@@ -1,15 +1,15 @@
 # Copyright (C) 2004 - 2012 Gregoire Lejeune <gregoire.lejeune@free.fr>
-# 
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
@@ -22,11 +22,11 @@ class GraphViz
       include Constants
 
       # Create a new edge
-      # 
+      #
       # In:
       # * vNodeOne : First node (can be a GraphViz::Node or a node ID)
       # * vNodeTwo : Second node (can be a GraphViz::Node or a node ID)
-      # * parent_graph : Graph 
+      # * parent_graph : Graph
       def initialize( vNodeOne, vNodeTwo, parent_graph )
          @node_one_id, @node_one_port = getNodeNameAndPort( vNodeOne )
          @node_two_id, @node_two_port = getNodeNameAndPort( vNodeTwo )
@@ -35,7 +35,7 @@ class GraphViz
          @edge_attributes = GraphViz::Attrs::new( nil, "edge", EDGESATTRS )
          @index = nil
 
-         unless @parent_graph.directed? 
+         unless @parent_graph.directed?
             (@parent_graph.find_node(@node_one_id) || @parent_graph.add_nodes(@node_one_id)).incidents << (@parent_graph.find_node(@node_two_id) || @parent_graph.add_nodes(@node_two_id))
             (@parent_graph.find_node(@node_two_id) || @parent_graph.add_nodes(@node_two_id)).neighbors << (@parent_graph.find_node(@node_one_id) || @parent_graph.add_nodes(@node_one_id))
          end
@@ -56,8 +56,8 @@ class GraphViz
       # Return the node two as string (so with port if any)
       def node_two( with_port = true )
          if @node_two_port.nil? or with_port == false
-            GraphViz.escape(@node_two_id) 
-         else 
+            GraphViz.escape(@node_two_id)
+         else
             GraphViz.escape(@node_two_id, :force => true) + ":#{@node_two_port}"
          end
       end
@@ -77,7 +77,7 @@ class GraphViz
          @edge_attributes[attribute_name.to_s] = attribute_value
       end
 
-      # Set values for edge attributes or 
+      # Set values for edge attributes or
       # get the value of the given edge attribute +attribute_name+
       def []( attribute_name )
          # Modification by axgle (http://github.com/axgle)
@@ -87,7 +87,7 @@ class GraphViz
             end
          else
             if @edge_attributes[attribute_name.to_s]
-               @edge_attributes[attribute_name.to_s].clone 
+               @edge_attributes[attribute_name.to_s].clone
             else
                nil
             end
@@ -95,7 +95,7 @@ class GraphViz
       end
 
       #
-      # Calls block once for each attribute of the edge, passing the name and value to the 
+      # Calls block once for each attribute of the edge, passing the name and value to the
       # block as a two-element array.
       #
       # If global is set to false, the block does not receive the attributes set globally

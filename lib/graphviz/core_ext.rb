@@ -37,7 +37,7 @@ class Hash
    #   :png => "file.png",
    #   :svg => "file.svg"
    # }
-   # 
+   #
    # x.each_except( :key => [:none], :value => [/\.png$/] ) do |k, v|
    #   puts "#{k} -> #{v}"
    # end
