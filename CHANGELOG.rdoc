@@ -1,5 +1,7 @@
 = CHANGELOG
 
+== 1.0.9 :
+
 == 1.0.8 :
 * Cleanup format (by markus1189)
 * Issue #49 : (undefined local variable or method `file' ) (by markus1189)
