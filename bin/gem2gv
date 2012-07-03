@@ -28,7 +28,7 @@ class Gem2Gv
   end
   
   def out( xFormat = "dot", xFile = nil )
-    if xFile.nil? == true
+    if xFile.nil? 
       @oGraph.output( xFormat => String )
     else
       @oGraph.output( xFormat => xFile )
@@ -154,7 +154,7 @@ end
 
 xGem = ARGV[0]
 
-if xGem.nil? == true
+if xGem.nil? 
   usage( )
   exit
 end

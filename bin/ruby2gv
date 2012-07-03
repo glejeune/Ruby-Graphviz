@@ -44,7 +44,7 @@ class Rb2Gv
   end
 
   def out( xFormat = "dot", xFile = nil )
-    if xFile.nil? == true
+    if xFile.nil? 
       @oGraph.output( xFormat => String )
     else
       @oGraph.output( xFormat => xFile )
@@ -54,7 +54,7 @@ class Rb2Gv
   private
   def gv_newNode( xNode, xShape = "box", xColor = nil )  
     xNodeName = xNode.gsub( /[^a-zA-Z0-9]/, "_" )
-    if xColor.nil? == true
+    if xColor.nil? 
       @oGraph.add_nodes( xNodeName, "label" => xNode, "shape" => xShape )
     else
       @oGraph.add_nodes( xNodeName, "label" => xNode, "shape" => xShape, "style" => "filled", "color" => xColor )
@@ -226,7 +226,7 @@ end
 
 xFile = ARGV[0]
 
-if xFile.nil? == true
+if xFile.nil? 
   usage( )
   exit
 end

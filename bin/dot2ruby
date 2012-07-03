@@ -83,7 +83,7 @@ end
 
 xFile = ARGV[0]
 
-if xFile.nil? == true
+if xFile.nil? 
   usage( )
   exit
 end

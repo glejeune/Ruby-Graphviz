@@ -72,7 +72,7 @@ class GraphViz
       @node_name.succ!
       
       label = xml_node.name
-      if xml_node.has_attributes? == true and @show_attributes == true
+      if xml_node.has_attributes? and @show_attributes 
         label = "{ " + xml_node.name 
 		
 		    xml_node.attributes.each do |xName, xValue|
@@ -84,7 +84,7 @@ class GraphViz
       @graph.add_nodes( local_node_name, "label" => label, "color" => "blue", "shape" => "record" )
 
       ## Act: Search and add Text nodes
-      if xml_node.has_text? == true and @show_text == true
+      if xml_node.has_text? and @show_text 
         text_node_name = local_node_name.clone
         text_node_name << "111"
         

@@ -430,7 +430,7 @@ class GraphViz
     lNotHugly = []
 
     @elements_order.each { |kElement|
-      if xLastType.nil? == true or xLastType != kElement["type"]
+      if xLastType.nil? or xLastType != kElement["type"]
         
         if xData.length > 0 
           case xLastType
@@ -510,7 +510,7 @@ class GraphViz
         xValue = xValue.to_s unless xValue.nil? or [Class, TrueClass, FalseClass].include?(xValue.class)
         case xKey.to_s
           when "use"
-            if PROGRAMS.index( xValue ).nil? == true
+            if PROGRAMS.index( xValue ).nil? 
               raise ArgumentError, "can't use '#{xValue}'"
             end
             @prog = xValue
@@ -559,7 +559,7 @@ class GraphViz
               @nothugly = false
             end
           else
-            if FORMATS.index( xKey.to_s ).nil? == true
+            if FORMATS.index( xKey.to_s ).nil? 
               raise ArgumentError, "output format '#{xValue}' invalid"
             end
             hOutput[xKey.to_s] = xValue
@@ -625,14 +625,14 @@ class GraphViz
         
         xOtherOptions = ""        
         xOtherOptions += " -s#{@scale}" unless @scale.nil?
-        xOtherOptions += " -y" if @inverty == true
+        xOtherOptions += " -y" if @inverty 
         unless @no_layout.nil?
           xOtherOptions += " -n"
           xOtherOptions += "2" if @no_layout.to_i == 2
         end
-        xOtherOptions += " -x" if @reduce_graph == true
-        xOtherOptions += " -Lg" if @Lg == true
-        xOtherOptions += " -LO" if @LO == true
+        xOtherOptions += " -x" if @reduce_graph 
+        xOtherOptions += " -Lg" if @Lg 
+        xOtherOptions += " -LO" if @LO 
         xOtherOptions += " -Ln#{@Ln}" unless @LN.nil?
         xOtherOptions += " -LU#{@LU}" unless @LU.nil?
         xOtherOptions += " -LC#{@LC}" unless @LC.nil?
@@ -878,14 +878,14 @@ class GraphViz
     hOpts.each do |xKey, xValue|
       case xKey.to_s
         when "use"
-          if PROGRAMS.index( xValue.to_s ).nil? == true
+          if PROGRAMS.index( xValue.to_s ).nil? 
             raise ArgumentError, "can't use '#{xValue}'"
           end
           @prog = xValue.to_s
         when "parent"
           @oParentGraph = xValue
         when "type"
-          if GRAPHTYPE.index( xValue.to_s ).nil? == true
+          if GRAPHTYPE.index( xValue.to_s ).nil? 
             raise ArgumentError, "graph type '#{xValue}' unknow"
           end
           @oGraphType = xValue.to_s
@@ -982,7 +982,7 @@ class GraphViz
     }.merge(opts)
     
     if (options[:force] or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?) 
-      unless options[:unquote_empty] == true and str.size == 0
+      unless options[:unquote_empty] and str.size == 0
         '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"' 
       end
     else
