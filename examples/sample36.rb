@@ -6,12 +6,12 @@ require "graphviz"
 GraphViz.graph( :G ) { |g|
   last_line = []
   node_number = 0
-  
+
   100.times do |j|
     # New_Line
     new_line = []
     c = g.subgraph( :rank => "same" )
-    
+
     100.times do |i|
       current_node = c.add_nodes( "N#{node_number}", :shape => "point", :label => "" )
       last_node = new_line[-1]

@@ -9,7 +9,7 @@ g = GraphViz.digraph( "G", :path => "/usr/local/bin" ) do |g|
   g.d[:label => "4"]
   g.e[:label => "5"]
   g.f[:label => "6"]
-  
+
 #   g.a << g.a
   g.a << g.b
   g.a << g.d
@@ -82,6 +82,6 @@ rrr = t.critical_path
 print "\tPath "; p rrr[:path]
 puts "\tDistance : #{rrr[:distance]}"
 
-t.pagerank.each { |node, rank| 
+t.pagerank.each { |node, rank|
    puts "Pagerank for node #{node.id} = #{rank}"
 }

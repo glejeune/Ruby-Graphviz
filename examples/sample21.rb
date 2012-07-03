@@ -8,5 +8,5 @@ require "graphviz"
     g.command(:URL => "http://www.research.att.com/base.html")
     g._output(:label => "output", :URL => "colors.html")
     g.command << g._output
-  }.output( format => file )  
+  }.output( format => file )
 end

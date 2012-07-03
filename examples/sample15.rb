@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-# fdp example 
+# fdp example
 # see : http://www.graphviz.org/Gallery/undirected/fdpclust.html
 
 $:.unshift( "../lib" );

@@ -4,7 +4,7 @@ require 'graphviz/theory'
 
 g = GraphViz.digraph( "G", :path => "/usr/local/bin", :use => "fdp" ) do |g|
   g.node[:shape => "record"]
-  
+
   g.start[:label => "Start"]
   g.task_1[:label => "Task #1 - Duration : 4d"]
   g.task_2[:label => "Task #2 - Duration : 5.25d"]
@@ -14,7 +14,7 @@ g = GraphViz.digraph( "G", :path => "/usr/local/bin", :use => "fdp" ) do |g|
   g.task_6[:label => "Task #6 - Duration : 4.5d"]
   g.task_7[:label => "Task #7 - Duration : 5.17d"]
   g.finish[:label => "End"]
-  
+
   (g.start << g.task_1)[:weight => 0.0]
   (g.start << g.task_2)[:weight => 0.0]
   (g.task_1 << g.task_3)[:weight => 4.0]

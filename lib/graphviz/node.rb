@@ -1,15 +1,15 @@
 # Copyright (C) 2004 - 2011 Gregoire Lejeune <gregoire.lejeune@free.fr>
-# 
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
@@ -27,9 +27,9 @@ class GraphViz
       attr_reader :incidents
 
       # Create a new node
-      # 
+      #
       # * node_id : ID of the node
-      # * parent_graph : Graph 
+      # * parent_graph : Graph
       def initialize( node_id, parent_graph )
          @neighbors = []
          @incidents = []
@@ -75,7 +75,7 @@ class GraphViz
          end
       end
 
-      # Calls block once for each attribute of the node, passing the name and value to the 
+      # Calls block once for each attribute of the node, passing the name and value to the
       # block as a two-element array.
       #
       # If global is set to false, the block does not receive the attributes set globally
@@ -95,7 +95,7 @@ class GraphViz
 
       # Create an edge between the current node and the node +node+
       def <<( node )
-         if( node.class == Array ) 
+         if( node.class == Array )
             node.each do |no|
                self << no
             end
@@ -116,7 +116,7 @@ class GraphViz
       #     _n.color = "blue"
       #     _n.fontcolor = "red"
       #   }
-      # 
+      #
       def set( &b )
          yield( self )
       end

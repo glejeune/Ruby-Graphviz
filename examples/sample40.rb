@@ -3,12 +3,12 @@ require "graphviz"
 
 graph = GraphViz.new( :G, :type => :digraph )
 
-node1 = graph.add_nodes("hello:world", 
-  "shape" => "record", 
+node1 = graph.add_nodes("hello:world",
+  "shape" => "record",
   "label" => "<left>|<f1> 1|<right>" )
 
-node2 = graph.add_nodes("2", 
-  "shape" => "record", 
+node2 = graph.add_nodes("2",
+  "shape" => "record",
   "label" => "<left>|<f1> 2|<right>" )
 
 graph.add_edges( {node1 => :left}, node2 )

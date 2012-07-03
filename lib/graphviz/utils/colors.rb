@@ -2,17 +2,17 @@ require 'graphviz/core_ext'
 
 class GraphViz
    class Utils
-      class Colors 
+      class Colors
          HEX_FOR_COLOR = /[0-9a-fA-F]{2}/
          RGBA = /^(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})?$/
-      
+
          attr_reader :r, :g, :b, :a
          attr_reader :h, :s, :v
-      
+
          def initialize
             @r, @g, @b, @a, @h, @s, @v, @color = nil, nil, nil, nil, nil, nil, nil, nil
          end
-      
+
          def rgb(r, g, b, a = nil)
             if r.is_a?(Fixnum)
                r = r.to_s.convert_base(10, 16)
@@ -20,64 +20,64 @@ class GraphViz
             unless r.is_a?(String) and HEX_FOR_COLOR.match(r)
                raise ColorException, "Bad red value"
             end
-               
+
             if g.is_a?(Fixnum)
                g = g.to_s.convert_base(10, 16)
             end
             unless g.is_a?(String) and HEX_FOR_COLOR.match(g)
                raise ColorException, "Bad green value"
             end
-            
+
             if b.is_a?(Fixnum)
                b = b.to_s.convert_base(10, 16)
             end
             unless b.is_a?(String) and HEX_FOR_COLOR.match(b)
                raise ColorException, "Bad blue value"
             end
-      
+
             if a.is_a?(Fixnum)
                a = a.to_s.convert_base(10, 16)
             end
             unless a.nil? or (a.is_a?(String) and HEX_FOR_COLOR.match(a))
                raise ColorException, "Bad alpha value"
             end
-      
+
             @r = r
             @g = g
             @b = b
             @a = a
-            
+
             @color = COLORS.key(rgba_string.downcase)
-            
+
             @h, @s, @v = rgb_to_hsv(@r, @g, @b)
          end
-      
+
          def hsv(h, s, v)
             unless h.is_a?(Float) and s.is_a?(Float) and v.is_a?(Float)
                raise ColorException, "Bas HSV value"
             end
-      
+
             @h = h
             @s = s
             @v = v
-      
+
             @r, @g, @b = hsv_to_rgb(@h, @s, @v)
-      
+
             @color = COLORS.key(rgba_string.downcase);
          end
-      
+
          def name(c = nil)
             return @color if c.nil?
 
             @color = c
-      
+
             rgb = COLORS[c]
             unless rgb.nil?
                m = RGBA.match(rgb)
                @r = m[1]
                @g = m[2]
                @b = m[3]
-      
+
                @h, @s, @v = rgb_to_hsv(@r, @g, @b)
             end
          end
@@ -89,7 +89,7 @@ class GraphViz
                nil
             end
          end
-      
+
          def hsv_string(s = ", ")
             unless @h.nil?
                "#{@h}#{s}#{@s}#{s}#{@v}"
@@ -105,45 +105,45 @@ class GraphViz
          def hsv_to_rgb(h, s, v)
             Colors.hsv_to_rgb(h, s, v)
          end
-      
+
          class <<self
             def rgb(r, g, b, a = nil)
                color = Colors.new
                color.rgb(r, g, b, a)
                color
             end
-      
+
             def hsv(h, s, v)
                color = Colors.new
                color.hsv(h, s, v)
                color
             end
-      
+
             def name(c)
                color = Colors.new
                color.name(c)
                color
             end
-      
+
             def rgb_to_hsv(r, g, b)
                h, s, v = 0.0, 0.0, 0.0
-      
+
                _r = r.convert_base(16, 10).to_f / 255.0
                _g = g.convert_base(16, 10).to_f / 255.0
                _b = b.convert_base(16, 10).to_f / 255.0
                rgb = [ _r, _g, _b ]
-      
+
                min = rgb.min
                max = rgb.max
                v = max
-      
+
                delta = max - min
                if max != 0.0
                   s = delta / max
                else
                   return [-1, 0, v]
                end
-      
+
                if _r == max
                   h = ( _g - _b ) / delta
                elsif( _g == max )
@@ -151,29 +151,29 @@ class GraphViz
                else
                   h = 4 + ( _r - _g ) / delta
                end
-                  
+
                h = h * 60
                h = h + 360 if h < 0
                h = h / 360.0
-      
+
                [h, s, v]
             end
-      
+
             def hsv_to_rgb(h, s, v)
                _h, _s, _v = h.to_f * 360.0, s.to_f, v.to_f
-      
-               if _s == 0.0  
+
+               if _s == 0.0
                  r = (_v * 255 ).to_i.to_s.convert_base(10,16)
                  return [r, r, r]
                end
-      
+
                _h = _h / 60.0
                i = _h.floor
                f = _h - i
                p = _v * ( 1.0 - _s )
                q = _v * ( 1.0 - _s * f )
                t = _v * ( 1.0 - _s * ( 1 - f ) )
-               case i 
+               case i
                when 0
                   r = _v
                   g = t
@@ -199,7 +199,7 @@ class GraphViz
                   g = p
                   b = q
                end
-      
+
                [
                   (r * 255).to_i.to_s.convert_base(10, 16),
                   (g * 255).to_i.to_s.convert_base(10, 16),
@@ -207,7 +207,7 @@ class GraphViz
                ]
             end
          end
-         
+
          COLORS = {
             "aliceblue" => "f0f8ff",
             "antiquewhite" => "faebd7",

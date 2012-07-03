@@ -24,7 +24,7 @@ class GraphVizTheoryTest < Test::Unit::TestCase
          (g.c << g.f)[:weight => 2, :label => "2"]
          g.d << g.e
       end
-   
+
       @t = GraphViz::Theory.new( @g )
    end
 
@@ -35,7 +35,7 @@ class GraphVizTheoryTest < Test::Unit::TestCase
 
    def test_adgency_matrix
       adgency = GraphViz::Math::Matrix.new([
-        [0,1,0,1,0,1], 
+        [0,1,0,1,0,1],
         [0,0,1,1,1,0],
         [0,0,0,1,0,1],
         [0,0,0,0,1,0],
@@ -51,7 +51,7 @@ class GraphVizTheoryTest < Test::Unit::TestCase
 
    def test_incidence_matrix
       incidence = GraphViz::Math::Matrix.new([
-         [ 1, 1, 1, 0, 0, 0, 0, 0, 0], 
+         [ 1, 1, 1, 0, 0, 0, 0, 0, 0],
          [-1, 0, 0, 1, 1, 1, 0, 0, 0],
          [ 0, 0, 0,-1, 0, 0, 1, 1, 0],
          [ 0,-1, 0, 0,-1, 0,-1, 0, 1],
@@ -73,7 +73,7 @@ class GraphVizTheoryTest < Test::Unit::TestCase
    def test_laplacian_matrix
       laplacian = GraphViz::Math::Matrix.new([
          [3,-1, 0,-1, 0,-1],
-         [0, 4,-1,-1,-1, 0], 
+         [0, 4,-1,-1,-1, 0],
          [0, 0, 3,-1, 0,-1],
          [0, 0, 0, 4,-1, 0],
          [0, 0, 0, 0, 2, 0],

@@ -3,12 +3,12 @@ class GraphViz
     def self.Matrix( line, column = 0, val = 0 )
       GraphViz::Math::Matrix.new(line, column, val)
     end
-    
+
     class CoordinateError < RuntimeError
     end
     class ValueError < RuntimeError
     end
-    
+
     class Matrix
       def initialize( line_or_array, column = 0, val = 0 )
         if line_or_array.kind_of?(Array)
@@ -27,7 +27,7 @@ class GraphViz
                 raise ValueError, "Element at [#{l+1}, #{c+1}] is not a number"
               end
             end
-          end 
+          end
 
           @matrix = line_or_array
           @line = line
@@ -45,8 +45,8 @@ class GraphViz
         else
           raise ArgumentError, "Wrong matrix definition"
         end
-      end      
-            
+      end
+
       def [](line, column)
         unless (0...@line).to_a.include?(line-1)
           raise CoordinateError, "Line out of range (#{line} for 1..#{@line})!"
@@ -56,7 +56,7 @@ class GraphViz
         end
         @matrix[line-1][column-1]
       end
-      
+
       def []=( line, column, val )
         unless (0...@line).to_a.include?(line-1)
           raise CoordinateError, "Line out of range (#{line} for 1..#{@line})!"
@@ -66,20 +66,20 @@ class GraphViz
         end
         @matrix[line-1][column-1] = val
       end
-      
+
       def matrix
         @matrix
       end
       alias :to_a :matrix
-      
+
       def columns
         @column
       end
-      
+
       def lines
         @line
       end
-      
+
       def to_s
         size = bigger
         out = ""
@@ -92,7 +92,7 @@ class GraphViz
         end
         return out
       end
-      
+
       def -(m)
         matrix = GraphViz::Math::Matrix.new( @line, @column )
         @line.times do |line|
@@ -102,10 +102,10 @@ class GraphViz
         end
         return matrix
       end
-      
+
       def *(m)
         matrix = GraphViz::Math::Matrix.new( @line, @line )
-        
+
         @line.times do |line|
           @line.times do |column|
             l = self.line(line+1)
@@ -117,17 +117,17 @@ class GraphViz
             matrix[line+1,column+1] = v
           end
         end
-        
+
         return matrix
       end
-      
+
       def line( line )
         unless (0...@line).to_a.include?(line-1)
           raise CoordinateError, "Line out of range (#{line} for 1..#{@line})!"
         end
         @matrix[line-1]
       end
-      
+
       def column( column )
         col = []
         unless (0...@column).to_a.include?(column-1)
@@ -136,10 +136,10 @@ class GraphViz
         @line.times do |line|
           col << self[line+1, column]
         end
-        
+
         return col
       end
-      
+
       def transpose
         matrix = GraphViz::Math::Matrix.new( @column, @line )
         @line.times do |line|
@@ -149,7 +149,7 @@ class GraphViz
         end
         return matrix
       end
-      
+
       def ==(m)
         equal = true
         @line.times do |line|
@@ -159,7 +159,7 @@ class GraphViz
         end
         return equal
       end
-      
+
       def remove_line(n)
         unless (0...@line).to_a.include?(n-1)
           raise CoordinateError, "Line out of range (#{n} for 1..#{@line})!"
@@ -176,7 +176,7 @@ class GraphViz
         end
         return matrix
       end
-      
+
       def remove_column(n)
         unless (0...@column).to_a.include?(n-1)
           raise CoordinateError, "Column out of range (#{n} for 1..#{@column})!"
@@ -193,11 +193,11 @@ class GraphViz
         end
         return matrix
       end
-      
+
       def sum_of_column(n)
         column(n).inject(0){|sum,item| sum + item}
       end
-      
+
       def sum_of_line(n)
         line(n).inject(0){|sum,item| sum + item}
       end

@@ -5,20 +5,20 @@ require "graphviz"
 
 GraphViz::new( "G", :type => "graph", :rankdir => "LR", :bgcolor => "#808080" ) { |graph|
   graph.edge[:dir] = "none"
-  
+
   graph.node[:width] = "0.3"
-  graph.node[:height] = "0.3" 
+  graph.node[:height] = "0.3"
   graph.node[:label] = ""
-  
+
   _ = {}
-  
+
   ("1".."8").each do |v|
     _[v] = graph.add_nodes( v, :shape => "circle", :style => "invis")
   end
   ["10","20","30","40","50","60","70","80"].each do |v|
     _[v] = graph.add_nodes( v, :shape => "circle", :style => "invis")
   end
-  
+
   ("a".."x").each do |v|
     _[v] = graph.add_nodes( v, :shape => "circle")
   end
@@ -26,7 +26,7 @@ GraphViz::new( "G", :type => "graph", :rankdir => "LR", :bgcolor => "#808080" ) 
   ("A".."X").each do |v|
     _[v] = graph.add_nodes( v, :shape => "diamond")
   end
-  
+
   (_["1"] << _["a"])[:color]="#0000ff"
   (_["a"] << _["A"])[:color]="#0000ff"
   (_["a"] << _["B"])[:color]="#0000ff"
@@ -51,7 +51,7 @@ GraphViz::new( "G", :type => "graph", :rankdir => "LR", :bgcolor => "#808080" ) 
   (_["8"] << _["h"])[:color]="#ff00ff"
   (_["h"] << _["H"])[:color]="#ff00ff"
   (_["h"] << _["G"])[:color]="#ff00ff"
-  
+
   graph.edge[:color]="#ff0000:#0000ff"
   _["A"] << _["i"]; _["i"] << [_["I"], _["K"]]
   _["B"] << _["j"]; _["j"] << [_["J"], _["L"]]

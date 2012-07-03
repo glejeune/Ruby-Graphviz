@@ -10,7 +10,7 @@ class GraphViz
           found = path if File.basename( path ) == ext
         end
       end
-      
+
       File.expand_path( found )
     end
   end

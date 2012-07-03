@@ -39,29 +39,29 @@ class GraphViz::DSL
    end
 
    # Add a subgraph
-   def subgraph(name, &block) 
+   def subgraph(name, &block)
       @graph.add_graph(GraphViz::DSL.new(name, { :parent => @graph, :type => @graph.type }, &block).graph)
    end
    alias :cluster :subgraph
 
    # Generate output
-   def output(options = {}) 
+   def output(options = {})
       @graph.output(options)
    end
 end
 
 # Create a new undirected graph
-def graph(name, options = {}, &block) 
+def graph(name, options = {}, &block)
    GraphViz::DSL.new(name, options.merge( { :type => "graph" } ), &block).graph
 end
 
 # Create a new directed graph
-def digraph(name, options = {}, &block) 
+def digraph(name, options = {}, &block)
    GraphViz::DSL.new(name, options.merge( { :type => "digraph" } ), &block).graph
 end
 
 # Create a new strict directed graph
-def strict(name, options = {}, &block) 
+def strict(name, options = {}, &block)
    GraphViz::DSL.new(name, options.merge( { :type => "strict digraph" } ), &block).graph
 end
 
