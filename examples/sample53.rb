@@ -5,7 +5,7 @@ tree = GraphViz::FamilyTree.new do
   generation do
     benoist.is_a_man( "Benoist" )
     nathalie.is_a_woman( "Nathalie" )
-    
+
     benoist.is_maried_with nathalie
   end
 
@@ -14,7 +14,7 @@ tree = GraphViz::FamilyTree.new do
     amelie.is_a_woman( "Amelie" )
     clement.is_a_man( "Clement" )
     gregoire.is_a_man( "Gregoire" )
-    
+
     muriel.is_a_woman( "Muriel" )
 
     gregoire.is_maried_with muriel

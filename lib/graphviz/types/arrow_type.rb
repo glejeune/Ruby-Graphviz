@@ -4,7 +4,7 @@
 # "hello\n\t\l\"world\""
 #
 # OR
-# 
+#
 # >> x = 'hello\n\t\l"world"'
 # => "hello\\n\\t\\l\"world\""
 # >> puts x.inspect.gsub( "\\\\", "\\" )
@@ -16,11 +16,11 @@ class GraphViz
       def check(data)
         return data
       end
-      
+
       def output
         return @data.to_s.inspect.gsub( "\\\\", "\\" )
       end
-      
+
       alias :to_gv :output
       alias :to_s :output
 

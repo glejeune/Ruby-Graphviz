@@ -5,16 +5,16 @@ module GVUtils
   # (http://copiousfreetime.rubyforge.org/launchy/Launchy/Application.html)
   # it follow is licence :
   #
-  # Permission to use, copy, modify, and/or distribute this software for any 
-  # purpose with or without fee is hereby granted, provided that the above 
+  # Permission to use, copy, modify, and/or distribute this software for any
+  # purpose with or without fee is hereby granted, provided that the above
   # copyright notice and this permission notice appear in all copies.
   #
-  # THE SOFTWARE IS PROVIDED AS IS AND THE AUTHOR DISCLAIMS ALL WARRANTIES 
-  # WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF 
-  # MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY 
-  # SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES 
-  # WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION 
-  # OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN 
+  # THE SOFTWARE IS PROVIDED AS IS AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+  # WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+  # MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+  # SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+  # WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
+  # OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
   # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
   def find_executable(bin, custom_paths) #:nodoc:
     system_path = ENV['PATH']
@@ -32,7 +32,7 @@ module GVUtils
     end
     return nil
   end
-  
+
   def escape_path_containing_blanks(path) #:nodoc:
     path.gsub!(File::ALT_SEPARATOR, File::SEPARATOR) if File::ALT_SEPARATOR
     path_elements = path.split(File::SEPARATOR)
@@ -45,7 +45,7 @@ module GVUtils
     end
     path_elements.join(File::SEPARATOR)
   end
-  
+
   def output_and_errors_from_command(cmd) #:nodoc:
    unless defined? Open3
      begin
@@ -76,5 +76,5 @@ module GVUtils
      raise "Error from #{cmd}:\n#{errors}"
    end
   end
-  
+
 end

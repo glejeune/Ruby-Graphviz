@@ -3,11 +3,11 @@ end
 
 # bool
 #
-# For the bool type, 
+# For the bool type,
 # - TRUE values are represented by "true" or "yes" (case-insensitive), true and any non-zero integer
 # - FALSE values by "false", "no" or empty string (case-insensitive), false and zero.
 #
-# Example 
+# Example
 #
 #   graph[:center] = "true"
 # or
@@ -25,7 +25,7 @@ class GraphViz
                @to_ruby = true
                return data
             end
-            
+
             if false == data or (data.is_a?(Integer) and data == 0) or (data.is_a?(String) and BOOL_FALSE.include?(data.downcase))
                @to_ruby = false
                return data

@@ -42,7 +42,7 @@ class GraphViz
       # Return the degree of the given node
       def degree( node )
          degree = 0
-         name = node 
+         name = node
          if node.kind_of?(GraphViz::Node)
             name = node.id
          end
@@ -59,7 +59,7 @@ class GraphViz
          return degree_matrix - adjancy_matrix
       end
 
-      # Return <tt>true</tt> if the graph if symmetric, <tt>false</tt> otherwise   
+      # Return <tt>true</tt> if the graph if symmetric, <tt>false</tt> otherwise
       def symmetric?
          adjancy_matrix == adjancy_matrix.transpose
       end
@@ -124,7 +124,7 @@ class GraphViz
          if d[arv.index].to_f.infinite?
             return nil
          else
-            return( { 
+            return( {
                :path => ch,
                :distance => d[arv.index]
             } )
@@ -187,7 +187,7 @@ class GraphViz
          return pagerank
       end
 
-      # Return the list of nodes that are directly accessible from given node 
+      # Return the list of nodes that are directly accessible from given node
       def neighbors(node)
          if node.class == String
             @graph.get_node(node).neighbors
@@ -231,9 +231,9 @@ class GraphViz
          recursive_dfs(node, visited_nodes, &b)
       end
 
-      private 
+      private
       def recursive_dfs(node, visited_nodes, &b)
-         node = @graph.get_node(node) if node.kind_of? String 
+         node = @graph.get_node(node) if node.kind_of? String
          b.call(node)
          visited_nodes << node
          neighbors(node).each do |n|
@@ -256,7 +256,7 @@ class GraphViz
          }
 
          return matrix
-      end    
+      end
 
       def degree_matrix
          matrix = GraphViz::Math::Matrix.new( @graph.node_count, @graph.node_count )
@@ -312,7 +312,7 @@ class GraphViz
                   capth = critical_path_recursion( d, a, [cpath], result, level+1 )
                else
                   result << cpath
-               end          
+               end
             end
          end
          return result

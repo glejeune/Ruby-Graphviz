@@ -8,11 +8,11 @@ class GraphViz
         @to_ruby = data.split(/\s*:\s*/).map { |c| GraphViz::Types::Color.new(c).to_ruby }
         return data
       end
-      
+
       def output
         return @data.to_s.inspect.gsub( "\\\\", "\\" )
       end
-      
+
       alias :to_gv :output
       alias :to_s :output
 

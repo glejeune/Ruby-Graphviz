@@ -5,7 +5,7 @@ require "graphviz"
 
 GraphViz.new(:G) { |g|
   g[:color] = "black"
-  
+
   g.one :label => "1"
 
   # This is an anonymous graph

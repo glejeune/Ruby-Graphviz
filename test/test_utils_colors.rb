@@ -6,7 +6,7 @@ class TypesTest < Test::Unit::TestCase
   def setup
     @brown_txt = GraphViz::Utils::Colors.name("brown")
     @brown_hsv = GraphViz::Utils::Colors.hsv(0.0, 0.745454545454545, 0.647058823529412)
-    @brown_rgb = GraphViz::Utils::Colors.rgb("a5", "2a", "2a") 
+    @brown_rgb = GraphViz::Utils::Colors.rgb("a5", "2a", "2a")
   end
 
   def test_color
@@ -22,17 +22,17 @@ class TypesTest < Test::Unit::TestCase
   end
 
   def test_color_by_rgb
-    assert_equal "a5", @brown_txt.r 
+    assert_equal "a5", @brown_txt.r
     assert_equal "2a", @brown_txt.g
     assert_equal "2a", @brown_txt.b
     assert_equal "#a52a2a", @brown_txt.rgba_string("#")
 
-    assert_equal "a5", @brown_hsv.r 
+    assert_equal "a5", @brown_hsv.r
     assert_equal "2a", @brown_hsv.g
     assert_equal "2a", @brown_hsv.b
     assert_equal "#a52a2a", @brown_hsv.rgba_string("#")
 
-    assert_equal "a5", @brown_rgb.r 
+    assert_equal "a5", @brown_rgb.r
     assert_equal "2a", @brown_rgb.g
     assert_equal "2a", @brown_rgb.b
     assert_equal "#a52a2a", @brown_rgb.rgba_string("#")
