@@ -1,6 +1,8 @@
 = CHANGELOG
 
 == 1.0.8 :
+* Cleanup format (by markus1189)
+* Issue #49 : (undefined local variable or method `file' ) (by markus1189)
 
 == 1.0.7 :
 * Issue #48 : add_graph fails when passed a GraphViz object
