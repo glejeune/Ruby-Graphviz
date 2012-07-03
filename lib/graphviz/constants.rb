@@ -157,6 +157,8 @@ module Constants
     "fontnames"           => { :usedBy => "G",    :type => :EscString }, # string
     "fontpath"            => { :usedBy => "G",    :type => :EscString }, # string
     "fontsize"            => { :usedBy => "ENGC", :type => :GvDouble },
+    "forcelabels"         => { :usedBy => "G",    :type => :GvBool}, # bool
+    "gradientangle"       => { :usedBy => "NCG",  :type => :EscString }, # int
     "group"               => { :usedBy => "N",    :type => :EscString }, # string
     "headURL"             => { :usedBy => "E",    :type => :EscString },
     "headclip"            => { :usedBy => "E",    :type => :GvBool }, # bool
@@ -169,6 +171,7 @@ module Constants
     "href"                => { :usedBy => "NE",   :type => :EscString },
     "id"                  => { :usedBy => "ENG",  :type => :EscString },
     "image"               => { :usedBy => "N",    :type => :EscString }, # string
+    "imagepath"           => { :usedBy => "G",    :type => :EscString }, # string
     "imagescale"          => { :usedBy => "N",    :type => :EscString }, # bool, string
     "label"               => { :usedBy => "ENGC", :type => :LblString },
     "labelURL"            => { :usedBy => "E",    :type => :EscString },
@@ -186,7 +189,9 @@ module Constants
     "labeltooltip"        => { :usedBy => "E",    :type => :EscString },
     "landscape"           => { :usedBy => "G",    :type => :GvBool }, # bool
     "layer"               => { :usedBy => "EN",   :type => :EscString }, # layerRange
+    "layerlistsep"        => { :usedBy => "G",    :type => :EscString }, # string
     "layers"              => { :usedBy => "G",    :type => :EscString }, # layerList
+    "layerselect"         => { :usedBy => "G",    :type => :EscString }, # layerRange
     "layersep"            => { :usedBy => "G",    :type => :EscString }, # string
     "layout"              => { :usedBy => "G",    :type => :EscString }, # string
     "len"                 => { :usedBy => "E",    :type => :GvDouble },

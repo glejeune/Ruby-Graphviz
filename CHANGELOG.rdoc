@@ -1,6 +1,12 @@
 = CHANGELOG
 
 == 1.0.9 :
+* Add support for attributs 
+  * forcelabels
+  * gradientangle
+  * imagepath
+  * layerlistsep
+  * layerselect
 
 == 1.0.8 :
 * Cleanup format (by markus1189)
