@@ -26,6 +26,7 @@ require 'graphviz/edge'
 require 'graphviz/attrs'
 require 'graphviz/constants'
 require 'graphviz/elements'
+require 'graphviz/dot_script'
 
 require 'graphviz/dot2ruby'
 require 'graphviz/types'
@@ -423,27 +424,15 @@ class GraphViz
   #   * 2 = none
   #
   def output( hOpts = {} )
-    xDOTScript = ""
+    xDOTScript = DOTScript.new
     xLastType = nil
     xSeparator = ""
     xData = ""
     lNotHugly = []
 
     @elements_order.each { |kElement|
-      if xLastType.nil? or xLastType != kElement["type"]
-
-        if xData.length > 0
-          case xLastType
-            when "graph_attr"
-              xDOTScript << "  " + xData + ";\n"
-
-            when "node_attr"
-              xDOTScript << "  node [" + xData + "];\n"
-
-            when "edge_attr"
-              xDOTScript << "  edge [" + xData + "];\n"
-          end
-        end
+      unless xLastType and xLastType == kElement["type"]
+        xDOTScript.add_type(xLastType, xData) unless xData.empty?
 
         xSeparator = ""
         xData = ""
@@ -472,37 +461,25 @@ class GraphViz
           xSeparator = ", "
 
         when "node"
-          xDOTScript << "  " + kElement["value"].output() + "\n"
+          xDOTScript << "  " + kElement["value"].output()
 
         when "edge"
-          xDOTScript << "  " + kElement["value"].output( @oGraphType ) + "\n"
+          xDOTScript << "  " + kElement["value"].output( @oGraphType )
 
         when "graph"
-          xDOTScript << kElement["value"].output() + "\n"
+          xDOTScript << kElement["value"].output()
 
         else
           raise ArgumentError, "Don't know what to do with element type '#{kElement['type']}'"
       end
     }
 
-    if xData.length > 0
-      case xLastType
-        when "graph_attr"
-          xDOTScript << "  " + xData + ";\n"
+    xDOTScript.add_type(xLastType, xData) unless xData.empty?
 
-        when "node_attr"
-          xDOTScript << "  node [" + xData + "];\n"
-
-        when "edge_attr"
-          xDOTScript << "  edge [" + xData + "];\n"
-      end
-    end
     xDOTScript << "}"
 
     if @oParentGraph
-      xDOTScript = "subgraph #{GraphViz.escape(@name, :unquote_empty => true)} {\n" << xDOTScript
-
-      return( xDOTScript )
+      xDOTScript.prepend("subgraph #{GraphViz.escape(@name, :unquote_empty => true)} {")
     else
       hOutput = {}
 
@@ -569,7 +546,9 @@ class GraphViz
       @output = hOutput if hOutput.size > 0
 
       xStict = ((@strict && @oGraphType == "digraph") ? "strict " : "")
-      xDOTScript = ("#{xStict}#{@oGraphType} #{GraphViz.escape(@name, :unquote_empty => true)} {\n" << xDOTScript).gsub( "\0", "" )
+      xDOTScript.prepend(
+        "#{xStict}#{@oGraphType} #{GraphViz.escape(@name, :unquote_empty => true)} {"
+      )
 
       xOutputString = (@filename == String ||
         @output.any? {|format, file| file == String })
