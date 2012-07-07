@@ -425,61 +425,14 @@ class GraphViz
   #
   def output( hOpts = {} )
     xDOTScript = DOTScript.new
-    xLastType = nil
-    xSeparator = ""
-    xData = ""
     lNotHugly = []
 
-    @elements_order.each { |kElement|
-      unless xLastType and xLastType == kElement["type"]
-        xDOTScript.add_type(xLastType, xData) unless xData.empty?
-
-        xSeparator = ""
-        xData = ""
-      end
-
-      xLastType = kElement["type"]
-
-      #Modified by
-      #Brandon Coleman
-      #verify value is NOT NULL
-      if kElement["value"] == nil then
-        raise ArgumentError, "#{kElement["name"]} has a nil value!"
-      end
-
-      case kElement["type"]
-        when "graph_attr"
-          xData << xSeparator + kElement["name"] + " = " + kElement["value"].to_gv
-          xSeparator = "; "
-
-        when "node_attr"
-          xData << xSeparator + kElement["name"] + " = " + kElement["value"].to_gv
-          xSeparator = ", "
-
-        when "edge_attr"
-          xData << xSeparator + kElement["name"] + " = " + kElement["value"].to_gv
-          xSeparator = ", "
-
-        when "node"
-          xDOTScript << "  " + kElement["value"].output()
-
-        when "edge"
-          xDOTScript << "  " + kElement["value"].output( @oGraphType )
-
-        when "graph"
-          xDOTScript << kElement["value"].output()
-
-        else
-          raise ArgumentError, "Don't know what to do with element type '#{kElement['type']}'"
-      end
-    }
-
-    xDOTScript.add_type(xLastType, xData) unless xData.empty?
+    append_attributes_and_types(xDOTScript)
 
     xDOTScript << "}"
 
-    if @oParentGraph
-      xDOTScript.prepend("subgraph #{GraphViz.escape(@name, :unquote_empty => true)} {")
+    if has_parent_graph?
+      xDOTScript.make_subgraph("#{GraphViz.escape(@name, :unquote_empty => true)}")
     else
       hOutput = {}
 
@@ -650,8 +603,33 @@ class GraphViz
       end
     end
   end
-
   alias :save :output
+
+  def append_attributes_and_types(script)
+    xLastType = nil
+    xData = DOTScriptData.new
+
+    @elements_order.each { |kElement|
+      is_new_type = xLastType != kElement["type"]
+      xData = DOTScriptData.new if is_new_type
+      xLastType = kElement["type"]
+
+      # Modified by Brandon Coleman verify value is NOT NULL
+      kElement["value"] or raise ArgumentError, "#{kElement["name"]} is nil!"
+
+      case xLastType
+        when "graph_attr", "node_attr", "edge_attr"
+          xData.add_attribute(xLastType,kElement["name"],kElement["value"].to_gv)
+        when "node", "graph"
+          script << kElement["value"].output()
+        when "edge"
+          script << "  " + kElement["value"].output( @oGraphType )
+        else
+          raise ArgumentError,
+            "Don't know what to do with element type '#{kElement['type']}'"
+      end
+    }
+  end
 
   def to_s
     self.output(:none => String)
@@ -787,6 +765,10 @@ class GraphViz
   # Return true if the graph is directed.
   def directed?
      not (/digraph/ =~ "bla digraph bla").nil?
+  end
+
+  def has_parent_graph?
+     @oParentGraph
   end
 ## ----------------------------------------------------------------------------
 

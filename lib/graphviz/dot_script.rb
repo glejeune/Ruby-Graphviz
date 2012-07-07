@@ -1,5 +1,41 @@
 require "forwardable"
 class GraphViz
+
+  class DOTScriptData
+    def initialize
+      @data = []
+    end
+
+    def append(data)
+      @data << data
+    end
+    alias :<< :append
+
+    def add_attribute(type,name,value)
+      @data << @separator << name << " = " << value
+      @separator = determine_separator(type)
+    end
+
+    def to_str
+      @data.join(" ")
+    end
+
+    def empty?
+      @data.empty?
+    end
+
+    private
+
+    def determine_separator(str)
+      case str
+        when "graph_attr"             then ";"
+        when "node_attr", "edge_attr" then ","
+        else raise ArgumentError, "Unknown type: #{str}."
+      end
+    end
+
+  end
+
   class DOTScript
     extend Forwardable
 
@@ -20,6 +56,10 @@ class GraphViz
       @script = assure_ends_with(line.to_s,"\n") + @script
 
       self
+    end
+
+    def make_subgraph(name)
+      prepend(assure_ends_with("subgraph #{name}"," {"))
     end
 
     def add_type(type, data)
@@ -49,7 +89,7 @@ class GraphViz
     private
 
     def assure_ends_with(str,ending="\n")
-      str.end_with?("\n") ? str : str + "\n"
+      str.to_s.end_with?("\n") ? str : str + ending
     end
 
     def append_statement(statement)
