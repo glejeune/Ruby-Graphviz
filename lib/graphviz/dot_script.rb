@@ -10,19 +10,21 @@ class GraphViz
     end
 
     def append(line)
-      @script << assure_ends_with(line, "\n")
+      @script << assure_ends_with(line.to_s,"\n")
 
       self
     end
     alias :<< :append
 
     def prepend(line)
-      @script = assure_ends_with(line,"\n") + @script
+      @script = assure_ends_with(line.to_s,"\n") + @script
 
       self
     end
 
     def add_type(type, data)
+      return self if data.empty?
+
       case type
       when "graph_attr"
         append_statement("  " + data)

@@ -32,7 +32,12 @@ describe GraphViz::DOTScript do
       script.to_s.must_match(/\s*node\s*\[\s*#{data}\s*\]\s*/m)
     end
 
+    it "does nothing if data is empty" do
+      script.add_type("anything", "")
+      script.to_s.must_be :empty?
+    end
+
     it "raises an argument error on unknown types" do
-      -> { script.add_type("invalid", "") }.must_raise(ArgumentError)
+      -> { script.add_type("invalid", "some data") }.must_raise(ArgumentError)
     end
 end
