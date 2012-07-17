@@ -61,7 +61,7 @@ class GraphViz
          begin
             value = GraphViz::Types.const_get(@attributes[key.to_s]).new( value )
          rescue => e
-            raise AttributeException, "Invalide value `#{value}` for attribute `#{key}` : #{e}"
+            raise AttributeException, "Invalid value `#{value}` for attribute `#{key}` : #{e}"
          end
 
          if value

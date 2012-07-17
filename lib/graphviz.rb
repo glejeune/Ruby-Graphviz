@@ -755,7 +755,7 @@ class GraphViz
         when "extlibs"
           @@extlibs = v.split( "," ).map{ |x| x.strip }
         else
-          warn "Invalide option #{k}!"
+          warn "Invalid option #{k}!"
       end
     end
   end
