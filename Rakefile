@@ -29,7 +29,7 @@ RDoc::Task.new do |rdoc|
     rdoc.main = "README.rdoc"
     rdoc.title = "Ruby/GraphViz, the Documentation"
     rdoc.rdoc_files.add ['README.rdoc', 'CHANGELOG.rdoc', 'AUTHORS.rdoc', 'COPYING.rdoc',
-      'lib/graphviz.rb', 
+      'lib/graphviz.rb',
       'lib/graphviz/node.rb',
       'lib/graphviz/edge.rb',
       'lib/graphviz/constants.rb',
@@ -45,11 +45,10 @@ end
 Rake::TestTask.new(:test) do |t|
   require 'graphviz/utils'
   include GVUtils
-  if find_executable("dot", nil).nil?
-    t.test_files = FileList['test/test_*.rb'].exclude("test/test_examples.rb") 
-  else
-    t.test_files = FileList['test/test_*.rb']
-  end
+  test_files = FileList['test/test_*.rb'].exclude('test/test_dot_script.rb')
+  test_files.unshift('test/test_dot_script.rb')
+  test_files.exclude("test/test_examples.rb") unless find_executable("dot", nil)
+  t.test_files = test_files
 end
 
 Bundler::GemHelper.install_tasks
