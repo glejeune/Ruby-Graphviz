@@ -10,6 +10,7 @@
 * Issue #52 : Extracted xDOTScript to DOTScript class (by markus1189)
 * Issue #54 : Fixes a couple of typos and spacing (by Mike Fiedler)
 * Issue #55 : Avoid autoload
+* Update graphviz attributs
 
 == 1.0.8 :
 * Cleanup format (by markus1189)
