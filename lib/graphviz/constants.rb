@@ -150,7 +150,7 @@ module Constants
     "edgetooltip"         => { :usedBy => "E",    :type => :EscString },
     "epsilon"             => { :usedBy => "G",    :type => :GvDouble },
     "esep"                => { :usedBy => "G",    :type => :EscString }, # GvDouble , pointf
-    "fillcolor"           => { :usedBy => "NC",   :type => :Color }, # color
+    "fillcolor"           => { :usedBy => "NEC",  :type => :Color }, # color
     "fixedsize"           => { :usedBy => "N",    :type => :GvBool }, # bool
     "fontcolor"           => { :usedBy => "ENGC", :type => :Color }, # color
     "fontname"            => { :usedBy => "ENGC", :type => :EscString }, # string
@@ -168,7 +168,7 @@ module Constants
     "headtarget"          => { :usedBy => "E",    :type => :EscString },
     "headtooltip"         => { :usedBy => "E",    :type => :EscString },
     "height"              => { :usedBy => "N",    :type => :GvDouble },
-    "href"                => { :usedBy => "NE",   :type => :EscString },
+    "href"                => { :usedBy => "ENGC", :type => :EscString },
     "id"                  => { :usedBy => "ENG",  :type => :EscString },
     "image"               => { :usedBy => "N",    :type => :EscString }, # string
     "imagepath"           => { :usedBy => "G",    :type => :EscString }, # string
@@ -188,7 +188,7 @@ module Constants
     "labeltarget"         => { :usedBy => "E",    :type => :EscString },
     "labeltooltip"        => { :usedBy => "E",    :type => :EscString },
     "landscape"           => { :usedBy => "G",    :type => :GvBool }, # bool
-    "layer"               => { :usedBy => "EN",   :type => :EscString }, # layerRange
+    "layer"               => { :usedBy => "ENC",  :type => :EscString }, # layerRange
     "layerlistsep"        => { :usedBy => "G",    :type => :EscString }, # string
     "layers"              => { :usedBy => "G",    :type => :EscString }, # layerList
     "layerselect"         => { :usedBy => "G",    :type => :EscString }, # layerRange
@@ -202,7 +202,7 @@ module Constants
     "lp"                  => { :usedBy => "EGC",  :type => :EscString }, # point
     "ltail"               => { :usedBy => "E",    :type => :EscString }, # string
     "lwidth"              => { :usedBy => "GC",   :type => :GvDouble },
-    "margin"              => { :usedBy => "NG",   :type => :EscString }, # GvDouble , pointf
+    "margin"              => { :usedBy => "NGC",  :type => :EscString }, # GvDouble , pointf
     "maxiter"             => { :usedBy => "G",    :type => :EscString }, # int
     "mclimit"             => { :usedBy => "G",    :type => :GvDouble },
     "mindist"             => { :usedBy => "G",    :type => :GvDouble },
@@ -215,7 +215,7 @@ module Constants
     "normalize"           => { :usedBy => "G",    :type => :GvBool }, # bool
     "nslimit"             => { :usedBy => "G",    :type => :GvDouble },
     "nslimit1"            => { :usedBy => "G",    :type => :GvDouble },
-    "ordering"            => { :usedBy => "G",    :type => :EscString }, # string
+    "ordering"            => { :usedBy => "GN",   :type => :EscString }, # string
     "orientation"         => { :usedBy => "NG",   :type => :GvDouble },  # N: double, G: string
     "outputorder"         => { :usedBy => "G",    :type => :EscString }, # outputMode
     "overlap"             => { :usedBy => "G",    :type => :EscString }, # string, bool
@@ -260,7 +260,7 @@ module Constants
     "sortv"               => { :usedBy => "GCN",  :type => :EscString }, # int
     "splines"             => { :usedBy => "G",    :type => :EscString }, # bool, string
     "start"               => { :usedBy => "G",    :type => :EscString }, # startType
-    "style"               => { :usedBy => "ENC",  :type => :EscString }, # style
+    "style"               => { :usedBy => "ENCG", :type => :EscString }, # style
     "stylesheet"          => { :usedBy => "G",    :type => :EscString }, # string
     "tailURL"             => { :usedBy => "E",    :type => :EscString },
     "tailclip"            => { :usedBy => "E",    :type => :GvBool }, # bool
