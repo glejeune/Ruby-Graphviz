@@ -20,6 +20,7 @@
 * Neven Has <https://github.com/nevenh>
 * Postmodern <https://github.com/postmodern> 
 * markus1189 <https://github.com/markus1189>
+* Mike Fiedler <https://github.com/miketheman>
 
 Thanks to :
 
