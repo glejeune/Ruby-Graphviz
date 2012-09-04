@@ -1,6 +1,6 @@
 = Ruby/GraphViz
 
-[![Build Status](//travis-ci.org/glejeune/Ruby-Graphviz.png)](http://travis-ci.org/athieriot/Ruby-Graphviz)
+{<img src="https://secure.travis-ci.org/glejeune/Ruby-Graphviz.png" />}[http://travis-ci.org/glejeune/Ruby-Graphviz]
 
 Copyright (C) 2004-2012 Gregoire Lejeune
 
