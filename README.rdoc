@@ -1,5 +1,7 @@
 = Ruby/GraphViz
 
+[![Build Status](//travis-ci.org/glejeune/Ruby-Graphviz.png)](http://travis-ci.org/athieriot/Ruby-Graphviz)
+
 Copyright (C) 2004-2012 Gregoire Lejeune
 
 * Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
