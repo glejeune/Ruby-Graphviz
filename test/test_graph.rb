@@ -105,4 +105,13 @@ class GraphVizTest < Test::Unit::TestCase
      assert_equal c1.find_node("a0"), a0
      assert_nil   c1.search_node("a0")
   end
+
+  def test_to_s
+    assert_nothing_raised 'to_s with edge with numeric label failed.' do
+      a = @graph.add_nodes('a')
+      b = @graph.add_nodes('b')
+      @graph.add_edges(a, b, label: 5)
+      @graph.to_s
+    end
+  end
 end
