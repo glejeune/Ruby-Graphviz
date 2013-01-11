@@ -44,31 +44,31 @@ class GraphViz
 
   ## Var: Output format (dot, png, jpeg, ...)
   @@format = nil #"canon"
-  @format
+  @format = nil
   ## Var: Output file name
-  @filename
+  @filename = nil
   ## Var: Output format and file
-  @output
+  @output = nil
   ## Var: program to use (dot|twopi)
   @@prog = "dot"
-  @prog
+  @prog = nil
   ## Var: program path
   @@path = []
-  @path
+  @path = nil
   ## Var: Error level
   @@errors = 1
-  @errors
+  @errors = nil
   ## Var: External libraries
   @@extlibs = []
-  @extlibs
+  @extlibs = nil
 
   ## Var: Graph name
-  @name
+  @name = nil
 
   ## Var: defined attributes
-  @graph
-  @node
-  @edge
+  @graph = nil
+  @node = nil
+  @edge = nil
 
   # This accessor allow you to set global graph attributes
   attr_accessor :graph
@@ -82,7 +82,7 @@ class GraphViz
   attr_accessor :edge
   alias_method :edge_attrs, :edge
 
-  @elements_order
+  @elements_order = nil
 
   #<b>DEPRECATED</b> please use GraphViz#add_nodes
   def add_node( xNodeName, hOpts = {} )
@@ -775,15 +775,15 @@ class GraphViz
   private
 
   ## Var: Nodes, Edges and Graphs tables
-  @hoNodes
-  @loEdges
-  @hoGraphs
+  @hoNodes = nil
+  @loEdges = nil
+  @hoGraphs = nil
 
   ## Var: Parent graph
-  @oParentGraph
+  @oParentGraph = nil
 
   ## Var: Type de graphe (orienté ou non)
-  @oGraphType
+  @oGraphType = nil
 
   #
   # Create a new graph object
