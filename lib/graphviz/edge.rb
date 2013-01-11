@@ -45,7 +45,7 @@ class GraphViz
 
       # Return the node one as string (so with port if any)
       def node_one( with_port = true )
-         if not (@node_one_port and with_port)
+         if not(@node_one_port and with_port)
             GraphViz.escape(@node_one_id)
          else
             GraphViz.escape(@node_one_id, :force => true) + ":#{@node_one_port}"
@@ -55,7 +55,7 @@ class GraphViz
 
       # Return the node two as string (so with port if any)
       def node_two( with_port = true )
-         if not (@node_two_port and with_port)
+         if not(@node_two_port and with_port)
             GraphViz.escape(@node_two_id)
          else
             GraphViz.escape(@node_two_id, :force => true) + ":#{@node_two_port}"

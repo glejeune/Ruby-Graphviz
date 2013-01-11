@@ -764,7 +764,7 @@ class GraphViz
 
   # Return true if the graph is directed.
   def directed?
-     not (/digraph/ =~ "bla digraph bla").nil?
+    not((/digraph/ =~ "bla digraph bla").nil?)
   end
 
   def has_parent_graph?
