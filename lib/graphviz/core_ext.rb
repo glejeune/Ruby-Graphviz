@@ -17,7 +17,7 @@ class Object
    def to_ruby
       begin
          eval self
-      rescue => e
+      rescue
          self
       end
    end

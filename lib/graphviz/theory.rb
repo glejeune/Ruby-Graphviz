@@ -309,7 +309,7 @@ class GraphViz
                cpath = [ (p[0] + d[node,succ]), (p[1].clone << succ) ]
 
                if index_of_item( a.line(succ), 1 ).size > 0
-                  capth = critical_path_recursion( d, a, [cpath], result, level+1 )
+                  critical_path_recursion( d, a, [cpath], result, level+1 )
                else
                   result << cpath
                end

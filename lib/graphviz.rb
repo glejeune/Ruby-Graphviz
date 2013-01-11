@@ -484,7 +484,7 @@ class GraphViz
             begin
               require 'graphviz/nothugly'
               @nothugly = true
-            rescue LoadError => e
+            rescue LoadError
               warn "You must install ruby-xslt or libxslt-ruby to use nothugly option!"
               @nothugly = false
             end
@@ -914,7 +914,7 @@ class GraphViz
      end
 
      nodes = (1..num_nodes).map{ |e| e.to_s }
-     x = g.add_nodes(nodes)
+     g.add_nodes(nodes)
 
      edges = []
      nodes.each do |head|
