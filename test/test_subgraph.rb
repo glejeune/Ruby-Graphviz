@@ -5,7 +5,7 @@ require 'graphviz'
 class GraphVizSubGraphTest < Test::Unit::TestCase
   def test_subgraph
     master1 = GraphViz::new(:G)
-    cl1 = master1.add_graph('cluster_cl1')
+    master1.add_graph('cluster_cl1')
 
     master2 = GraphViz::new(:G)
     cl2 = GraphViz::new('cluster_cl1')
