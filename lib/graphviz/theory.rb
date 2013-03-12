@@ -150,8 +150,8 @@ class GraphViz
          return nil if range.include?(nil) or @graph.type != "digraph"
          r = [ [0, [1]] ]
 
-         critical_path_recursion( distance_matrix, adjancy_matrix, r, [], 0 ).inject( {:distance => 0, :path => []} ) { |r, item|
-            (r[:distance] < item[0]) ? { :distance => item[0], :path => item[1] } : r
+         critical_path_recursion( distance_matrix, adjancy_matrix, r, [], 0 ).inject( {:distance => 0, :path => []} ) { |_r, item|
+            (_r[:distance] < item[0]) ? { :distance => item[0], :path => item[1] } : _r
          }
       end
 
@@ -309,7 +309,7 @@ class GraphViz
                cpath = [ (p[0] + d[node,succ]), (p[1].clone << succ) ]
 
                if index_of_item( a.line(succ), 1 ).size > 0
-                  capth = critical_path_recursion( d, a, [cpath], result, level+1 )
+                  critical_path_recursion( d, a, [cpath], result, level+1 )
                else
                   result << cpath
                end

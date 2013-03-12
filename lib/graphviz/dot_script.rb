@@ -4,6 +4,7 @@ class GraphViz
   class DOTScriptData
     def initialize
       @data = []
+      @separator = nil
     end
 
     def append(data)
