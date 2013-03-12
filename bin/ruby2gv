@@ -78,7 +78,7 @@ class Rb2Gv
 
       # Search in "standard" paths
       xPath.each do |xDir|
-        xCurrentPath = Config::expand( Config::CONFIG[xDir] )
+        xCurrentPath = RbConfig::expand( RbConfig::CONFIG[xDir] )
         xFileFound = File.join( xCurrentPath, xRbFileWithExt )
         if File.exist?( xFileFound )
           return xFileFound
@@ -86,16 +86,17 @@ class Rb2Gv
       end
 
       # Search in "rubygems" :: This is not utile but...
-      spec = Gem.searcher.find(xLib)
-      unless spec.nil?
-        spec.require_paths.unshift spec.bindir if spec.bindir
-        xPath = spec.require_paths.map do |path|
-          File.join spec.full_gem_path, path
-        end
-        xPath.each do |xCurrentPath|
-          xFileFound = File.join( xCurrentPath, xRbFileWithExt )
-          if File.exist?( xFileFound )
-            return xFileFound
+      Gem::Specification.find_all do |spec|
+        if spec == xLib
+          spec.require_paths.unshift spec.bindir if spec.bindir
+          xPath = spec.require_paths.map do |path|
+            File.join spec.full_gem_path, path
+          end
+          xPath.each do |xCurrentPath|
+            xFileFound = File.join( xCurrentPath, xRbFileWithExt )
+            if File.exist?( xFileFound )
+              return xFileFound
+            end
           end
         end
       end
@@ -112,11 +113,7 @@ class Rb2Gv
       puts "Parse #{xFile} :" if DEBUG
     end
 
-    fp = open( xFile, 'r' )
-    xData = fp.read()
-    fp.close
-
-    xData.each do |xLine|
+    File.open(xFile, 'r').each_line do |xLine|
       if lxLineMatch = REQUIRE.match( xLine )
         xRequiredLib = lxLineMatch[2].gsub( /\.(rb|so)$/, "" )
 
