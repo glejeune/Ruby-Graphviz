@@ -565,7 +565,7 @@ class GraphViz
         xOtherOptions += " -x" if @reduce_graph
         xOtherOptions += " -Lg" if @Lg
         xOtherOptions += " -LO" if @LO
-        xOtherOptions += " -Ln#{@Ln}" unless @LN.nil?
+        xOtherOptions += " -Ln#{@Ln}" unless @Ln.nil?
         xOtherOptions += " -LU#{@LU}" unless @LU.nil?
         xOtherOptions += " -LC#{@LC}" unless @LC.nil?
         xOtherOptions += " -LT#{@LT}" unless @LT.nil?
