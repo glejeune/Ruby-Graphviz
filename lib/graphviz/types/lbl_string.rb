@@ -6,7 +6,7 @@ class GraphViz
       end
 
       def output
-        html = /^<([<|(^<)*<].*)>$/m.match(@data)
+        html = /^<([<|(^<)*<].*)>$/m.match(@data.to_s)
         if html != nil
           "<#{html[1]}>"
         else
