@@ -1,5 +1,8 @@
 = CHANGELOG
 
+== 1.1.0 :
+* Issue #61 : Combine graphviz instances
+
 == 1.0.9 :
 * Add support for attributs 
   * forcelabels
@@ -10,6 +13,11 @@
 * Issue #52 : Extracted xDOTScript to DOTScript class (by markus1189)
 * Issue #54 : Fixes a couple of typos and spacing (by Mike Fiedler)
 * Issue #55 : Avoid autoload
+* Issue #57 : Add man pages for the commandline programs (by Praveen Arimbrathodiyil)
+* Issue #59 : Support label as Fixnum (by Gabe Kopley)
+* Issue #62 : Remove warnings (by Kenichi Kamiya)
+* Issue #63 : Fix typo (by Kenichi Kamiya)
+* Issue #65 : ruby-graphviz breaks autoloading of ActiveSupport::Concerns
 * Update graphviz attributs
 
 == 1.0.8 :
