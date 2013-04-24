@@ -606,20 +606,23 @@ class GraphViz
   alias :save :output
 
   def append_attributes_and_types(script)
-    xLastType = nil
-    xData = DOTScriptData.new
+    script_data = DOTScriptData.new
 
     @elements_order.each { |kElement|
-      is_new_type = xLastType != kElement["type"]
-      xData = DOTScriptData.new if is_new_type
-      xLastType = kElement["type"]
+      is_new_type = script_data.type != kElement["type"]
+      if is_new_type 
+        unless script_data.type.nil? or script_data.empty?
+          script << script_data
+        end
+        script_data = DOTScriptData.new(kElement["type"])
+      end
 
       # Modified by Brandon Coleman verify value is NOT NULL
       kElement["value"] or raise ArgumentError, "#{kElement["name"]} is nil!"
 
-      case xLastType
+      case kElement["type"]
         when "graph_attr", "node_attr", "edge_attr"
-          xData.add_attribute(xLastType,kElement["name"],kElement["value"].to_gv)
+          script_data.add_attribute(kElement["name"], kElement["value"].to_gv)
         when "node", "graph"
           script << kElement["value"].output()
         when "edge"

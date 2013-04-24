@@ -2,9 +2,11 @@ require "forwardable"
 class GraphViz
 
   class DOTScriptData
-    def initialize
+    attr_accessor :type
+    def initialize(type = nil)
       @data = []
-      @separator = nil
+      @separator = ""
+      @type = type
     end
 
     def append(data)
@@ -12,14 +14,20 @@ class GraphViz
     end
     alias :<< :append
 
-    def add_attribute(type,name,value)
+    def add_attribute(name, value)
       @data << @separator << name << " = " << value
-      @separator = determine_separator(type)
+      @separator = determine_separator
     end
 
     def to_str
-      @data.join(" ")
+      case @type
+        when "graph_attr" then "#{@data.join}#{@separator}"
+        when "node_attr" then "node[#{@data.join(' ')}];"
+        when "edge_attr" then "edge[#{@data.join(' ')}];"
+        else raise ArgumentError, "Wrong type: #{@type}."
+      end
     end
+    alias :to_s :to_str
 
     def empty?
       @data.empty?
@@ -27,11 +35,11 @@ class GraphViz
 
     private
 
-    def determine_separator(str)
-      case str
-        when "graph_attr"             then ";"
+    def determine_separator
+      case @type
+        when "graph_attr"             then ";\n"
         when "node_attr", "edge_attr" then ","
-        else raise ArgumentError, "Unknown type: #{str}."
+        else raise ArgumentError, "Wrong type: #{@type}."
       end
     end
 
