@@ -43,9 +43,8 @@ Last (important) changes :
   }
   
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'gems'
   s.add_development_dependency 'rdoc'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'ronn'
+  s.add_development_dependency 'ronn' unless RUBY_PLATFORM == 'java'
 end

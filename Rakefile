@@ -13,9 +13,9 @@ include FileUtils
 
 CLEAN.include ['**/.*.sw?', '*.gem', '.config', 'test/test.log']
 RDOC_OPTS = ['--quiet', '--title', "Ruby/GraphViz, the Documentation",
-    "--opname", "index.html",
-    "--line-numbers",
-    "--main", "README.rdoc"]
+  "--opname", "index.html",
+  "--line-numbers",
+  "--main", "README.rdoc"]
 
 desc "Packages up Ruby/GraphViz."
 task :default => [:test, :package]
@@ -24,22 +24,22 @@ task :package => [:clean]
 task :doc => :rdoc
 
 RDoc::Task.new do |rdoc|
-    rdoc.rdoc_dir = 'doc/rdoc'
-    rdoc.options += RDOC_OPTS
-    rdoc.main = "README.rdoc"
-    rdoc.title = "Ruby/GraphViz, the Documentation"
-    rdoc.rdoc_files.add ['README.rdoc', 'CHANGELOG.rdoc', 'AUTHORS.rdoc', 'COPYING.rdoc',
-      'lib/graphviz.rb',
-      'lib/graphviz/node.rb',
-      'lib/graphviz/edge.rb',
-      'lib/graphviz/constants.rb',
-      'lib/graphviz/xml.rb',
-      'lib/graphviz/graphml.rb',
-      'lib/graphviz/family_tree.rb',
-      'lib/graphviz/family_tree/couple.rb',
-      'lib/graphviz/family_tree/generation.rb',
-      'lib/graphviz/family_tree/person.rb',
-      'lib/graphviz/family_tree/sibling.rb']
+  rdoc.rdoc_dir = 'doc/rdoc'
+  rdoc.options += RDOC_OPTS
+  rdoc.main = "README.rdoc"
+  rdoc.title = "Ruby/GraphViz, the Documentation"
+  rdoc.rdoc_files.add ['README.rdoc', 'CHANGELOG.rdoc', 'AUTHORS.rdoc', 'COPYING.rdoc',
+    'lib/graphviz.rb',
+    'lib/graphviz/node.rb',
+    'lib/graphviz/edge.rb',
+    'lib/graphviz/constants.rb',
+    'lib/graphviz/xml.rb',
+    'lib/graphviz/graphml.rb',
+    'lib/graphviz/family_tree.rb',
+    'lib/graphviz/family_tree/couple.rb',
+    'lib/graphviz/family_tree/generation.rb',
+    'lib/graphviz/family_tree/person.rb',
+    'lib/graphviz/family_tree/sibling.rb']
 end
 
 Rake::TestTask.new(:test) do |t|
@@ -53,9 +53,13 @@ end
 
 desc "Generate man pages"
 task :man do
-  require 'ronn'
-  chdir 'man' do
-    sh "ronn -r *.ronn"
+  unless RUBY_PLATFORM == 'java'
+    require 'ronn'
+    chdir 'man' do
+      sh "ronn -r *.ronn"
+    end
+  else
+    puts "Can't generate man pages with JRuby"
   end
 end
 
