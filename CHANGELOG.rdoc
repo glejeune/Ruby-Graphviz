@@ -2,6 +2,7 @@
 
 == 1.1.0 :
 * Issue #61 : Combine graphviz instances
+* Bug correction with development dependencies on JRuby
 
 == 1.0.9 :
 * Add support for attributs 
