@@ -84,10 +84,11 @@ class GraphViz
 
   @elements_order = nil
 
-  #<b>DEPRECATED</b> please use GraphViz#add_nodes
   def add_node( xNodeName, hOpts = {} )
-     warn "GraphViz#add_node is deprecated, please use GraphViz#add_nodes"
-     return add_nodes(xNodeName, hOpts)
+    if xNodeName.kind_of? Array
+      raise ArgumentError, "use `add_nodes' to add several nodes at the same time"
+    end
+    return add_nodes(xNodeName, hOpts)
   end
 
   # Create a new node
@@ -180,10 +181,11 @@ class GraphViz
     @hoNodes.size
   end
 
-  #<b>DEPRECATED</b> please use GraphViz#add_edges
   def add_edge( oNodeOne, oNodeTwo, hOpts = {} )
-     warn "GraphViz#add_edge is deprecated, please use GraphViz#add_edges"
-     add_edges(oNodeOne, oNodeTwo, hOpts)
+    if oNodeTwo.kind_of? Array or oNodeOne.kind_of? Array 
+      raise ArgumentError, "use `add_edges' to add several edges at the same time"
+    end
+    add_edges(oNodeOne, oNodeTwo, hOpts)
   end
 
   # Create a new edge
