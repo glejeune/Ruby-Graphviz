@@ -51,5 +51,13 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = test_files
 end
 
+desc "Generate man pages"
+task :man do
+  require 'ronn'
+  chdir 'man' do
+    sh "ronn -r *.ronn"
+  end
+end
+
 Bundler::GemHelper.install_tasks
 
