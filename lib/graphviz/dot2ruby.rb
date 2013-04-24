@@ -19,7 +19,7 @@ require 'graphviz/ext'
 require 'graphviz/utils'
 
 class Dot2Ruby #:nodoc:
-  include GVUtils
+  include GraphViz::Utils
 
   def initialize( xGVPath, xOutFile, xOutFormat = nil ) #:nodoc:
     paths = (xGVPath.nil?) ? [] : [xGVPath]

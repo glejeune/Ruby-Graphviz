@@ -37,8 +37,8 @@ if /^1.8/.match RUBY_VERSION
 end
 
 class GraphViz
-  include Constants
-  include GVUtils
+  include GraphViz::Constants
+  include GraphViz::Utils
 
   public
 
@@ -410,9 +410,9 @@ class GraphViz
   # Generate the graph
   #
   # Options :
-  # * :output : Output format (Constants::FORMATS)
+  # * :output : Output format (GraphViz::Constants::FORMATS)
   # * :file : Output file name
-  # * :use : Program to use (Constants::PROGRAMS)
+  # * :use : Program to use (GraphViz::Constants::PROGRAMS)
   # * :path : Program PATH
   # * :<format> => <file> : <file> can be
   #   * a file name
@@ -729,9 +729,9 @@ class GraphViz
   # Create a new graph from a GraphViz File
   #
   # Options :
-  # * :output : Output format (Constants::FORMATS) (default : dot)
+  # * :output : Output format (GraphViz::Constants::FORMATS) (default : dot)
   # * :file : Output file name (default : none)
-  # * :use : Program to use (Constants::PROGRAMS) (default : dot)
+  # * :use : Program to use (GraphViz::Constants::PROGRAMS) (default : dot)
   # * :path : Program PATH
   #
   def self.parse( xFile, hOpts = {}, &block )
@@ -743,9 +743,9 @@ class GraphViz
   # Create a new graph from a GraphViz File
   #
   # Options :
-  # * :output : Output format (Constants::FORMATS) (default : dot)
+  # * :output : Output format (GraphViz::Constants::FORMATS) (default : dot)
   # * :file : Output file name (default : none)
-  # * :use : Program to use (Constants::PROGRAMS) (default : dot)
+  # * :use : Program to use (GraphViz::Constants::PROGRAMS) (default : dot)
   # * :path : Program PATH
   #
   def self.parse_string( str, hOpts = {}, &block )
@@ -792,12 +792,12 @@ class GraphViz
   # Create a new graph object
   #
   # Options :
-  # * :output : Output format (Constants::FORMATS) (default : dot)
+  # * :output : Output format (GraphViz::Constants::FORMATS) (default : dot)
   # * :file : Output file name (default : nil)
-  # * :use : Program to use (Constants::PROGRAMS) (default : dot)
+  # * :use : Program to use (GraphViz::Constants::PROGRAMS) (default : dot)
   # * :path : Program PATH
   # * :parent : Parent graph (default : nil)
-  # * :type : Graph type (Constants::GRAPHTYPE) (default : digraph)
+  # * :type : Graph type (GraphViz::Constants::GRAPHTYPE) (default : digraph)
   # * :errors : DOT error level (default 1)
   #   * 0 = Error + Warning
   #   * 1 = Error

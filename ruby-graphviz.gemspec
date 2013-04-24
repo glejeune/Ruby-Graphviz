@@ -5,7 +5,7 @@ require "graphviz/constants"
 
 Gem::Specification.new do |s|
   s.name = "ruby-graphviz"
-  s.version = Constants::RGV_VERSION
+  s.version = GraphViz::Constants::RGV_VERSION
   s.platform = Gem::Platform::RUBY
   
   s.authors = ["Gregoire Lejeune"]

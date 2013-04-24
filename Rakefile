@@ -44,7 +44,7 @@ end
 
 Rake::TestTask.new(:test) do |t|
   require 'graphviz/utils'
-  include GVUtils
+  include GraphViz::Utils
   test_files = FileList['test/test_*.rb'].exclude('test/test_dot_script.rb')
   test_files.unshift('test/test_dot_script.rb')
   test_files.exclude("test/test_examples.rb") unless find_executable("dot", nil)

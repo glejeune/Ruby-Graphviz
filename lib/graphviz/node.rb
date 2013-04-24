@@ -19,7 +19,7 @@ require 'graphviz/constants'
 
 class GraphViz
    class Node
-      include Constants
+      include GraphViz::Constants
 
       # List of nodes that are directly accessible from given node (in a directed graph neighbors == incidents)
       attr_reader :neighbors

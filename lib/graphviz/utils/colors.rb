@@ -1,7 +1,7 @@
 require 'graphviz/core_ext'
 
 class GraphViz
-   class Utils
+   module Utils
       class Colors
          HEX_FOR_COLOR = /[0-9a-fA-F]{2}/
          RGBA = /^(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})(#{HEX_FOR_COLOR})?$/

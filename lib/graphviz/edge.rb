@@ -19,7 +19,7 @@ require 'graphviz/constants'
 
 class GraphViz
    class Edge
-      include Constants
+      include GraphViz::Constants
 
       # Create a new edge
       #
@@ -172,7 +172,7 @@ class GraphViz
          if xAttr.length > 0
             xOut << " [" + xAttr + "]"
          end
-         xOut + ";"
+         xOut << ";"
 
          return( xOut )
       end
