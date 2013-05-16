@@ -66,6 +66,10 @@ class GraphVizTest < Test::Unit::TestCase
      assert_output_pattern(/\ANode.*\n\Z/m, '62')
   end
 
+  def test_sample70
+    assert_output_pattern(/\Agraph G \{.*\}\n\Z/m, '70')
+  end
+
   #
   # for every sample file in the examples directory that matches the
   # pattern ("sample01.rb, sample02.rb, etc) make a corresponding

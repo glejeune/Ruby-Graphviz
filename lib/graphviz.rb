@@ -408,6 +408,13 @@ class GraphViz
      each_attribute(&b)
   end
 
+  # Create a new graph from the current subgraph
+  def to_graph
+    graph = self.clone
+    graph.pg = nil
+    return graph
+  end
+
   #
   # Generate the graph
   #
@@ -773,7 +780,7 @@ class GraphViz
   end
 
   def has_parent_graph?
-     @oParentGraph
+     not @oParentGraph.nil?
   end
 ## ----------------------------------------------------------------------------
 
