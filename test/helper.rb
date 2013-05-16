@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'test/unit'
-require 'shoulda'
 require 'pathname'
 
 cur = Pathname.new(File.expand_path("..", __FILE__))

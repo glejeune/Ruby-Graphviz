@@ -40,7 +40,6 @@ Last (important) changes :
 * GraphViz::Node#each_attribut is deprecated, use GraphViz::Node#each_attribute
   }
   
-  s.add_development_dependency 'shoulda' 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rdoc'
   s.add_development_dependency 'bundler'
