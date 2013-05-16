@@ -43,11 +43,15 @@ RDoc::Task.new do |rdoc|
 end
 
 Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib' << 'test'
+  t.verbose = true
+
   require 'graphviz/utils'
   include GraphViz::Utils
-  test_files = FileList['test/test_*.rb'].exclude('test/test_dot_script.rb')
-  test_files.unshift('test/test_dot_script.rb')
+  test_files = FileList['test/test_*.rb']
   test_files.exclude("test/test_examples.rb") unless find_executable("dot", nil)
+
+  p test_files
   t.test_files = test_files
 end
 

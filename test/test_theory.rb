@@ -1,9 +1,4 @@
-require 'minitest/autorun'
-require 'test/unit'
-$:.unshift(File.expand_path('../../lib',__FILE__))
-require 'graphviz'
-require 'graphviz/theory'
-require 'graphviz/math/matrix'
+require 'helper'
 
 class GraphVizTheoryTest < Test::Unit::TestCase
    def setup

@@ -1,15 +1,5 @@
-require 'rubygems'
-require 'test/unit'
-begin
-require 'ruby-debug'
-rescue LoadError
-end
+require 'helper'
 require 'stringio'
-
-root = File.expand_path('../../lib',__FILE__)
-$:.unshift(root) unless $:.include?(root)
-
-require 'graphviz'
 
 # hack so that the example scripts don't unnecessarily unshift @todo
 class << $:

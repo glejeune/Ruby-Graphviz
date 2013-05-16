@@ -1,43 +1,49 @@
-require "minitest/autorun"
-require_relative "../lib/graphviz/dot_script"
+require 'helper'
 
-describe GraphViz::DOTScript do
-    let(:script) { GraphViz::DOTScript.new }
+class GraphVizDOTScriptTest < Test::Unit::TestCase
+  context "a new dot script" do
+    setup do
+      @script = GraphViz::DOTScript.new
+    end
 
-    it "appends a newline character if it is missing" do
+    should "appends a newline character if it is missing" do
       str = "Test without newline"
-      script.append(str)
-      script.to_s.must_equal(str + "\n")
+      @script.append(str)
+      assert_equal @script.to_s, str + "\n"
     end
 
-    it "does not append a newline if already present" do
+    should "does not append a newline if already present" do
       str = "Linebreak follows at my tail:\n"
-      script.append(str)
-      script.to_s.must_equal(str)
+      @script.append(str)
+      assert_equal @script.to_s, str
     end
 
-    it "can prepend lines to its content" do
+    should "can prepend lines to its content" do
       start_content = "I want to be at the top!\n"
       additional_content = "No way!\n"
 
-      script.append(start_content)
-      script.prepend(additional_content)
+      @script.append(start_content)
+      @script.prepend(additional_content)
 
-      script.to_s.must_equal(additional_content + start_content)
+      assert_equal @script.to_s, additional_content + start_content
     end
 
-    it "can add types with data" do
+    should "can add types with data" do
       data = "some random data"
-      script.add_type("node_attr", data)
-      script.to_s.must_match(/\s*node\s*\[\s*#{data}\s*\]\s*/m)
+      @script.add_type("node_attr", data)
+      assert_match /\s*node\s*\[\s*#{data}\s*\]\s*/, @script.to_s
     end
 
-    it "does nothing if data is empty" do
-      script.add_type("anything", "")
-      script.to_s.must_be :empty?
+    should "does nothing if data is empty" do
+      @script.add_type("anything", "")
+      assert_equal true, @script.to_s.empty?
     end
 
-    it "raises an argument error on unknown types" do
-      -> { script.add_type("invalid", "some data") }.must_raise(ArgumentError)
+    should "raises an argument error on unknown types" do
+      assert_raise ArgumentError do
+        @script.add_type("invalid", "some data")
+      end
     end
+  end
 end
+

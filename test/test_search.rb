@@ -1,8 +1,4 @@
-require 'minitest/autorun'
-require 'test/unit'
-$:.unshift(File.expand_path('../../lib',__FILE__))
-require 'graphviz'
-require 'graphviz/theory'
+require 'helper'
 
 class GraphVizSearch < Test::Unit::TestCase
    def setup

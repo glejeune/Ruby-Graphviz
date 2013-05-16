@@ -35,16 +35,14 @@ For more information about Ruby-Graphviz :
 * NEW - Mailing List : http://groups.google.com/group/ruby-graphviz
 
 Last (important) changes :
-* GraphViz#add_edge is deprecated, use GraphViz#add_edges
-* GraphViz#add_node is deprecated, use GraphViz#add_nodes
 * GraphViz::Edge#each_attribut is deprecated, use GraphViz::Edge#each_attribute
 * GraphViz::GraphML#attributs is deprecated, use GraphViz::GraphML#attributes
 * GraphViz::Node#each_attribut is deprecated, use GraphViz::Node#each_attribute
   }
   
+  s.add_development_dependency 'shoulda' 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rdoc'
-  s.add_development_dependency 'minitest'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'ronn' unless RUBY_PLATFORM == 'java'
 end

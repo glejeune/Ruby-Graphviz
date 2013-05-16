@@ -1,7 +1,4 @@
-require 'minitest/autorun'
-require 'test/unit'
-$:.unshift(File.expand_path('../../lib',__FILE__))
-require 'graphviz/types'
+require 'helper'
 
 class TypesTest < Test::Unit::TestCase
   def test_gv_bool

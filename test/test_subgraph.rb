@@ -1,7 +1,4 @@
-require 'minitest/autorun'
-require 'test/unit'
-$:.unshift(File.expand_path('../../lib',__FILE__))
-require 'graphviz'
+require 'helper'
 
 class GraphVizSubGraphTest < Test::Unit::TestCase
   def test_subgraph
