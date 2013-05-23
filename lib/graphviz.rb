@@ -618,11 +618,10 @@ class GraphViz
     script_data = DOTScriptData.new
 
     @elements_order.each { |kElement|
+      p kElement["type"]
       is_new_type = script_data.type != kElement["type"]
       if is_new_type 
-        unless script_data.type.nil? or script_data.empty?
-          script << script_data
-        end
+        script << script_data unless script_data.type.nil? or script_data.empty?
         script_data = DOTScriptData.new(kElement["type"])
       end
 
@@ -641,6 +640,7 @@ class GraphViz
             "Don't know what to do with element type '#{kElement['type']}'"
       end
     }
+    script << script_data unless script_data.type.nil? or script_data.empty?
   end
 
   def to_s
