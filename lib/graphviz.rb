@@ -390,7 +390,12 @@ class GraphViz
         self[key] = value
       end
     else
-      return( @graph[xAttrName].clone )
+      attr = @graph[xAttrName]
+      if attr.nil?
+        return nil
+      else
+        return( @graph[xAttrName].clone )
+      end
     end
   end
 
