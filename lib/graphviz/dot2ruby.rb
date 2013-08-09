@@ -41,17 +41,20 @@ class Dot2Ruby #:nodoc:
     end
   end
 
-  def eval( xFile ) #:nodoc:
-    xCmd = "#{@xGvprPath} -f #{@gvprScript} -a \"-\" #{xFile}"
+  def eval( xFile ) #:nodoc:   
+    xCmd = "\"#{@xGvprPath}\" -f #{@gvprScript} -a \"-\" #{xFile}"
     xOutput = output_from_command( xCmd )
     instance_eval(xOutput)
     return @_graph_eval
   end
 
   def eval_string( data ) #:nodoc:
+
     t = Tempfile::open( File.basename(__FILE__) )
-    t.print( data )
+    puts "Temp: " + t.path      
+    t.write( data )
     t.close
+    puts "EXI: " + File.exist?(t.path).to_s
     result = self.eval(t.path)
     t.close
     return result
