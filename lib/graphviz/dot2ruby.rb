@@ -30,7 +30,7 @@ class Dot2Ruby #:nodoc:
   end
 
   def run( xFile ) #:nodoc:
-    xCmd = "#{@xGvprPath} -f #{@gvprScript} -a #{@xOutFormat} #{xFile}"
+    xCmd = [@xGvprPath, '-f', @gvprScript, '-a', @xOutFormat, xFile]
     xOutput = output_from_command( xCmd )
     if @xOutFile.nil?
       puts xOutput
@@ -42,7 +42,7 @@ class Dot2Ruby #:nodoc:
   end
 
   def eval( xFile ) #:nodoc:
-    xCmd = "#{@xGvprPath} -f #{@gvprScript} -a \"-\" #{xFile}"
+    xCmd = [@xGvprPath, '-f', @gvprScript, '-a', '-', xFile]
     xOutput = output_from_command( xCmd )
     instance_eval(xOutput)
     return @_graph_eval
