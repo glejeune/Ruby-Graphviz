@@ -56,13 +56,13 @@ class GraphViz
         end
       end
       begin
-        Open3.popen3( cmd ) do |stdin, stdout, stderr|
+        Open3.popen3( *cmd ) do |stdin, stdout, stderr|
           stdin.close
           stdout.binmode
           [stdout.read, stderr.read]
         end
       rescue NotImplementedError, NoMethodError
-        IO.popen( cmd ) do |stdout|
+        IO.popen( *cmd ) do |stdout|
           stdout.binmode
           [stdout.read, nil]
         end
