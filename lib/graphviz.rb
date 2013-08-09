@@ -538,60 +538,58 @@ class GraphViz
           raise StandardError, "GraphViz not installed or #{@prog} not in PATH. Install GraphViz or use the 'path' option"
         end
 
-        cmd = escape_path_containing_blanks(cmd) if IS_JRUBY
-
-        xOutputWithFile = ""
-        xOutputWithoutFile = ""
+        xOutputWithFile = []
+        xOutputWithoutFile = []
         unless @format.nil? or @format == "none"
           lNotHugly << @filename if @format.to_s == "svg" and @nothugly
           if @filename.nil? or @filename == String
-            xOutputWithoutFile = "-T#{@format} "
+            xOutputWithoutFile = ["-T#{@format}"]
           else
-            xOutputWithFile = "-T#{@format} -o#{@filename} "
+            xOutputWithFile = ["-T#{@format}", "-o#{@filename}"]
           end
         end
         @output.each_except( :key => ["none"] ) do |format, file|
           lNotHugly << file if format.to_s == "svg" and @nothugly
           if file.nil? or file == String
-            xOutputWithoutFile << "-T#{format} "
+            xOutputWithoutFile += ["-T#{format}"]
           else
-            xOutputWithFile << "-T#{format} -o#{file} "
+            xOutputWithFile += ["-T#{format}", "-o#{file}"]
           end
         end
 
-        xExternalLibraries = ""
-        @extlibs.each do |lib|
-          xExternalLibraries << "-l#{lib} "
-        end
+        xExternalLibraries = @extlibs.map { |lib| "-l#{lib}" }
 
-        xOtherOptions = ""
-        xOtherOptions += " -s#{@scale}" unless @scale.nil?
-        xOtherOptions += " -y" if @inverty
-        unless @no_layout.nil?
-          xOtherOptions += " -n"
-          xOtherOptions += "2" if @no_layout.to_i == 2
-        end
-        xOtherOptions += " -x" if @reduce_graph
-        xOtherOptions += " -Lg" if @Lg
-        xOtherOptions += " -LO" if @LO
-        xOtherOptions += " -Ln#{@Ln}" unless @Ln.nil?
-        xOtherOptions += " -LU#{@LU}" unless @LU.nil?
-        xOtherOptions += " -LC#{@LC}" unless @LC.nil?
-        xOtherOptions += " -LT#{@LT}" unless @LT.nil?
+        xOtherOptions = []
+        xOtherOptions << "-s#{@scale}" if @scale
+        xOtherOptions << "-y" if @inverty
+        xOtherOptions << "-n#{@no_layout}" if @no_layout
+        xOtherOptions << "-x" if @reduce_graph
+        xOtherOptions << "-Lg" if @Lg
+        xOtherOptions << "-LO" if @LO
+        xOtherOptions << "-Ln#{@Ln}" if @Ln
+        xOtherOptions << "-LU#{@LU}" if @LU
+        xOtherOptions << "-LC#{@LC}" if @LC
+        xOtherOptions << "-LT#{@LT}" if @LT
 
-        if IS_JRUBY
-          xCmd = "#{cmd} -q#{@errors} #{xExternalLibraries} #{xOtherOptions} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+        tmpPath = if IS_JRUBY
+          t.path
         elsif IS_CYGWIN
-          tmpPath = t.path
           begin
-            tmpPath = "'" + `cygpath -w #{t.path}`.chomp + "'"
+            IO.popen("cygpath", "-w", t.path).chomp
           rescue
             warn "cygpath is not installed!"
+            t.path
           end
-          xCmd = "\"#{cmd}\" -q#{@errors} #{xExternalLibraries} #{xOtherOptions} #{xOutputWithFile} #{xOutputWithoutFile} #{tmpPath}"
         else
-          xCmd = "\"#{cmd}\" -q#{@errors} #{xExternalLibraries} #{xOtherOptions} #{xOutputWithFile} #{xOutputWithoutFile} #{t.path}"
+          t.path
         end
+
+        xCmd = [cmd, "-q#{@errors}"] +
+               xExternalLibraries +
+               xOtherOptions +
+               xOutputWithFile +
+               xOutputWithoutFile +
+               [tmpPath]
 
         xOutput << output_from_command( xCmd )
       end
