@@ -538,8 +538,6 @@ class GraphViz
           raise StandardError, "GraphViz not installed or #{@prog} not in PATH. Install GraphViz or use the 'path' option"
         end
 
-        cmd = escape_path_containing_blanks(cmd) if IS_JRUBY
-
         xOutputWithFile = []
         xOutputWithoutFile = []
         unless @format.nil? or @format == "none"

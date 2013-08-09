@@ -34,19 +34,6 @@ class GraphViz
       return nil
     end
 
-    def escape_path_containing_blanks(path) #:nodoc:
-      path.gsub!(File::ALT_SEPARATOR, File::SEPARATOR) if File::ALT_SEPARATOR
-      path_elements = path.split(File::SEPARATOR)
-      path_elements.map! do |element|
-        if element.include?(' ')
-          "\"#{element}\""
-        else
-          element
-        end
-      end
-      path_elements.join(File::SEPARATOR)
-    end
-
     def output_and_errors_from_command(cmd) #:nodoc:
       unless defined? Open3
         begin
