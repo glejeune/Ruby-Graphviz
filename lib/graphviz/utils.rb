@@ -34,19 +34,6 @@ class GraphViz
       return nil
     end
 
-    def escape_path_containing_blanks(path) #:nodoc:
-      path.gsub!(File::ALT_SEPARATOR, File::SEPARATOR) if File::ALT_SEPARATOR
-      path_elements = path.split(File::SEPARATOR)
-      path_elements.map! do |element|
-        if element.include?(' ')
-          "\"#{element}\""
-        else
-          element
-        end
-      end
-      path_elements.join(File::SEPARATOR)
-    end
-
     def output_and_errors_from_command(cmd) #:nodoc:
       unless defined? Open3
         begin
@@ -56,13 +43,13 @@ class GraphViz
         end
       end
       begin
-        Open3.popen3( cmd ) do |stdin, stdout, stderr|
+        Open3.popen3( *cmd ) do |stdin, stdout, stderr|
           stdin.close
           stdout.binmode
           [stdout.read, stderr.read]
         end
       rescue NotImplementedError, NoMethodError
-        IO.popen( cmd ) do |stdout|
+        IO.popen( *cmd ) do |stdout|
           stdout.binmode
           [stdout.read, nil]
         end
