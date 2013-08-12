@@ -618,7 +618,6 @@ class GraphViz
     script_data = DOTScriptData.new
 
     @elements_order.each { |kElement|
-      p kElement["type"]
       is_new_type = script_data.type != kElement["type"]
       if is_new_type 
         script << script_data unless script_data.type.nil? or script_data.empty?

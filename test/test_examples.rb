@@ -27,6 +27,7 @@ class GraphVizTest < Test::Unit::TestCase
     '36' => 'hangs for me',
     '53' => 'FamilyTree is broken',
     '57' => 'will not be able to find the graphml script',
+    '98' => 'This test is just for debug',
     '99' => 'FamilyTree is broken'
   }
 

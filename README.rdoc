@@ -2,7 +2,7 @@
 
 {<img src="https://secure.travis-ci.org/glejeune/Ruby-Graphviz.png" />}[http://travis-ci.org/glejeune/Ruby-Graphviz]
 
-Copyright (C) 2004-2012 Gregoire Lejeune
+Copyright (C) 2004-2013 Gregoire Lejeune
 
 * Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
 * Sources : http://github.com/glejeune/Ruby-Graphviz
