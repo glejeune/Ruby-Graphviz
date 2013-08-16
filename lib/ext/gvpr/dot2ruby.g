@@ -76,6 +76,31 @@ BEGIN {
     }
   }
 
+  graph_t get_node_graph(node_t n, graph_t p) {
+    graph_t sub_graph;
+    sub_graph = fstsubg(p);
+    while( sub_graph != NULL ) {
+      if( isSubnode( sub_graph, n) != 0 ) {
+        return get_node_graph(n, sub_graph);
+      }    
+      sub_graph = nxtsubg( sub_graph );
+    }
+    return p;
+  }
+
+  graph_t get_edge_graph(edge_t e, graph_t p) {
+    graph_t sub_graph;
+    sub_graph = fstsubg(p);
+    while( sub_graph != NULL ) {
+      if( isSubedge( sub_graph, e) != 0 ) {      
+        return get_edge_graph(e, sub_graph);
+      }    
+      sub_graph = nxtsubg( sub_graph );
+    }
+    return p;
+  }
+
+
 }
 
 BEG_G {
@@ -109,15 +134,7 @@ BEG_G {
 
 N {
   pgraph = $.root;
-  ofgraph = pgraph;
-
-  subgraph = fstsubg( pgraph );
-  while( subgraph != NULL ) {
-    if( isSubnode( subgraph, $ ) != 0 ) {
-      ofgraph = subgraph;
-    }
-    subgraph = nxtsubg( subgraph );
-  }
+  ofgraph = get_node_graph($, pgraph);
   
   printf( "  node_%s = graph_%s.add_nodes( \"%s\"", rubyfy($.name), rubyfy(ofgraph.name), stringify($.name) );
 
@@ -136,42 +153,34 @@ N {
     printf( " )\n");
   }
 
-  E {
-    pgraph = $.root;
-    ofgraph = pgraph;
+E {
+   pgraph = $.root;
+    ofgraph = get_edge_graph($, $.root);  
 
-    subgraph = fstsubg( pgraph );
-    while( subgraph != NULL ) {
-      if( isSubedge( subgraph, $ ) != 0 ) {
-        ofgraph = subgraph;
+  printf( "  graph_%s.add_edges( \"%s\", \"%s\"", rubyfy(ofgraph.name), stringify($.tail.name), stringify($.head.name) );
+
+// Attributs of E
+    attr = fstAttr($G, "E");
+    while( attr != "" ) {
+      attrv = aget( $, attr );
+      if( attrv != "" ) {
+        printf( ", :%s => '%s'", attr, gsub( attrv, "'", "\\'" ) );
+      } else {
+        printf( ", :%s => ''", attr );
       }
-      subgraph = nxtsubg( subgraph );
+      attr = nxtAttr( $G, "E", attr );
     }
 
-    printf( "  graph_%s.add_edges( \"%s\", \"%s\"", rubyfy(ofgraph.name), stringify($.tail.name), stringify($.head.name) );
+    printf( " )\n" );
+  }
 
-  // Attributs of E
-      attr = fstAttr($G, "E");
-      while( attr != "" ) {
-        attrv = aget( $, attr );
-        if( attrv != "" ) {
-          printf( ", :%s => '%s'", attr, gsub( attrv, "'", "\\'" ) );
-        } else {
-          printf( ", :%s => ''", attr );
-        }
-        attr = nxtAttr( $G, "E", attr );
-      }
-
-      printf( " )\n" );
+END_G {
+  printf( "}\n" );
+  if( xOut != "_" ) {
+    if( xOut == "-" ) {
+      printf( "@_graph_eval = graph_%s\n", rubyfy($.name) );
+    } else {
+  printf( "graph_%s.output( :%s => \"%s.%s\" )\n", rubyfy($.name), xOut, gsub($F, ".*/", ""), xOut );
     }
-
-    END_G {
-      printf( "}\n" );
-      if( xOut != "_" ) {
-        if( xOut == "-" ) {
-          printf( "@_graph_eval = graph_%s\n", rubyfy($.name) );
-        } else {
-      printf( "graph_%s.output( :%s => \"%s.%s\" )\n", rubyfy($.name), xOut, gsub($F, ".*/", ""), xOut );
-        }
-      }
-    }
+  }
+}
