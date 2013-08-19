@@ -25,6 +25,7 @@ BEGIN {
   string attr; string attrv;
   graph_t subgraph; graph_t pgraph;
   graph_t ofgraph;
+  graph_t sub_graph;
 
   string xOut;
   if( ARGC == 0 ) {
@@ -54,7 +55,6 @@ BEGIN {
     if(p == NULL) {
       return;
     }
-    graph_t sub_graph;
     sub_graph = fstsubg(p);
     while( sub_graph != NULL ) {
       pgraph = sub_graph.parent;
@@ -77,7 +77,6 @@ BEGIN {
   }
 
   graph_t get_node_graph(node_t n, graph_t p) {
-    graph_t sub_graph;
     sub_graph = fstsubg(p);
     while( sub_graph != NULL ) {
       if( isSubnode( sub_graph, n) != 0 ) {
@@ -89,7 +88,6 @@ BEGIN {
   }
 
   graph_t get_edge_graph(edge_t e, graph_t p) {
-    graph_t sub_graph;
     sub_graph = fstsubg(p);
     while( sub_graph != NULL ) {
       if( isSubedge( sub_graph, e) != 0 ) {      
