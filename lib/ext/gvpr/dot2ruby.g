@@ -26,6 +26,7 @@ BEGIN {
   graph_t subgraph; graph_t pgraph;
   graph_t ofgraph;
   graph_t sub_graph;
+  graph_t tmp_g;
 
   string xOut;
   if( ARGC == 0 ) {
@@ -69,7 +70,7 @@ BEGIN {
         }
         attr = nxtAttr( sub_graph, "G", attr );
       }
-      graph_t tmp_g = sub_graph;
+      tmp_g = sub_graph;
       load_sub_graph(sub_graph);
       sub_graph = nxtsubg( tmp_g );
 
