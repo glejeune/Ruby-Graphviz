@@ -41,7 +41,7 @@
 #
 class GraphViz
   module Constants
-    RGV_VERSION = "1.0.9"
+    RGV_VERSION = "1.1.0"
 
     ## Const: Output formats
     FORMATS = [

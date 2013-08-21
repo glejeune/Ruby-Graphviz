@@ -2,6 +2,7 @@
 
 == 1.1.0 :
 * Issue #61 : Combine graphviz instances
+* Issue #73 : Avoid constructing shell commands as strings
 * Bug correction with development dependencies on JRuby
 
 == 1.0.9 :

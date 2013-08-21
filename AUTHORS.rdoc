@@ -24,6 +24,7 @@
 * Gabe Kopley <https://github.com/gkop>
 * markus1189 <https://github.com/markus1189>
 * Praveen Arimbrathodiyil <https://github.com/pravi>
+* Andrew <https://github.com/AndrewKvalheim>
 
 Thanks to :
 
