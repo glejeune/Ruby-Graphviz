@@ -956,7 +956,8 @@ class GraphViz
       :unquote_empty => false,
     }.merge(opts)
 
-    if (options[:force] or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil?)
+    reserved_words = %w{node edge graph digraph subgraph strict}
+    if (options[:force] or str.match( /\A[a-zA-Z_]+[a-zA-Z0-9_]*\Z/ ).nil? or reserved_words.include?(str.downcase))
       unless options[:unquote_empty] and str.size == 0
         '"' + str.gsub('"', '\\"').gsub("\n", '\\\\n') + '"'
       end
