@@ -134,11 +134,16 @@ class GraphViz
       end
 
       def output #:nodoc:
+         # reserved words, they aren't accepted in dot as node name
+         reserved_names = ["node", "edge","graph", "digraph", "subgraph", "strict"]
          #node_id = @node_id.clone
          #node_id = '"' << node_id << '"' if node_id.match( /^[a-zA-Z_]+[a-zA-Z0-9_\.]*$/ ).nil?
          node_id = GraphViz.escape(@node_id)
 
-         xOut = "" << node_id
+         # add a check to see if the node names are valid
+         # if they aren't is added an _ before
+         # and the print staies the same, because of the label
+         xOut = reserved_names.include?(node_id) ? "" << "_" + node_id : "" << node_id
          xAttr = ""
          xSeparator = ""
 

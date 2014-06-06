@@ -82,6 +82,9 @@ class GraphViz
   attr_accessor :edge
   alias_method :edge_attrs, :edge
 
+  ## Restricted node names list
+  @reserved_node_names = []
+
   @elements_order = nil
 
   def add_node( xNodeName, hOpts = {} )
@@ -102,6 +105,9 @@ class GraphViz
      if node_name.kind_of? Array
         node_name.each { |n| add_nodes(n, options.clone) }
      else
+        puts node_name.class
+        #if node_name in @reserved_node_names
+        #end
         node = @hoNodes[node_name]
 
         if node.nil?
@@ -596,6 +602,7 @@ class GraphViz
                xOutputWithoutFile +
                [tmpPath]
 
+        puts xCmd
         xOutput << output_from_command( xCmd )
       end
 
