@@ -11,10 +11,14 @@ class GraphViz
         html = /^<(.*)>$/m.match(@data.to_s)
         if html != nil
           xml = "<gv>" + html[1].to_s + "</gv>"
-          doc = REXML::Document.new(xml)
-          unless doc.root.text == html[1].to_s
-            "<#{html[1]}>"
-          else
+          begin
+            doc = REXML::Document.new(xml)
+            unless doc.root.text == html[1].to_s
+              "<#{html[1]}>"
+            else
+              @data.to_s.inspect.gsub( "\\\\", "\\" )
+            end
+          rescue REXML::ParseException => _
             @data.to_s.inspect.gsub( "\\\\", "\\" )
           end
         else

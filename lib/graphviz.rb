@@ -761,8 +761,8 @@ class GraphViz
   # * :path : Program PATH
   #
   def self.parse_string( str, hOpts = {}, &block )
-    graph = Dot2Ruby::new( hOpts[:path], nil, nil ).eval_string( str )
-    yield( graph ) if( block and graph )
+    graph = Dot2Ruby::new(hOpts[:path], nil, nil).eval_string(str)
+    yield(graph) if(block and graph)
     return graph
   end
 

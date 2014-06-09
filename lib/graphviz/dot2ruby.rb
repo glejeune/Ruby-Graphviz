@@ -24,7 +24,7 @@ class Dot2Ruby #:nodoc:
   def initialize( xGVPath, xOutFile, xOutFormat = nil ) #:nodoc:
     paths = (xGVPath.nil?) ? [] : [xGVPath]
     @xGvprPath = find_executable( 'gvpr', paths )
-    if (@xGvprPath.blank?)
+    if(@xGvprPath.nil?)
       raise Exception, "GraphViz is not installed. Please be sure that 'gvpr' is on the search path'"
     end
     @xOutFile = xOutFile
