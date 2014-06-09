@@ -550,7 +550,7 @@ class GraphViz
           if @filename.nil? or @filename == String
             xOutputWithoutFile = ["-T#{@format}"]
           else
-            xOutputWithFile = ["-T#{@format}", "-o#{@filename}"]
+            xOutputWithFile = ["-T#{@format}", "-o'#{@filename}'"]
           end
         end
         @output.each_except( :key => ["none"] ) do |format, file|
@@ -558,7 +558,7 @@ class GraphViz
           if file.nil? or file == String
             xOutputWithoutFile += ["-T#{format}"]
           else
-            xOutputWithFile += ["-T#{format}", "-o#{file}"]
+            xOutputWithFile += ["-T#{format}", "-o'#{file}'"]
           end
         end
 
