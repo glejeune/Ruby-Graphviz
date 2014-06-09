@@ -82,6 +82,7 @@ class GraphViz
   attr_accessor :edge
   alias_method :edge_attrs, :edge
 
+
   @elements_order = nil
 
   def add_node( xNodeName, hOpts = {} )
