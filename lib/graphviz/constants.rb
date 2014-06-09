@@ -121,11 +121,12 @@ class GraphViz
       "Damping"             => { :usedBy => "G",    :type => :GvDouble },
       "K"                   => { :usedBy => "GC",   :type => :GvDouble },
       "URL"                 => { :usedBy => "ENGC", :type => :EscString },
+      "_background"         => { :usedBy => "G",    :type => :EscString },
       "area"                => { :usedBy => "NC",   :type => :GvDouble },
       "arrowhead"           => { :usedBy => "E",    :type => :ArrowType }, # arrowType
       "arrowsize"           => { :usedBy => "E",    :type => :GvDouble },
       "arrowtail"           => { :usedBy => "E",    :type => :ArrowType }, # arrowType
-      "aspect"              => { :usedBy => "G",    :type => :EscString }, # aspectType
+      #"aspect"              => { :usedBy => "G",    :type => :EscString }, # aspectType
       "bb"                  => { :usedBy => "G",    :type => :Rect }, # rect
       "bgcolor"             => { :usedBy => "GC",   :type => :Color }, # color
       "center"              => { :usedBy => "G",    :type => :GvBool },    # bool
@@ -162,6 +163,7 @@ class GraphViz
       "gradientangle"       => { :usedBy => "NCG",  :type => :EscString }, # int
       "group"               => { :usedBy => "N",    :type => :EscString }, # string
       "headURL"             => { :usedBy => "E",    :type => :EscString },
+      "head_lp"             => { :usedBy => "E",    :type => :EscString }, #point
       "headclip"            => { :usedBy => "E",    :type => :GvBool }, # bool
       "headhref"            => { :usedBy => "E",    :type => :EscString },
       "headlabel"           => { :usedBy => "E",    :type => :EscString }, # LblString
@@ -174,6 +176,7 @@ class GraphViz
       "image"               => { :usedBy => "N",    :type => :EscString }, # string
       "imagepath"           => { :usedBy => "G",    :type => :EscString }, # string
       "imagescale"          => { :usedBy => "N",    :type => :EscString }, # bool, string
+      "inputscale"          => { :usedBy => "G",    :type => :GvDouble },
       "label"               => { :usedBy => "ENGC", :type => :LblString },
       "labelURL"            => { :usedBy => "E",    :type => :EscString },
       "label_scheme"        => { :usedBy => "G",    :type => :EscString }, # int
@@ -221,6 +224,7 @@ class GraphViz
       "outputorder"         => { :usedBy => "G",    :type => :EscString }, # outputMode
       "overlap"             => { :usedBy => "G",    :type => :EscString }, # string, bool
       "overlap_scaling"     => { :usedBy => "G",    :type => :GvDouble },
+      "overlap_shrink"      => { :usedBy => "G",    :type => :GvBool },
       "pack"                => { :usedBy => "G",    :type => :EscString }, # bool, int
       "packmode"            => { :usedBy => "G",    :type => :EscString }, # packMode
       "pad"                 => { :usedBy => "G",    :type => :EscString }, # GvDouble , pointf
@@ -264,6 +268,7 @@ class GraphViz
       "style"               => { :usedBy => "ENCG", :type => :EscString }, # style
       "stylesheet"          => { :usedBy => "G",    :type => :EscString }, # string
       "tailURL"             => { :usedBy => "E",    :type => :EscString },
+      "tail_lp"             => { :usedBy => "E",    :type => :EscString }, #point
       "tailclip"            => { :usedBy => "E",    :type => :GvBool }, # bool
       "tailhref"            => { :usedBy => "E",    :type => :EscString },
       "taillabel"           => { :usedBy => "E",    :type => :EscString }, # lblString
@@ -278,7 +283,9 @@ class GraphViz
       "voro_margin"         => { :usedBy => "G",    :type => :GvDouble },
       "weight"              => { :usedBy => "E",    :type => :GvDouble },
       "width"               => { :usedBy => "N",    :type => :GvDouble },
+      "xdotversion"         => { :usedBy => "G",    :type => :EscString },
       "xlabel"              => { :usedBy => "EN",   :type => :LblString },
+      "xlp"                 => { :usedBy => "EN",   :type => :EscString }, # point
       "z"                   => { :usedBy => "N",    :type => :GvDouble }
     }
 
