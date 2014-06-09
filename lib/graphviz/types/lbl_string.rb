@@ -1,3 +1,5 @@
+require "rexml/document"
+
 class GraphViz
   class Types
     class LblString < Common
@@ -6,9 +8,15 @@ class GraphViz
       end
 
       def output
-        html = /^<([<|(^<)*<].*)>$/m.match(@data.to_s)
+        html = /^<(.*)>$/m.match(@data.to_s)
         if html != nil
-          "<#{html[1]}>"
+          xml = "<gv>" + html[1].to_s + "</gv>"
+          doc = REXML::Document.new(xml)
+          unless doc.root.text == html[1].to_s
+            "<#{html[1]}>"
+          else
+            @data.to_s.inspect.gsub( "\\\\", "\\" )
+          end
         else
           @data.to_s.inspect.gsub( "\\\\", "\\" )
         end
