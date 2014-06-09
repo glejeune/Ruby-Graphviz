@@ -44,21 +44,21 @@ class GraphViz
     end
 
     # Return the node one as string (so with port if any)
-    def node_one( with_port = true )
+    def node_one(with_port = true, escaped = true)
       if not(@node_one_port and with_port)
-        @node_one_id
+        escaped ? GraphViz.escape(@node_one_id) : @node_one_id
       else
-        "#{@node_one_id}:#{@node_one_port}"
+        escaped ? GraphViz.escape(@node_one_id, :force => true) + ":#{@node_one_port}" : "#{@node_one_id}:#{@node_one_port}"
       end
     end
     alias :tail_node :node_one
 
     # Return the node two as string (so with port if any)
-    def node_two( with_port = true )
+    def node_two(with_port = true, escaped = true)
       if not(@node_two_port and with_port)
-        @node_two_id
+        escaped ? GraphViz.escape(@node_two_id) : @node_two_id
       else
-        "#{@node_two_id}:#{@node_two_port}"
+        escaped ? GraphViz.escape(@node_two_id, :force => true) + ":#{@node_two_port}" : "#{@node_two_id}:#{@node_two_port}"
       end
     end
     alias :head_node :node_two
@@ -158,47 +158,45 @@ class GraphViz
 
     def output( oGraphType ) #:nodoc:
       xLink = " -> "
-         if oGraphType == "graph"
-            xLink = " -- "
-         end
-
-         node_one_id = GraphViz.escape(self.node_one) 
-         node_two_id = GraphViz.escape(self.node_two)
-         # reserved words, they aren't accepted in dot as node name
-         reserved_names = ["node", "edge","graph", "digraph", "subgraph", "strict"]
-
-         xOut = reserved_names.include?(node_one_id) ? "" << "_" + node_one_id : "" << node_one_id
-         xOut = xOut << xLink
-         xOut = reserved_names.include?(node_two_id) ? xOut << "_" + node_two_id : xOut << node_two_id
-         xAttr = ""
-         xSeparator = ""
-         @edge_attributes.data.each do |k, v|
-            xAttr << xSeparator + k + " = " + v.to_gv
-            xSeparator = ", "
-         end
-         if xAttr.length > 0
-            xOut << " [" + xAttr + "]"
-         end
-         xOut << ";"
-
-         return( xOut )
+      if oGraphType == "graph"
+        xLink = " -- "
       end
 
-      private
-      def getNodeNameAndPort( node )
-         name, port = nil, nil
-         if node.class == Hash
-            node.each do |k, v|
-               name, port = getNodeNameAndPort(k)
-               port = v
-            end
-         elsif node.class == String
-            name = node
-         else
-            name = node.id
-         end
+      # reserved words, they aren't accepted in dot as node name
+      reserved_names = ["node", "edge","graph", "digraph", "subgraph", "strict"]
 
-         return name, port
+      xOut = reserved_names.include?(self.node_one) ? "" << "_" + self.node_one : "" << self.node_one
+      xOut = xOut << xLink
+      xOut = reserved_names.include?(self.node_two) ? xOut << "_" + self.node_two : xOut << self.node_two
+      xAttr = ""
+      xSeparator = ""
+      @edge_attributes.data.each do |k, v|
+        xAttr << xSeparator + k + " = " + v.to_gv
+        xSeparator = ", "
       end
-   end
+      if xAttr.length > 0
+        xOut << " [" + xAttr + "]"
+      end
+      xOut << ";"
+
+      return( xOut )
+    end
+
+    private
+    def getNodeNameAndPort( node )
+      name, port = nil, nil
+      if node.class == Hash
+        node.each do |k, v|
+          name, port = getNodeNameAndPort(k)
+          port = v
+        end
+      elsif node.class == String
+        name = node
+      else
+        name = node.id
+      end
+
+      return name, port
+    end
+  end
 end

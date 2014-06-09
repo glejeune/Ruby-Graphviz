@@ -1,26 +1,14 @@
-#require File.expand_path('support.rb', File.dirname(__FILE__))
-require 'support'
-
 class GraphVizTest < Test::Unit::TestCase
-
-  #
   # you can run a subset of all the samples like this:
   #  ruby test/test_examples.rb  --name='/sample3[6-9]/'
   #
   # The above will run samples 36, 37, 38, and 39
   #
-
-
-  include IoHack
-
   RootDir    = File.expand_path('../..', __FILE__)
   ExampleDir = File.join(RootDir,'examples')
   OutputDir  = File.join(File.dirname(__FILE__),'output')
-  # OutputDir  = File.join(RootDir,'test','output')
-
 
   # the below tests write to stdout. the other tests write to filesystem
-
   Skips = {
     #'35' => 'hanging for me',
     '33' => 'FamilyTree is broken',
@@ -30,7 +18,6 @@ class GraphVizTest < Test::Unit::TestCase
     '98' => 'This test is just for debug',
     '99' => 'FamilyTree is broken'
   }
-
 
   def test_sample07
     assert_output_pattern(/\Adigraph structs \{.+\}\n\Z/m, '07')
@@ -105,31 +92,30 @@ class GraphVizTest < Test::Unit::TestCase
     attr_accessor :last_image_path, :number_to_path
   end
 
-  samples = Dir[File.join(ExampleDir,'sample*.rb')].sort
+  if File.directory? OutputDir
+    FileUtils.rm_rf OutputDir
+  end
+  FileUtils.cp_r ExampleDir, OutputDir
+  
+  samples = Dir[File.join(OutputDir,'sample*.rb')].sort
   samples.each {|path| make_sample_test_method(path) }
-
 
 private
 
   def assert_output_pattern tgt_regexp, number
     path = self.class.number_to_path[number]
-    setup_sample path
-    out, err = fake_popen2(path)
+    out, err, _ = Open3.capture3("ruby #{path}")
     assert_equal "", err, "no errors"
     assert_match tgt_regexp, out.gsub(/\r\n/, "\n"), "output for sample#{number} should match regexp"
   end
 
   def assert_sample_file_has_no_output path
-    setup_sample(path)
     begin
-      out, err = fake_popen2(path)
-      assert_equal(0, out.length, "expecting empty output")
-      assert_equal(0, err.length, "expecting empty errorput")
-      msg = "maybe generated #{self.class.last_image_path}"
-      print "\n", msg
+      out, err, _ = Open3.capture3("ruby #{path}")
+      assert_equal(0, out.length, "expecting empty output got [#{out}]")
+      assert_equal(0, err.length, "expecting empty errorput got [#{err}]")
     rescue Exception => e
       assert(false, "got exception on #{File.basename(path)}: #{e.message}")
-      puts "out: ", out.inspect, "err:", err.inspect
     end
   end
 
@@ -138,14 +124,12 @@ private
       FileUtils.mkdir_p(OutputDir, :verbose => true)
     end
     ARGV[0] = nil if ARGV.any? # hack trigger searching for 'dot' executable
-    hack_output_path path
   end
 
-  def hack_output_path path
-    # hack $0 to change where the output image is written to
-    fake_example_path = File.join(OutputDir, File.basename(path))
-    $program_name = fake_example_path.dup
-    alias $0 $program_name
-    self.class.last_image_path = "#{$0}.png"
+  def run_sample(path)
+    run_path = File.join(OutputDir, File.basename(path))
+    FileUtils.cp path, run_path
+    out, err, _ = Open3.capture3("ruby #{run_path}")
+    return out, err
   end
 end

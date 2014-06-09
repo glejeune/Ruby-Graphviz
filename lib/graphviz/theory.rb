@@ -11,8 +11,8 @@ class GraphViz
          matrix = GraphViz::Math::Matrix.new( @graph.node_count, @graph.node_count )
 
          @graph.each_edge { |e|
-            x = @graph.get_node(e.node_one( false )).index
-            y = @graph.get_node(e.node_two( false )).index
+            x = @graph.get_node(e.node_one(false, false)).index
+            y = @graph.get_node(e.node_two(false, false)).index
             matrix[x+1, y+1] = 1
             matrix[y+1, x+1] = 1 if @graph.type == "graph"
          }
@@ -28,8 +28,8 @@ class GraphViz
          @graph.each_edge { |e|
             x = e.index
 
-            nstart = @graph.get_node(e.node_one( false )).index
-            nend = @graph.get_node(e.node_two( false )).index
+            nstart = @graph.get_node(e.node_one(false, false)).index
+            nend = @graph.get_node(e.node_two(false, false)).index
 
             matrix[nstart+1, x+1] = 1
             matrix[nend+1, x+1] = tail
@@ -48,7 +48,7 @@ class GraphViz
          end
 
          @graph.each_edge do |e|
-            degree += 1 if e.node_one(false) == name or e.node_two(false) == name
+            degree += 1 if e.node_one(false, false) == name or e.node_two(false, false) == name
          end
 
          return degree
@@ -246,8 +246,8 @@ class GraphViz
          matrix = GraphViz::Math::Matrix.new( @graph.node_count, @graph.node_count, (1.0/0.0) )
 
          @graph.each_edge { |e|
-            x = @graph.get_node(e.node_one( false )).index
-            y = @graph.get_node(e.node_two( false )).index
+            x = @graph.get_node(e.node_one(false, false)).index
+            y = @graph.get_node(e.node_two(false, false)).index
             unless x == y
                weight = ((e[:weight].nil?) ? 1 : e[:weight].to_f)
                matrix[x+1, y+1] = weight

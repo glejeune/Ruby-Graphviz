@@ -43,22 +43,19 @@ class GraphViz
         end
       end
       begin
-        Open3.popen3( *cmd ) do |stdin, stdout, stderr|
-          stdin.close
-          stdout.binmode
-          [stdout.read, stderr.read]
-        end
+        out, err, status = Open3.capture3(*cmd)
+        [out, err, status.exitstatus]
       rescue NotImplementedError, NoMethodError
         IO.popen( *cmd ) do |stdout|
           stdout.binmode
-          [stdout.read, nil]
+          [stdout.read, nil, nil]
         end
       end
     end
 
     def output_from_command(cmd) #:nodoc:
-      output, errors = output_and_errors_from_command(cmd)
-      if errors.nil? || errors.strip.empty?
+      output, errors, status = output_and_errors_from_command(cmd)
+      if (status.nil? && (errors.nil? || errors.strip.empty?)) || status.zero?
         output
       else
         raise "Error from #{cmd}:\n#{errors}"

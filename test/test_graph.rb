@@ -112,8 +112,8 @@ class GraphVizTest < Test::Unit::TestCase
     end
 
     @g.each_edge do |e|
-      assert_not_nil @g.get_node e.node_one
-      assert_not_nil @g.get_node e.node_two
+      assert_not_nil @g.get_node e.node_one(true, false)
+      assert_not_nil @g.get_node e.node_two(true, false)
     end
   end
 
