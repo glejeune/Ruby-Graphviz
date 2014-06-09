@@ -162,7 +162,14 @@ class GraphViz
             xLink = " -- "
          end
 
-         xOut = GraphViz.escape(self.node_one) + xLink + GraphViz.escape(self.node_two)
+         node_one_id = GraphViz.escape(self.node_one) 
+         node_two_id = GraphViz.escape(self.node_two)
+         # reserved words, they aren't accepted in dot as node name
+         reserved_names = ["node", "edge","graph", "digraph", "subgraph", "strict"]
+
+         xOut = reserved_names.include?(node_one_id) ? "" << "_" + node_one_id : "" << node_one_id
+         xOut = xOut << xLink
+         xOut = reserved_names.include?(node_two_id) ? xOut << "_" + node_two_id : xOut << node_two_id
          xAttr = ""
          xSeparator = ""
          @edge_attributes.data.each do |k, v|
