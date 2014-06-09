@@ -95,4 +95,18 @@ class GraphVizTheoryTest < Test::Unit::TestCase
       assert_equal [1, 6], r[:path]
       assert_equal 6.0, r[:distance]
    end
+
+   def test_escaped_node_ids__adjancy_matrix
+      @g = GraphViz.graph "G" do |g|
+         g.add_nodes 'a@com'
+         g.add_nodes 'b@com'
+         g.add_edges 'a@com', 'b@com'
+      end
+
+      @t = GraphViz::Theory.new( @g )
+
+      assert_nothing_raised NoMethodError do
+         @t.adjancy_matrix
+      end
+   end
 end

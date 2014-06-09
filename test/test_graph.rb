@@ -104,6 +104,19 @@ class GraphVizTest < Test::Unit::TestCase
      assert_nil   c1.search_node("a0")
   end
 
+  def test_getting_escaped_node_from_edge
+    @g = GraphViz.graph "G" do |g|
+      g.add_nodes 'a@com'
+      g.add_nodes 'b@com'
+      g.add_edges 'a@com', 'b@com'
+    end
+
+    @g.each_edge do |e|
+      assert_not_nil @g.get_node e.node_one
+      assert_not_nil @g.get_node e.node_two
+    end
+  end
+
   def test_to_s
     assert_nothing_raised 'to_s with edge with numeric label failed.' do
       a = @graph.add_nodes('a')
