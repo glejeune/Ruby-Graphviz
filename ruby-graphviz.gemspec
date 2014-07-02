@@ -24,24 +24,21 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.rdoc", "COPYING.rdoc", "AUTHORS.rdoc", "CHANGELOG.rdoc"]
   s.rdoc_options = ["--title", "Ruby/GraphViz", "--main", "README.rdoc"]
   s.post_install_message = %{
-Since version 0.9.2, Ruby/GraphViz can use Open3.popen3 (or not)
-On Windows, you can install 'win32-open3'
-
 You need to install GraphViz (http://graphviz.org/) to use this Gem.
 
 For more information about Ruby-Graphviz :
 * Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
 * Sources : http://github.com/glejeune/Ruby-Graphviz
-* NEW - Mailing List : http://groups.google.com/group/ruby-graphviz
+* Mailing List : http://groups.google.com/group/ruby-graphviz
 
 Last (important) changes :
-* GraphViz::Edge#each_attribut is deprecated, use GraphViz::Edge#each_attribute
-* GraphViz::GraphML#attributs is deprecated, use GraphViz::GraphML#attributes
-* GraphViz::Node#each_attribut is deprecated, use GraphViz::Node#each_attribute
+Ruby-Graphviz no longer supports Ruby < 1.9.3
   }
   
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rdoc'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'ronn' unless RUBY_PLATFORM == 'java'
+
+  s.required_ruby_version = '>= 1.9.3'
 end
