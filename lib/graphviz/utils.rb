@@ -43,7 +43,7 @@ class GraphViz
         end
       end
       begin
-        out, err, status = Open3.capture3(*cmd)
+        out, err, status = Open3.capture3(*cmd, :binmode => true)
         [out, err, status.exitstatus]
       rescue NotImplementedError, NoMethodError
         IO.popen( *cmd ) do |stdout|
