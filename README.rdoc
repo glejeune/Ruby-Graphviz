@@ -162,7 +162,7 @@ You also need to install GraphViz[http://www.graphviz.org]
 
 On *Windows* you also need to install win32-open3. This is not an absolute requirement.
 
-== LICENCES
+== LICENSES
 
 === Ruby/GraphViz 
 
@@ -172,7 +172,7 @@ GNU General Public License (see the file 'COPYING').
 This program is distributed without any warranty. See the file
 'COPYING' for details.
 
-GNU General Public Licence: http://en.wikipedia.org/wiki/Gpl
+GNU General Public License: http://en.wikipedia.org/wiki/Gpl
 
 === nothugly.xsl
 
