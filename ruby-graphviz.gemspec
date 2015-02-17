@@ -39,6 +39,7 @@ Ruby-Graphviz no longer supports Ruby < 1.9.3
   s.add_development_dependency 'rdoc'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'ronn' unless RUBY_PLATFORM == 'java'
+  s.add_development_dependency 'test-unit'
 
   s.required_ruby_version = '>= 1.9.3'
 end
