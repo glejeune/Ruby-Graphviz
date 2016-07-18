@@ -7,6 +7,7 @@ Gem::Specification.new do |s|
   s.name = "ruby-graphviz"
   s.version = GraphViz::Constants::RGV_VERSION
   s.platform = Gem::Platform::RUBY
+  s.license = "GPL-2.0"
 
   s.authors = ["Gregoire Lejeune"]
   s.summary = %q{Interface to the GraphViz graphing tool}
