@@ -1,6 +1,8 @@
 # Need sudo to install rubinius-3.69
 sudo: required
 
+# Ruby 2.1.0 is not available as a travis-ci precompiled binary for trusty
+# See http://rubies.travis-ci.org/
 before-install: rvm use 2.1.0 --install --binary --fuzzy --create
 
 # The binary for rubinius-3.69 is not available for
