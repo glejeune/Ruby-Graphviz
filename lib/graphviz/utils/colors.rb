@@ -14,28 +14,28 @@ class GraphViz
          end
 
          def rgb(r, g, b, a = nil)
-            if r.is_a?(Fixnum)
+            if r.is_a?(Integer)
                r = r.to_s.convert_base(10, 16)
             end
             unless r.is_a?(String) and HEX_FOR_COLOR.match(r)
                raise ColorException, "Bad red value"
             end
 
-            if g.is_a?(Fixnum)
+            if g.is_a?(Integer)
                g = g.to_s.convert_base(10, 16)
             end
             unless g.is_a?(String) and HEX_FOR_COLOR.match(g)
                raise ColorException, "Bad green value"
             end
 
-            if b.is_a?(Fixnum)
+            if b.is_a?(Integer)
                b = b.to_s.convert_base(10, 16)
             end
             unless b.is_a?(String) and HEX_FOR_COLOR.match(b)
                raise ColorException, "Bad blue value"
             end
 
-            if a.is_a?(Fixnum)
+            if a.is_a?(Integer)
                a = a.to_s.convert_base(10, 16)
             end
             unless a.nil? or (a.is_a?(String) and HEX_FOR_COLOR.match(a))
