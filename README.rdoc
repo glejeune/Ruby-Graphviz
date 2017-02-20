@@ -1,7 +1,7 @@
 = Ruby/GraphViz
 
-{<img src="https://secure.travis-ci.org/glejeune/Ruby-Graphviz.png" />}[http://travis-ci.org/glejeune/Ruby-Graphviz]
-{<img src="https://badge.fury.io/rb/ruby-graphviz.png" alt="Gem Version" />}[http://badge.fury.io/rb/ruby-graphviz]
+{<img src="https://secure.travis-ci.org/glejeune/Ruby-Graphviz.svg" />}[http://travis-ci.org/glejeune/Ruby-Graphviz]
+{<img src="https://badge.fury.io/rb/ruby-graphviz.svg" alt="Gem Version" />}[http://badge.fury.io/rb/ruby-graphviz]
 
 Copyright (C) 2004-2014 Gregoire Lejeune
 
