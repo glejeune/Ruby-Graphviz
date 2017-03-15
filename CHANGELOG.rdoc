@@ -165,7 +165,7 @@
 
 == 0.9.12 :
 * GraphViz::Node#name is deprecated, you must use GraphViz::Node#id (issue #14)
-* Add :nothugly option to GraphViz#output (see sample41.rb and http://www.hokstad.com/making-graphviz-output-pretty-with-xsl.html)
+* Add :nothugly option to GraphViz#output (see sample41.rb and http://hokstad.com/making-graphviz-output-pretty-with-xsl)
 * Issue #13 : you must now specify a port in GraphViz::Edge.new with a syntax like this : 
     GraphViz::Edge.new( {nodeOne => :port}, {nodeTwo => :other} )
 * Issue #12 : UTF8 support (see sample38.rb)
@@ -176,7 +176,7 @@
 * Issue #11 : Cygwin PATH
 * Major bugs correction in output
 * Bug correction in find_executable
-* Add tests (by Chip Malice : http://github.com/hipe)
+* Add tests (by Chip Malice : https://github.com/hipe)
 
 == 0.9.10 :
 * Move ChangeLog in README

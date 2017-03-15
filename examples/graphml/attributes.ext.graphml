@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns"  
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns 
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+            xmlns:xlink="https://www.w3.org/1999/xlink"
+            xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
                                 graphml+xlink.xsd">
   <graph edgedefault="directed">
     <node id="n0" xlink:href="http://graphml.graphdrawing.org"/>

@@ -1,14 +1,14 @@
 = Ruby/GraphViz
 
-{<img src="https://secure.travis-ci.org/glejeune/Ruby-Graphviz.svg" />}[http://travis-ci.org/glejeune/Ruby-Graphviz]
-{<img src="https://badge.fury.io/rb/ruby-graphviz.svg" alt="Gem Version" />}[http://badge.fury.io/rb/ruby-graphviz]
+{<img src="https://secure.travis-ci.org/glejeune/Ruby-Graphviz.svg" />}[https://travis-ci.org/glejeune/Ruby-Graphviz]
+{<img src="https://badge.fury.io/rb/ruby-graphviz.svg" alt="Gem Version" />}[https://rubygems.org/gems/ruby-graphviz]
 
 Copyright (C) 2004-2014 Gregoire Lejeune
 
 * Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
-* Sources : http://github.com/glejeune/Ruby-Graphviz
+* Sources : https://github.com/glejeune/Ruby-Graphviz
 * On Rubygems: https://rubygems.org/gems/ruby-graphviz
-* <b>NEW</b> - Mailing List : http://groups.google.com/group/ruby-graphviz
+* <b>NEW</b> - Mailing List : https://groups.google.com/forum/#!forum/ruby-graphviz
 
 == DESCRIPTION
 
@@ -108,7 +108,7 @@ Ruby/GraphViz also includes :
     }
     puts graph_g.output( :canon => String )
 
-* <tt>git2gv</tt>, a tool that allows you to show your git commits : http://dl.dropbox.com/u/72629/ruby-graphviz-git.svg
+* <tt>git2gv</tt>, a tool that allows you to show your git commits
 
 * <tt>xml2gv</tt>, a tool that allows you to show a xml file as graph.
 
@@ -173,7 +173,7 @@ GNU General Public License (see the file 'COPYING').
 This program is distributed without any warranty. See the file
 'COPYING' for details.
 
-GNU General Public Licence: http://en.wikipedia.org/wiki/Gpl
+GNU General Public Licence: https://en.wikipedia.org/wiki/Gpl
 
 === nothugly.xsl
 
@@ -200,4 +200,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-MIT license: http://en.wikipedia.org/wiki/MIT_License
+MIT license: https://en.wikipedia.org/wiki/MIT_License
