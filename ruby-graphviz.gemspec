@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
   s.license = "GPL-2.0"
 
   s.authors = ["Gregoire Lejeune"]
-  s.summary = %q{Interface to the GraphViz graphing tool}
-  s.email = %q{gregoire.lejeune@free.fr}
-  s.homepage = %q{https://github.com/glejeune/Ruby-Graphviz}
-  s.description = %q{Ruby/Graphviz provides an interface to layout and generate images of directed graphs in a variety of formats (PostScript, PNG, etc.) using GraphViz.}
+  s.summary = "Interface to the GraphViz graphing tool"
+  s.email = "gregoire.lejeune@free.fr"
+  s.homepage = "https://github.com/glejeune/Ruby-Graphviz"
+  s.description = "Ruby/Graphviz provides an interface to layout and generate images of directed graphs in a variety of formats (PostScript, PNG, etc.) using GraphViz."
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
