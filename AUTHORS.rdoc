@@ -25,6 +25,12 @@
 * markus1189 <https://github.com/markus1189>
 * Praveen Arimbrathodiyil <https://github.com/pravi>
 * Andrew <https://github.com/AndrewKvalheim>
+* Joseph Anthony Pasquale Holsten <https://github.com/josephholsten>
+* Oleg Orlov <https://github.com/OrelSokolov>
+* Nathan Long <https://github.com/nathanl>
+* Khalil Fazal <https://github.com/khalilfazal>
+* Olle Jonsson <https://github.com/olleolleolle>
+* Guilherme Simoes <https://github.com/guilhermesimoes>
 
 Thanks to :
 
