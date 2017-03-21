@@ -44,4 +44,6 @@ Ruby-Graphviz no longer supports Ruby < 1.9.3
   s.add_development_dependency 'test-unit'
 
   s.required_ruby_version = '>= 1.9.3'
+
+  s.requirements << 'GraphViz'
 end
