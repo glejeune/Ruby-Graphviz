@@ -1,7 +1,7 @@
 # This file use notugly.xsl: An XSL transform to pretty up the SVG output from Graphviz
 #
-# See: http://www.hokstad.com/making-graphviz-output-pretty-with-xsl.html
-# And: http://www.hokstad.com/making-graphviz-output-pretty-with-xsl-updated.html
+# See: http://hokstad.com/making-graphviz-output-pretty-with-xsl
+# And: http://hokstad.com/making-graphviz-output-pretty-with-xsl-updated
 #
 # By Vidar Hokstad and Ryan Shea; Contributions by Jonas Tingborn,
 # Earl Cummings, Michael Kennedy (Graphviz 2.20.2 compatibility, bug fixes,
@@ -20,8 +20,8 @@ end
 class GraphViz
   # Transform to pretty up the SVG output
   #
-  # For more information, see http://www.hokstad.com/making-graphviz-output-pretty-with-xsl.html
-  # and http://www.hokstad.com/making-graphviz-output-pretty-with-xsl-updated.html
+  # For more information, see http://hokstad.com/making-graphviz-output-pretty-with-xsl
+  # and http://hokstad.com/making-graphviz-output-pretty-with-xsl-updated
   #
   # You can use the :nothugly option to GraphViz#output :
   #

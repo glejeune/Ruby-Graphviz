@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
   s.license = "GPL-2.0"
 
   s.authors = ["Gregoire Lejeune"]
-  s.summary = %q{Interface to the GraphViz graphing tool}
-  s.email = %q{gregoire.lejeune@free.fr}
-  s.homepage = %q{http://github.com/glejeune/Ruby-Graphviz}
-  s.description = %q{Ruby/Graphviz provides an interface to layout and generate images of directed graphs in a variety of formats (PostScript, PNG, etc.) using GraphViz.}
+  s.summary = "Interface to the GraphViz graphing tool"
+  s.email = "gregoire.lejeune@free.fr"
+  s.homepage = "https://github.com/glejeune/Ruby-Graphviz"
+  s.description = "Ruby/Graphviz provides an interface to layout and generate images of directed graphs in a variety of formats (PostScript, PNG, etc.) using GraphViz."
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -29,8 +29,8 @@ You need to install GraphViz (http://graphviz.org/) to use this Gem.
 
 For more information about Ruby-Graphviz :
 * Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
-* Sources : http://github.com/glejeune/Ruby-Graphviz
-* Mailing List : http://groups.google.com/group/ruby-graphviz
+* Sources : https://github.com/glejeune/Ruby-Graphviz
+* Mailing List : https://groups.google.com/forum/#!forum/ruby-graphviz
 
 Last (important) changes :
 Ruby-Graphviz no longer supports Ruby < 1.9.3

@@ -80,7 +80,7 @@ class GraphViz
     # Set values for edge attributes or
     # get the value of the given edge attribute +attribute_name+
     def []( attribute_name )
-      # Modification by axgle (http://github.com/axgle)
+      # Modification by axgle (https://github.com/axgle)
       if Hash === attribute_name
         attribute_name.each do |key, value|
           self[key] = value

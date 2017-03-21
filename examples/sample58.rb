@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-# By Jonas Elfström - http://github.com/jonelf
+# By Jonas Elfström - https://github.com/jonelf
 $:.unshift( "../lib" )
 require 'graphviz'
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" 
-    xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">
+<xsl:stylesheet xmlns:xsl="https://www.w3.org/1999/XSL/Transform" version="1.0"
+    xmlns:svg="https://www.w3.org/2000/svg" xmlns="https://www.w3.org/2000/svg">
 <xsl:output method="xml" indent="yes"
     doctype-public="-//W3C//DTD SVG 1.0//EN"
-    doctype-system="http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"/>
+    doctype-system="https://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"/>
 
 <xsl:template match="@*|node()">
   <xsl:copy>
@@ -12,7 +12,7 @@
 </xsl:template>
 
 <xsl:template match="svg:svg">
-  <svg xmlns="http://www.w3.org/2000/svg">
+  <svg xmlns="https://www.w3.org/2000/svg">
     <!-- Order is important here, so the attributes below overrides the 
          originals, which are copied "wholesale" -->
     <xsl:apply-templates select="@*" />
