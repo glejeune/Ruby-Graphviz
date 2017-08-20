@@ -1,3 +1,5 @@
+require 'open3'
+
 class GraphVizTest < Test::Unit::TestCase
   # you can run a subset of all the samples like this:
   #  ruby test/test_examples.rb  --name='/sample3[6-9]/'
@@ -96,7 +98,7 @@ class GraphVizTest < Test::Unit::TestCase
     FileUtils.rm_rf OutputDir
   end
   FileUtils.cp_r ExampleDir, OutputDir
-  
+
   samples = Dir[File.join(OutputDir,'sample*.rb')].sort
   samples.each {|path| make_sample_test_method(path) }
 
