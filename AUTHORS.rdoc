@@ -31,6 +31,8 @@
 * Khalil Fazal <https://github.com/khalilfazal>
 * Olle Jonsson <https://github.com/olleolleolle>
 * Guilherme Simoes <https://github.com/guilhermesimoes>
+* SHIBATA Hiroshi <https://github.com/hsbt>
+* moracca <https://github.com/moracca>
 
 Thanks to :
 

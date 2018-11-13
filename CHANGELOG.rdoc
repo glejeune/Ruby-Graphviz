@@ -1,5 +1,26 @@
 = CHANGELOG
 
+== 1.2.4 :
+* Added explicitly declaration for Open3 module on GraphVizTest
+* Add support for the 'class' attribute
+
+== 1.2.3 :
+* Adding license info to gempsec
+* Update build for rubinius-3.69
+* Bug correction with Ruby 2.4
+* Update links to HTTPS
+* Add gemspec requirements attribut
+
+== 1.2.2 :
+* Remove duplication in utils/colors.rb
+
+== 1.2.1 :
+* Issue #92 : Can no longer create binary strings
+* Remove support for Ruby < 1.9.3
+
+== 1.2.0 :
+* Issue #89: Force label to be HTML
+
 == 1.1.0 :
 * Issue #61 : Combine graphviz instances
 * Issue #73 : Avoid constructing shell commands as strings
@@ -284,4 +305,3 @@
 
 == 0.1.0 :
 * Initial version
-

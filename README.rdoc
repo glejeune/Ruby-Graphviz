@@ -3,7 +3,7 @@
 {<img src="https://secure.travis-ci.org/glejeune/Ruby-Graphviz.svg" />}[https://travis-ci.org/glejeune/Ruby-Graphviz]
 {<img src="https://badge.fury.io/rb/ruby-graphviz.svg" alt="Gem Version" />}[https://rubygems.org/gems/ruby-graphviz]
 
-Copyright (C) 2004-2014 Gregoire Lejeune
+Copyright (C) 2004-2018 Gregoire Lejeune
 
 * Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
 * Sources : https://github.com/glejeune/Ruby-Graphviz
