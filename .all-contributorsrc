@@ -208,6 +208,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ronen",
+      "name": "ronen barzel",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/125620?v=4",
+      "profile": "http://www.ronenbarzel.org",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
