@@ -1,0 +1,22 @@
+{
+  "projectName": "Ruby-Graphviz",
+  "projectOwner": "glejeune",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "dburt",
+      "name": "Dave Burt",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/139988?v=4",
+      "profile": "https://github.com/dburt",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}
