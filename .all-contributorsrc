@@ -98,6 +98,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "glejeune",
+      "name": "Gregoire Lejeune",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15168?v=4",
+      "profile": "http://lejeun.es",
+      "contributions": [
+        "code",
+        "design",
+        "doc"
+      ]
     }
   ]
 }
