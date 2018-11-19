@@ -39,6 +39,8 @@ Ruby-Graphviz no longer supports Ruby < 1.9.3
   s.add_development_dependency 'mustache', "~> 0.99.8" if RUBY_VERSION =~ /^1[.]9[.]/
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rdoc'
+  s.add_development_dependency 'yard'
+  s.add_development_dependency 'github_changelog_generator'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'ronn' unless RUBY_PLATFORM == 'java'
   s.add_development_dependency 'test-unit'

@@ -28,24 +28,6 @@
       ]
     },
     {
-      "login": "reactive",
-      "name": "reactive",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/49928?v=4",
-      "profile": "https://github.com/reactive",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "axgle",
-      "name": "axgle",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/21093?v=4",
-      "profile": "https://github.com/axgle",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
       "login": "hipe",
       "name": "Chip Malice",
       "avatar_url": "https://avatars1.githubusercontent.com/u/22006?v=4",
@@ -59,33 +41,6 @@
       "name": "Stefan Stüben",
       "avatar_url": "https://avatars3.githubusercontent.com/u/101456?v=4",
       "profile": "https://github.com/MSNexploder",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "NigelThorne",
-      "name": "Nigel Thorne",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/5942?v=4",
-      "profile": "http://www.nigelthorne.com",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "rolftimmermans",
-      "name": "Rolf Timmermans",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/78237?v=4",
-      "profile": "https://github.com/rolftimmermans",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "jonelf",
-      "name": "Jonas Elfström",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/359500?v=4",
-      "profile": "http://alicebobandmallory.com/",
       "contributions": [
         "code"
       ]
