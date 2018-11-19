@@ -1,5 +1,5 @@
 # Ruby/GraphViz
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 
 [<img src="https://secure.travis-ci.org/glejeune/Ruby-Graphviz.svg"
 />](https://travis-ci.org/glejeune/Ruby-Graphviz) [<img
@@ -233,8 +233,8 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars0.githubusercontent.com/u/139988?v=4" width="100px;"/><br /><sub><b>Dave Burt</b></sub>](https://github.com/dburt)<br />[💻](https://github.com/glejeune/Ruby-Graphviz/commits?author=dburt "Code") | [<img src="https://avatars2.githubusercontent.com/u/146361?v=4" width="100px;"/><br /><sub><b>obruening</b></sub>](https://github.com/obruening)<br />[💻](https://github.com/glejeune/Ruby-Graphviz/commits?author=obruening "Code") | [<img src="https://avatars0.githubusercontent.com/u/49928?v=4" width="100px;"/><br /><sub><b>reactive</b></sub>](https://github.com/reactive)<br />[💻](https://github.com/glejeune/Ruby-Graphviz/commits?author=reactive "Code") |
-| :---: | :---: | :---: |
+| [<img src="https://avatars0.githubusercontent.com/u/139988?v=4" width="100px;"/><br /><sub><b>Dave Burt</b></sub>](https://github.com/dburt)<br />[💻](https://github.com/glejeune/Ruby-Graphviz/commits?author=dburt "Code") | [<img src="https://avatars2.githubusercontent.com/u/146361?v=4" width="100px;"/><br /><sub><b>obruening</b></sub>](https://github.com/obruening)<br />[💻](https://github.com/glejeune/Ruby-Graphviz/commits?author=obruening "Code") | [<img src="https://avatars0.githubusercontent.com/u/49928?v=4" width="100px;"/><br /><sub><b>reactive</b></sub>](https://github.com/reactive)<br />[💻](https://github.com/glejeune/Ruby-Graphviz/commits?author=reactive "Code") | [<img src="https://avatars2.githubusercontent.com/u/21093?v=4" width="100px;"/><br /><sub><b>axgle</b></sub>](https://github.com/axgle)<br />[💻](https://github.com/glejeune/Ruby-Graphviz/commits?author=axgle "Code") |
+| :---: | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
