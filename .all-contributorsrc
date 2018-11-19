@@ -271,6 +271,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "postmodern",
+      "name": "Postmodern",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12671?v=4",
+      "profile": "http://postmodern.github.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
