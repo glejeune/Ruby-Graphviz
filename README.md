@@ -81,7 +81,7 @@ Create a graph from a file
 [GraphML](http://graphml.graphdrawing.org/) support
 
 ```ruby
-    require ruby-graphviz/graphml'
+    require 'ruby-graphviz/graphml'
 
     g = GraphViz::GraphML.new( "graphml/cluster.graphml" )
     g.graph.output( :path => "/usr/local/bin", :png => "#{$0}.png" )
