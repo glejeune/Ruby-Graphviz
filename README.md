@@ -9,6 +9,20 @@ Copyright (C) 2004-2018 Gregoire Lejeune
 * Sources : https://github.com/glejeune/Ruby-Graphviz
 * On Rubygems: https://rubygems.org/gems/ruby-graphviz
 
+## INSTALLATION
+
+Add this line to your application's Gemfile:
+
+	gem 'ruby-graphviz'
+
+And then execute:
+
+	$ bundle
+
+Or install it yourself as:
+
+	$ gem install ruby-graphviz
+
 ## DESCRIPTION
 
 Interface to the GraphViz graphing tool
