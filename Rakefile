@@ -47,9 +47,24 @@ task :man do
   end
 end
 
+namespace :changelog do
+  desc "Update CHANGELOG"
+  task :update do
+    require "github_changelog_generator"
+    GitHubChangelogGenerator::ChangelogGenerator.new.run
+  end
+end
+
 Bundler::GemHelper.install_tasks
 
-desc "Install all-contributors-cli"
-task :contributors do
-  sh "npm install --save-dev all-contributors-cli"
+namespace :contributors do
+  desc "Install all-contributors-cli"
+  task :install do
+    sh "npm install --save-dev all-contributors-cli"
+  end
+
+  desc "Run"
+  task :run do
+    sh "npx all-contributors"
+  end
 end

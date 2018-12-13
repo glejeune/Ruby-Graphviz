@@ -3,6 +3,7 @@
   "projectOwner": "glejeune",
   "repoType": "github",
   "repoHost": "https://github.com",
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg)](#contributors)",
   "files": [
     "README.md"
   ],
@@ -270,6 +271,24 @@
       "profile": "https://github.com/moracca",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "TPei",
+      "name": "TPei",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/4004343?v=4",
+      "profile": "https://github.com/TPei",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "villuorav",
+      "name": "Villu Orav",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/8543094?v=4",
+      "profile": "https://github.com/villuorav",
+      "contributions": [
+        "doc"
       ]
     }
   ]
