@@ -215,6 +215,7 @@ class GraphViz
       "mode"                => { :usedBy => "G",    :type => :EscString }, # string
       "model"               => { :usedBy => "G",    :type => :EscString }, # string
       "mosek"               => { :usedBy => "G",    :type => :GvBool }, # bool
+      "newrank"             => { :usedBy => "G",    :type => :EscString }, # rankType
       "nodesep"             => { :usedBy => "G",    :type => :GvDouble },
       "nojustify"           => { :usedBy => "GCNE", :type => :GvBool }, # bool
       "normalize"           => { :usedBy => "G",    :type => :GvBool }, # bool
