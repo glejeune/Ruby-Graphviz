@@ -36,6 +36,8 @@ Last (important) changes :
 Ruby-Graphviz no longer supports Ruby < 1.9.3
   }
 
+  s.add_dependency "rexml"
+
   s.add_development_dependency 'mustache', "~> 0.99.8" if RUBY_VERSION =~ /^1[.]9[.]/
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rdoc'
