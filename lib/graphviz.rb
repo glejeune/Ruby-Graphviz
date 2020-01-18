@@ -32,10 +32,6 @@ require 'graphviz/dot2ruby'
 require 'graphviz/types'
 require 'graphviz/core_ext'
 
-if /^1.8/.match RUBY_VERSION
-  $KCODE = "UTF8"
-end
-
 class GraphViz
   include GraphViz::Constants
   include GraphViz::Utils
