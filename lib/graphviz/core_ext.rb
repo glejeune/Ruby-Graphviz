@@ -54,11 +54,4 @@ class Hash
          yield( k, v ) unless (key_table.size > 0 and key_table.include?(k)) or (key_regexp.size > 0 and k.to_s.match(key_regexp)) or (value_table.size > 0 and value_table.include?(v)) or (value_regexp.size > 0 and v.to_s.match(value_regexp))
       end
    end
-
-   unless self.method_defined? :key
-      # Add Hash#key to Ruby < 1.9
-      def key(v)
-         index(v)
-      end
-   end
 end

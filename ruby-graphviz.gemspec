@@ -31,14 +31,10 @@ For more information about Ruby-Graphviz :
 * Doc: http://rdoc.info/projects/glejeune/Ruby-Graphviz
 * Sources: https://github.com/glejeune/Ruby-Graphviz
 * Issues: https://github.com/glejeune/Ruby-Graphviz/issues
-
-Last (important) changes :
-Ruby-Graphviz no longer supports Ruby < 1.9.3
   }
 
   s.add_dependency "rexml"
 
-  s.add_development_dependency 'mustache', "~> 0.99.8" if RUBY_VERSION =~ /^1[.]9[.]/
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rdoc'
   s.add_development_dependency 'yard'
@@ -47,7 +43,7 @@ Ruby-Graphviz no longer supports Ruby < 1.9.3
   s.add_development_dependency 'ronn' unless RUBY_PLATFORM == 'java'
   s.add_development_dependency 'test-unit'
 
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.4.0'
 
   s.requirements << 'GraphViz'
 end
