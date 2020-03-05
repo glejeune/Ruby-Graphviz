@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
 You need to install GraphViz (https://graphviz.org/) to use this Gem.
 
 For more information about Ruby-Graphviz :
-* Doc: https://rdoc.info/projects/glejeune/Ruby-Graphviz
+* Doc: https://rdoc.info/github/glejeune/Ruby-Graphviz
 * Sources: https://github.com/glejeune/Ruby-Graphviz
 * Issues: https://github.com/glejeune/Ruby-Graphviz/issues
   }
