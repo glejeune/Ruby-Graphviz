@@ -1,5 +1,23 @@
 # Change Log
 
+## [v1.2.5](https://github.com/glejeune/Ruby-Graphviz/tree/v1.2.5) (2020-03-05)
+[Full Changelog](https://github.com/glejeune/Ruby-Graphviz/compare/v1.2.4...v1.2.5)
+
+**Closed issues:**
+
+- Is there a way to get ruby-graphviz to output to a base64 encoded image? [\#143](https://github.com/glejeune/Ruby-Graphviz/issues/143)
+- Error building ruby-graphviz [\#141](https://github.com/glejeune/Ruby-Graphviz/issues/141)
+- Is there any way to remove an edge? [\#112](https://github.com/glejeune/Ruby-Graphviz/issues/112)
+
+**Merged pull requests:**
+
+- Fix gemspec [\#146](https://github.com/glejeune/Ruby-Graphviz/pull/146) ([deivid-rodriguez](https://github.com/deivid-rodriguez))
+- Update supported rubies to 2.4.0-2.7.0 [\#145](https://github.com/glejeune/Ruby-Graphviz/pull/145) ([deivid-rodriguez](https://github.com/deivid-rodriguez))
+- Add missing rexml dependency [\#144](https://github.com/glejeune/Ruby-Graphviz/pull/144) ([deivid-rodriguez](https://github.com/deivid-rodriguez))
+- Add new legal attribute to whitelist, enumerate\_nodes method [\#142](https://github.com/glejeune/Ruby-Graphviz/pull/142) ([yrral86](https://github.com/yrral86))
+- Update README.md [\#140](https://github.com/glejeune/Ruby-Graphviz/pull/140) ([villuorav](https://github.com/villuorav))
+- Updates readme with correct require information [\#139](https://github.com/glejeune/Ruby-Graphviz/pull/139) ([TPei](https://github.com/TPei))
+
 ## [v1.2.4](https://github.com/glejeune/Ruby-Graphviz/tree/v1.2.4) (2018-11-13)
 [Full Changelog](https://github.com/glejeune/Ruby-Graphviz/compare/v1.2.3...v1.2.4)
 
