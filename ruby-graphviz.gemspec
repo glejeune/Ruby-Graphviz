@@ -20,8 +20,8 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.extra_rdoc_files = ["README.rdoc", "COPYING.rdoc", "AUTHORS.rdoc", "CHANGELOG.rdoc"]
-  s.rdoc_options = ["--title", "Ruby/GraphViz", "--main", "README.rdoc"]
+  s.extra_rdoc_files = ["README.md", "COPYING.md", "CHANGELOG.md"]
+  s.rdoc_options = ["--title", "Ruby/GraphViz", "--main", "README.md"]
   s.post_install_message = %{
 You need to install GraphViz (https://graphviz.org) to use this Gem.
 
