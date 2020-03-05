@@ -293,6 +293,17 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "deivid-rodriguez",
+      "name": "David Rodríguez",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2887858?v=4",
+      "profile": "https://github.com/deivid-rodriguez",
+      "contributions": [
+        "code",
+        "platform"
+      ]
     }
-  ]
+  ],
+  "commitConvention": "none"
 }
