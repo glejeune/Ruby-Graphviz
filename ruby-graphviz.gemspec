@@ -20,8 +20,6 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.rubyforge_project = 'ruby-asp'
-  s.has_rdoc = true
   s.extra_rdoc_files = ["README.rdoc", "COPYING.rdoc", "AUTHORS.rdoc", "CHANGELOG.rdoc"]
   s.rdoc_options = ["--title", "Ruby/GraphViz", "--main", "README.rdoc"]
   s.post_install_message = %{
