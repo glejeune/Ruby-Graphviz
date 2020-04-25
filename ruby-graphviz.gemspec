@@ -22,14 +22,15 @@ Gem::Specification.new do |s|
 
   s.extra_rdoc_files = ["README.md", "COPYING.md", "CHANGELOG.md"]
   s.rdoc_options = ["--title", "Ruby/GraphViz", "--main", "README.md"]
-  s.post_install_message = %{
-You need to install GraphViz (https://graphviz.org) to use this Gem.
+  s.post_install_message = <<~MESSAGE
+    You need to install GraphViz (https://graphviz.org) to use this Gem.
 
-For more information about Ruby-Graphviz :
-* Doc: https://rdoc.info/github/glejeune/Ruby-Graphviz
-* Sources: https://github.com/glejeune/Ruby-Graphviz
-* Issues: https://github.com/glejeune/Ruby-Graphviz/issues
-  }
+    For more information about Ruby-Graphviz :
+    * Doc: https://rdoc.info/github/glejeune/Ruby-Graphviz
+    * Sources: https://github.com/glejeune/Ruby-Graphviz
+    * Issues: https://github.com/glejeune/Ruby-Graphviz/issues}
+
+  MESSAGE
 
   s.add_dependency "rexml"
 
