@@ -5,7 +5,7 @@
 
 Copyright (C) 2004-2018 Gregoire Lejeune
 
-* Doc : http://rdoc.info/projects/glejeune/Ruby-Graphviz
+* Doc : https://rubydoc.info/projects/glejeune/Ruby-Graphviz
 * Sources : https://github.com/glejeune/Ruby-Graphviz
 * On Rubygems: https://rubygems.org/gems/ruby-graphviz
 
