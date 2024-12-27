@@ -45,7 +45,7 @@ class GraphViz
     #   * :attrs : show XML attributes (default true)
     #
     def initialize( xml_file, *options )
-      @node_name = "00000"
+      @node_name = String.new("00000")
 	   @show_text = true
 	   @show_attributes = true
 
@@ -88,7 +88,7 @@ class GraphViz
         text_node_name = local_node_name.clone
         text_node_name << "111"
 
-        xText = ""
+        xText = String.new
         xSep = ""
         xml_node.texts().each do |l|
           x = l.value.chomp.strip
