@@ -143,8 +143,8 @@ class GraphViz
          # add a check to see if the node names are valid
          # if they aren't is added an _ before
          # and the print staies the same, because of the label
-         xOut = reserved_names.include?(node_id) ? "" << "_" + node_id : "" << node_id
-         xAttr = ""
+         xOut = reserved_names.include?(node_id) ? String.new << "_" + node_id : String.new << node_id
+         xAttr = String.new
          xSeparator = ""
 
          if @node_attributes.data.has_key?("label") and @node_attributes.data.has_key?("html")

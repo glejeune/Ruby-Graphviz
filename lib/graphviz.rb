@@ -527,7 +527,7 @@ class GraphViz
       xOutputString = (@filename == String ||
         @output.any? {|format, file| file == String })
 
-      xOutput = ""
+      xOutput = String.new
       if @format.to_s == "none" or @output.any? {|fmt, fn| fmt.to_s == "none"}
         if xOutputString
           xOutput << xDOTScript
