@@ -1,6 +1,6 @@
 class String
    def self.random(size)
-      s = String.new
+      s = +""
       d = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
       size.times {
          s << d[rand(d.size)]

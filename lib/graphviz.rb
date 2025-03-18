@@ -527,15 +527,13 @@ class GraphViz
       xOutputString = (@filename == String ||
         @output.any? {|format, file| file == String })
 
-      xOutput = String.new
-      if @format.to_s == "none" or @output.any? {|fmt, fn| fmt.to_s == "none"}
+      xOutput = +""
+      if @format.to_s == "none" || @output.any? { |fmt, _fn| fmt.to_s == "none" }
         if xOutputString
           xOutput << xDOTScript
         else
           xFileName = @output["none"] || @filename
-          open( xFileName, "w" ) do |h|
-            h.puts xDOTScript
-          end
+          File.open(xFileName, "w") { |h| h.puts xDOTScript }
         end
       end
 
