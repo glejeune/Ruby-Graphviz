@@ -51,7 +51,7 @@ class GraphViz
     def_delegators :@script, :end_with?
 
     def initialize
-      @script = String.new
+      @script = +""
     end
 
     def append(line)

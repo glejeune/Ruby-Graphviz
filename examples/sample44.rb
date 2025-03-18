@@ -88,7 +88,7 @@ g.edge["arrowhead"] = "normal"
 "rvee",
 "rveervee"
 ].each { |s|
-  p = String.new("p_") << s
+  p = +"p_" << s
   g.add_nodes( p, "shape" => "point" )
   g.add_nodes( s )
   g.add_edges( p, s, "arrowhead" => s )
