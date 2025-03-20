@@ -189,7 +189,7 @@ class GraphViz
   end
 
   def add_edge( oNodeOne, oNodeTwo, hOpts = {} )
-    if oNodeTwo.kind_of? Array or oNodeOne.kind_of? Array 
+    if oNodeTwo.kind_of? Array or oNodeOne.kind_of? Array
       raise ArgumentError, "use `add_edges' to add several edges at the same time"
     end
     add_edges(oNodeOne, oNodeTwo, hOpts)
@@ -603,7 +603,12 @@ class GraphViz
                xOutputWithoutFile +
                [tmpPath]
 
-        xOutput << output_from_command( xCmd )
+        # text outputs like SVG should be computed using binmode=false, issue #115
+        textmode = if @filename.nil? or @filename == String
+          TEXT_FORMATS.include?(@format) or
+          TEXT_FORMATS.any?{|f| (@output || {}).keys.include?(f)}
+        end
+        xOutput << output_from_command( xCmd, binmode: !textmode )
       end
 
       # Not Hugly
@@ -629,7 +634,7 @@ class GraphViz
 
     @elements_order.each { |kElement|
       is_new_type = script_data.type != kElement["type"]
-      if is_new_type 
+      if is_new_type
         script << script_data unless script_data.type.nil? or script_data.empty?
         script_data = DOTScriptData.new(kElement["type"])
       end

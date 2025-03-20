@@ -299,5 +299,9 @@ class GraphViz
 
     ## Const: Edge attributes
     EDGESATTRS = GraphViz::Constants::getAttrsFor( /E/ )
+
+    # output types that produce text (i.e. not binary)
+    TEXT_FORMATS = %w[ svg tk plain vml json dot].freeze
+
   end
 end
