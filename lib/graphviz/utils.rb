@@ -55,7 +55,7 @@ class GraphViz
 
     def output_from_command(cmd) #:nodoc:
       output, errors, status = output_and_errors_from_command(cmd)
-      if (status.nil? && (errors.nil? || errors.strip.empty?)) || status.zero?
+      if (status.nil? && (errors.nil? || errors.strip.empty?)) || status == 0
         output
       else
         raise "Error from #{cmd}:\n#{errors}"
