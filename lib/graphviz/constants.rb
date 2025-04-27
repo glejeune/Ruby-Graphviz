@@ -176,6 +176,7 @@ class GraphViz
       "id"                  => { :usedBy => "ENG",  :type => :EscString },
       "image"               => { :usedBy => "N",    :type => :EscString }, # string
       "imagepath"           => { :usedBy => "G",    :type => :EscString }, # string
+      "imagepos"            => { :usedBy => "N",    :type => :EscString }, # string
       "imagescale"          => { :usedBy => "N",    :type => :EscString }, # bool, string
       "inputscale"          => { :usedBy => "G",    :type => :GvDouble },
       "label"               => { :usedBy => "ENGC", :type => :LblString },
