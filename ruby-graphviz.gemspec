@@ -41,7 +41,7 @@ For more information about Ruby-Graphviz :
   s.add_development_dependency 'ronn' unless RUBY_PLATFORM == 'java'
   s.add_development_dependency 'test-unit'
 
-  s.required_ruby_version = '>= 2.4.0'
+  s.required_ruby_version = '>= 2.3'
 
   s.requirements << 'GraphViz'
 end
