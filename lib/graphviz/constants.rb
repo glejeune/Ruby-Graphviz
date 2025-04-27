@@ -88,6 +88,7 @@ class GraphViz
       "vtx",
       "wbmp",
       "xlib",
+      "json",
       "none"
     ]
 
