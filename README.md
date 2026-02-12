@@ -1,6 +1,6 @@
 # Ruby/GraphViz
 [![All Contributors](https://img.shields.io/badge/all_contributors-31-orange.svg)](#contributors)
-[![Travis CI build](https://secure.travis-ci.org/glejeune/Ruby-Graphviz.svg)](https://travis-ci.org/glejeune/Ruby-Graphviz)
+[![CI](https://github.com/glejeune/Ruby-Graphviz/actions/workflows/main.yml/badge.svg)](https://github.com/glejeune/Ruby-Graphviz/actions/workflows/main.yml)
 [![Gem Version](https://badge.fury.io/rb/ruby-graphviz.svg)](https://rubygems.org/gems/ruby-graphviz)
 
 Copyright (C) 2004-2018 Gregoire Lejeune

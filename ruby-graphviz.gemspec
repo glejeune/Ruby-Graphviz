@@ -36,7 +36,7 @@ For more information about Ruby-Graphviz :
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rdoc'
   s.add_development_dependency 'yard'
-  s.add_development_dependency 'github_changelog_generator'
+  s.add_development_dependency 'github_changelog_generator' unless RUBY_PLATFORM == 'java'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'ronn' unless RUBY_PLATFORM == 'java'
   s.add_development_dependency 'test-unit'
